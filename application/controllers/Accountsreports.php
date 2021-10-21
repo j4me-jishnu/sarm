@@ -1,0 +1,303 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+class Accountsreports extends MY_Controller 
+{
+		public function __construct() 
+		{
+				parent::__construct();
+	      if(! $this->is_logged_in())
+	      {
+	          redirect('/login');
+	      }
+	      $this->load->model('General_model');
+				$this->load->model('Dashboard_model');
+				$this->load->model('Administration_model');
+				$this->load->model('Accounts_model');
+				$this->load->model('Accountsreports_model');
+				$this->load->model('Sale_model');    
+		}
+		public function getLedgerHead()
+		{
+			header('Content-Type: application/x-json; charset=utf-8');
+			$result = $this->General_model->ledgerheadsbycompany($this->input->post('company'));
+			echo json_encode($result);
+		}
+		public function Ledger()
+		{
+			if ($this->session->userdata['user_type'] =='A')
+			{
+				$template['ledgerhead']=$this->Accounts_model->getLedgerheadlist();
+			}
+			else
+			{
+				$cmp =  $this->session->userdata['cmp_id'];
+				$template['ledgerhead']=$this->Accounts_model->getLedgerheadlistcompany($cmp);
+			}
+				
+			$template['company']=$this->General_model->getCompanies();
+			$template['balance']=NULL;$template['result']=NULL;
+			$template['body'] = 'Accounts/Ledger/list';
+			$template['script'] = 'Accounts/Ledger/script';
+			$this->load->view('template', $template);
+		}
+		public function getLedger()
+		{
+				$date_from = $this->input->post('date_from');
+				$date_from = str_replace('/', '-', $date_from);
+		    	$date_from =  date("Y-m-d",strtotime($date_from));
+
+		    	$date_to = $this->input->post('date_to');
+				$date_to = str_replace('/', '-', $date_to);
+		    	$date_to =  date("Y-m-d",strtotime($date_to));
+
+		    	// $ledger_date=date("2021-06-29");
+		    	// $date_from=date("2021-06-29");	
+
+				// $template['debit'] = $this->Accountsreports_model->getDebitSide($this->input->post('company'),$this->input->post('ledgerhead'),$ledger_date);
+				// $template['credit'] = $this->Accountsreports_model->getCreditSide($this->input->post('company'),$this->input->post('ledgerhead'),$ledger_date);
+				$template['debit']=NULL;$template['credit']=NULL;
+				$template['result']= $this->Accountsreports_model->ledger($this->input->post('company'),$this->input->post('ledgerhead'),$date_from,$date_to);
+				$template['balance'] = $this->Accountsreports_model->getBalance($this->input->post('company'),$this->input->post('ledgerhead'),$date_from,$date_to);
+
+				// print_r($template['balance']);die();
+
+				$template['company_id'] = $this->input->post('company');
+				$template['led_id'] = $this->input->post('ledgerhead');
+				$template['date_from'] = $this->input->post('date_from');
+				$template['date_to'] = $this->input->post('date_to');
+
+
+				$template['ledgerhead']=$this->Accounts_model->getLedgerheadlist();
+				$template['company']=$this->General_model->getCompanies();
+				$template['body'] = 'Accounts/Ledger/list';
+				$template['script'] = 'Accounts/Ledger/script';
+				$this->load->view('template', $template);
+		}
+		public function Daybook()
+		{
+				$template['bank_acc'] = $this->Accountsreports_model->GetDaybookheads();
+				$template['company']=$this->General_model->getCompanies();
+				$template['body'] = 'Accounts/Daybook/list';
+				$template['script'] = 'Accounts/Daybook/script';
+				$this->load->view('template', $template);
+		}
+		public function cashorbank()
+		{
+			header('Content-Type: application/x-json; charset=utf-8');
+			$result = $this->General_model->cashorbank($this->input->post('company'));
+			echo json_encode($result);
+		}
+		public function getDaybook()
+		{
+			$day = $this->input->post('day');
+			$day = str_replace('/', '-', $day);
+		    $day =  date("Y-m-d",strtotime($day));
+
+		    $template['records'] = $this->Accountsreports_model->getDaybook($this->input->post('company'),$day,$this->input->post('ledger_head'));
+		    $template['bank_acc'] = $this->Accountsreports_model->GetDaybookheads();
+			$template['company']=$this->General_model->getCompanies();
+
+			$template['company_id'] = $this->input->post('company');
+			$template['ledger_head'] = $this->input->post('ledger_head');
+			$template['day'] = $this->input->post('day');
+
+		  	$template['body'] = 'Accounts/Daybook/list';
+			$template['script'] = 'Accounts/Daybook/script';
+			$this->load->view('template', $template);
+
+		}
+		public function Profitloss()
+		{
+			$template['fin_year']  = $this->General_model->fin_year();
+			$template['company']=$this->General_model->getCompanies();
+			$template['body'] = 'Accounts/Profitloss/list';
+			$template['script'] = 'Accounts/Profitloss/script';
+			$this->load->view('template', $template);
+		}
+		public function getProfitloss()
+		{
+			$cmp=$this->input->post('company');
+			$template['fin_year']  = $this->General_model->fin_year();
+			$template['company']=$this->General_model->getCompanies();
+			$template['company_id'] = $this->input->post('company');
+
+			$fnyr = $this->General_model->fin_year();
+			if(isset($fnyr->finyear_id)){ $fyr = $fnyr->finyear_id; } else{ $fyr = 0;}
+
+			//purchase
+			// $template['purchase'] = $this->Accountsreports_model->getTotalPurchases($cmp,$fyr);
+			// print_r($template['purchase']);die;
+
+			// $template['purchaseret'] = $this->Accountsreports_model->getTotalPurchaseret($cmp,$fyr);
+
+			//sales
+			// $template['sales'] = $this->Accountsreports_model->getTotalSales($cmp,$fyr);
+			// $template['salesret'] = $this->Accountsreports_model->getTotalSalesret($cmp,$fyr);
+
+			// //direct expenses
+			// $template['direct_exp'] = $this->Accountsreports_model->getAllDirectexp($cmp,$fyr);
+
+			// //direct income
+			// $template['direct_income'] = $this->Accountsreports_model->getAllDirectincome($cmp);
+
+			// //indirect expense
+			// $template['indirect_exp'] = $this->Accountsreports_model->getAllinDirectexp($cmp);
+
+			// //indirect income
+			// $template['indirect_income'] = $this->Accountsreports_model->getAllinDirectincome($cmp);
+
+			//all direct income
+			$template['direct_income'] = $this->Accountsreports_model->getAllDirectincomes($cmp,$fyr);
+			// print_r($template['direct_income']);die();
+
+			//all indirect income
+			$template['indirect_income'] = $this->Accountsreports_model->getAllinDirectincomes($cmp,$fyr);
+
+			//all direct expense
+			$template['direct_exp'] = $this->Accountsreports_model->getAllDirectexpenses($cmp,$fyr);
+
+			//all indirect expense
+			$template['indirect_exp'] = $this->Accountsreports_model->getAllinDirectexpenses($cmp,$fyr);
+
+			// $template['opening'] = $this->Accountsreports_model->get_opening($cmp,$fyr);
+			$template['closing'] = $this->Accountsreports_model->get_closingstock($cmp,$fyr);
+			// print_r($template['direct_income']);die;
+			$template['body'] = 'Accounts/Profitloss/list';
+			$template['script'] = 'Accounts/Profitloss/script';
+			$this->load->view('template', $template);
+		
+		}
+		public function Trialbalance()
+		{
+			$template['fin_year']  = $this->General_model->fin_year();
+			$template['company']=$this->General_model->getCompanies();
+			$template['body'] = 'Accounts/Trialbalance/list';
+			$template['script'] = 'Accounts/Trialbalance/script';
+			$this->load->view('template', $template);
+		}
+		public function getTrialbalance()
+		{
+			$template['fin_year']  = $this->General_model->fin_year();
+			$template['company']=$this->General_model->getCompanies();
+			$cmp=$this->input->post('company');
+			$template['company_id'] = $this->input->post('company');
+
+			$fnyr = $this->General_model->fin_year();
+			if(isset($fnyr->finyear_id)){ $fyr = $fnyr->finyear_id; } else{ $fyr = 0;}
+
+			//long term assets or fixed asset
+			$template['fixed'] = $this->Accountsreports_model->getFixedAssetsDetails($cmp,$fyr);
+
+			//short term assets or current assets
+			$template['current'] = $this->Accountsreports_model->getCurrentAssetsDetails($cmp,$fyr);
+
+			//longterm liability
+			$template['liabilty'] = $this->Accountsreports_model->getFixedLiabiltyDetails($cmp,$fyr);
+
+			//current liability
+			$template['currentliabilty'] = $this->Accountsreports_model->getCurrentLiabiltyDetails($cmp,$fyr);
+
+			//all direct income
+			$template['direct_income'] = $this->Accountsreports_model->getAllDirectincomes($cmp,$fyr);
+
+			//all indirect income
+			$template['indirect_income'] = $this->Accountsreports_model->getAllinDirectincomes($cmp,$fyr);
+
+			//all direct expense
+			$template['direct_exp'] = $this->Accountsreports_model->getAllDirectexpenses($cmp,$fyr);
+
+			//all indirect expense
+			$template['indirect_exp'] = $this->Accountsreports_model->getAllinDirectexpenses($cmp,$fyr);
+			
+
+			$template['body'] = 'Accounts/Trialbalance/list';
+			$template['script'] = 'Accounts/Trialbalance/script';
+			$this->load->view('template', $template);
+		}
+		public function Balancesheet()
+		{
+			$template['fin_year']  = $this->General_model->fin_year();
+			$template['company']=$this->General_model->getCompanies();
+			$template['body'] = 'Accounts/Balancesheet/list';
+			$template['script'] = 'Accounts/Balancesheet/script';
+			$this->load->view('template', $template);
+		}
+		public function getBalancesheet()
+		{
+			$cmp=$this->input->post('company');
+			$template['company_id'] = $this->input->post('company');
+			$fnyr = $this->General_model->fin_year();
+			if(isset($fnyr->finyear_id)){ $fyr = $fnyr->finyear_id; } else{ $fyr = 0;}
+
+			//long term assets or fixed 
+			$template['fixed'] = $this->Accountsreports_model->getFixedAssets($cmp,$fyr);
+
+			//short term assets or current assetsasset
+			$template['current'] = $this->Accountsreports_model->getCurrentAssets($cmp,$fyr);
+			// print_r($template['current']);die();
+
+			//longterm liability
+			$template['liabilty'] = $this->Accountsreports_model->getFixedLiabilty($cmp,$fyr);
+
+			//current liability
+			$template['currentliabilty'] = $this->Accountsreports_model->getCurrentLiabilty($cmp,$fyr);
+
+			$template['capital'] = $this->Accountsreports_model->getCapital($cmp);
+
+			$template['profitloss'] = $this->Accountsreports_model->getProfitloss($cmp,$fyr);
+
+			$template['fin_year']  = $this->General_model->fin_year();
+			$template['company']=$this->General_model->getCompanies();
+			$template['body'] = 'Accounts/Balancesheet/list';
+			$template['script'] = 'Accounts/Balancesheet/script';
+			$this->load->view('template', $template);
+		}
+		public function addProfit()
+		{
+			$profit=$this->input->post('profit');
+			$loss=$this->input->post('loss');
+			$cmp=$this->input->post('cmp');
+
+			$fnyr = $this->General_model->fin_year();
+			if(isset($fnyr->finyear_id)){ $fyr = $fnyr->finyear_id; } else{ $fyr = 0;}
+			if($profit != 0 || $loss != 0)
+			{
+				if($profit != 0)
+				{
+					$check=$this->Accountsreports_model->checkProfitexist($cmp,$fyr);
+					$data=array(
+						'cmp_id_fk'=> $cmp,
+						'amount' => $profit,
+						'profit_loss' => 1,
+						'fin_year' => $fyr
+					);
+					if ($check == 0) 
+					{
+						$this->General_model->add('tbl_profit',$data);
+					}
+					else
+					{
+						$this->General_model->updat('tbl_profit',$data,'cmp_id_fk',$cmp,'fin_year',$fyr);
+					}
+				}
+				else
+				{
+					$check=$this->Accountsreports_model->checkProfitexist($cmp,$fyr);
+					$data=array(
+						'cmp_id_fk'=> $cmp,
+						'amount' => $loss,
+						'profit_loss' => 2,
+						'fin_year' => $fyr
+					);
+					if ($check == 0) 
+					{
+						$this->General_model->add('tbl_profit',$data);
+					}
+					else
+					{
+						$this->General_model->updat('tbl_profit',$data,'cmp_id_fk',$cmp,'fin_year',$fyr);
+					}
+				}
+			}
+		}
+}

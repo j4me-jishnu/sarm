@@ -1,0 +1,22 @@
+<xpml><page quantity='0' pitch='25.0 mm'></xpml>SIZE 77.5 mm, 25 mm
+DIRECTION 0,0
+REFERENCE 0,0
+OFFSET 0 mm
+SET PEEL OFF
+SET CUTTER OFF
+SET PARTIAL_CUTTER OFF
+<xpml></page></xpml><xpml><page quantity='1' pitch='25.0 mm'></xpml>SET TEAR ON
+CLS
+CODEPAGE 1252
+TEXT 573,175,"0",180,12,12,"SPORTIQUE"
+TEXT 593,142,"0",180,12,10,"	<!--PRODUCT_NAME-->"
+TEXT 593,107,"0",180,10,10,"Price         : <!--AMOUNT-->"
+BARCODE 601,74,"128M",43,0,180,3,6,"!105<!--BARCODE-->"
+TEXT 522,25,"0",180,7,7,"<!--BARCODE_TEXT-->"
+TEXT 237,175,"0",180,12,12,"SPORTIQUE"
+TEXT 257,142,"0",180,12,10,"	<!--PRODUCT_NAME-->"
+TEXT 257,107,"0",180,10,10,"Price         : <!--AMOUNT-->"
+BARCODE 265,74,"128M",43,0,180,3,6,"!105<!--BARCODE-->"
+TEXT 186,25,"0",180,7,7,"<!--BARCODE_TEXT-->"
+PRINT 1,1
+<xpml></page></xpml><xpml><end/></xpml>

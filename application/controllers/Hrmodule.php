@@ -1,0 +1,441 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+class Hrmodule extends MY_Controller {
+	public function __construct() {
+		parent::__construct();
+        if(! $this->is_logged_in()){
+          redirect('/login');
+		
+        }   
+        $this->load->model('General_model');
+		$this->load->model('Dashboard_model');
+		$this->load->model('Administration_model');
+		$this->load->model('Hr_model');
+        
+	}
+	public function index()
+	{
+
+	}
+	public function Employee()
+	{
+		$template['body'] = 'Hrmodule/Employee/list';
+		$template['script'] = 'Hrmodule/Employee/script';
+		$this->load->view('template', $template);
+	}
+	public function getEmployee()
+	{
+		$param['draw'] = (isset($_REQUEST['draw']))?$_REQUEST['draw']:'';
+        $param['length'] =(isset($_REQUEST['length']))?$_REQUEST['length']:'10'; 
+        $param['start'] = (isset($_REQUEST['start']))?$_REQUEST['start']:'0';
+        $param['order'] = (isset($_REQUEST['order'][0]['column']))?$_REQUEST['order'][0]['column']:'';
+        $param['dir'] = (isset($_REQUEST['order'][0]['dir']))?$_REQUEST['order'][0]['dir']:'';
+        $param['searchValue'] =(isset($_REQUEST['search']['value']))?$_REQUEST['search']['value']:'';
+        
+    	$data = $this->Hr_model->getCustomerTable($param);
+    	$json_data = json_encode($data);
+    	echo $json_data;
+	}
+	public function addEmployee()
+	{
+		$this->form_validation->set_rules('employname', 'Name', 'required');
+		$this->form_validation->set_rules('employsalary','lang:Salary','required|numeric|greater_than[0.99]|regex_match[/^[0-9,]+$/]');
+		if ($this->form_validation->run() == FALSE) 
+		{
+			$template['company']=$this->General_model->getCompanies();
+			$template['body'] = 'Hrmodule/Employee/add';
+			$template['script'] = 'Hrmodule/Employee/script';
+			$this->load->view('template', $template);
+		}
+		else {
+
+			$datas = array(
+						'emp_name' => $this->input->post('employname'),
+						'company_id'=> $this->input->post('company'),
+						'emp_address' => $this->input->post('employaddress'),
+						'emp_phone' => $this->input->post('employphone'),
+						'emp_email' => $this->input->post('employemail'),
+						'emp_salary' => $this->input->post('employsalary'),
+						'emp_date' => date("Y-m-d",strtotime($this->input->post('dob'))),
+						'emp_status' => 1
+						);
+			$emp_id = $this->input->post('emp_id');
+			if($emp_id){
+				 
+				$data['emp_id'] = $emp_id;
+				$result = $this->General_model->update('tbl_employee',$datas,'emp_id',$emp_id);
+				$response_text = 'Employee details  updated';
+			}
+			else{
+				$result = $this->General_model->add('tbl_employee',$datas);
+				$response_text = 'Employee details Added';
+			}
+			if($result){
+	            $this->session->set_flashdata('response', "{&quot;text&quot;:&quot;$response_text&quot;,&quot;layout&quot;:&quot;topRight&quot;,&quot;type&quot;:&quot;success&quot;}");
+			}
+			else{
+	            $this->session->set_flashdata('response', '{&quot;text&quot;:&quot;Something went wrong,please try again later&quot;,&quot;layout&quot;:&quot;bottomRight&quot;,&quot;type&quot;:&quot;error&quot;}');
+			}
+	        redirect('/Employee/', 'refresh');
+		}
+	}
+	public function deleteEmployee()
+	{
+		$emp_id = $this->input->post('emp_id');
+        $updateData = array('emp_status' => 0);
+        $data = $this->General_model->update('tbl_employee',$updateData,'emp_id',$emp_id);                       
+        if($data) {
+            $response['text'] = 'Deleted successfully';
+            $response['type'] = 'success';
+        }
+        else{
+            $response['text'] = 'Something went wrong';
+            $response['type'] = 'error';
+        }
+        $response['layout'] = 'topRight';
+        $data_json = json_encode($response);
+        echo $data_json;
+	}
+	public function editEmployee($emp_id)
+	{
+		$template['records'] = $this->Hr_model->getEmployeeData($emp_id);
+		$template['company']=$this->General_model->getCompanies();
+		$template['body'] = 'Hrmodule/Employee/add';
+		$template['script'] = 'Hrmodule/Employee/script';
+		$this->load->view('template', $template);
+	}
+
+	//Attendance
+	public function Attendance()
+	{
+		$template['body'] = 'Hrmodule/Attendance/list';
+		$template['script'] = 'Hrmodule/Attendance/script';
+		$this->load->view('template', $template);
+	}
+	public function getAttendence()
+	{
+		$param['draw'] = (isset($_REQUEST['draw']))?$_REQUEST['draw']:'';
+        $param['length'] =(isset($_REQUEST['length']))?$_REQUEST['length']:'10'; 
+        $param['start'] = (isset($_REQUEST['start']))?$_REQUEST['start']:'0';
+        $param['order'] = (isset($_REQUEST['order'][0]['column']))?$_REQUEST['order'][0]['column']:'';
+        $param['dir'] = (isset($_REQUEST['order'][0]['dir']))?$_REQUEST['order'][0]['dir']:'';
+        $param['searchValue'] =(isset($_REQUEST['search']['value']))?$_REQUEST['search']['value']:'';
+        $param['cmp_id'] = (isset($_REQUEST['cmp_id']))?$_REQUEST['cmp_id']:'';
+
+		$data = $this->Hr_model->getAttendenceData($param);
+	
+		$json_data = json_encode($data);
+    	echo $json_data;
+	}
+	public function absent_reg()
+	{
+		$emp_id = $this->input->post('emp_id');
+		$at_date = str_replace('/', '-', $this->input->post('att_date'));
+		$at_date = date("Y-m-d",strtotime($at_date));
+		$date = $at_date;
+		if($this->Hr_model->check_absent($emp_id,$date) == 0){
+		$at_date = str_replace('/', '-', $this->input->post('att_date'));
+		$at_date = date("Y-m-d",strtotime($at_date));
+		$month = date("m",strtotime($at_date));
+		$data = array(
+						'absent_date'=> $at_date,
+						'month'=> $month,
+						'emp_id'=> $emp_id,
+						'absent_status'=> 1
+						);
+		$result = $this->General_model->add('tbl_empabsent',$data);
+		$response_text = 'Absent Registered successfully';
+		if($result){
+	            $this->session->set_flashdata('response', "{&quot;text&quot;:&quot;$response_text&quot;,&quot;layout&quot;:&quot;topRight&quot;,&quot;type&quot;:&quot;success&quot;}");
+				}
+				else{
+	            $this->session->set_flashdata('response', '{&quot;text&quot;:&quot;Something went wrong,please try again later&quot;,&quot;layout&quot;:&quot;bottomRight&quot;,&quot;type&quot;:&quot;error&quot;}');
+				}
+			}
+			else{
+	            $this->session->set_flashdata('response', '{&quot;text&quot;:&quot;Something went wrong,please try again later&quot;,&quot;layout&quot;:&quot;bottomRight&quot;,&quot;type&quot;:&quot;error&quot;}');
+				}
+	
+        echo json_encode($result);
+	}
+	public function attend_reg()
+	{
+		$emp_id = $this->input->post('emp_id');
+		$at_date = str_replace('/', '-', $this->input->post('att_date'));
+		$at_date = date("Y-m-d",strtotime($at_date));
+		$date = $at_date;
+		if($this->Hr_model->check_attendance($emp_id,$date) == 0)
+		{
+			$session = $this->input->post('session');
+			$at_date = str_replace('/', '-', $this->input->post('att_date'));
+			$at_date = date("Y-m-d",strtotime($at_date));
+			$data = array(
+						'att_date'=> $at_date,
+						'emp_id'=> $emp_id,
+						'att_status'=> 1
+						);
+			$result = $this->General_model->add('tbl_empattendance',$data);
+			$response_text = 'Attendance Registered successfully';
+					
+			if($result){
+	            $this->session->set_flashdata('response', "{&quot;text&quot;:&quot;$response_text&quot;,&quot;layout&quot;:&quot;topRight&quot;,&quot;type&quot;:&quot;success&quot;}");
+			}
+			else{
+            	$this->session->set_flashdata('response', '{&quot;text&quot;:&quot;Something went wrong,please try again later&quot;,&quot;layout&quot;:&quot;bottomRight&quot;,&quot;type&quot;:&quot;error&quot;}');
+			}
+		}
+		else
+		{
+			$this->session->set_flashdata('response', '{&quot;text&quot;:&quot;Attendence already exist,&quot;,&quot;layout&quot;:&quot;bottomRight&quot;,&quot;type&quot;:&quot;error&quot;}');
+		}
+        echo json_encode($result);
+	}
+
+	//PayAdvance
+	public function PayAdvance()
+	{
+		$template['body'] = 'Hrmodule/PayAdvance/list';
+		$template['script'] = 'Hrmodule/PayAdvance/script';
+		$this->load->view('template', $template);
+	}
+	public function getpayAdvance()
+	{
+		$param['draw'] = (isset($_REQUEST['draw']))?$_REQUEST['draw']:'';
+        $param['length'] =(isset($_REQUEST['length']))?$_REQUEST['length']:'10'; 
+        $param['start'] = (isset($_REQUEST['start']))?$_REQUEST['start']:'0';
+        $param['order'] = (isset($_REQUEST['order'][0]['column']))?$_REQUEST['order'][0]['column']:'';
+        $param['dir'] = (isset($_REQUEST['order'][0]['dir']))?$_REQUEST['order'][0]['dir']:'';
+        $param['searchValue'] =(isset($_REQUEST['search']['value']))?$_REQUEST['search']['value']:'';
+        
+		$data = $this->Hr_model->getpayAdvanceData($param);
+		$json_data = json_encode($data);
+    	echo $json_data;
+	}
+	public function addPayAdvance()
+	{
+		$salarydate = str_replace('/', '-', $this->input->post('payroll_salarydate'));
+		$salarydate = date("Y-m-d",strtotime($salarydate));
+
+		$this->form_validation->set_rules('emp', 'Date', 'required');
+		if ($this->form_validation->run() == FALSE) {
+			$template['company']=$this->General_model->getCompanies();
+			$template['body'] = 'Hrmodule/PayAdvance/add';
+			$template['script'] = 'Hrmodule/PayAdvance/script';
+			$this->load->view('template', $template);
+		}
+		else {
+			$data = array(
+						
+						'emp_id'=> $this->input->post('emp'),
+						'company_id'=>$this->input->post('company'),
+						'adv_month'=> $this->input->post('payroll_salmonth'),
+						'adv_amount'=>$this->input->post('payroll_ta'),
+						'adv_date'=> $salarydate,
+						'adv_status'=> 1
+						);
+			$adv_id = $this->input->post('adv_id');
+			if ($adv_id) 
+			{
+				$data['adv_id'] = $adv_id;
+				$result = $this->General_model->update('tbl_advance',$data,'adv_id',$adv_id);
+				$response_text = 'Advance Payment details  updated';
+			}
+			else
+			{
+	             $result = $this->General_model->add('tbl_advance',$data);
+				 $response_text = 'Advance Payment Details added successfully';
+                 
+				if($data){
+	            $this->session->set_flashdata('response', "{&quot;text&quot;:&quot;$response_text&quot;,&quot;layout&quot;:&quot;topRight&quot;,&quot;type&quot;:&quot;success&quot;}");
+				}
+				else{
+	            $this->session->set_flashdata('response', '{&quot;text&quot;:&quot;Something went wrong,please try again later&quot;,&quot;layout&quot;:&quot;bottomRight&quot;,&quot;type&quot;:&quot;error&quot;}');
+				}
+			}	
+			redirect('/PayAdvance/', 'refresh');
+		}
+	}
+	public function getEmployeesbyCompany()
+	{
+		$data=$this->Hr_model->fetchEmployeesbycompany($this->input->post('cmp_id'));
+        echo json_encode($data);
+	}
+	public function getBasicofEmployee()
+	{
+		$data=$this->Hr_model->getBasicofEmployee($this->input->post('emp_id'));
+        echo json_encode($data);
+	}
+	public function editPayAdvance($id)
+	{
+		$template['records']=$this->Hr_model->fetchAdvancepay($id);
+		$template['company']=$this->General_model->getCompanies();
+		$template['body'] = 'Hrmodule/PayAdvance/edit';
+		$template['script'] = 'Hrmodule/PayAdvance/script';
+		$this->load->view('template', $template);
+	}
+
+	//Payroll
+	public function Payroll()
+	{
+		$template['body'] = 'Hrmodule/Payroll/list';
+		$template['script'] = 'Hrmodule/Payroll/script';
+		$this->load->view('template', $template);
+	}
+	public function getPayroll()
+	{
+		$param['draw'] = (isset($_REQUEST['draw']))?$_REQUEST['draw']:'';
+        $param['length'] =(isset($_REQUEST['length']))?$_REQUEST['length']:'10'; 
+        $param['start'] = (isset($_REQUEST['start']))?$_REQUEST['start']:'0';
+        $param['order'] = (isset($_REQUEST['order'][0]['column']))?$_REQUEST['order'][0]['column']:'';
+        $param['dir'] = (isset($_REQUEST['order'][0]['dir']))?$_REQUEST['order'][0]['dir']:'';
+        $param['searchValue'] =(isset($_REQUEST['search']['value']))?$_REQUEST['search']['value']:'';
+        
+		$data = $this->Hr_model->getPayrollDetails($param);
+		$json_data = json_encode($data);
+    	echo $json_data;
+	}
+	public function addPayroll()
+	{
+		$salarydate = str_replace('/', '-', $this->input->post('payroll_salarydate'));
+		$salarydate = date("Y-m-d",strtotime($salarydate));
+		$this->form_validation->set_rules('emp', 'Date', 'required');
+		if ($this->form_validation->run() == FALSE) 
+		{
+			$template['company']=$this->General_model->getCompanies();
+			$template['body'] = 'Hrmodule/Payroll/add';
+			$template['script'] = 'Hrmodule/Payroll/script';
+			$this->load->view('template', $template);
+		}
+		else
+		{
+			$data = array(
+						'company_id'=>$this->input->post('company'),	
+						'payroll_emp_id'=> $this->input->post('emp'),
+						// 'payroll_salmonth'=> $this->input->post('payroll_salmonth'),
+						'payroll_basicsalary'=> $this->input->post('payroll_basicpay'),
+						// 'payroll_ta'=> $this->input->post('payroll_ta'),
+						// 'payroll_incentive'=> $this->input->post('payroll_incentive'),
+						'payroll_advance'=>$this->input->post('payroll_balance'),
+						'payroll_leaveamt'=> $this->input->post('payroll_leaveamt'),
+						'payroll_salary'=> $this->input->post('payroll_salary'),
+						// 'payroll_expence'=> $this->input->post('payroll_expence'),
+						'payroll_salarydate'=> $salarydate,
+						'payroll_salmonth'=>$this->input->post('payroll_salmonth'),
+						'payroll_status'=> 1
+						);
+
+            $result = $this->General_model->add('tbl_payroll',$data);
+			$response_text = 'Payroll Details added successfully';
+                 
+			if($data){
+	            $this->session->set_flashdata('response', "{&quot;text&quot;:&quot;$response_text&quot;,&quot;layout&quot;:&quot;topRight&quot;,&quot;type&quot;:&quot;success&quot;}");
+			}
+			else{
+	            $this->session->set_flashdata('response', '{&quot;text&quot;:&quot;Something went wrong,please try again later&quot;,&quot;layout&quot;:&quot;bottomRight&quot;,&quot;type&quot;:&quot;error&quot;}');
+			}
+			redirect('/Payroll/', 'refresh');
+		}	
+	}
+	public function getAdvanceofEmployee()
+	{
+		$data=$this->Hr_model->getadvanceofEmployee($this->input->post('emp_id'),$this->input->post('month'));
+        echo json_encode($data);
+	}
+	public function getLeaveofEmployee()
+	{
+		$data=$this->Hr_model->getLeavesofEmployee($this->input->post('emp_id'),$this->input->post('month'));
+        echo json_encode($data);
+	}
+
+	public function Overtime()
+	{
+		$template['body'] = 'Hrmodule/Overtime/list';
+		$template['script'] = 'Hrmodule/Overtime/script';
+		$this->load->view('template', $template);
+	}
+	public function addOvertime()
+	{
+		$this->form_validation->set_rules('emp', 'Date', 'required');
+		if ($this->form_validation->run() == FALSE) 
+		{
+			$template['company']=$this->General_model->getCompanies();
+			$template['body'] = 'Hrmodule/Overtime/add';
+			$template['script'] = 'Hrmodule/Overtime/script';
+			$this->load->view('template', $template);
+		}
+		else
+		{
+			$date = str_replace('/', '-', $this->input->post('date'));
+			$date = date("Y-m-d",strtotime($date));
+			$data = array(
+				'company_id_fk'=>$this->input->post('company'),
+				'emp_id_fk' =>$this->input->post('emp'),
+				'hours' =>0,
+				'amount' =>$this->input->post('amount'), 
+				'date' =>$date,
+				'overtime_status'=>1 
+			);
+			$overtime_id = $this->input->post('overtime_id');
+			if ($overtime_id) 
+			{
+				$result = $this->General_model->update('tbl_overtime',$data,'overtime_id',$overtime_id);
+				$response_text = 'Overtime details  updated';
+			}
+			else
+			{
+				$result = $this->General_model->add('tbl_overtime',$data);
+				$response_text = 'Overtime Details added successfully';
+			}
+			if($response_text){
+	            $this->session->set_flashdata('response', "{&quot;text&quot;:&quot;$response_text&quot;,&quot;layout&quot;:&quot;topRight&quot;,&quot;type&quot;:&quot;success&quot;}");
+			}
+			else{
+	            $this->session->set_flashdata('response', '{&quot;text&quot;:&quot;Something went wrong,please try again later&quot;,&quot;layout&quot;:&quot;bottomRight&quot;,&quot;type&quot;:&quot;error&quot;}');
+			}
+			redirect('/Overtime/', 'refresh');
+		}
+	}
+	public function getOvertime()
+	{
+		$param['draw'] = (isset($_REQUEST['draw']))?$_REQUEST['draw']:'';
+        $param['length'] =(isset($_REQUEST['length']))?$_REQUEST['length']:'10'; 
+        $param['start'] = (isset($_REQUEST['start']))?$_REQUEST['start']:'0';
+        $param['order'] = (isset($_REQUEST['order'][0]['column']))?$_REQUEST['order'][0]['column']:'';
+        $param['dir'] = (isset($_REQUEST['order'][0]['dir']))?$_REQUEST['order'][0]['dir']:'';
+        $param['searchValue'] =(isset($_REQUEST['search']['value']))?$_REQUEST['search']['value']:'';
+        
+		$data = $this->Hr_model->getOvertimeDetails($param);
+		$json_data = json_encode($data);
+    	echo $json_data;
+	}
+	public function editOvertime($id)
+	{
+		$template['records'] = $this->Hr_model->getOvertimeDetailss($id);
+		$template['company']=$this->General_model->getCompanies();
+		$template['body'] = 'Hrmodule/Overtime/edit';
+		$template['script'] = 'Hrmodule/Overtime/script';
+		$this->load->view('template', $template);
+	}
+	public function deleteOvertime()
+	{
+		$overtime_id = $this->input->post('overtime_id');
+        $updateData = array('overtime_status' => 0);
+        $data = $this->General_model->update('tbl_overtime',$updateData,'overtime_id',$overtime_id);                       
+        if($data) {
+            $response['text'] = 'Deleted successfully';
+            $response['type'] = 'success';
+        }
+        else{
+            $response['text'] = 'Something went wrong';
+            $response['type'] = 'error';
+        }
+        $response['layout'] = 'topRight';
+        $data_json = json_encode($response);
+        echo $data_json;	
+	}
+	public function getOvertimeofEmployee()
+	{
+		$data=$this->Hr_model->getOvertimeofEmployee($this->input->post('emp_id'),$this->input->post('month'));
+        echo json_encode($data);
+	}
+}
