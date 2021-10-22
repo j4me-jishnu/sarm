@@ -14,7 +14,7 @@ class Accounts extends MY_Controller {
 		$this->load->model('Accountsreports_model');
 
 	}
-	
+
 	public function Voucherhead()
 	{
 		$template['body'] = 'Accounts/Voucherhead/list';
