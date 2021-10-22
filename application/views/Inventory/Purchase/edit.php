@@ -110,6 +110,10 @@
                 ?>
                 </select>
               </div>
+              <div class="col-md-4">
+                  <label for="product_name" class="control-label">Refffernce Bill ID<span style="color:red">*</span></label>
+                  <input type="text" name="ref_bill_id" class="form-control" id="invoice_number" value="<?php if(isset($records[0]->reference_bill_id)) echo  $records[0]->reference_bill_id?>" required>
+              </div>
             </div>
             <br>
             <!-- <div class="row">
