@@ -6,12 +6,13 @@ class Dashboard extends MY_Controller {
 		parent::__construct();
         if(! $this->is_logged_in()){
           redirect('/login');
-		
+
         }
-        
+
     $this->load->model('General_model');
 		$this->load->model('Dashboard_model');
-        
+
+				
 	}
 	public function index()
 	{

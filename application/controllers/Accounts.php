@@ -5,15 +5,16 @@ class Accounts extends MY_Controller {
 		parent::__construct();
         if(! $this->is_logged_in()){
           redirect('/login');
-		
+
         }
         $this->load->model('General_model');
 		$this->load->model('Dashboard_model');
 		$this->load->model('Administration_model');
 		$this->load->model('Accounts_model');
 		$this->load->model('Accountsreports_model');
-        
+
 	}
+	
 	public function Voucherhead()
 	{
 		$template['body'] = 'Accounts/Voucherhead/list';
@@ -30,15 +31,15 @@ class Accounts extends MY_Controller {
 		}
 		else {
 			$vouch_id = $this->input->post('vouch_id');
-			
-			
+
+
 			$data = array(
 						'vouch_head' =>strtoupper($this->input->post('vouch_head')),
 						'vouch_desc' =>strtoupper($this->input->post('vouch_desc')),
 						'vouch_status' => 1
 						);
 			if($vouch_id){
-				 
+
                  $data['vouch_id'] = $vouch_id;
                  $result = $this->General_model->update('tbl_vouchhead',$data,'vouch_id',$vouch_id);
                  $response_text = 'Voucher Head  updated successfully';
@@ -59,12 +60,12 @@ class Accounts extends MY_Controller {
 	public function getVoucherHeads()
 	{
 		$param['draw'] = (isset($_REQUEST['draw']))?$_REQUEST['draw']:'';
-        $param['length'] =(isset($_REQUEST['length']))?$_REQUEST['length']:'10'; 
+        $param['length'] =(isset($_REQUEST['length']))?$_REQUEST['length']:'10';
         $param['start'] = (isset($_REQUEST['start']))?$_REQUEST['start']:'0';
         $param['order'] = (isset($_REQUEST['order'][0]['column']))?$_REQUEST['order'][0]['column']:'';
         $param['dir'] = (isset($_REQUEST['order'][0]['dir']))?$_REQUEST['order'][0]['dir']:'';
         $param['searchValue'] =(isset($_REQUEST['search']['value']))?$_REQUEST['search']['value']:'';
-        
+
     	$data = $this->Accounts_model->getVoucherheadTable($param);
     	$json_data = json_encode($data);
     	echo $json_data;
@@ -111,15 +112,15 @@ class Accounts extends MY_Controller {
 		}
 		else {
 			$receipt_id = $this->input->post('receipt_id');
-			
-			
+
+
 			$data = array(
 						'receipt_head' =>strtoupper($this->input->post('receipt_head')),
 						'receipt_desc' =>strtoupper($this->input->post('receipt_desc')),
 						'receipt_status' => 1
 						);
 			if($receipt_id){
-				 
+
                  $result = $this->General_model->update('tbl_receipthead',$data,'receipt_id',$receipt_id);
                  $response_text = 'Receipt Head  updated successfully';
             }
@@ -139,12 +140,12 @@ class Accounts extends MY_Controller {
 	public function getReceipthead()
 	{
 		$param['draw'] = (isset($_REQUEST['draw']))?$_REQUEST['draw']:'';
-        $param['length'] =(isset($_REQUEST['length']))?$_REQUEST['length']:'10'; 
+        $param['length'] =(isset($_REQUEST['length']))?$_REQUEST['length']:'10';
         $param['start'] = (isset($_REQUEST['start']))?$_REQUEST['start']:'0';
         $param['order'] = (isset($_REQUEST['order'][0]['column']))?$_REQUEST['order'][0]['column']:'';
         $param['dir'] = (isset($_REQUEST['order'][0]['dir']))?$_REQUEST['order'][0]['dir']:'';
         $param['searchValue'] =(isset($_REQUEST['search']['value']))?$_REQUEST['search']['value']:'';
-        
+
     	$data = $this->Accounts_model->getReceiptheadTable($param);
     	$json_data = json_encode($data);
     	echo $json_data;
@@ -192,7 +193,7 @@ class Accounts extends MY_Controller {
 			$template['script'] = 'Accounts/Receipt/script';
 			$this->load->view('template', $template);
 		}
-		else 
+		else
 		{
 			$receipt_id = $this->input->post('rece_id');
 
@@ -209,16 +210,16 @@ class Accounts extends MY_Controller {
 				$company =  $this->session->userdata['cmp_id'];
 			}
 			$data = array(
-			           'finyear_id_fk' =>$fyr,	
-						'receip_id_fk' =>$this->input->post('receip_id'),	
+			           'finyear_id_fk' =>$fyr,
+						'receip_id_fk' =>$this->input->post('receip_id'),
 						'rept_date' =>$rept_date,
-						'receipt_amount' =>$this->input->post('receipt_amount'),						
+						'receipt_amount' =>$this->input->post('receipt_amount'),
 						'received_to' =>$this->input->post('paid_to'),
 						'narration' =>strtoupper($this->input->post('narration')),
 						'receipt_status' => 1,
 						'company_id_fk' => $company
-						);	
-			
+						);
+
 			if($receipt_id){
                  $result = $this->General_model->update('tbl_receipt',$data,'receipt_id',$receipt_id);
                  $response_text = 'Receipt updated successfully';
@@ -239,12 +240,12 @@ class Accounts extends MY_Controller {
 	public function getReceipt()
 	{
 		$param['draw'] = (isset($_REQUEST['draw']))?$_REQUEST['draw']:'';
-        $param['length'] =(isset($_REQUEST['length']))?$_REQUEST['length']:'10'; 
+        $param['length'] =(isset($_REQUEST['length']))?$_REQUEST['length']:'10';
         $param['start'] = (isset($_REQUEST['start']))?$_REQUEST['start']:'0';
         $param['order'] = (isset($_REQUEST['order'][0]['column']))?$_REQUEST['order'][0]['column']:'';
         $param['dir'] = (isset($_REQUEST['order'][0]['dir']))?$_REQUEST['order'][0]['dir']:'';
         $param['searchValue'] =(isset($_REQUEST['search']['value']))?$_REQUEST['search']['value']:'';
-        
+
 		$data = $this->Accounts_model->getRecieptTable($param);
     	$json_data = json_encode($data);
     	echo $json_data;
@@ -264,7 +265,7 @@ class Accounts extends MY_Controller {
 		$receipt_id = $this->input->post('receipt_id');
         $updateData = array('receipt_status' => 0);
         $data = $this->General_model->update('tbl_receipt',$updateData,'receipt_id',$receipt_id);
-       
+
         if($data) {
             $response['text'] = 'Deleted successfully';
             $response['type'] = 'success';
@@ -296,12 +297,12 @@ class Accounts extends MY_Controller {
 			$template['script'] = 'Accounts/Voucher/script';
 			$this->load->view('template', $template);
 		}
-		else 
+		else
 		{
 			$voucher_id = $this->input->post('vouch_id');
 			$fnyr = $this->General_model->fin_year();
 			if(isset($fnyr->finyear_id)){ $fyr = $fnyr->finyear_id; } else{ $fyr = 0;}
-			
+
 			$voucher_date = str_replace('/', '-', $this->input->post('voucher_date'));
 			$voucher_date = date("Y-m-d",strtotime($voucher_date));
 			if ($this->session->userdata['user_type'] =='A')
@@ -314,10 +315,10 @@ class Accounts extends MY_Controller {
 			}
 			$data = array(
 			           'finyear_id_fk' =>$fyr,
-						'vouch_id_fk' =>$this->input->post('vouch_head'),	
-						'voucher_amount' =>$this->input->post('voucher_amount'),						
+						'vouch_id_fk' =>$this->input->post('vouch_head'),
+						'voucher_amount' =>$this->input->post('voucher_amount'),
 						'paid_from' =>$this->input->post('paid_to'),
-						'voucher_date' =>$voucher_date,	
+						'voucher_date' =>$voucher_date,
 						'narration' =>strtoupper($this->input->post('narration')),
 						'voucher_status' => 1,
 						'company_id_fk' => $company
@@ -331,7 +332,7 @@ class Accounts extends MY_Controller {
 			{
 			     $this->General_model->add('tbl_voucher',$data);
                  $response_text = 'Voucher added  successfully';
-				 
+
             }
 			if($response_text){
             $this->session->set_flashdata('response', "{&quot;text&quot;:&quot;$response_text&quot;,&quot;layout&quot;:&quot;topRight&quot;,&quot;type&quot;:&quot;success&quot;}");
@@ -345,12 +346,12 @@ class Accounts extends MY_Controller {
 	public function getVoucher()
 	{
 		$param['draw'] = (isset($_REQUEST['draw']))?$_REQUEST['draw']:'';
-        $param['length'] =(isset($_REQUEST['length']))?$_REQUEST['length']:'10'; 
+        $param['length'] =(isset($_REQUEST['length']))?$_REQUEST['length']:'10';
         $param['start'] = (isset($_REQUEST['start']))?$_REQUEST['start']:'0';
         $param['order'] = (isset($_REQUEST['order'][0]['column']))?$_REQUEST['order'][0]['column']:'';
         $param['dir'] = (isset($_REQUEST['order'][0]['dir']))?$_REQUEST['order'][0]['dir']:'';
         $param['searchValue'] =(isset($_REQUEST['search']['value']))?$_REQUEST['search']['value']:'';
-        
+
 		$data = $this->Accounts_model->getVoucherTable($param);
     	$json_data = json_encode($data);
     	echo $json_data;
@@ -370,7 +371,7 @@ class Accounts extends MY_Controller {
 		$voucher_id = $this->input->post('voucher_id');
         $updateData = array('voucher_status' => 0);
         $data = $this->General_model->update('tbl_voucher',$updateData,'voucher_id',$voucher_id);
-       
+
         if($data) {
             $response['text'] = 'Deleted successfully';
             $response['type'] = 'success';
@@ -399,14 +400,14 @@ class Accounts extends MY_Controller {
 			$template['script'] = 'Accounts/Groups/script';
 			$this->load->view('template', $template);
 		}
-		else 
+		else
 		{
 			$group_id = $this->input->post('group_id');
 			$default = $this->input->post('default');
 			if ($default != 1) {
 				$default =0;
 			}
-			
+
 			$data = array(
 						'group_name' =>strtoupper($this->input->post('group_name')),
 						'group_desc' =>strtoupper($this->input->post('group_desc')),
@@ -416,7 +417,7 @@ class Accounts extends MY_Controller {
 						'group_parent_id'=> 0
 						);
 			if($group_id){
-				 
+
                  $result = $this->General_model->update('tbl_groups',$data,'group_id',$group_id);
                  $response_text = 'Updated successfully';
             }
@@ -436,12 +437,12 @@ class Accounts extends MY_Controller {
 	public function getGroups()
 	{
 		$param['draw'] = (isset($_REQUEST['draw']))?$_REQUEST['draw']:'';
-        $param['length'] =(isset($_REQUEST['length']))?$_REQUEST['length']:'10'; 
+        $param['length'] =(isset($_REQUEST['length']))?$_REQUEST['length']:'10';
         $param['start'] = (isset($_REQUEST['start']))?$_REQUEST['start']:'0';
         $param['order'] = (isset($_REQUEST['order'][0]['column']))?$_REQUEST['order'][0]['column']:'';
         $param['dir'] = (isset($_REQUEST['order'][0]['dir']))?$_REQUEST['order'][0]['dir']:'';
         $param['searchValue'] =(isset($_REQUEST['search']['value']))?$_REQUEST['search']['value']:'';
-        
+
     	$data = $this->Accounts_model->getGroupsTable($param);
     	$json_data = json_encode($data);
     	echo $json_data;
@@ -459,7 +460,7 @@ class Accounts extends MY_Controller {
 		$group_id = $this->input->post('group_id');
         $updateData = array('group_status' => 0);
         $data = $this->General_model->update('tbl_groups',$updateData,'group_id',$group_id);
-       
+
         if($data) {
             $response['text'] = 'Deleted successfully';
             $response['type'] = 'success';
@@ -488,14 +489,14 @@ class Accounts extends MY_Controller {
 			$template['script'] = 'Accounts/Subgroups/script';
 			$this->load->view('template', $template);
 		}
-		else 
+		else
 		{
 			$group_id = $this->input->post('group_id');
 			$default = $this->input->post('default');
 			if ($default != 1) {
 				$default =0;
 			}
-			
+
 			$data = array(
 						'group_name' =>strtoupper($this->input->post('group_name')),
 						'group_desc' =>strtoupper($this->input->post('group_desc')),
@@ -505,7 +506,7 @@ class Accounts extends MY_Controller {
 						'group_parent_id'=> $this->input->post('groups')
 						);
 			if($group_id){
-				 
+
                  $result = $this->General_model->update('tbl_groups',$data,'group_id',$group_id);
                  $response_text = 'Updated successfully';
             }
@@ -530,18 +531,18 @@ class Accounts extends MY_Controller {
 	public function getSubgroup()
 	{
 		$param['draw'] = (isset($_REQUEST['draw']))?$_REQUEST['draw']:'';
-        $param['length'] =(isset($_REQUEST['length']))?$_REQUEST['length']:'10'; 
+        $param['length'] =(isset($_REQUEST['length']))?$_REQUEST['length']:'10';
         $param['start'] = (isset($_REQUEST['start']))?$_REQUEST['start']:'0';
         $param['order'] = (isset($_REQUEST['order'][0]['column']))?$_REQUEST['order'][0]['column']:'';
         $param['dir'] = (isset($_REQUEST['order'][0]['dir']))?$_REQUEST['order'][0]['dir']:'';
         $param['searchValue'] =(isset($_REQUEST['search']['value']))?$_REQUEST['search']['value']:'';
-        
+
     	$data = $this->Accounts_model->getsubGroupsTable($param);
     	$groups=$this->Accounts_model->getGroupslist();
-    	for ($i=0; $i < count($data['data']) ; $i++) 
-    	{ 
-    		for ($k=0; $k < count($groups) ; $k++) 
-    		{ 
+    	for ($i=0; $i < count($data['data']) ; $i++)
+    	{
+    		for ($k=0; $k < count($groups) ; $k++)
+    		{
     			if($data['data'][$i]->group_parent_id == $groups[$k]->group_id)
 	    		{
 	    			$data['data'][$i]->main_group = $groups[$k]->group_name;
@@ -565,7 +566,7 @@ class Accounts extends MY_Controller {
 		$group_id = $this->input->post('group_id');
         $updateData = array('group_status' => 0);
         $data = $this->General_model->update('tbl_groups',$updateData,'group_id',$group_id);
-       
+
         if($data) {
             $response['text'] = 'Deleted successfully';
             $response['type'] = 'success';
@@ -596,18 +597,18 @@ class Accounts extends MY_Controller {
 			$template['script'] = 'Accounts/Ledgerhead/script';
 			$this->load->view('template', $template);
 		}
-		else 
+		else
 		{
 			$ledgerhead_id = $this->input->post('ledgerhead_id');
-			
+
 			$data = array(
-						'group_id_fk' =>$this->input->post('groups'),	
-						'ledger_head' =>$this->input->post('ledger_head'),						
+						'group_id_fk' =>$this->input->post('groups'),
+						'ledger_head' =>$this->input->post('ledger_head'),
 						'ledgerhead_desc' =>$this->input->post('ledgerhead_desc'),
 						'ledgerhead_status' =>1,
 						'opening_bal' => $this->input->post('opening_bal'),
 						'debit_or_credit' => $this->input->post('optradio'),
-						'company_id_fk' => $this->input->post('company')	
+						'company_id_fk' => $this->input->post('company')
 						);
 			$day= date('d') - 1;
 			$monthyear=date('Y-m');
@@ -624,7 +625,7 @@ class Accounts extends MY_Controller {
 			if($ledgerhead_id)
 			{
                  $result = $this->General_model->update('tbl_ledgerhead',$data,'ledgerhead_id',$ledgerhead_id);
-                 
+
                  	$array=array(
 						'company_id_fk'=>$this->input->post('company'),
 						'ledgerhead_id_fk'=>$ledgerhead_id,
@@ -647,9 +648,9 @@ class Accounts extends MY_Controller {
 						'debit_credit'=>$debit_credit,
 						'ledgerbalance_status'=>1
 					);
-					$this->General_model->add('tbl_ledgerbalance',$array);		
+					$this->General_model->add('tbl_ledgerbalance',$array);
                 $response_text = 'Added  successfully';
-				 
+
             }
 			if($response_text){
             $this->session->set_flashdata('response', "{&quot;text&quot;:&quot;$response_text&quot;,&quot;layout&quot;:&quot;topRight&quot;,&quot;type&quot;:&quot;success&quot;}");
@@ -663,18 +664,18 @@ class Accounts extends MY_Controller {
 	public function getLedgerhead()
 	{
 		$param['draw'] = (isset($_REQUEST['draw']))?$_REQUEST['draw']:'';
-        $param['length'] =(isset($_REQUEST['length']))?$_REQUEST['length']:'10'; 
+        $param['length'] =(isset($_REQUEST['length']))?$_REQUEST['length']:'10';
         $param['start'] = (isset($_REQUEST['start']))?$_REQUEST['start']:'0';
         $param['order'] = (isset($_REQUEST['order'][0]['column']))?$_REQUEST['order'][0]['column']:'';
         $param['dir'] = (isset($_REQUEST['order'][0]['dir']))?$_REQUEST['order'][0]['dir']:'';
         $param['searchValue'] =(isset($_REQUEST['search']['value']))?$_REQUEST['search']['value']:'';
-        
+
     	$data = $this->Accounts_model->getLedgerheadTable($param);
     	$groups=$this->Accounts_model->getGroupslist();
-    	for ($i=0; $i < count($data['data']) ; $i++) 
-    	{ 
-    		for ($k=0; $k < count($groups) ; $k++) 
-    		{ 
+    	for ($i=0; $i < count($data['data']) ; $i++)
+    	{
+    		for ($k=0; $k < count($groups) ; $k++)
+    		{
     			if($data['data'][$i]->group_parent_id == $groups[$k]->group_id)
 	    		{
 	    			$data['data'][$i]->main_group = $groups[$k]->group_name;
@@ -731,7 +732,7 @@ class Accounts extends MY_Controller {
 			}
 			list($alpha,$numeric) = sscanf($inv, "%[A-Z,-]%d");
 			$s=substr($inv,6);
-			$y=$s+1; 
+			$y=$s+1;
 			$inv_no = str_pad($y, 4, "0", STR_PAD_LEFT);
 			$template['invno'] = $alpha.$inv_no;
 
@@ -741,7 +742,7 @@ class Accounts extends MY_Controller {
 			$template['script'] = 'Accounts/Journal/script';
 			$this->load->view('template', $template);
 		}
-		else 
+		else
 		{
 			$ledgerhead = $this->input->post('ledgerhead');
 			$debit = $this->input->post('debit');
@@ -756,10 +757,10 @@ class Accounts extends MY_Controller {
 			{
 				$res = $this->Accounts_model->UpdateJournal($journal_inv);
 			}
-			// if (! $unique_id) 
+			// if (! $unique_id)
 			// {
 			// 	$unique = $this->Accounts_model->getJournalUnique();
-			// 	if (! $unique) 
+			// 	if (! $unique)
 			// 	{
 			// 		$unique=1;
 			// 	}
@@ -781,10 +782,10 @@ class Accounts extends MY_Controller {
 			$journal_date =  date("Y-m-d",strtotime($journal_date));
 			$fnyr = $this->General_model->fin_year();
 			if(isset($fnyr->finyear_id)){ $fyr = $fnyr->finyear_id; } else{ $fyr = 0;}
-			
 
-			for ($i=0; $i < $count ; $i++) 
-			{ 
+
+			for ($i=0; $i < $count ; $i++)
+			{
 				$data = array(
 					'fin_year' => $fyr,
 					'company_id_fk'=> $this->input->post('company'),
@@ -800,13 +801,13 @@ class Accounts extends MY_Controller {
 				$response = $this->General_model->add('tbl_journal',$data);
                 $response_text = 'Added  successfully';
 			}
-			for ($a=0; $a < count($ledgerhead) ; $a++) 
-			{ 
+			for ($a=0; $a < count($ledgerhead) ; $a++)
+			{
 				$this->BalanceUpdate($this->input->post('company'),$ledgerhead[$a],$journal_date);
 				// echo $ledgerhead[$a];die;
 			}
 
-			if ($response_text) 
+			if ($response_text)
 			{
 				$this->session->set_flashdata('response', "{&quot;text&quot;:&quot;$response_text&quot;,&quot;layout&quot;:&quot;topRight&quot;,&quot;type&quot;:&quot;success&quot;}");
 			}
@@ -825,22 +826,22 @@ class Accounts extends MY_Controller {
 	public function getJournallist()
 	{
 		$param['draw'] = (isset($_REQUEST['draw']))?$_REQUEST['draw']:'';
-        $param['length'] =(isset($_REQUEST['length']))?$_REQUEST['length']:'10'; 
+        $param['length'] =(isset($_REQUEST['length']))?$_REQUEST['length']:'10';
         $param['start'] = (isset($_REQUEST['start']))?$_REQUEST['start']:'0';
         $param['order'] = (isset($_REQUEST['order'][0]['column']))?$_REQUEST['order'][0]['column']:'';
         $param['dir'] = (isset($_REQUEST['order'][0]['dir']))?$_REQUEST['order'][0]['dir']:'';
         $param['searchValue'] =(isset($_REQUEST['search']['value']))?$_REQUEST['search']['value']:'';
-        
+
     	$data = $this->Accounts_model->getJournalTable($param);
-    	
-    	// for ($i=0; $i < count($data['data']); $i++) 
+
+    	// for ($i=0; $i < count($data['data']); $i++)
     	// {
 
     	// 	$row = $this->Accounts_model->getNumsofCount($data['data']->journal_inv);
-    	// 	for ($k=0; $k < count($row); $k++) 
-    	// 	{ 
+    	// 	for ($k=0; $k < count($row); $k++)
+    	// 	{
     	// 		$data['data'][$i]->led =$data['data'][$i]->jout
-    	// 	}	
+    	// 	}
     	// }
 
 
@@ -864,7 +865,7 @@ class Accounts extends MY_Controller {
         $updateData = array('journal_status' => 0);
         $journal_inv =$this->Accounts_model->getJournalsInv($journal_id);
         $data = $this->General_model->update('tbl_journal',$updateData,'journal_inv',$journal_inv);
-       
+
         if($data) {
             $response['text'] = 'Deleted successfully';
             $response['type'] = 'success';
@@ -888,15 +889,15 @@ class Accounts extends MY_Controller {
 	public function getTypes()
 	{
 		$param['draw'] = (isset($_REQUEST['draw']))?$_REQUEST['draw']:'';
-        $param['length'] =(isset($_REQUEST['length']))?$_REQUEST['length']:'10'; 
+        $param['length'] =(isset($_REQUEST['length']))?$_REQUEST['length']:'10';
         $param['start'] = (isset($_REQUEST['start']))?$_REQUEST['start']:'0';
         $param['order'] = (isset($_REQUEST['order'][0]['column']))?$_REQUEST['order'][0]['column']:'';
         $param['dir'] = (isset($_REQUEST['order'][0]['dir']))?$_REQUEST['order'][0]['dir']:'';
         $param['searchValue'] =(isset($_REQUEST['search']['value']))?$_REQUEST['search']['value']:'';
-        
+
     	$data = $this->Accounts_model->getTypesTable($param);
     	$json_data = json_encode($data);
-    	echo $json_data;	
+    	echo $json_data;
 	}
 	public function BalanceUpdate($cmp,$ledgerhead,$journal_date)
 	{
@@ -904,7 +905,7 @@ class Accounts extends MY_Controller {
 		$credit= $this->Accountsreports_model->getCreditSide($cmp,$ledgerhead,$journal_date);
 		$balance = $this->Accountsreports_model->getBalance($cmp,$ledgerhead,$journal_date,$journal_date);
 
-		if (isset($debit) == NULL && isset($credit) == NULL) 
+		if (isset($debit) == NULL && isset($credit) == NULL)
 		{
 			$array=array(
 						'company_id_fk'=>$cmp,
@@ -920,7 +921,7 @@ class Accounts extends MY_Controller {
 		{
 			$deb_count = count($debit);
             $cre_count = count($credit);
-            if ($deb_count > $cre_count) 
+            if ($deb_count > $cre_count)
             {
               $count = $deb_count;
             }
@@ -932,7 +933,7 @@ class Accounts extends MY_Controller {
             {
               $count = $cre_count;
             }
-            
+
             if($balance)
             {
 	            if($balance['debit_credit'] == 0)
@@ -942,22 +943,22 @@ class Accounts extends MY_Controller {
 		        else if($balance['debit_credit'] == 2)
 		        {
 		          	if(isset($balance['balance']))
-		          	{ 
+		          	{
 		          		$deb_total=$balance['balance'];
-		          		$cred_total = 0; 
+		          		$cred_total = 0;
 		          	}
 		        }
 		        else if($balance['debit_credit'] == 1)
 		        {
 		          	if(isset($balance['balance']))
-		          	{ 
+		          	{
 		          		$cred_total=$balance['balance'];
-		          		$deb_total=0; 
+		          		$deb_total=0;
 		          	}
 		        }
 		    }
 
-            for ($i=0; $i < $count ; $i++) 
+            for ($i=0; $i < $count ; $i++)
             {
             	if(isset($debit[$i]['credit_amt'])){$deb_total = $deb_total + $debit[$i]['credit_amt'];}
                 if(isset($credit[$i]['debit_amt'])){$cred_total = $cred_total + $credit[$i]['debit_amt'];}
@@ -1000,7 +1001,7 @@ class Accounts extends MY_Controller {
           			else
           			{
           				$response = $this->General_model->upda('tbl_ledgerbalance',$array,'date',$journal_date,'ledgerhead_id_fk',$ledgerhead,'company_id_fk',$cmp);
-          			} 
+          			}
           		}
             }
 
