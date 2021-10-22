@@ -121,6 +121,7 @@ class Inventory extends MY_Controller {
 					  'finyear' => $fyr,
 					  'price_category'=>$this->input->post('optradio'),
 					  'invoice_number' =>$this->input->post('invoice_number'),
+					  'reference_bill_id'=>$this->input->post('ref_bill_id'),
 					  'purchase_quantity' =>$purchase_quantity[$i],
 					  'purchase_price' =>$purchase_price[$i],
 					  'discount_price' =>$discount_price[$i],

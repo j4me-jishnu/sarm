@@ -126,7 +126,7 @@
               </div>
               <div class="col-md-4">
                   <label for="product_name" class="control-label">Refffernce Bill ID<span style="color:red">*</span></label>
-                  <input type="text" name="invoice_number" class="form-control" id="invoice_number" required>
+                  <input type="text" name="ref_bill_id" class="form-control" id="invoice_number" required>
               </div>
             </div>
             <br>
