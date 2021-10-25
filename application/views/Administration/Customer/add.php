@@ -91,6 +91,10 @@
                     <input type="text"  class="form-control" name="old_balance" id="old_balance"  value="<?php if(isset($records->old_balance)) echo $records->old_balance ?>">
                   </div>
                 </div>
+                <div class="form-group text-center">
+                  <label class="radio-inline"><input type="radio" name="radio_val" value="0">Debitor</label>
+                  <label class="radio-inline"><input type="radio" name="radio_val" value="1">Creditor</label>
+                </div>
                 <div class="form-group">
                   <label for="size_name" class="col-sm-4 control-label">Price Category</label>
 

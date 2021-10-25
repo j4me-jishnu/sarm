@@ -71,7 +71,8 @@ class Administration extends MY_Controller {
 						'custemail' => $this->input->post('cust_email'),
 						'old_balance'=>$this->input->post('old_balance'),
 						'cust_pcategory'=>$this->input->post('category'),
-						'custstatus' => 1
+						'custstatus' => 1,
+						'debit_credit'	=>$this->input->post('radio_val'),
 						);
 
 			$data2 = array(
@@ -79,7 +80,6 @@ class Administration extends MY_Controller {
 				'ledger_head' =>$this->input->post('cust_name'),
 				'ledgerhead_desc' => 'Customer',
 				'opening_bal'	=> 0,	
-				'debit_or_credit'	=> 2,
 				'ledgerhead_status'	=> 1,
 				'company_id_fk'	=>	$company,
 			);	

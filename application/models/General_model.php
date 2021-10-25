@@ -333,5 +333,13 @@ class General_model extends CI_Model{
     //     return $this->db->get('tbl_taxdetails')->result();
     // }
 
+    public function getBankListTable()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_bank');
+        $this->db->where('bank_status',1);
+        $query = $this->db->get();
+        return $query->result();
+    }
 }
 ?>

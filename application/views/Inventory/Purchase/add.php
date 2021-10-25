@@ -231,6 +231,26 @@
                 <input class="form-control" type="text" name="frieght" id="frieght" value="0" onkeyup="getNetTotal()" required>
                 <label>Packing Charge</label>
                 <input class="form-control" type="text" name="pack_chrg" id="pack_chrg" value="0" onkeyup="getNetTotal()">
+                <br>
+                <!-- Dynamic Radio Button for Cash Or Bank -->
+                <!-- Added By Rajeev -->
+                <label for="chkYes">
+                    <input type="radio" id="chkYes" name="bank_or_cash" value="0" onclick="ShowHideDiv()" />
+                    Cash
+                </label>
+                <label for="chkNo">
+                    <input type="radio" id="chkNo" name="bank_or_cash" value="1" onclick="ShowHideDiv()" />
+                    Bank
+                </label>
+                <div id="batext" style="display: none">
+                <label for="banks">Choose Bank:</label>
+                  <select name="bank_id" id="banks">
+                    <?php foreach($banklist as $banklists){ ?>
+                    <option value="<?php echo $banklists->bank_id ?>"><?php echo $banklists->bank_name ?></option>
+                    <?php } ?>
+                  </select>
+                </div>
+                <!-- end of radio button field -->
               </div>
               <div class="col-md-8"></div>
               <div class="col-md-2">
@@ -271,4 +291,10 @@
     $('#draft').val(1);
     document.getElementById('purchase_form').submit();
   }
+
+  function ShowHideDiv() {
+        var chkYes = document.getElementById("chkYes");
+        var dvtext = document.getElementById("dvtext");
+        batext.style.display = chkNo.checked ? "block" : "none";
+    }
 </script>
