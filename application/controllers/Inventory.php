@@ -62,6 +62,7 @@ class Inventory extends MY_Controller {
 			$template['supplier'] = $this->General_model->getSuppliers();
 			$template['pcategory'] = $this->General_model->getPriceCategories();
 			$template['itemlist'] = $this->General_model->getItemlist();
+			$template['banklist'] = $this->General_model->getBankListTable();
 			$template['body'] = 'Inventory/Purchase/add';
 			$template['script'] = 'Inventory/Purchase/script';
 			$this->load->view('template', $template);
@@ -84,6 +85,15 @@ class Inventory extends MY_Controller {
 			$product_id = $this->input->post('product_id_fk');
 			$supp_id = $this->input->post('supp_id');
 			$cmp_id = $company;
+			// Bank or Cash
+			$radio_type = $this->input->post('bank_or_cash');
+			if($radio_type == 1){
+				$bank_id = $this->input->post('bank_id');
+			}
+			else{
+				$bank_id = NULL;
+			}
+
 			$purchase_quantity = $this->input->post('quantity');
 			$purchase_price = $this->input->post('price');
 			$discount_price = $this->input->post('discount'); 
@@ -118,6 +128,7 @@ class Inventory extends MY_Controller {
 					  'product_id_fk' =>$product_id[$i],
 					  'supp_id' =>$supp_id,
 					  'cmp_id' =>$cmp_id,
+					  'bank_id' =>$bank_id,
 					  'finyear' => $fyr,
 					  'price_category'=>$this->input->post('optradio'),
 					  'invoice_number' =>$this->input->post('invoice_number'),
