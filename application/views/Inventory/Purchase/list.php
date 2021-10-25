@@ -17,7 +17,7 @@
         <div class="box-header">
           <div class="row">
             <div class="col-sm-10">
-              <h3>Purchase List</h3>  
+              <h3>Purchase List</h3>
             </div>
             <div class="col-sm-2">
               <a href="<?php echo base_url();?>addPurchase" class="btn btn-sm common-btn"><i class="fa fa-plus-square"></i>Add New</a>
@@ -83,4 +83,3 @@
       </div>
     </section>
 </div>
-  

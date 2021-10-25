@@ -27,7 +27,7 @@
                     <select name="company" class="form-control" required>
                       <option></option>
                       <?php
-                      foreach ($company as $row) 
+                      foreach ($company as $row)
                       {
                         ?>
                         <option value="<?php echo $row->cmp_id ?>" <?php if(isset($records->company_id)) if ($records->company_id == $row->cmp_id)  echo "selected" ?>><?php echo $row->cmp_name; ?></option>
@@ -42,13 +42,13 @@
                   <div class="col-sm-4"></div>
                   <div class="col-sm-5">
                     <label  class="radio-inline">
-                        <input type="radio" name="optradio" value="1" <?php if(isset($records->supplier_type)) if ($records->supplier_type == 1)  echo "checked" ?>><label>Wholesale Customer</label> 
+                        <input type="radio" name="optradio" value="1" <?php if(isset($records->supplier_type)) if ($records->supplier_type == 1)  echo "checked" ?>><label>Wholesale Customer</label>
                     </label>
-                    
+
                     <label class="radio-inline">
-                        <input type="radio" name="optradio" value="2" <?php if(isset($records->supplier_type)) if ($records->supplier_type == 2)  echo "checked" ?>><label>Retail Customer</label> 
+                        <input type="radio" name="optradio" value="2" <?php if(isset($records->supplier_type)) if ($records->supplier_type == 2)  echo "checked" ?>><label>Retail Customer</label>
                     </label>
-                  </div>  
+                  </div>
               </div> -->
               <div class="form-group">
                <input type="hidden" name="supplier_id" value="<?php if(isset($records->supplier_id)) echo $records->supplier_id ?>"/>
@@ -95,7 +95,7 @@
                     <select name="category" class="form-control" required>
                       <option></option>
                       <?php
-                      foreach ($category as $key) 
+                      foreach ($category as $key)
                       {
                         ?>
                         <option value="<?php echo $key->pcategory_id ?>" <?php if(isset($records->company_id)) if ($records->supplier_pcategory == $key->pcategory_id)  echo "selected" ?>><?php echo $key->pcategory_name; ?></option>
@@ -105,14 +105,14 @@
                     </select>
                   </div>
               </div>
-              
+
               <div class="form-group">
                   <div class="col-sm-5">
                     <label class="radio-inline">
-                      <input type="radio" name="supplier_type" value="0" <?php if(isset($records->supplier_type)) if ($records->supplier_type == 0)  echo "checked" ?>>Debitor
+                      <input type="radio" name="supplier_type" value="0" <?php if(isset($records->supplier_type)) if ($records->supplier_type == 0)  echo "checked" ?> required>Debtor
                     </label>
                     <label class="radio-inline">
-                      <input type="radio" name="supplier_type" value="1" <?php if(isset($records->supplier_type)) if ($records->supplier_type == 1)  echo "checked" ?>>Creditor
+                      <input type="radio" name="supplier_type" value="1" <?php if(isset($records->supplier_type)) if ($records->supplier_type == 1)  echo "checked" ?>required>Creditor
                     </label>
                   </div>
               </div>
