@@ -23,6 +23,10 @@ class Category extends MY_Controller {
 	//price category
 	public function Pricecategory()
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['body'] = 'Administration/Category/PriceCategory/list';
 		$template['script'] = 'Administration/Category/PriceCategory/script';
 		$this->load->view('template', $template);
@@ -44,6 +48,10 @@ class Category extends MY_Controller {
 	{
 		$this->form_validation->set_rules('category_name', 'Name', 'required');
 		if ($this->form_validation->run() == FALSE) {
+			if($this->session->userdata('user_type')=='C'){
+				$id = $this->session->userdata('id');
+				$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+				}
 			$template['body'] = 'Administration/Category/PriceCategory/add';
 			$template['script'] = 'Administration/Category/PriceCategory/script';
 			$this->load->view('template', $template);
@@ -76,6 +84,10 @@ class Category extends MY_Controller {
 	}
 	public function priceCategoryedit($category_id)
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['body'] = 'Administration/Category/PriceCategory/add';
 		$template['script'] = 'Administration/Category/PriceCategory/script';
 		$template['records'] = $this->General_model->get_row($this->pricecat,'pcategory_id',$category_id);
@@ -102,6 +114,10 @@ class Category extends MY_Controller {
 	//Prduct main Category
 	public function Productcategory()
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['body'] = 'Administration/Category/Product/Main/list';
 		$template['script'] = 'Administration/Category/Product/Main/script';
 		$this->load->view('template', $template);
@@ -123,6 +139,10 @@ class Category extends MY_Controller {
 	{
 		$this->form_validation->set_rules('category_name', 'Name', 'required');
 		if ($this->form_validation->run() == FALSE) {
+			if($this->session->userdata('user_type')=='C'){
+				$id = $this->session->userdata('id');
+				$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+				}
 			$template['body'] = 'Administration/Category/Product/Main/add';
 			$template['script'] = 'Administration/Category/Product/Main/script';
 			$this->load->view('template', $template);
@@ -172,6 +192,10 @@ class Category extends MY_Controller {
 	}
 	public function Categoryedit($cat)
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['records'] = $this->General_model->get_row($this->t_category,'category_id',$cat);
 		$template['body'] = 'Administration/Category/Product/Main/add';
 		$template['script'] = 'Administration/Category/Product/Main/script';
@@ -181,6 +205,10 @@ class Category extends MY_Controller {
 	//SUB-CATEGORY
 	public function Productsubcategory()
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['body'] = 'Administration/Category/Product/Sub/list';
 		$template['script'] = 'Administration/Category/Product/Sub/script';
 		$this->load->view('template', $template);
@@ -202,6 +230,10 @@ class Category extends MY_Controller {
 	{
 		$this->form_validation->set_rules('category_name', 'Name', 'required');
 		if ($this->form_validation->run() == FALSE) {
+			if($this->session->userdata('user_type')=='C'){
+				$id = $this->session->userdata('id');
+				$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+				}
 			$template['mainCategory'] = $this->General_model->getMainCategorylist();
 			$template['body'] = 'Administration/Category/Product/Sub/add';
 			$template['script'] = 'Administration/Category/Product/Sub/script';

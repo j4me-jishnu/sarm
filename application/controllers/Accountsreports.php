@@ -33,7 +33,10 @@ class Accountsreports extends MY_Controller
 				$cmp =  $this->session->userdata['cmp_id'];
 				$template['ledgerhead']=$this->Accounts_model->getLedgerheadlistcompany($cmp);
 			}
-				
+			if($this->session->userdata('user_type')=='C'){
+				$id = $this->session->userdata('id');
+				$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+				}
 			$template['company']=$this->General_model->getCompanies();
 			$template['balance']=NULL;$template['result']=NULL;
 			$template['body'] = 'Accounts/Ledger/list';
@@ -66,7 +69,10 @@ class Accountsreports extends MY_Controller
 				$template['date_from'] = $this->input->post('date_from');
 				$template['date_to'] = $this->input->post('date_to');
 
-
+				if($this->session->userdata('user_type')=='C'){
+					$id = $this->session->userdata('id');
+					$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+					}
 				$template['ledgerhead']=$this->Accounts_model->getLedgerheadlist();
 				$template['company']=$this->General_model->getCompanies();
 				$template['body'] = 'Accounts/Ledger/list';
@@ -75,6 +81,10 @@ class Accountsreports extends MY_Controller
 		}
 		public function Daybook()
 		{
+			if($this->session->userdata('user_type')=='C'){
+				$id = $this->session->userdata('id');
+				$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+				}
 				$template['bank_acc'] = $this->Accountsreports_model->GetDaybookheads();
 				$template['company']=$this->General_model->getCompanies();
 				$template['body'] = 'Accounts/Daybook/list';
@@ -101,6 +111,10 @@ class Accountsreports extends MY_Controller
 			$template['ledger_head'] = $this->input->post('ledger_head');
 			$template['day'] = $this->input->post('day');
 
+			if($this->session->userdata('user_type')=='C'){
+				$id = $this->session->userdata('id');
+				$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+				}
 		  	$template['body'] = 'Accounts/Daybook/list';
 			$template['script'] = 'Accounts/Daybook/script';
 			$this->load->view('template', $template);
@@ -108,6 +122,10 @@ class Accountsreports extends MY_Controller
 		}
 		public function Profitloss()
 		{
+			if($this->session->userdata('user_type')=='C'){
+				$id = $this->session->userdata('id');
+				$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+				}
 			$template['fin_year']  = $this->General_model->fin_year();
 			$template['company']=$this->General_model->getCompanies();
 			$template['body'] = 'Accounts/Profitloss/list';
@@ -162,6 +180,10 @@ class Accountsreports extends MY_Controller
 			// $template['opening'] = $this->Accountsreports_model->get_opening($cmp,$fyr);
 			$template['closing'] = $this->Accountsreports_model->get_closingstock($cmp,$fyr);
 			// print_r($template['direct_income']);die;
+			if($this->session->userdata('user_type')=='C'){
+				$id = $this->session->userdata('id');
+				$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+				}
 			$template['body'] = 'Accounts/Profitloss/list';
 			$template['script'] = 'Accounts/Profitloss/script';
 			$this->load->view('template', $template);
@@ -169,6 +191,10 @@ class Accountsreports extends MY_Controller
 		}
 		public function Trialbalance()
 		{
+			if($this->session->userdata('user_type')=='C'){
+				$id = $this->session->userdata('id');
+				$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+				}
 			$template['fin_year']  = $this->General_model->fin_year();
 			$template['company']=$this->General_model->getCompanies();
 			$template['body'] = 'Accounts/Trialbalance/list';
@@ -209,13 +235,20 @@ class Accountsreports extends MY_Controller
 			//all indirect expense
 			$template['indirect_exp'] = $this->Accountsreports_model->getAllinDirectexpenses($cmp,$fyr);
 			
-
+			if($this->session->userdata('user_type')=='C'){
+				$id = $this->session->userdata('id');
+				$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+				}
 			$template['body'] = 'Accounts/Trialbalance/list';
 			$template['script'] = 'Accounts/Trialbalance/script';
 			$this->load->view('template', $template);
 		}
 		public function Balancesheet()
 		{
+			if($this->session->userdata('user_type')=='C'){
+				$id = $this->session->userdata('id');
+				$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+				}
 			$template['fin_year']  = $this->General_model->fin_year();
 			$template['company']=$this->General_model->getCompanies();
 			$template['body'] = 'Accounts/Balancesheet/list';
@@ -246,6 +279,10 @@ class Accountsreports extends MY_Controller
 
 			$template['profitloss'] = $this->Accountsreports_model->getProfitloss($cmp,$fyr);
 
+			if($this->session->userdata('user_type')=='C'){
+				$id = $this->session->userdata('id');
+				$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+				}
 			$template['fin_year']  = $this->General_model->fin_year();
 			$template['company']=$this->General_model->getCompanies();
 			$template['body'] = 'Accounts/Balancesheet/list';

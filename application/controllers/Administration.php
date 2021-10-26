@@ -24,6 +24,11 @@ class Administration extends MY_Controller {
 	//customers
 	public function customers()
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
+
 		$template['body'] = 'Administration/Customer/list';
 		$template['script'] = 'Administration/Customer/script';
 		$this->load->view('template', $template);
@@ -46,6 +51,10 @@ class Administration extends MY_Controller {
 		$this->form_validation->set_rules('cust_name', 'Name', 'required');
 		if ($this->form_validation->run() == FALSE) 
 		{
+			if($this->session->userdata('user_type')=='C'){
+				$id = $this->session->userdata('id');
+				$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+				}
 			$template['category']=$this->General_model->getPriceCategories();
 			$template['company']=$this->General_model->getCompanies();
 			$template['body'] = 'Administration/Customer/add';
@@ -115,6 +124,10 @@ class Administration extends MY_Controller {
 	}
 	public function Customeredit($cust_id)
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['records'] = $this->General_model->get_row($this->customer,'cust_id',$cust_id);
     	$template['category']=$this->General_model->getPriceCategories();
 		$template['company']=$this->General_model->getCompanies();
@@ -149,14 +162,23 @@ class Administration extends MY_Controller {
 	//suppliers
 	public function Supplier()
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['body'] = 'Administration/Supplier/list';
 		$template['script'] = 'Administration/Supplier/script';
 		$this->load->view('template', $template);
 	}
 	public function addSupplier()
 	{
+		
 		$this->form_validation->set_rules('supplier_name', 'Name', 'required');
 		if ($this->form_validation->run() == FALSE) {
+			if($this->session->userdata('user_type')=='C'){
+				$id = $this->session->userdata('id');
+				$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+				}
 			$template['company']=$this->General_model->getCompanies();
 			$template['category']=$this->General_model->getPriceCategories();
 			$template['body'] = 'Administration/Supplier/add';
@@ -241,6 +263,10 @@ class Administration extends MY_Controller {
 	}
 	public function editSupplier($supp_id)
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['records'] = $this->General_model->get_row($this->suppliers,'supplier_id',$supp_id);
     	$template['category']=$this->General_model->getPriceCategories();
 		$template['company']=$this->General_model->getCompanies();
@@ -272,6 +298,10 @@ class Administration extends MY_Controller {
 	//TAX
 	public function Tax()
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['body'] = 'Administration/Tax/list';
 		$template['script'] = 'Administration/Tax/script';
 		$this->load->view('template', $template);
@@ -293,6 +323,10 @@ class Administration extends MY_Controller {
 	{
 		$this->form_validation->set_rules('taxname', 'Tax Name', 'required');
 		if ($this->form_validation->run() == FALSE) {
+			if($this->session->userdata('user_type')=='C'){
+				$id = $this->session->userdata('id');
+				$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+				}
 			$template['body'] = 'Administration/Tax/add';
 			$template['script'] = 'Administration/Tax/script';
 			$this->load->view('template', $template);
@@ -344,6 +378,10 @@ class Administration extends MY_Controller {
 	}
 	public function editTaxdetails($tax_id)
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['records'] = $this->General_model->get_row($this->tax,'tax_id',$tax_id);
 		$template['body'] = 'Administration/Tax/add';
 		$template['script'] = 'Administration/Tax/script';
@@ -353,6 +391,10 @@ class Administration extends MY_Controller {
 	//area
 	public function Area()
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['body'] = 'Administration/Area/list';
 		$template['script'] = 'Administration/Area/script';
 		$this->load->view('template', $template);
@@ -374,6 +416,10 @@ class Administration extends MY_Controller {
 	{
 		$this->form_validation->set_rules('area_name', 'Name', 'required');
 		if ($this->form_validation->run() == FALSE) {
+			if($this->session->userdata('user_type')=='C'){
+				$id = $this->session->userdata('id');
+				$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+				}
 			$template['body'] = 'Administration/Area/add';
 			$template['script'] = 'Administration/Area/script';
 			$this->load->view('template', $template);
@@ -406,6 +452,10 @@ class Administration extends MY_Controller {
 	}
 	public function editArea($area_id)
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['body'] = 'Administration/Area/add';
 		$template['script'] = 'Administration/Area/script';
 		$template['records'] = $this->General_model->get_row('tbl_area','area_id',$area_id);
@@ -432,6 +482,10 @@ class Administration extends MY_Controller {
 	//bank
 	public function Bank()
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['body'] = 'Administration/Bank/list';
 		$template['script'] = 'Administration/Bank/script';
 		$this->load->view('template', $template);
@@ -454,6 +508,10 @@ class Administration extends MY_Controller {
 		$this->form_validation->set_rules('bank_name', 'Name', 'required');
 		if ($this->form_validation->run() == FALSE) 
 		{
+			if($this->session->userdata('user_type')=='C'){
+				$id = $this->session->userdata('id');
+				$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+				}
 			$template['company']=$this->General_model->getCompanies();
             $template['body'] = 'Administration/Bank/add';
 			$template['script'] = 'Administration/Bank/script';
@@ -517,6 +575,10 @@ class Administration extends MY_Controller {
 	}
 	public function editBank($bank_id)
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['body'] = 'Administration/Bank/add';
 		$template['script'] = 'Administration/Bank/script';
 		$template['company']=$this->General_model->getCompanies();

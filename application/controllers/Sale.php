@@ -17,6 +17,10 @@ class Sale extends MY_Controller {
 	}
 	public function index()
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['body'] = 'Sale/list';
 		$template['script'] = 'Sale/script';
 		$this->load->view('template',$template);
@@ -25,6 +29,10 @@ class Sale extends MY_Controller {
 	{
 		$this->form_validation->set_rules('company', 'company', 'required');
 		if ($this->form_validation->run() == FALSE) {
+			if($this->session->userdata('user_type')=='C'){
+				$id = $this->session->userdata('id');
+				$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+				}
 			$template['company']=$this->General_model->getCompanies();
 			$template['customers'] = $this->General_model->getCustomers();
 			$template['pcategory'] = $this->General_model->getPriceCategories();
@@ -248,6 +256,10 @@ class Sale extends MY_Controller {
 	}
 	public function edit($invoice)
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['company']=$this->General_model->getCompanies();
 		$template['customers'] = $this->General_model->getCustomers();
 		$template['pcategory'] = $this->General_model->getPriceCategories();

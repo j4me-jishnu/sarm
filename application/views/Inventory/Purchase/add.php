@@ -231,6 +231,8 @@
                 <input class="form-control" type="text" name="frieght" id="frieght" value="0" onkeyup="getNetTotal()" required>
                 <label>Packing Charge</label>
                 <input class="form-control" type="text" name="pack_chrg" id="pack_chrg" value="0" onkeyup="getNetTotal()">
+                <label>Net Total</label>
+                <input class="form-control" type="text" name="net_total" id="net_total" value="0" >
                 <br>
                 <!-- Dynamic Radio Button for Cash Or Bank -->
                 <!-- Added By Rajeev -->
@@ -254,7 +256,7 @@
               </div>
               <div class="col-md-8"></div>
               <div class="col-md-2">
-                <label>Net Total</label>
+                <label>Total</label>
                 <input class="form-control" type="text" name="sum" id="sum">
                 <label>Cash Payment</label>
                 <input class="form-control" type="text" name="cash" id="cash" value="0" onkeyup="getNet();" required>

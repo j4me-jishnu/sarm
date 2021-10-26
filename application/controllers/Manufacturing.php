@@ -16,6 +16,10 @@ class Manufacturing extends MY_Controller {
 	}
 	public function Production()
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['company']=$this->General_model->getCompanies();
 		$template['areas'] = $this->Manufacturing_model->getArealslist();
 		$template['body'] = 'Manufacturing/Production/list';
@@ -27,6 +31,10 @@ class Manufacturing extends MY_Controller {
 		$this->form_validation->set_rules('company', 'company Name', 'required');
 		if ($this->form_validation->run() == FALSE) 
 		{
+			if($this->session->userdata('user_type')=='C'){
+				$id = $this->session->userdata('id');
+				$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+				}
 			$template['company']=$this->General_model->getCompanies();
 			$template['areas'] = $this->Manufacturing_model->getArealslist();
 			$template['body'] = 'Manufacturing/Production/add';
@@ -155,6 +163,10 @@ class Manufacturing extends MY_Controller {
 	}
 	public function viewProduction($production_id)
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['basic_details'] = $this->Manufacturing_model->getProductionbyID($production_id);
 		$template['input'] = $this->Manufacturing_model->getProductionInputsbyID($production_id);
 		$template['output'] = $this->Manufacturing_model->getProductionOutputsbyID($production_id);
@@ -206,6 +218,10 @@ class Manufacturing extends MY_Controller {
 	}
 	public function editProduction($production_id)
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['areas'] = $this->Manufacturing_model->getArealslist();
 		$template['company']=$this->General_model->getCompanies();
 		$template['basic_details'] = $this->Manufacturing_model->getProductionbyID($production_id);

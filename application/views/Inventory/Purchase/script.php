@@ -277,6 +277,7 @@ function getNetTotal()
             var sum = parseFloat(sum) + parseFloat($('#total_'+i+'').val());
         }
     }
+
     if (tax_amt) 
     {
         // var tax_amt = parseFloat(sum) * parseFloat(tax_amt) / 100;
@@ -302,7 +303,7 @@ function getNetTotal()
     {
         sum = parseFloat(sum) + parseFloat(pack_chrg);
     }
-    $('#sum').val(sum);
+    $('#net_total').val(sum);
     var cash = $('#cash').val();
     var bank = $('#bank').val();
     var net_bal = parseFloat(old_bal) + parseFloat (sum);
@@ -458,4 +459,10 @@ function deleteRow() {
         });
     });
 }
+var sum = 0;
+$(".total").each(function () {
+    if (!isNaN(this.value) && this.value.length != 0) {
+    sum += parseFloat(this.value);
+    }
+});
 </script>

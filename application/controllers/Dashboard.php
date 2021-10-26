@@ -16,6 +16,10 @@ class Dashboard extends MY_Controller {
 	}
 	public function index()
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['fin_year']  = $this->General_model->fin_year();
 		$template['body'] = 'Dashboard/list';
 		$template['script'] = 'Dashboard/script';
