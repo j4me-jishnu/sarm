@@ -19,6 +19,10 @@ class Hrmodule extends MY_Controller {
 	}
 	public function Employee()
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['body'] = 'Hrmodule/Employee/list';
 		$template['script'] = 'Hrmodule/Employee/script';
 		$this->load->view('template', $template);
@@ -42,6 +46,10 @@ class Hrmodule extends MY_Controller {
 		$this->form_validation->set_rules('employsalary','lang:Salary','required|numeric|greater_than[0.99]|regex_match[/^[0-9,]+$/]');
 		if ($this->form_validation->run() == FALSE) 
 		{
+			if($this->session->userdata('user_type')=='C'){
+				$id = $this->session->userdata('id');
+				$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+				}
 			$template['company']=$this->General_model->getCompanies();
 			$template['body'] = 'Hrmodule/Employee/add';
 			$template['script'] = 'Hrmodule/Employee/script';
@@ -98,6 +106,10 @@ class Hrmodule extends MY_Controller {
 	}
 	public function editEmployee($emp_id)
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['records'] = $this->Hr_model->getEmployeeData($emp_id);
 		$template['company']=$this->General_model->getCompanies();
 		$template['body'] = 'Hrmodule/Employee/add';
@@ -108,6 +120,10 @@ class Hrmodule extends MY_Controller {
 	//Attendance
 	public function Attendance()
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['body'] = 'Hrmodule/Attendance/list';
 		$template['script'] = 'Hrmodule/Attendance/script';
 		$this->load->view('template', $template);
@@ -194,6 +210,10 @@ class Hrmodule extends MY_Controller {
 	//PayAdvance
 	public function PayAdvance()
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['body'] = 'Hrmodule/PayAdvance/list';
 		$template['script'] = 'Hrmodule/PayAdvance/script';
 		$this->load->view('template', $template);
@@ -218,6 +238,10 @@ class Hrmodule extends MY_Controller {
 
 		$this->form_validation->set_rules('emp', 'Date', 'required');
 		if ($this->form_validation->run() == FALSE) {
+			if($this->session->userdata('user_type')=='C'){
+				$id = $this->session->userdata('id');
+				$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+				}
 			$template['company']=$this->General_model->getCompanies();
 			$template['body'] = 'Hrmodule/PayAdvance/add';
 			$template['script'] = 'Hrmodule/PayAdvance/script';
@@ -267,6 +291,10 @@ class Hrmodule extends MY_Controller {
 	}
 	public function editPayAdvance($id)
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['records']=$this->Hr_model->fetchAdvancepay($id);
 		$template['company']=$this->General_model->getCompanies();
 		$template['body'] = 'Hrmodule/PayAdvance/edit';
@@ -277,6 +305,10 @@ class Hrmodule extends MY_Controller {
 	//Payroll
 	public function Payroll()
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['body'] = 'Hrmodule/Payroll/list';
 		$template['script'] = 'Hrmodule/Payroll/script';
 		$this->load->view('template', $template);
@@ -301,6 +333,10 @@ class Hrmodule extends MY_Controller {
 		$this->form_validation->set_rules('emp', 'Date', 'required');
 		if ($this->form_validation->run() == FALSE) 
 		{
+			if($this->session->userdata('user_type')=='C'){
+				$id = $this->session->userdata('id');
+				$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+				}
 			$template['company']=$this->General_model->getCompanies();
 			$template['body'] = 'Hrmodule/Payroll/add';
 			$template['script'] = 'Hrmodule/Payroll/script';
@@ -349,6 +385,10 @@ class Hrmodule extends MY_Controller {
 
 	public function Overtime()
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['body'] = 'Hrmodule/Overtime/list';
 		$template['script'] = 'Hrmodule/Overtime/script';
 		$this->load->view('template', $template);
@@ -358,6 +398,10 @@ class Hrmodule extends MY_Controller {
 		$this->form_validation->set_rules('emp', 'Date', 'required');
 		if ($this->form_validation->run() == FALSE) 
 		{
+			if($this->session->userdata('user_type')=='C'){
+				$id = $this->session->userdata('id');
+				$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+				}
 			$template['company']=$this->General_model->getCompanies();
 			$template['body'] = 'Hrmodule/Overtime/add';
 			$template['script'] = 'Hrmodule/Overtime/script';
@@ -410,6 +454,10 @@ class Hrmodule extends MY_Controller {
 	}
 	public function editOvertime($id)
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['records'] = $this->Hr_model->getOvertimeDetailss($id);
 		$template['company']=$this->General_model->getCompanies();
 		$template['body'] = 'Hrmodule/Overtime/edit';

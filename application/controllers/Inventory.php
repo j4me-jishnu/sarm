@@ -20,6 +20,10 @@ class Inventory extends MY_Controller {
 	}
 	public function Purchase()
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['supplier'] = $this->General_model->getSuppliers();
 		$template['body'] = 'Inventory/Purchase/list';
 		$template['script'] = 'Inventory/Purchase/script';
@@ -58,6 +62,10 @@ class Inventory extends MY_Controller {
 		$this->form_validation->set_rules('supp_id', ' Supplier Name', 'required');
 		if ($this->form_validation->run() == FALSE) 
 		{
+			if($this->session->userdata('user_type')=='C'){
+				$id = $this->session->userdata('id');
+				$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+				}
 			$template['company']=$this->General_model->getCompanies();
 			$template['supplier'] = $this->General_model->getSuppliers();
 			$template['pcategory'] = $this->General_model->getPriceCategories();
@@ -333,6 +341,10 @@ class Inventory extends MY_Controller {
 	}
 	public function PurchaseEdit($invoice)
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['company']=$this->General_model->getCompanies();
 		$template['supplier'] = $this->General_model->getSuppliers();
 		$template['pcategory'] = $this->General_model->getPriceCategories();
@@ -348,6 +360,10 @@ class Inventory extends MY_Controller {
 	//stock
 	public function Stock()
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['supplier'] = $this->General_model->getSuppliers();
 		$template['mainCategory'] = $this->General_model->getMainCategorylist();
 		$template['body'] = 'Inventory/Stock/list';

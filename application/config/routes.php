@@ -68,6 +68,11 @@ $route['FinyearDelete'] = 'Settings/FinyearDelete';
 $route['ChangePassword'] = 'Settings/ChangePassword';
 $route['resetPassword'] = 'Settings/resetPassword';
 
+$route['ChangeColor'] = 'Settings/ChangeColor';
+$route['addColor'] = 'Settings/addColor';
+$route['editColor'] = 'Settings/editColor';
+$route['insertColor'] = 'Settings/insertColor';
+
 //Administation
 $route['Pricecategory'] = 'Category/Pricecategory';
 $route['getPricecategory'] = 'Category/getPricecategory';

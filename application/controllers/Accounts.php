@@ -17,6 +17,10 @@ class Accounts extends MY_Controller {
 
 	public function Voucherhead()
 	{
+		if($this->session->userdata('user_type')=='C'){
+		$id = $this->session->userdata('id');
+		$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+		}
 		$template['body'] = 'Accounts/Voucherhead/list';
 		$template['script'] = 'Accounts/Voucherhead/script';
 		$this->load->view('template', $template);
@@ -25,6 +29,10 @@ class Accounts extends MY_Controller {
 	{
 		$this->form_validation->set_rules('vouch_head', 'Name', 'required');
 		if ($this->form_validation->run() == FALSE) {
+			if($this->session->userdata('user_type')=='C'){
+				$id = $this->session->userdata('id');
+				$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+				}
 			$template['body'] = 'Accounts/Voucherhead/add';
 			$template['script'] = 'Accounts/Voucherhead/script';
 			$this->load->view('template', $template);
@@ -72,6 +80,10 @@ class Accounts extends MY_Controller {
 	}
 	public function editVoucherhead($vouch_id)
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['records'] = $this->Accounts_model->getVoucherhead($vouch_id);
 		$template['body'] = 'Accounts/Voucherhead/add';
 		$template['script'] = 'Accounts/Voucherhead/script';
@@ -98,6 +110,10 @@ class Accounts extends MY_Controller {
 
 	public function Receipthead()
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['body'] = 'Accounts/Receipthead/list';
 		$template['script'] = 'Accounts/Receipthead/script';
 		$this->load->view('template', $template);
@@ -106,6 +122,10 @@ class Accounts extends MY_Controller {
 	{
 		$this->form_validation->set_rules('receipt_head', 'Name', 'required');
 		if ($this->form_validation->run() == FALSE) {
+			if($this->session->userdata('user_type')=='C'){
+				$id = $this->session->userdata('id');
+				$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+				}
 			$template['body'] = 'Accounts/Receipthead/add';
 			$template['script'] = 'Accounts/Receipthead/script';
 			$this->load->view('template', $template);
@@ -152,6 +172,10 @@ class Accounts extends MY_Controller {
 	}
 	public function editReceipthead($receipt_id)
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['records'] = $this->Accounts_model->getReceipthead($receipt_id);
 		$template['body'] = 'Accounts/Receipthead/add';
 		$template['script'] = 'Accounts/Receipthead/script';
@@ -178,6 +202,10 @@ class Accounts extends MY_Controller {
 
 	public function Receipt()
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['body'] = 'Accounts/Receipt/list';
 		$template['script'] = 'Accounts/Receipt/script';
 		$this->load->view('template', $template);
@@ -186,6 +214,10 @@ class Accounts extends MY_Controller {
 	{
 		$this->form_validation->set_rules('receip_id', 'Name', 'required');
 		if ($this->form_validation->run() == FALSE) {
+			if($this->session->userdata('user_type')=='C'){
+				$id = $this->session->userdata('id');
+				$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+				}
 			$template['receiptnames'] = $this->Accounts_model->getReceiptnames();
 			$template['data']=$this->Accounts_model->getBank();
 			$template['company']=$this->General_model->getCompanies();
@@ -252,6 +284,10 @@ class Accounts extends MY_Controller {
 	}
 	public function editReceipt($receipt_id)
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['records'] = $this->Accounts_model->getRecieptTableby($receipt_id);
 		$template['receiptnames'] = $this->Accounts_model->getReceiptnames();
 		$template['data']=$this->Accounts_model->getBank();
@@ -282,6 +318,10 @@ class Accounts extends MY_Controller {
 
 	public function Voucher()
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['body'] = 'Accounts/Voucher/list';
 		$template['script'] = 'Accounts/Voucher/script';
 		$this->load->view('template', $template);
@@ -290,6 +330,10 @@ class Accounts extends MY_Controller {
 	{
 		$this->form_validation->set_rules('vouch_head', 'Name', 'required');
 		if ($this->form_validation->run() == FALSE) {
+			if($this->session->userdata('user_type')=='C'){
+				$id = $this->session->userdata('id');
+				$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+				}
 			$template['company']=$this->General_model->getCompanies();
 			$template['vouchnames'] = $this->Accounts_model->voucherheads();
 			$template['data']=$this->Accounts_model->getBank();
@@ -358,6 +402,10 @@ class Accounts extends MY_Controller {
 	}
 	public function editVoucher($voucher_id)
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['company']=$this->General_model->getCompanies();
 		$template['vouchnames'] = $this->Accounts_model->voucherheads();
 		$template['data']=$this->Accounts_model->getBank();
@@ -387,6 +435,10 @@ class Accounts extends MY_Controller {
 
 	public function Groups()
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['body'] = 'Accounts/Groups/list';
 		$template['script'] = 'Accounts/Groups/script';
 		$this->load->view('template', $template);
@@ -395,6 +447,10 @@ class Accounts extends MY_Controller {
 	{
 		$this->form_validation->set_rules('group_name', 'Name', 'required');
 		if ($this->form_validation->run() == FALSE) {
+			if($this->session->userdata('user_type')=='C'){
+				$id = $this->session->userdata('id');
+				$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+				}
 			$template['type'] = $this->Accounts_model->getTypesList();
 			$template['body'] = 'Accounts/Groups/add';
 			$template['script'] = 'Accounts/Groups/script';
@@ -449,6 +505,10 @@ class Accounts extends MY_Controller {
 	}
 	public function editGroups($group_id)
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['type'] = $this->Accounts_model->getTypesList();
 		$template['records'] = $this->Accounts_model->getGroups($group_id);
 		$template['body'] = 'Accounts/Groups/add';
@@ -475,6 +535,10 @@ class Accounts extends MY_Controller {
 	}
 	public function Subgroups()
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['body'] = 'Accounts/Subgroups/list';
 		$template['script'] = 'Accounts/Subgroups/script';
 		$this->load->view('template', $template);
@@ -483,6 +547,10 @@ class Accounts extends MY_Controller {
 	{
 		$this->form_validation->set_rules('group_name', 'Name', 'required');
 		if ($this->form_validation->run() == FALSE) {
+			if($this->session->userdata('user_type')=='C'){
+				$id = $this->session->userdata('id');
+				$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+				}
 			$template['type'] = $this->Accounts_model->getTypesList();
 			$template['groups']=$this->Accounts_model->getGroupslist();
 			$template['body'] = 'Accounts/Subgroups/add';
@@ -554,6 +622,10 @@ class Accounts extends MY_Controller {
 	}
 	public function editsubGroups($group_id)
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['records'] = $this->Accounts_model->getGroups($group_id);
 		$template['type'] = $this->Accounts_model->getTypesList();
 		$template['groups']=$this->Accounts_model->getGroupslist();
@@ -583,6 +655,10 @@ class Accounts extends MY_Controller {
 
 	public function Ledgerhead()
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['body'] = 'Accounts/Ledgerhead/list';
 		$template['script'] = 'Accounts/Ledgerhead/script';
 		$this->load->view('template', $template);
@@ -591,6 +667,10 @@ class Accounts extends MY_Controller {
 	{
 		$this->form_validation->set_rules('ledger_head', 'Name', 'required');
 		if ($this->form_validation->run() == FALSE) {
+			if($this->session->userdata('user_type')=='C'){
+				$id = $this->session->userdata('id');
+				$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+				}
 			$template['company']=$this->General_model->getCompanies();
 			$template['groups']=$this->Accounts_model->getsubsGroupslist();
 			$template['body'] = 'Accounts/Ledgerhead/add';
@@ -688,6 +768,10 @@ class Accounts extends MY_Controller {
 	}
 	public function editLedgerhead($ledgerhead_id)
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['company']=$this->General_model->getCompanies();
 		$template['groups']=$this->Accounts_model->getGroupslist();
 		$template['records'] = $this->Accounts_model->getLedgerhead($ledgerhead_id);
@@ -717,6 +801,10 @@ class Accounts extends MY_Controller {
 
 	public function Journal()
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['body'] = 'Accounts/Journal/list';
 		$template['script'] = 'Accounts/Journal/script';
 		$this->load->view('template', $template);
@@ -736,6 +824,10 @@ class Accounts extends MY_Controller {
 			$inv_no = str_pad($y, 4, "0", STR_PAD_LEFT);
 			$template['invno'] = $alpha.$inv_no;
 
+			if($this->session->userdata('user_type')=='C'){
+				$id = $this->session->userdata('id');
+				$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+				}
 			$template['ledgerhead']=$this->Accounts_model->getLedgerheadlist();
 			$template['company']=$this->General_model->getCompanies();
 			$template['body'] = 'Accounts/Journal/add';
@@ -852,6 +944,10 @@ class Accounts extends MY_Controller {
 	}
 	public function editJournal($unique_id)
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['ledgerhead']=$this->Accounts_model->getLedgerheadlist();
 		$template['company']=$this->General_model->getCompanies();
 		$template['records'] = $this->Accounts_model->getJournals($unique_id);
@@ -882,6 +978,10 @@ class Accounts extends MY_Controller {
 
 	public function Types()
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['body'] = 'Accounts/Type/list';
 		$template['script'] = 'Accounts/Type/script';
 		$this->load->view('template', $template);

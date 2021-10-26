@@ -15,6 +15,10 @@ class Manufacturing extends MY_Controller {
 	}
 	public function productList()
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['body'] = 'Manufacturing/Product/list';
 		$template['script'] = 'Manufacturing/Product/script';
 		$this->load->view('template', $template);
@@ -24,6 +28,10 @@ class Manufacturing extends MY_Controller {
 		$this->form_validation->set_rules('product_name', 'Name', 'required');
 		if ($this->form_validation->run() == FALSE) 
 		{
+			if($this->session->userdata('user_type')=='C'){
+				$id = $this->session->userdata('id');
+				$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+				}
 			$template['category']=$this->General_model->getPriceCategories();
 			$template['company']=$this->General_model->getCompanies();
 			$template['mainCategory'] = $this->General_model->getMainCategorylist();
@@ -210,6 +218,10 @@ class Manufacturing extends MY_Controller {
 	}
 	public function editProducts($product_id)
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['category']=$this->General_model->getPriceCategories();
 		$template['company']=$this->General_model->getCompanies();
 		$template['mainCategory'] = $this->General_model->getMainCategorylist();
