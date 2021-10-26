@@ -37,7 +37,7 @@ $table = $('#ledgerhead_table').DataTable( {
 
         "columns": [
                 { "data": "ledgerhead_status", "orderable": true },
-                { "data": "ledger_head", "orderable": false },
+                { "data": "type_name", "orderable": false },
                 { "data": "main_group", "orderable": false },
                 { "data": "group_name", "orderable": false },
                 { "data": "ledger_head", "orderable": false },

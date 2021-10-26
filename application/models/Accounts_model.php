@@ -314,6 +314,14 @@ Class Accounts_model extends CI_Model
         $this->db->where("group_status",1);
         return $query = $this->db->get()->result();
     }
+        // public function getGroupslist()
+        // {
+        //     $this->db->select('*');
+        //     $this->db->from('tbl_groups');
+        //     $this->db->join('tbl_type','tbl_type.type_id = tbl_groups.type_id_fk');
+        //     $this->db->where("group_status",1);
+        //     return $query = $this->db->get()->result();
+        // }
     public function getsubsGroupslist()
     {
         $this->db->select('*');
@@ -346,6 +354,7 @@ Class Accounts_model extends CI_Model
         $this->db->select('*');
         $this->db->from('tbl_ledgerhead');
         $this->db->join('tbl_groups','group_id = group_id_fk');
+        $this->db->join('tbl_type','tbl_type.type_id = tbl_groups.type_id_fk');
         $this->db->order_by('ledgerhead_id', 'DESC');
         $query = $this->db->get();
         

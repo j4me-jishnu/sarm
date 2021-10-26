@@ -762,9 +762,10 @@ class Accounts extends MY_Controller {
 	    		}
     		}
     	}
-    	//  var_dump($data);
+    	   
     	$json_data = json_encode($data);
     	echo $json_data;
+		
 	}
 	public function editLedgerhead($ledgerhead_id)
 	{
