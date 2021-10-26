@@ -405,10 +405,9 @@
         </li>
         <!-- Inventory -->
         <li class="treeview <?php 
-          if($this->uri->segment(1)=="Purchase")
-            {echo "active";}
-          else if($this->uri->segment(1)=="Stock")
-            {echo "active";}
+          if($this->uri->segment(1)=="ChangeColor")
+          {echo "active";}
+          
           ?>">
           <a><i class="fa fa-laptop"></i><span>Inventory</span>
             <span class="pull-right-container">
@@ -420,6 +419,22 @@
             <li class="<?php if($this->uri->segment(1)=="Stock"){echo "active";}?>" ><a  href="<?php echo base_url();?>Stock"><i class="glyphicon glyphicon-share-alt"></i> <span>Stock</span></a></li>
           </ul>
         </li>
+        <!-- Admin panel -->
+        <li class="treeview <?php 
+          if($this->uri->segment(1)=="ChangeColor")
+          {echo "active";}
+          ?>">
+          <a><i class="fa fa-laptop"></i><span>Admin Panel</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu ">
+          <li class="<?php if($this->uri->segment(1)=="ChangeColor"){echo "active";}?>" ><a  href="<?php echo base_url();?>ChangeColor"><i class="glyphicon glyphicon-share-alt"></i> <span>Change Color</span></a></li>
+          </ul>
+        </li>
+
+
     <?php } ?>
 
 </ul>	

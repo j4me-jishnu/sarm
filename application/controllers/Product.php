@@ -19,6 +19,10 @@ class Product extends MY_Controller {
 	}
 	public function Unit()
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['body'] = 'Administration/Product/Unit/list';
 		$template['script'] = 'Administration/Product/Unit/script';
 		$this->load->view('template', $template);
@@ -40,6 +44,10 @@ class Product extends MY_Controller {
 	{
 		$this->form_validation->set_rules('unit_name', 'unit', 'required');
 		if ($this->form_validation->run() == FALSE) {
+			if($this->session->userdata('user_type')=='C'){
+				$id = $this->session->userdata('id');
+				$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+				}
 			$template['body'] = 'Administration/Product/Unit/add';
 			$template['script'] = 'Administration/Product/Unit/script';
 			$this->load->view('template', $template);
@@ -89,6 +97,10 @@ class Product extends MY_Controller {
 	}
 	public function Unitedit($unit)
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['records'] = $this->General_model->get_row('tbl_unit','unit_id',$unit);
 		$template['body'] = 'Administration/Product/Unit/add';
 		$template['script'] = 'Administration/Product/Unit/script';
@@ -99,6 +111,10 @@ class Product extends MY_Controller {
 	//product
 	public function Item()
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['codes']=$this->General_model->getItemlist();
 		$template['body'] = 'Administration/Product/Item/list';
 		$template['script'] = 'Administration/Product/Item/script';
@@ -121,6 +137,10 @@ class Product extends MY_Controller {
 
 	public function ImportExcel()
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['category']=$this->General_model->getPriceCategories();
 		$template['company']=$this->General_model->getCompanies();
 		$template['mainCategory'] = $this->General_model->getMainCategorylist();
@@ -263,6 +283,10 @@ class Product extends MY_Controller {
 		$this->form_validation->set_rules('product_name', 'Name', 'required');
 		if ($this->form_validation->run() == FALSE) 
 		{
+			if($this->session->userdata('user_type')=='C'){
+				$id = $this->session->userdata('id');
+				$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+				}
 			$template['category']=$this->General_model->getPriceCategories();
 			$template['company']=$this->General_model->getCompanies();
 			$template['mainCategory'] = $this->General_model->getMainCategorylist();
@@ -393,6 +417,10 @@ class Product extends MY_Controller {
 	}
 	public function editProduct($product_id)
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['category']=$this->General_model->getPriceCategories();
 		$template['company']=$this->General_model->getCompanies();
 		$template['mainCategory'] = $this->General_model->getMainCategorylist();
@@ -450,6 +478,10 @@ class Product extends MY_Controller {
 	//Opening stock
 	public function Openingstock()
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['body'] = 'Administration/Product/Opening/list';
 		$template['script'] = 'Administration/Product/Opening/script';
 		$this->load->view('template', $template);
@@ -466,6 +498,10 @@ class Product extends MY_Controller {
 				$company =  $this->session->userdata['cmp_id'];
 				$template['items'] = $this->Administration_model->getproductnamebyCompany($company);
 			}
+			if($this->session->userdata('user_type')=='C'){
+				$id = $this->session->userdata('id');
+				$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+				}
 			$template['body'] = 'Administration/Product/Opening/add';
 			$template['script'] = 'Administration/Product/Opening/script';
 			$this->load->view('template', $template);
@@ -559,6 +595,10 @@ class Product extends MY_Controller {
 	}
 	public function editOpening($open_id)
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['company']=$this->General_model->getCompanies();
 		$template['records'] = $this->Administration_model->getOpenstockDetails($open_id);
 		$template['body'] = 'Administration/Product/Opening/edit';
