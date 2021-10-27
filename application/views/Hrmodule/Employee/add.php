@@ -83,6 +83,18 @@
                       <input type="text"    class="form-control" name="employsalary" id="employsalary"  value="<?php if(isset($records->emp_salary)) echo $records->emp_salary ?>">
                     </div>
                   </div>
+
+                  <div class="form-group">
+                    <div class="col-sm-12 text-center">
+                    <label class="radio-inline">
+                      <input type="radio" name="salary_mode" <?php echo (@$records->emp_mode==0) ? "checked":"" ?> value="0">Wages
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" name="salary_mode" <?php echo (@$records->emp_mode==1) ? "checked":"" ?> value="1">Salary
+                    </label>
+                    </div>
+                  </div>
+
                   <div class="form-group">
                     <center> <button type="submit" class="btn btn-primary">Save</button></center>
                   </div>
