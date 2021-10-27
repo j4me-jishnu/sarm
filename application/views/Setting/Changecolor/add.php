@@ -16,7 +16,7 @@
 
   <!-- Main content -->
   <section class="content">
-    <form method="post" action="<?php echo base_url(); ?>insertColor"> 
+    <form method="post" action="<?php echo base_url(); ?>insertColor">
     <div class="row">
       <div class="col-md-12">
         <div class="box">
@@ -38,7 +38,7 @@
             </div>
             <div class="form-group">
               <center><input type="submit" class="btn common-btn" name="submit"></center>
-            </div>              
+            </div>
           </fieldset>
         </div>
       </div>
@@ -46,4 +46,4 @@
     </form>
   </section>
   <script src="https://unpkg.com/huebee@2/dist/huebee.pkgd.min.js"></script>
-</div>        
+</div>
