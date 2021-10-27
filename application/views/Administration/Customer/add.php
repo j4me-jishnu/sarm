@@ -92,8 +92,10 @@
                   </div>
                 </div>
                 <div class="form-group text-center">
-                  <label class="radio-inline"><input type="radio" name="radio_val" value="0">Debtor</label>
-                  <label class="radio-inline"><input type="radio" name="radio_val" value="1">Creditor</label>
+
+                  <label class="radio-inline"><input type="radio" name="radio_val" <?php if(@$records->debit_credit=='0') echo 'Checked' ?> value="0">Debit</label>
+                  <label class="radio-inline"><input type="radio" name="radio_val" <?php if(@$records->debit_credit=='1') echo 'Checked' ?> value="1">Credit</label>
+
                 </div>
                 <div class="form-group">
                   <label for="size_name" class="col-sm-4 control-label">Price Category</label>

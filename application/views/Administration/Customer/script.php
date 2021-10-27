@@ -24,9 +24,19 @@
             { "data": "custname", "orderable": false },
             { "data": "custaddress", "orderable": false },
             { "data": "custphone", "orderable": false },
-			      { "data": "custemail", "orderable": false },
-      		  { "data": "old_balance", "orderable": false },
-			      { "data": "cust_id", "orderable": false }
+      		{ "data": "old_balance", "orderable": false },
+            {
+            data: 'debit_credit',
+            "className": "text-center",
+            render: function (data, type, row) {
+                if (data == '0') {
+                    return '<i class="fas fa-arrow-left" style="color:green"></i>';
+                }else{
+                    return '<i class="fas fa-arrow-right" style="color:red"></i>';
+                }
+                }
+            }, 
+			{ "data": "cust_id", "orderable": false }
         ]
         
     });

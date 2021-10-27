@@ -151,10 +151,10 @@
                   <label for="size_name" class="col-sm-4 control-label">Product Mode<span style="color:red">*</span></label>
                   <div class="col-sm-5">
                     <label class="radio-inline">
-                      <input type="radio" name="p_type" value="0" <?php if ($records->goods_or_service==0) echo "checked";?>>Goods
+                      <input type="radio" name="p_type" value="0" <?php if (@$records->goods_or_service==0) echo "checked";?>>Goods
                     </label>
                     <label class="radio-inline">
-                      <input type="radio" name="p_type" value="1" <?php if ($records->goods_or_service==1) echo "checked";?>>Service
+                      <input type="radio" name="p_type" value="1" <?php if (@$records->goods_or_service==1) echo "checked";?>>Service
                   </div>
                 </div>      
                 <div class="form-group">
