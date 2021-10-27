@@ -537,15 +537,44 @@ class Administration extends MY_Controller {
 						'bank_status' => 1,
 						
 						);
+			if($this->input->post('bank_type') == 0)
+				{
+					//debit
+					$debit_credit=1;
+				}
+			else if($this->input->post('bank_type') == 1)
+				{
+					//credit
+					$debit_credit=2;
+				}			
+			$data2 = array(
+						'group_id_fk' => 12,
+						'ledger_head' => $this->input->post('bank_name'),
+						'ledgerhead_desc'=>'Bank',
+						'opening_bal'=>0,
+						'debit_or_credit'=>$debit_credit,
+						'ledgerhead_status'=>1,
+						'company_id_fk'=>$company			
+			);
+			$data3 = array(
+						'ledger_head' => $this->input->post('bank_name'),
+						'debit_or_credit'=>$debit_credit,
+						'company_id_fk'=>$company
+			);			
 			$bank_id = $this->input->post('bank_id');
 			if($bank_id){
 				 
 				$data['bank_id'] = $bank_id;
+				//Here retrive the row coressponding to Bank id
+				$bank_name2 = $this->General_model->get_data('tbl_bank','bank_id','bank_name',$bank_id);
 				$result = $this->General_model->update('tbl_bank',$datas,'bank_id',$bank_id);
+				 //pass the Bank name and update ledger head
+				 $result2 = $this->General_model->update('tbl_ledgerhead',$data3,'ledger_head',$bank_name2[0]->bank_name);
 				$response_text = 'Bank details  updated';
 			}
 			else{
 				$result = $this->General_model->add('tbl_bank',$datas);
+				$result2 = $this->General_model->add('tbl_ledgerhead',$data2);
 				$response_text = 'Bank details Added';
 			}
 			if($result){
@@ -560,8 +589,11 @@ class Administration extends MY_Controller {
 	public function deleteBank()
 	{
 		$bank_id = $this->input->post('bank_id');
+		$bank_name2 = $this->General_model->get_data('tbl_bank','bank_id','bank_name',$bank_id);
         $updateData = array('bank_status' => 0);
+		$updateData2 = array('ledgerhead_status' => 0);
         $data = $this->General_model->update('tbl_bank',$updateData,'bank_id',$bank_id);
+		$data1 = $this->General_model->update('tbl_ledgerhead',$updateData2,'ledger_head',$bank_name2[0]->bank_name);
         if($data) {
             $response['text'] = 'Deleted successfully';
             $response['type'] = 'success';
