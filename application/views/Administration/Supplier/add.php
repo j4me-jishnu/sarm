@@ -106,17 +106,17 @@
                   </div>
               </div>
               
-              <div class="form-group text-left">
-                  <div class="col-sm-5">
+              <div class="form-group">
+                  
                     <label class="radio-inline">
-                      <input type="radio" name="supplier_type" value="0" <?php if(isset($records->supplier_type)) if ($records->supplier_type == 0)  echo "checked" ?>>Debit
+                      <input type="radio" name="supplier_type" value="0" <?php if ($records->supplier_type == 0)  echo "checked" ?>>Debit
                     </label>
-                  </div>
-                  <div class="col-sm-5">
+                  
+                  
                     <label class="radio-inline">
-                      <input type="radio" name="supplier_type" value="1" <?php if(isset($records->supplier_type)) if ($records->supplier_type == 1)  echo "checked" ?>>Credit
+                      <input type="radio" name="supplier_type" value="1" <?php if ($records->supplier_type == 1)  echo "checked" ?>>Credit
                     </label>
-                  </div>
+                  
               </div>
 
                 <div class="form-group">
