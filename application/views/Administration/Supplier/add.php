@@ -110,10 +110,10 @@
 
                   <div class="col-sm-12 text-center">
                   <label class="radio-inline">
-                    <input type="radio" name="supplier_type" value="0" <?php if ($records->supplier_type == 0)  echo "checked" ?>>Debit
+                    <input type="radio" name="supplier_type" value="0" <?php if (@$records->supplier_type == 0)  echo "checked" ?>>Debit
                   </label>
                   <label class="radio-inline">
-                    <input type="radio" name="supplier_type" value="1" <?php if ($records->supplier_type == 1)  echo "checked" ?>>Credit
+                    <input type="radio" name="supplier_type" value="1" <?php if (@$records->supplier_type == 1)  echo "checked" ?>>Credit
                   </label>
 
                   </div>

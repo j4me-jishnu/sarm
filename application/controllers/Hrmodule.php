@@ -63,6 +63,7 @@ class Hrmodule extends MY_Controller {
 						'emp_address' => $this->input->post('employaddress'),
 						'emp_phone' => $this->input->post('employphone'),
 						'emp_email' => $this->input->post('employemail'),
+						'emp_mode' => $this->input->post('salary_mode'),
 						'emp_salary' => $this->input->post('employsalary'),
 						'emp_date' => date("Y-m-d",strtotime($this->input->post('dob'))),
 						'emp_status' => 1

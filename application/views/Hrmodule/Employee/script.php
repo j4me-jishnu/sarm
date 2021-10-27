@@ -28,7 +28,7 @@
 			$table.column(0).nodes().each(function(node,index,dt){
             $table.cell(node).data(index+1);
             });
-			$('td', row).eq(8).html('<center><a href="<?php echo base_url();?>Employee/edit/'+data['emp_id']+'"><i class="fa fa-edit iconFontSize-medium" ></i></a>&nbsp;&nbsp;&nbsp;<a onclick="return confirmDelete('+data['emp_id']+')"><i class="fa fa-trash-o iconFontSize-medium" ></i></a></center>');
+			$('td', row).eq(9).html('<center><a href="<?php echo base_url();?>Employee/edit/'+data['emp_id']+'"><i class="fa fa-edit iconFontSize-medium" ></i></a>&nbsp;&nbsp;&nbsp;<a onclick="return confirmDelete('+data['emp_id']+')"><i class="fa fa-trash-o iconFontSize-medium" ></i></a></center>');
 		},
 
         "columns": [
@@ -38,6 +38,17 @@
             { "data": "emp_address", "orderable": false },
             { "data": "emp_phone", "orderable": false },
 			{ "data": "emp_email", "orderable": false },
+            {
+            data: 'emp_mode',
+            "className": "text-center",
+            render: function (data, type, row) {
+                if (data == '0') {
+                    return 'Wages';
+                }else{
+                    return 'Salary';
+                }
+                }
+            }, 
             { "data": "emp_salary", "orderable": false },
             { "data": "emp_date", "orderable": false },
 			{ "data": "emp_id", "orderable": false }
