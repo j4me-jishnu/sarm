@@ -66,6 +66,17 @@ class Inventory extends MY_Controller {
 				$id = $this->session->userdata('id');
 				$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
 				}
+			//invoice id auto increment
+			@$hello = $this->General_model->getLastInvoiceID();
+			if(isset($hello)){
+				@$index = $hello[0]['invoice_number'] + 1;
+				@$template['invoice'] = $index;
+			}
+			else{
+				$template['invoice'] = 1;
+			}
+			//
+			
 			$template['company']=$this->General_model->getCompanies();
 			$template['supplier'] = $this->General_model->getSuppliers();
 			$template['pcategory'] = $this->General_model->getPriceCategories();
