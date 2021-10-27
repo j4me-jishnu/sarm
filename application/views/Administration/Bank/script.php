@@ -22,7 +22,7 @@
            $table.column(0).nodes().each(function(node,index,dt){
             $table.cell(node).data(index+1);
             });
-            $('td', row).eq(6).html('<center><a href="<?php echo base_url();?>Bank/edit/'+data['bank_id']+'"><i class="fa fa-edit iconFontSize-medium" ></i></a> &nbsp;&nbsp;&nbsp;<a onclick="return confirmDelete('+data['bank_id']+')"><i class="fa fa-trash-o iconFontSize-medium" ></i></a></center>');
+            $('td', row).eq(7).html('<center><a href="<?php echo base_url();?>Bank/edit/'+data['bank_id']+'"><i class="fa fa-edit iconFontSize-medium" ></i></a> &nbsp;&nbsp;&nbsp;<a onclick="return confirmDelete('+data['bank_id']+')"><i class="fa fa-trash-o iconFontSize-medium" ></i></a></center>');
         },
 
         "columns": [
@@ -32,6 +32,17 @@
             { "data": "bank_accno", "orderable": false },
             { "data": "bank_branch", "orderable": false },
             { "data": "bank_ifsc", "orderable": false },
+            {
+            data: 'bank_debit_credit',
+            "className": "text-center",
+            render: function (data, type, row) {
+                if (data == '0') {
+                    return '<i class="fas fa-arrow-left" style="color:green"></i>';
+                }else{
+                    return '<i class="fas fa-arrow-right" style="color:red"></i>';
+                }
+                }
+            }, 
             { "data": "bank_id", "orderable": false }
             
         ]

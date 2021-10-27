@@ -69,6 +69,16 @@
                     <input type="text" data-pms-required="true"  class="form-control" name="bank_ifsc" id="bank_ifsc"  value="<?php if(isset($records[0]->bank_ifsc)) echo $records[0]->bank_ifsc ?>">
                   </div>
               </div>
+              <div class="form-group text-center">
+                  <div class="col-sm-12">
+                  <label class="radio-inline">
+                    <input type="radio" name="bank_type" <?php if(@$records[0]->bank_debit_credit==0) echo "checked" ?> value="0">Debit
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" name="bank_type" <?php if(@$records[0]->bank_debit_credit==1) echo "checked" ?> value="1">Credit
+                  </label>
+                  </div>
+              </div>
               <div class="form-group">
                   <center> <button type="submit" class="btn btn-primary">Save</button></center>
               </div>

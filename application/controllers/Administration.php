@@ -533,6 +533,7 @@ class Administration extends MY_Controller {
 						'bank_accno' => $this->input->post('acc_no'),
 						'bank_branch' => $this->input->post('bank_branch'),
 						'bank_ifsc' => $this->input->post('bank_ifsc'),
+						'bank_debit_credit' => $this->input->post('bank_type'),
 						'bank_status' => 1,
 						
 						);
