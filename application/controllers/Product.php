@@ -321,7 +321,8 @@ class Product extends MY_Controller {
 						'min_stock'=>$this->input->post('min_stock'),
 						'product_status'=>1,
 						'company_id'=>$company,
-						'product_type'=>'RM'
+						'product_type'=>'RM',
+						'goods_or_service'=>$this->input->post('p_type')
 					);
 			$stock=array(
 						'finyear'=>$fyr,
