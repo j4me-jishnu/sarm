@@ -5,13 +5,13 @@ class Hrmodule extends MY_Controller {
 		parent::__construct();
         if(! $this->is_logged_in()){
           redirect('/login');
-		
-        }   
+
+        }
         $this->load->model('General_model');
 		$this->load->model('Dashboard_model');
 		$this->load->model('Administration_model');
 		$this->load->model('Hr_model');
-        
+
 	}
 	public function index()
 	{
@@ -30,12 +30,12 @@ class Hrmodule extends MY_Controller {
 	public function getEmployee()
 	{
 		$param['draw'] = (isset($_REQUEST['draw']))?$_REQUEST['draw']:'';
-        $param['length'] =(isset($_REQUEST['length']))?$_REQUEST['length']:'10'; 
+        $param['length'] =(isset($_REQUEST['length']))?$_REQUEST['length']:'10';
         $param['start'] = (isset($_REQUEST['start']))?$_REQUEST['start']:'0';
         $param['order'] = (isset($_REQUEST['order'][0]['column']))?$_REQUEST['order'][0]['column']:'';
         $param['dir'] = (isset($_REQUEST['order'][0]['dir']))?$_REQUEST['order'][0]['dir']:'';
         $param['searchValue'] =(isset($_REQUEST['search']['value']))?$_REQUEST['search']['value']:'';
-        
+
     	$data = $this->Hr_model->getCustomerTable($param);
     	$json_data = json_encode($data);
     	echo $json_data;
@@ -44,7 +44,7 @@ class Hrmodule extends MY_Controller {
 	{
 		$this->form_validation->set_rules('employname', 'Name', 'required');
 		$this->form_validation->set_rules('employsalary','lang:Salary','required|numeric|greater_than[0.99]|regex_match[/^[0-9,]+$/]');
-		if ($this->form_validation->run() == FALSE) 
+		if ($this->form_validation->run() == FALSE)
 		{
 			if($this->session->userdata('user_type')=='C'){
 				$id = $this->session->userdata('id');
@@ -69,10 +69,10 @@ class Hrmodule extends MY_Controller {
 						);
 			$emp_id = $this->input->post('emp_id');
 			if($emp_id){
-				 
+
 				$data['emp_id'] = $emp_id;
 				$result = $this->General_model->update('tbl_employee',$datas,'emp_id',$emp_id);
-				$response_text = 'Employee details  updated';
+				$response_text = 'Employee details updated';
 			}
 			else{
 				$result = $this->General_model->add('tbl_employee',$datas);
@@ -91,7 +91,7 @@ class Hrmodule extends MY_Controller {
 	{
 		$emp_id = $this->input->post('emp_id');
         $updateData = array('emp_status' => 0);
-        $data = $this->General_model->update('tbl_employee',$updateData,'emp_id',$emp_id);                       
+        $data = $this->General_model->update('tbl_employee',$updateData,'emp_id',$emp_id);
         if($data) {
             $response['text'] = 'Deleted successfully';
             $response['type'] = 'success';
@@ -131,7 +131,7 @@ class Hrmodule extends MY_Controller {
 	public function getAttendence()
 	{
 		$param['draw'] = (isset($_REQUEST['draw']))?$_REQUEST['draw']:'';
-        $param['length'] =(isset($_REQUEST['length']))?$_REQUEST['length']:'10'; 
+        $param['length'] =(isset($_REQUEST['length']))?$_REQUEST['length']:'10';
         $param['start'] = (isset($_REQUEST['start']))?$_REQUEST['start']:'0';
         $param['order'] = (isset($_REQUEST['order'][0]['column']))?$_REQUEST['order'][0]['column']:'';
         $param['dir'] = (isset($_REQUEST['order'][0]['dir']))?$_REQUEST['order'][0]['dir']:'';
@@ -139,7 +139,7 @@ class Hrmodule extends MY_Controller {
         $param['cmp_id'] = (isset($_REQUEST['cmp_id']))?$_REQUEST['cmp_id']:'';
 
 		$data = $this->Hr_model->getAttendenceData($param);
-	
+
 		$json_data = json_encode($data);
     	echo $json_data;
 	}
@@ -171,7 +171,7 @@ class Hrmodule extends MY_Controller {
 			else{
 	            $this->session->set_flashdata('response', '{&quot;text&quot;:&quot;Something went wrong,please try again later&quot;,&quot;layout&quot;:&quot;bottomRight&quot;,&quot;type&quot;:&quot;error&quot;}');
 				}
-	
+
         echo json_encode($result);
 	}
 	public function attend_reg()
@@ -192,7 +192,7 @@ class Hrmodule extends MY_Controller {
 						);
 			$result = $this->General_model->add('tbl_empattendance',$data);
 			$response_text = 'Attendance Registered successfully';
-					
+
 			if($result){
 	            $this->session->set_flashdata('response', "{&quot;text&quot;:&quot;$response_text&quot;,&quot;layout&quot;:&quot;topRight&quot;,&quot;type&quot;:&quot;success&quot;}");
 			}
@@ -221,12 +221,12 @@ class Hrmodule extends MY_Controller {
 	public function getpayAdvance()
 	{
 		$param['draw'] = (isset($_REQUEST['draw']))?$_REQUEST['draw']:'';
-        $param['length'] =(isset($_REQUEST['length']))?$_REQUEST['length']:'10'; 
+        $param['length'] =(isset($_REQUEST['length']))?$_REQUEST['length']:'10';
         $param['start'] = (isset($_REQUEST['start']))?$_REQUEST['start']:'0';
         $param['order'] = (isset($_REQUEST['order'][0]['column']))?$_REQUEST['order'][0]['column']:'';
         $param['dir'] = (isset($_REQUEST['order'][0]['dir']))?$_REQUEST['order'][0]['dir']:'';
         $param['searchValue'] =(isset($_REQUEST['search']['value']))?$_REQUEST['search']['value']:'';
-        
+
 		$data = $this->Hr_model->getpayAdvanceData($param);
 		$json_data = json_encode($data);
     	echo $json_data;
@@ -249,7 +249,7 @@ class Hrmodule extends MY_Controller {
 		}
 		else {
 			$data = array(
-						
+
 						'emp_id'=> $this->input->post('emp'),
 						'company_id'=>$this->input->post('company'),
 						'adv_month'=> $this->input->post('payroll_salmonth'),
@@ -258,7 +258,7 @@ class Hrmodule extends MY_Controller {
 						'adv_status'=> 1
 						);
 			$adv_id = $this->input->post('adv_id');
-			if ($adv_id) 
+			if ($adv_id)
 			{
 				$data['adv_id'] = $adv_id;
 				$result = $this->General_model->update('tbl_advance',$data,'adv_id',$adv_id);
@@ -268,14 +268,14 @@ class Hrmodule extends MY_Controller {
 			{
 	             $result = $this->General_model->add('tbl_advance',$data);
 				 $response_text = 'Advance Payment Details added successfully';
-                 
+
 				if($data){
 	            $this->session->set_flashdata('response', "{&quot;text&quot;:&quot;$response_text&quot;,&quot;layout&quot;:&quot;topRight&quot;,&quot;type&quot;:&quot;success&quot;}");
 				}
 				else{
 	            $this->session->set_flashdata('response', '{&quot;text&quot;:&quot;Something went wrong,please try again later&quot;,&quot;layout&quot;:&quot;bottomRight&quot;,&quot;type&quot;:&quot;error&quot;}');
 				}
-			}	
+			}
 			redirect('/PayAdvance/', 'refresh');
 		}
 	}
@@ -316,12 +316,12 @@ class Hrmodule extends MY_Controller {
 	public function getPayroll()
 	{
 		$param['draw'] = (isset($_REQUEST['draw']))?$_REQUEST['draw']:'';
-        $param['length'] =(isset($_REQUEST['length']))?$_REQUEST['length']:'10'; 
+        $param['length'] =(isset($_REQUEST['length']))?$_REQUEST['length']:'10';
         $param['start'] = (isset($_REQUEST['start']))?$_REQUEST['start']:'0';
         $param['order'] = (isset($_REQUEST['order'][0]['column']))?$_REQUEST['order'][0]['column']:'';
         $param['dir'] = (isset($_REQUEST['order'][0]['dir']))?$_REQUEST['order'][0]['dir']:'';
         $param['searchValue'] =(isset($_REQUEST['search']['value']))?$_REQUEST['search']['value']:'';
-        
+
 		$data = $this->Hr_model->getPayrollDetails($param);
 		$json_data = json_encode($data);
     	echo $json_data;
@@ -331,7 +331,7 @@ class Hrmodule extends MY_Controller {
 		$salarydate = str_replace('/', '-', $this->input->post('payroll_salarydate'));
 		$salarydate = date("Y-m-d",strtotime($salarydate));
 		$this->form_validation->set_rules('emp', 'Date', 'required');
-		if ($this->form_validation->run() == FALSE) 
+		if ($this->form_validation->run() == FALSE)
 		{
 			if($this->session->userdata('user_type')=='C'){
 				$id = $this->session->userdata('id');
@@ -345,7 +345,7 @@ class Hrmodule extends MY_Controller {
 		else
 		{
 			$data = array(
-						'company_id'=>$this->input->post('company'),	
+						'company_id'=>$this->input->post('company'),
 						'payroll_emp_id'=> $this->input->post('emp'),
 						// 'payroll_salmonth'=> $this->input->post('payroll_salmonth'),
 						'payroll_basicsalary'=> $this->input->post('payroll_basicpay'),
@@ -362,7 +362,7 @@ class Hrmodule extends MY_Controller {
 
             $result = $this->General_model->add('tbl_payroll',$data);
 			$response_text = 'Payroll Details added successfully';
-                 
+
 			if($data){
 	            $this->session->set_flashdata('response', "{&quot;text&quot;:&quot;$response_text&quot;,&quot;layout&quot;:&quot;topRight&quot;,&quot;type&quot;:&quot;success&quot;}");
 			}
@@ -370,7 +370,7 @@ class Hrmodule extends MY_Controller {
 	            $this->session->set_flashdata('response', '{&quot;text&quot;:&quot;Something went wrong,please try again later&quot;,&quot;layout&quot;:&quot;bottomRight&quot;,&quot;type&quot;:&quot;error&quot;}');
 			}
 			redirect('/Payroll/', 'refresh');
-		}	
+		}
 	}
 	public function getAdvanceofEmployee()
 	{
@@ -396,7 +396,7 @@ class Hrmodule extends MY_Controller {
 	public function addOvertime()
 	{
 		$this->form_validation->set_rules('emp', 'Date', 'required');
-		if ($this->form_validation->run() == FALSE) 
+		if ($this->form_validation->run() == FALSE)
 		{
 			if($this->session->userdata('user_type')=='C'){
 				$id = $this->session->userdata('id');
@@ -415,12 +415,12 @@ class Hrmodule extends MY_Controller {
 				'company_id_fk'=>$this->input->post('company'),
 				'emp_id_fk' =>$this->input->post('emp'),
 				'hours' =>0,
-				'amount' =>$this->input->post('amount'), 
+				'amount' =>$this->input->post('amount'),
 				'date' =>$date,
-				'overtime_status'=>1 
+				'overtime_status'=>1
 			);
 			$overtime_id = $this->input->post('overtime_id');
-			if ($overtime_id) 
+			if ($overtime_id)
 			{
 				$result = $this->General_model->update('tbl_overtime',$data,'overtime_id',$overtime_id);
 				$response_text = 'Overtime details  updated';
@@ -442,12 +442,12 @@ class Hrmodule extends MY_Controller {
 	public function getOvertime()
 	{
 		$param['draw'] = (isset($_REQUEST['draw']))?$_REQUEST['draw']:'';
-        $param['length'] =(isset($_REQUEST['length']))?$_REQUEST['length']:'10'; 
+        $param['length'] =(isset($_REQUEST['length']))?$_REQUEST['length']:'10';
         $param['start'] = (isset($_REQUEST['start']))?$_REQUEST['start']:'0';
         $param['order'] = (isset($_REQUEST['order'][0]['column']))?$_REQUEST['order'][0]['column']:'';
         $param['dir'] = (isset($_REQUEST['order'][0]['dir']))?$_REQUEST['order'][0]['dir']:'';
         $param['searchValue'] =(isset($_REQUEST['search']['value']))?$_REQUEST['search']['value']:'';
-        
+
 		$data = $this->Hr_model->getOvertimeDetails($param);
 		$json_data = json_encode($data);
     	echo $json_data;
@@ -468,7 +468,7 @@ class Hrmodule extends MY_Controller {
 	{
 		$overtime_id = $this->input->post('overtime_id');
         $updateData = array('overtime_status' => 0);
-        $data = $this->General_model->update('tbl_overtime',$updateData,'overtime_id',$overtime_id);                       
+        $data = $this->General_model->update('tbl_overtime',$updateData,'overtime_id',$overtime_id);
         if($data) {
             $response['text'] = 'Deleted successfully';
             $response['type'] = 'success';
@@ -479,7 +479,7 @@ class Hrmodule extends MY_Controller {
         }
         $response['layout'] = 'topRight';
         $data_json = json_encode($response);
-        echo $data_json;	
+        echo $data_json;
 	}
 	public function getOvertimeofEmployee()
 	{

@@ -19,7 +19,7 @@
               <input type="hidden" id="response" value="<?php echo $this->session->flashdata('response');?>" />
 
               <!-- radio -->
-              
+
               <div class="form-group">
                <input type="hidden" name="cust_id" value="<?php if(isset($records->cust_id)) echo $records->cust_id ?>"/>
                <?php echo validation_errors(); ?>
@@ -33,7 +33,7 @@
                     <select name="company" class="form-control" required>
                       <option></option>
                       <?php
-                      foreach ($company as $row) 
+                      foreach ($company as $row)
                       {
                         ?>
                         <option value="<?php echo $row->cmp_id ?>" <?php if(isset($records->company_id)) if ($records->company_id == $row->cmp_id)  echo "selected" ?>><?php echo $row->cmp_name; ?></option>
@@ -49,14 +49,14 @@
                   <div class="col-sm-4"></div>
                   <div class="col-sm-5">
                     <label  class="radio-inline">
-                        <input type="radio" name="optradio" value="1" <?php if(isset($records->customer_type)) if ($records->customer_type == 1)  echo "checked" ?>><label>Wholesale Customer</label> 
+                        <input type="radio" name="optradio" value="1" <?php if(isset($records->customer_type)) if ($records->customer_type == 1)  echo "checked" ?>><label>Wholesale Customer</label>
                     </label>
-                    
+
                     <label class="radio-inline">
-                        <input type="radio" name="optradio" value="2" <?php if(isset($records->customer_type)) if ($records->customer_type == 2)  echo "checked" ?>><label>Retail Customer</label> 
+                        <input type="radio" name="optradio" value="2" <?php if(isset($records->customer_type)) if ($records->customer_type == 2)  echo "checked" ?>><label>Retail Customer</label>
                     </label>
-                  </div>  
-                </div>  --> 
+                  </div>
+                </div>  -->
                 <div class="form-group">
                   <label for="size_name" class="col-sm-4 control-label">Name <span style="color:red">*</span></label>
 
@@ -92,8 +92,10 @@
                   </div>
                 </div>
                 <div class="form-group text-center">
+
                   <label class="radio-inline"><input type="radio" name="radio_val" <?php if(@$records->debit_credit=='0') echo 'Checked' ?> value="0">Debit</label>
                   <label class="radio-inline"><input type="radio" name="radio_val" <?php if(@$records->debit_credit=='1') echo 'Checked' ?> value="1">Credit</label>
+
                 </div>
                 <div class="form-group">
                   <label for="size_name" class="col-sm-4 control-label">Price Category</label>
@@ -102,7 +104,7 @@
                     <select name="category" class="form-control" required>
                       <option></option>
                       <?php
-                      foreach ($category as $key) 
+                      foreach ($category as $key)
                       {
                         ?>
                         <option value="<?php echo $key->pcategory_id ?>" <?php if(isset($records->company_id)) if ($records->cust_pcategory == $key->pcategory_id)  echo "selected" ?>><?php echo $key->pcategory_name; ?></option>
@@ -116,11 +118,11 @@
                   <center> <button type="submit" class="btn btn-primary">Save</button></center>
                 </div>
               </div>
-              
+
 
             </fieldset>
           </div>
-          
+
         </div>
 
       </div>
