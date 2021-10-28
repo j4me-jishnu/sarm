@@ -535,6 +535,7 @@ class Administration extends MY_Controller {
 						'bank_ifsc' => $this->input->post('bank_ifsc'),
 						'bank_debit_credit' => $this->input->post('bank_type'),
 						'bank_status' => 1,
+						'old_balance' => $this->input->post('opening_bal'),
 
 						);
 			if($this->input->post('bank_type') == 0)
@@ -551,7 +552,7 @@ class Administration extends MY_Controller {
 						'group_id_fk' => 12,
 						'ledger_head' => $this->input->post('bank_name'),
 						'ledgerhead_desc'=>'Bank',
-						'opening_bal'=>0,
+						'opening_bal'=> $this->input->post('opening_bal'),
 						'debit_or_credit'=>$debit_credit,
 						'ledgerhead_status'=>1,
 						'company_id_fk'=>$company			
@@ -559,7 +560,8 @@ class Administration extends MY_Controller {
 			$data3 = array(
 						'ledger_head' => $this->input->post('bank_name'),
 						'debit_or_credit'=>$debit_credit,
-						'company_id_fk'=>$company
+						'company_id_fk'=>$company,
+						'opening_bal'=> $this->input->post('opening_bal'),
 			);			
 			$bank_id = $this->input->post('bank_id');
 			if($bank_id){
