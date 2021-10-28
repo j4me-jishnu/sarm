@@ -69,6 +69,13 @@
                     <input type="text" data-pms-required="true"  class="form-control" name="bank_ifsc" id="bank_ifsc"  value="<?php if(isset($records[0]->bank_ifsc)) echo $records[0]->bank_ifsc ?>">
                   </div>
               </div>
+              <div class="form-group">
+                  <label for="size_name" class="col-sm-4 control-label">Opening Balance<span style="color:red">*</span></label>
+
+                  <div class="col-sm-5">
+                    <input type="text" data-pms-required="true"  class="form-control" name="opening_bal" id="oepning_bal"  value="<?php if(isset($records[0]->bank_ifsc)) echo $records[0]->bank_ifsc ?>">
+                  </div>
+              </div>
               <div class="form-group text-center">
                   <div class="col-sm-12">
                   <label class="radio-inline">
