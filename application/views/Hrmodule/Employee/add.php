@@ -77,6 +77,17 @@
                   </div>
 
                   <div class="form-group">
+                    <div class="col-sm-12 text-center">
+                    <label class="radio-inline">
+                      <input type="radio" name="salary_mode" <?php echo (@$records->emp_mode==0) ? "checked":"" ?> value="0">Wages
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" name="salary_mode" <?php echo (@$records->emp_mode==1) ? "checked":"" ?> value="1">Salary
+                    </label>
+                    </div>
+                  </div>      
+
+                  <div class="form-group">
                     <label for="size_name" class="col-sm-4 control-label">Basic Salary</label>
 
                     <div class="col-sm-5">
@@ -87,14 +98,24 @@
                   <div class="form-group">
                     <div class="col-sm-12 text-center">
                     <label class="radio-inline">
-                      <input type="radio" name="salary_mode" <?php echo (@$records->emp_mode==0) ? "checked":"" ?> value="0">Wages
+                      <input type="radio" name="debit_or_credit" <?php echo (@$records->debit_or_credit==0) ? "checked":"" ?> value="0">Debit
                     </label>
                     <label class="radio-inline">
-                      <input type="radio" name="salary_mode" <?php echo (@$records->emp_mode==1) ? "checked":"" ?> value="1">Salary
+                      <input type="radio" name="debit_or_credit" <?php echo (@$records->debit_or_credit==1) ? "checked":"" ?> value="1">Credit
                     </label>
                     </div>
                   </div>
+                  
+                  <div class="form-group">
+                    <label for="size_name" class="col-sm-4 control-label">Old Balance</label>
 
+                    <div class="col-sm-5">
+                      <input type="text"    class="form-control" name="old_balance2" id="old_balance2"  value="<?php if(isset($records->old_balance)) echo $records->old_balance ?>">
+                    </div>
+                  </div>
+                  
+                  
+                  
                   <div class="form-group">
                     <center> <button type="submit" class="btn btn-primary">Save</button></center>
                   </div>
