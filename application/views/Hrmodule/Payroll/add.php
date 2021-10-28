@@ -94,7 +94,7 @@
                   <label for="size_name" class="col-sm-4 control-label">Overtime</label>
 
                   <div class="col-sm-5">
-                    <input type="text" readonly id="overtime_amt" name="overtime_amt" class="form-control" >
+                    <input type="text" readonly id="ot_amount" name="ot_amount" class="form-control" >
                   </div>
               </div>
               <div class="form-group">
