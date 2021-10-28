@@ -341,5 +341,12 @@ class General_model extends CI_Model{
         $query = $this->db->get();
         return $query->result();
     }
+
+    public function getLastInvoiceID()
+    {
+        $query = $this->db->query("SELECT * FROM tbl_purchase ORDER BY purchase_id DESC LIMIT 1");
+        $result = $query->result_array();
+        return $result;         
+    }
 }
 ?>

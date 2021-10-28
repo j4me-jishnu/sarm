@@ -65,18 +65,53 @@ class Hrmodule extends MY_Controller {
 						'emp_email' => $this->input->post('employemail'),
 						'emp_mode' => $this->input->post('salary_mode'),
 						'emp_salary' => $this->input->post('employsalary'),
+						'debit_or_credit' => $this->input->post('debit_or_credit'),
+						'old_balance' => $this->input->post('old_balance2'),
 						'emp_date' => date("Y-m-d",strtotime($this->input->post('dob'))),
 						'emp_status' => 1
 						);
+
+			if($this->input->post('salary_mode')==0){
+				$salary_mode = 27;
+			}
+			else{
+				$salary_mode = 29;
+			}
+			if($this->input->post('debit_or_credit')==0){
+				$debit_credit = 1;
+			}
+			else{
+				$debit_credit = 2;
+			}
+			//ledgerhead entry
+			$data2 = array(
+						'group_id_fk' => $salary_mode,
+						'ledger_head' => $this->input->post('employname'),
+						'ledgerhead_desc' => 'Employee',
+						'opening_bal' => $this->input->post('old_balance2'),
+						'company_id_fk' => $this->input->post('company'),
+						'ledgerhead_status' => 1,
+						'debit_or_credit' => $debit_credit,
+			);
+			$data3 = array(
+				'ledger_head' => $this->input->post('employname'),
+				'opening_bal' => $this->input->post('old_balance2'),
+				'company_id_fk' => $this->input->post('company'),
+				'debit_or_credit' => $debit_credit,
+			);
+			//end
 			$emp_id = $this->input->post('emp_id');
 			if($emp_id){
-
+				//get name of employee to find inj ledgerhead table
+				$emp_name = $this->General_model->get_data('tbl_employee','emp_id','emp_name',$emp_id);
 				$data['emp_id'] = $emp_id;
 				$result = $this->General_model->update('tbl_employee',$datas,'emp_id',$emp_id);
+				$result2 = $this->General_model->update('tbl_ledgerhead',$data3,'ledger_head',$emp_name[0]->emp_name);
 				$response_text = 'Employee details updated';
 			}
 			else{
 				$result = $this->General_model->add('tbl_employee',$datas);
+				$result2 = $this->General_model->add('tbl_ledgerhead',$data2);
 				$response_text = 'Employee details Added';
 			}
 			if($result){
@@ -90,9 +125,13 @@ class Hrmodule extends MY_Controller {
 	}
 	public function deleteEmployee()
 	{
+		
 		$emp_id = $this->input->post('emp_id');
+		$emp_name = $this->General_model->get_data('tbl_employee','emp_id','emp_name',$emp_id);
+		$updateData2 = array('ledgerhead_status' => 0);
         $updateData = array('emp_status' => 0);
         $data = $this->General_model->update('tbl_employee',$updateData,'emp_id',$emp_id);
+		$data2 = $this->General_model->update('tbl_ledgerhead',$updateData2,'ledger_head',$emp_name[0]->emp_name);
         if($data) {
             $response['text'] = 'Deleted successfully';
             $response['type'] = 'success';
