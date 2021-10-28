@@ -227,25 +227,40 @@
                 <input class="form-control" type="text" name="frieght" id="frieght" value="0" onkeyup="getNetTotal()" required>
                 <label>Packing Charge</label>
                 <input class="form-control" type="text" name="pack_chrg" id="pack_chrg" value="0" onkeyup="getNetTotal()">
+                
               </div>
               <div class="col-md-8"></div>
               <div class="col-md-2">
                 <label>Net Total</label>
                 <input class="form-control" type="text" name="sum" id="sum">
+
+                <!-- Dynamic Radio Button for Cash Or Bank -->
+                <!-- Added By Rajeev -->
+                <br>
+                <label for="chkYes">
+                    <input type="radio" id="chkYes" name="bank_or_cash" value="0" onclick="ShowHideDiv()"/>
+                    Cash
+                </label>
+                <label for="chkNo">
+                    <input type="radio" id="chkNo" name="bank_or_cash" value="1" onclick="ShowHideDiv()" />
+                    Bank
+                </label>
                 <label>Cash Payment</label>
-                <input class="form-control" type="text" name="cash" id="cash" value="0" onkeyup="getNet();" required>
+                <input class="form-control" type="text" name="cash" id="cash" value="0" onkeyup="getNet();" required> 
+                <div id="bank_select" style="display: none">
                 <label>Bank Payment</label>
-                <select class="form-control" name="bank_id">
-                  <option>select bank</option>
-                  <?php
-                  foreach ($bank as $bank) {
-                  ?>
-                    <option value="<?php echo $bank->bank_id ?>"><?php echo $bank->bank_name ?></option>
-                  <?php
-                  }
-                  ?>
-                </select>
-                <input class="form-control" type="text" name="bank" id="bank" value="0" onkeyup="getNet();" required>
+                  <select class="form-control" name="bank_id">
+                    <option>select bank</option>
+                    <?php
+                    foreach ($bank as $bank) {
+                    ?>
+                      <option value="<?php echo $bank->bank_id ?>"><?php echo $bank->bank_name ?></option>
+                    <?php
+                    }
+                    ?>
+                  </select>
+                </div>    
+                <br>
                 <label>Old Balance</label>
                 <input class="form-control" type="text" name="old_bal" id="old_bal" value="0">
                 <label>Net Balance</label>
@@ -277,4 +292,8 @@
     $('#draft').val(1);
     document.getElementById('purchase_form').submit();
   }
+  function ShowHideDiv() {
+        bank_select.style.display = chkYes.checked ? "block" : "none";
+        bank_select.style.display = chkNo.checked ? "block" : "none";
+    }
 </script>
