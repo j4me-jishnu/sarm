@@ -125,9 +125,13 @@ class Hrmodule extends MY_Controller {
 	}
 	public function deleteEmployee()
 	{
+		
 		$emp_id = $this->input->post('emp_id');
+		$emp_name = $this->General_model->get_data('tbl_employee','emp_id','emp_name',$emp_id);
+		$updateData2 = array('ledgerhead_status' => 0);
         $updateData = array('emp_status' => 0);
         $data = $this->General_model->update('tbl_employee',$updateData,'emp_id',$emp_id);
+		$data2 = $this->General_model->update('tbl_ledgerhead',$updateData2,'ledger_head',$emp_name[0]->emp_name);
         if($data) {
             $response['text'] = 'Deleted successfully';
             $response['type'] = 'success';
