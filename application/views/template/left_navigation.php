@@ -7,11 +7,11 @@
   <!-- Sidebar user panel (optional) -->
   <div class="user-panel mt-3 pb-3 mb-3 d-flex">
       <div class="row">
-      <div class="col-sm-2">
-          <img src="<?php echo base_url() ?>assets/include/user_icon.png" class="img-circle elevation-2" width="25" height="25" alt="User Image">
+      <div class="col-sm-2" id="image">
+          <img src="<?php echo base_url() ?>assets/include/user_icon.png" class="img-circle elevation-2" width="30" height="30" alt="User Image">
         </div>
-        <div class="col-sm-2">
-          <a href="#" class="d-block"><?php echo $this->session->userdata('user_name'); ?></a>
+        <div class="col-sm-2" id="info" style="padding-top: 4px;">
+          <a href="#" class="d-block"><?php echo  strtoupper( $this->session->userdata('user_name')); ?></a>
         </div>
       </div>
     </div>
