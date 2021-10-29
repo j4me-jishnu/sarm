@@ -19,11 +19,11 @@
       <div class="row">
         <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box">
-            <span class="info-box-icon" style="color: #f25500;"><i class="fa fa-bed"></i></span>
+            <span class="info-box-icon" style="color: #f25500;"><i class="fa fa-user"></i></span>
 
             <div class="info-box-content">
               <span class="info-box-text">Customers</span>
-              <span class="info-box-number" id="occupied"></span>
+              <span class="info-box-number" id="customer"></span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -32,11 +32,11 @@
         <!-- /.col -->
         <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box">
-            <span class="info-box-icon " style="color: #04936c;"><i class="fa fa-folder-open-o"></i></span>
+            <span class="info-box-icon " style="color: #04936c;"><i class="fa fa-truck"></i></span>
 
             <div class="info-box-content">
               <span class="info-box-text">Vendor</span>
-              <span class="info-box-number" id="available"></span>
+              <span class="info-box-number" id="vendor"></span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -49,22 +49,22 @@
 
          <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box">
-            <span class="info-box-icon" style="color: #fc0303;"><i class="fa fa-exclamation-triangle"></i></span>
+            <span class="info-box-icon" style="color: #fc0303;"><i class="fa fa-archive"></i></span>
 
             <div class="info-box-content">
               <span class="info-box-text">Stock</span>
-              <span class="info-box-number" id="service"></span>
+              <span class="info-box-number" id="stock"></span>
             </div>
           </div>
         </div> 
         <!-- /.col -->
         <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box">
-            <span class="info-box-icon " style="color: #f6c12f;"><i class="fa fa-clock-o"></i></span>
+            <span class="info-box-icon " style="color: #f6c12f;"><i class="fa fa-male"></i></span>
 
             <div class="info-box-content">
-              <span class="info-box-text">Shop</span>
-              <span class="info-box-number" id="upcoming"></span>
+              <span class="info-box-text">Employees</span>
+              <span class="info-box-number" id="employee"></span>
             </div>
             <!-- /.info-box-content -->
           </div>

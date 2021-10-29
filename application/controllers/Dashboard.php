@@ -25,4 +25,28 @@ class Dashboard extends MY_Controller {
 		$template['script'] = 'Dashboard/script';
 		$this->load->view('template',$template);
 	}
+
+	public function customer()
+	{
+		$data = $this->Dashboard_model->customers();
+		echo json_encode($data);
+	}
+
+	public function vendor()
+	{
+		$data = $this->Dashboard_model->vendors();
+		echo json_encode($data);
+	}
+
+	public function stock()
+	{
+		$data = $this->Dashboard_model->stocks();
+		echo json_encode($data);
+	}
+
+	public function employee()
+	{
+		$data = $this->Dashboard_model->employees();
+		echo json_encode($data);
+	}
 }
