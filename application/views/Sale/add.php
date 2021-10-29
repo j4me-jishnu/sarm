@@ -12,7 +12,7 @@
 
   <!-- Main content -->
   <section class="content">
-    <form method="post" id="purchase_form" action="<?php echo base_url(); ?>Sale/add"> 
+    <form method="post" id="purchase_form" action="<?php echo base_url(); ?>Sale/add">
     <div class="row">
       <div class="col-md-12">
         <div class="box">
@@ -45,7 +45,7 @@
                     <select name="company" id="company" class="form-control" required>
                       <option></option>
                       <?php
-                      foreach ($company as $row) 
+                      foreach ($company as $row)
                       {
                         ?>
                         <option value="<?php echo $row->cmp_id ?>" <?php if(isset($records->company_id)) if ($records->company_id == $row->cmp_id)  echo "selected" ?>><?php echo $row->cmp_name; ?></option>
@@ -91,9 +91,9 @@
                     }
                     ?>
                   </select>
-              <?php  
+              <?php
               }
-              ?>    
+              ?>
               </div>
               <div class="col-md-4">
                   <label for="product_name" class="control-label">Customer Address <span style="color:red">*</span></label>
@@ -121,7 +121,7 @@
                 foreach ($pcategory as $key) {
                 ?>
                 <option value="<?php echo $key->pcategory_id ?>"><?php echo $key->pcategory_name ?></option>
-                <?php 
+                <?php
                 }
                 ?>
                 </select>
@@ -229,12 +229,15 @@
                 <input class="form-control" type="text" name="frieght" id="frieght" value="0" onkeyup="getNetTotal()" required>
                 <label>Packing Charge</label>
                 <input class="form-control" type="text" name="pack_chrg" id="pack_chrg" value="0" onkeyup="getNetTotal()">
-                
+                <label>Net Total</label>
+                <input class="form-control" type="text" name="sum" id="sum">
+
               </div>
               <div class="col-md-8"></div>
               <div class="col-md-2">
-                <label>Net Total</label>
-                <input class="form-control" type="text" name="sum" id="sum">
+                <label>Item Total</label>
+                <input class="form-control" type="text" name="sum" id="item_total" value="0">
+
 
                 <!-- Dynamic Radio Button for Cash Or Bank -->
                 <!-- Added By Rajeev -->
@@ -248,7 +251,7 @@
                     Bank
                 </label>
                 <label>Cash Payment</label>
-                <input class="form-control" type="text" name="cash" id="cash" value="0" onkeyup="getNet();" required> 
+                <input class="form-control" type="text" name="cash" id="cash" value="0" onkeyup="getNet();" required>
                 <div id="bank_select" style="display: none">
                 <label>Bank Payment</label>
                   <select class="form-control" name="bank_id">
@@ -261,7 +264,7 @@
                     }
                     ?>
                   </select>
-                </div>    
+                </div>
                 <br>
                 <label>Old Balance</label>
                 <input class="form-control" type="text" name="old_bal" id="old_bal" value="0">
