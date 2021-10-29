@@ -110,7 +110,7 @@
               </div>
               <div class="col-md-4">
                   <label for="product_name" class="control-label">Invoice Number<span style="color:red">*</span></label>
-                  <input type="text" name="invoice_number" class="form-control" id="invoice_number" value="<?php echo $invoice ?>" disabled>
+                  <input type="text" name="invoice_number" class="form-control" id="invoice_number" style="pointer-events:none;background:#e0ebeb;" value="<?php echo $invoice ?>">
               </div>
               <div class="col-md-4">
                 <label class="control-label">Price Category<span style="color:red">*</span></label>
