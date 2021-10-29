@@ -110,6 +110,7 @@
                   <input type="text" name="pur_date" id="pur_date" class="form-control">
               </div>
               <div class="col-md-4">
+                <!-- new changes -->
                   <label for="product_name" class="control-label">Invoice Number<span style="color:red">*</span></label>
                   <input type="text" name="invoice_number" class="form-control" style="pointer-events:none;background:grey;" id="invoice_number" value="<?php if(isset($invoice)) echo $invoice ?>">
               </div>
