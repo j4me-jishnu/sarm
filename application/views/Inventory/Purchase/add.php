@@ -257,7 +257,7 @@
               <div class="col-md-8"></div>
               <div class="col-md-2">
                 <label>Total</label>
-                <input class="form-control" type="text" name="sum" id="sum">
+                <input class="form-control" type="text" name="sum" id="item_total" value="0">
                 <label>Cash Payment</label>
                 <input class="form-control" type="text" name="cash" id="cash" value="0" onkeyup="getNet();" required>
                 <label>Bank Payment</label>

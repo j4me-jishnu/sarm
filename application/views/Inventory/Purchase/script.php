@@ -321,7 +321,16 @@ function getNetTotal()
         net_bal = parseFloat(net_bal) - parseFloat(cash);
     }
     $('#net_bal').val(net_bal);
+
+/* Simple total amount calculated_______________*/
+    let total=[];
+    for (let i = 1; i <= counter; i++) {
+      total.push(parseFloat($('#total_'+i).val()));
+    }
+    const sum_final = total.reduce((a, b) => a + b, 0);
+    $('#item_total').val(sum_final);
 }
+/*______________________________________________*/
 function getNet()
 {
     var cash = $('#cash').val();
