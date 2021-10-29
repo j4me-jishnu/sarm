@@ -15,8 +15,8 @@ Class Dashboard_model extends CI_Model{
 	}
 	public function vendors()
 	{
-		$this->db->where('vendorstatus ',1);
-		$query=$this->db->get('tbl_vendor');
+		$this->db->where('supplier_status ',1);
+		$query=$this->db->get('tbl_supplier');
 		return $query->num_rows();
 	}
 	public function stock()
@@ -24,6 +24,21 @@ Class Dashboard_model extends CI_Model{
 		$this->db->select('stockid');
 		$this->db->from('tbl_stock');
 		$this->db->where('status', 1);
+		$query=$this->db->get();
+		return $query->num_rows();
+	}
+	public function stocks()
+	{
+		$this->db->from('tbl_stock');
+		$this->db->where('stock_status', 1);
+		$query=$this->db->get();
+		return $query->num_rows();
+	}
+
+	public function employees()
+	{
+		$this->db->from('tbl_employee');
+		$this->db->where('emp_status', 1);
 		$query=$this->db->get();
 		return $query->num_rows();
 	}

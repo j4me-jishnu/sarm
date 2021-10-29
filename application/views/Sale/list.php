@@ -23,42 +23,7 @@
               <a href="<?php echo base_url();?>Sale/add" class="btn btn-sm common-btn"><i class="fa fa-plus-square"></i>Add New</a>
             </div>
           </div>
-          <!-- <div class="row">
-            <div class="col-md-3">
-              <div class="input-group margin">
-                <div class="input-group-btn">
-                  <button type="button" class="btn btn-primary nohover">Invoice</button>
-                </div>
-                <input type="text" name="invoice_number" id="invoice_numbers" class="form-control">
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="input-group margin">
-                <div class="input-group-btn">
-                  <button type="button" class="btn btn-primary nohover">Supplier</button>
-                </div>
-                <select class="form-control supp_id" name="supplier_id" id="supplier_id">
-                  <option selected disabled>Select Supplier</option>
-                  <?php
-                  foreach ($supplier as $key) {
-                  ?>
-                  <option value="<?php echo $key->supplier_id; ?>"><?php echo $key->supplier_name; ?></option>
-                  <?php
-                  }
-                  ?>
-                </select>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="input-group margin">
-                <div class="input-group-btn">
-                  <button type="button" class="btn btn-primary nohover">Date</button>
-                </div>
-                <input type="text" name="purchase_date" id="purchase_date" class="form-control">
-              </div>
-            </div>
-          </div>
-        </div> -->
+          
         <div class="box-body">
 
           <table id="sale_table" class="table table-bordered table-striped">

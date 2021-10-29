@@ -13,10 +13,9 @@
             function(data)
             {
               $('#customer').html(data);
-              console.log(data);
             },
             error:function(e){
-            console.log("error");
+              $('#customer').html('NULL');
             }
             });
 			
@@ -28,10 +27,9 @@
             function(data)
             {
               $('#vendor').html(data);
-              console.log(data);
             },
             error:function(e){
-            console.log("error");
+            $('#vendor').html('NULL');
             }
             });
 			
@@ -43,25 +41,23 @@
             function(data)
             {
               $('#stock').html(data);
-              console.log(data);
             },
             error:function(e){
-            console.log("error");
+              $('#stock').html('NULL');
             }
             });
 			
 			$.ajax({
-            url:"<?php echo base_url()?>dashboard/shop",
+            url:"<?php echo base_url()?>dashboard/employee",
             type: 'POST',
             dataType: 'json',
             success:
             function(data)
             {
-              $('#shop').html(data);
-              console.log(data);
+              $('#employee').html(data);
             },
             error:function(e){
-            console.log("error");
+              $('#employee').html('NULL');
             }
             });
 			

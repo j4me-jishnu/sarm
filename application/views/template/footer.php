@@ -90,6 +90,12 @@
 <script src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js" type="text/javascript"></script>
 <script src="//cdn.datatables.net/buttons/1.2.4/js/buttons.html5.min.js" type="text/javascript"></script>
 
-
+<script>
+  $(document).on('expanded.pushMenu', function () {
+    $('#info').show();
+}).on('collapsed.pushMenu', function(){
+    $('#info').hide();
+});
+</script>
 </body>
 </html>
