@@ -27,12 +27,25 @@ class Sale extends MY_Controller {
 	}
 	public function add()
 	{
+		
 		$this->form_validation->set_rules('company', 'company', 'required');
 		if ($this->form_validation->run() == FALSE) {
 			if($this->session->userdata('user_type')=='C'){
 				$id = $this->session->userdata('id');
 				$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
 				}
+
+			//invoice id auto increment
+			@$lastinvoiceid = $this->General_model->getLastInvoiceID2();
+
+			if(isset($lastinvoiceid)){
+				@$incremented_number = $lastinvoiceid[0]['invoice_number'] + 1;
+				@$template['invoice'] = $incremented_number;
+			}
+			else{
+				$template['invoice'] = 1;
+			}
+			//	
 			$template['company']=$this->General_model->getCompanies();
 			$template['customers'] = $this->General_model->getCustomers();
 			$template['pcategory'] = $this->General_model->getPriceCategories();
@@ -99,6 +112,7 @@ class Sale extends MY_Controller {
 							break;
 						}
 					}
+					
 					$data=array(
 					  'product_id_fk' =>$product_id[$i],
 					  'cust_id' =>$cust_id,
@@ -115,7 +129,6 @@ class Sale extends MY_Controller {
 					  'stockstatus' =>0,
 					  'sale_status' =>1
 					);
-					// print_r($data);
 					$result = $this->General_model->add('tbl_sale',$data);
 					$insert_id = $this->db->insert_id();
 
@@ -126,7 +139,21 @@ class Sale extends MY_Controller {
 					$data = $this->General_model->update('tbl_stock',$updateData,'item_id',$product_id[$i]);
 				$j++;	
 				}
-			
+				//check if radio button of bank is selected
+				$radio_type = $this->input->post('bank_or_cash');
+					if($radio_type == 1){
+						//bank radio selected
+						$bank_id4 = $this->input->post('bank_id');
+						$bank_amt = $this->input->post('cash');
+						$cash_amt = 0;
+					}
+					else{
+						//cash radio selected
+						$bank_id4 = NULL;
+						$bank_amt = 0;
+						$cash_amt = $this->input->post('cash');
+					}	
+
 				$datap = array(
 						'invoice_number' =>$this->input->post('invoice_number'),
 						'tax_amount'=>$this->input->post('tax_sum'),
@@ -135,13 +162,14 @@ class Sale extends MY_Controller {
 						'frieght'=>$this->input->post('frieght'),
 						'packing_charge'=>$this->input->post('pack_chrg'),
 	  					'net_total' =>$this->input->post('sum'),
-	  					'cash_paid' =>$this->input->post('cash'),
-	  					'bank_paid' =>$this->input->post('bank'),
-	  					'bank_id' => $this->input->post('bank_id'),
+	  					'cash_paid' => $cash_amt,
+	  					'bank_paid' => $bank_amt,
+	  					'bank_id' => $bank_id4,
 	  					'old_balance'=>$this->input->post('old_bal'),
 	  					'net_balance'=>$this->input->post('net_bal'),
 	  					'payment_status'=>1 
 	  					);
+						  
 				$result = $this->General_model->add('tbl_salepayments',$datap);
 				$upData = array('old_balance' =>$this->input->post('net_bal'));
 				$stk = $this->General_model->update('tbl_customer',$upData,'cust_id',$cust_id);

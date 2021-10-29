@@ -66,11 +66,12 @@
                   <select class="form-control cust_id" name="cust_id" id="cust_id">
                     <!-- <option selected disabled>Select Supplier</option>
                     <?php
+                    if(isset($supplier)){
                     foreach ($supplier as $key) {
                     ?>
                     <option value="<?php echo $key->supplier_id; ?>"><?php echo $key->supplier_name; ?></option>
                     <?php
-                    }
+                    }}
                     ?> -->
                   </select>
               <?php
@@ -110,7 +111,7 @@
               </div>
               <div class="col-md-4">
                   <label for="product_name" class="control-label">Invoice Number<span style="color:red">*</span></label>
-                  <input type="text" name="invoice_number" class="form-control" id="invoice_number" required>
+                  <input type="text" name="invoice_number" class="form-control" style="pointer-events:none;background:grey;" id="invoice_number" value="<?php if(isset($invoice)) echo $invoice ?>">
               </div>
               <div class="col-md-4">
                 <label class="control-label">Price Category<span style="color:red">*</span></label>

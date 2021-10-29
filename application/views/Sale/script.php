@@ -57,27 +57,27 @@ $(document).on("change",'#cust_id',function(){
             });
         }
 }); 
-$(document).on("change",'#invoice_number',function()
-{
-     var invoice_number = $('#invoice_number').val();
-    $.ajax({
-        url: "<?php echo base_url()?>checkInvoicenumber",
-        type: 'POST',
-        data:{invoice_number : invoice_number},
-        success: function(data)
-        {  
-            if (data > 0) 
-            {
-                alert('The invoice number is alredy Used !');
-                $('#invoice_number').val('');
-            }
-            else
-            {
-                $('#invoice_number').css('border-color', 'green');
-            }
-        }
-    });
-}); 
+// $(document).on("change",'#invoice_number',function()
+// {
+//      var invoice_number = $('#invoice_number').val();
+//     $.ajax({
+//         url: "<?php echo base_url()?>checkInvoicenumber",
+//         type: 'POST',
+//         data:{invoice_number : invoice_number},
+//         success: function(data)
+//         {  
+//             if (data > 0) 
+//             {
+//                 alert('The invoice number is alredy Used !');
+//                 $('#invoice_number').val('');
+//             }
+//             else
+//             {
+//                 $('#invoice_number').css('border-color', 'green');
+//             }
+//         }
+//     });
+// }); 
 function addMore() 
   {
     var count=$('#counter').val();
