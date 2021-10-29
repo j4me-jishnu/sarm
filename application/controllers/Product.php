@@ -322,7 +322,8 @@ class Product extends MY_Controller {
 						'product_status'=>1,
 						'company_id'=>$company,
 						'product_type'=>'RM',
-						'goods_or_service'=>$this->input->post('p_type')
+						'goods_or_service'=>$this->input->post('p_type'),
+						'product_remark'=>$this->input->post('remark')
 					);
 			$stock=array(
 						'finyear'=>$fyr,
