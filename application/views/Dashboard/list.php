@@ -17,73 +17,67 @@
       <input type="hidden" id="response" value="<?php echo $this->session->flashdata('response');?>" />
       <!-- Info boxes -->
       <div class="row">
-        <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box">
-            <span class="info-box-icon" style="color: #f25500;"><i class="fa fa-user"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">Customers</span>
-              <span class="info-box-number" id="customer"></span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-        </div>
         <!-- /.col -->
-        <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box">
-            <span class="info-box-icon " style="color: #04936c;"><i class="fa fa-truck"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">Vendor</span>
-              <span class="info-box-number" id="vendor"></span>
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box" style="background-color: #17a2b8;color:#f8f9fa;">
+              <div class="inner">
+                <h3 id="customer"></h3>
+                <p>Customers</p>
+              </div>
+              <div class="icon">
+                <i class="ion-ios-people"></i>
+              </div>
+              <a href="<?php echo base_url() ?>Customer" class="small-box-footer">More info <i class="ion-android-arrow-dropright-circle"></i></a>
             </div>
-            <!-- /.info-box-content -->
           </div>
-          <!-- /.info-box -->
-        </div>
+        <!-- /.col -->
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box" style="background-color:#28a745;color:#f8f9fa;">
+              <div class="inner">
+                <h3 id="vendor"></h3>
+                <p>Vendor</p>
+              </div>
+              <div class="icon">
+                <i class="ion-android-cart"></i>
+              </div>
+              <a href="<?php echo base_url() ?>Supplier" class="small-box-footer">More info <i class="ion-android-arrow-dropright-circle"></i></a>
+            </div>
+          </div>
         <!-- /.col -->
 
         <!-- fix for small devices only -->
         <div class="clearfix visible-sm-block"></div>
 
-         <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box">
-            <span class="info-box-icon" style="color: #fc0303;"><i class="fa fa-archive"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">Stock</span>
-              <span class="info-box-number" id="stock"></span>
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box" style="background-color:#fd7e14;color:#f8f9fa;">
+              <div class="inner">
+                <h3 id="stock"></h3>
+                <p>Stock</p>
+              </div>
+              <div class="icon">
+                <i class="ion-ios-box"></i>
+              </div>
+              <a href="<?php echo base_url() ?>Stock" class="small-box-footer">More info <i class="ion-android-arrow-dropright-circle"></i></a>
             </div>
           </div>
-        </div> 
         <!-- /.col -->
-        <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box">
-            <span class="info-box-icon " style="color: #f6c12f;"><i class="fa fa-male"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">Employees</span>
-              <span class="info-box-number" id="employee"></span>
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box" style="background-color:#dc3545;color:#f8f9fa;">
+              <div class="inner">
+                <h3 id="employee"></h3>
+                <p>Employees</p>
+              </div>
+              <div class="icon">
+                <i class="ion-man"></i>
+              </div>
+              <a href="<?php echo base_url() ?>Employee" class="small-box-footer">More info <i class="ion-android-arrow-dropright-circle"></i></a>
             </div>
-            <!-- /.info-box-content -->
           </div>
-          <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
-      <!-- /.row -->
-		
-			 
-            <!-- /.box-footer -->
-          </div>
-          <!-- /.box -->
-       
-        <!-- /.col -->
-
-        
-        <!-- /.col -->
-      
-      <!-- /.row -->
+      </div>   
     </section>
     <!-- /.content -->
   </div
