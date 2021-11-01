@@ -6,10 +6,10 @@ Class Hr_model extends CI_Model
 		$arOrder = array('','emp_name');
 		$searchValue =($param['searchValue'])?$param['searchValue']:'';
         if($searchValue){
-            $this->db->like('emp_name', $searchValue); 
+            $this->db->like('emp_name', $searchValue);
         }
         $this->db->where("emp_status",1);
-		
+
         if ($param['start'] != 'false' and $param['length'] != 'false') {
         	$this->db->limit($param['length'],$param['start']);
         }
@@ -18,7 +18,7 @@ Class Hr_model extends CI_Model
 		$this->db->join('tbl_companyinfo','cmp_id = company_id');
 		$this->db->order_by('emp_id', 'DESC');
         $query = $this->db->get();
-		
+
         $data['data'] = $query->result();
         $data['recordsTotal'] = $query->num_rows();
         $data['recordsFiltered'] = $query->num_rows();
@@ -38,15 +38,15 @@ Class Hr_model extends CI_Model
         $searchValue =($param['searchValue'])?$param['searchValue']:'';
         $cmp_id =(isset($param['cmp_id']))?$param['cmp_id']:'';
 		if($searchValue){
-            $this->db->like('emp_name', $searchValue); 
+            $this->db->like('emp_name', $searchValue);
         }
         if ($cmp_id) {
         	$this->db->where('company_id',$cmp_id);
         }
-      
-        
+
+
 		$this->db->where("emp_status",1);
-		
+
         if ($param['start'] != 'false' and $param['length'] != 'false') {
             $this->db->limit($param['length'],$param['start']);
         }
@@ -54,11 +54,11 @@ Class Hr_model extends CI_Model
 		$this->db->from('tbl_employee');
 		$this->db->order_by('emp_id', 'DESC');
         $query = $this->db->get();
-        
+
 		$data['data'] = $query->result();
         $data['recordsTotal'] = $query->num_rows();
         $data['recordsFiltered'] = $query->num_rows();
-        
+
         return $data;
 	}
 	function check_absent($emp_id,$date){
@@ -69,15 +69,15 @@ Class Hr_model extends CI_Model
 
             if($q->num_rows()==1){
                 return 1;
-  
+
               }
               else{
-  
+
                   return 0;
               }
 
         }
-       
+
 
     }
     function check_attendance($emp_id,$date){
@@ -96,7 +96,7 @@ Class Hr_model extends CI_Model
             }
 
           }
-         
+
     }
     public function getpayAdvanceData($param)
     {
@@ -104,10 +104,10 @@ Class Hr_model extends CI_Model
         $adv_empname  =(isset($param['adv_empname ']))?$param['adv_empname ']:'';
 		$searchValue =($param['searchValue'])?$param['searchValue']:'';
         if($searchValue){
-            $this->db->like('emp_name', $searchValue); 
+            $this->db->like('emp_name', $searchValue);
         }
 		$this->db->where("adv_status",1);
-		
+
         if ($param['start'] != 'false' and $param['length'] != 'false') {
             $this->db->limit($param['length'],$param['start']);
         }
@@ -117,7 +117,7 @@ Class Hr_model extends CI_Model
 		$this->db->join('tbl_companyinfo','tbl_companyinfo.cmp_id = tbl_advance.company_id');
 		$this->db->order_by('adv_id', 'DESC');
         $query = $this->db->get();
-        
+
 		$data['data'] = $query->result();
         $data['recordsTotal'] = $query->num_rows();
         $data['recordsFiltered'] = $query->num_rows();
@@ -149,11 +149,11 @@ Class Hr_model extends CI_Model
     	$arOrder = array('','payroll_empname');
 		$searchValue =($param['searchValue'])?$param['searchValue']:'';
         if($searchValue){
-            $this->db->like('emp_name', $searchValue); 
+            $this->db->like('emp_name', $searchValue);
         }
-        
+
 		$this->db->where("payroll_status",1);
-		
+
         if ($param['start'] != 'false' and $param['length'] != 'false') {
             $this->db->limit($param['length'],$param['start']);
         }
@@ -163,7 +163,7 @@ Class Hr_model extends CI_Model
 		$this->db->join('tbl_companyinfo','tbl_companyinfo.cmp_id = tbl_payroll.company_id');
 		$this->db->order_by('payroll_id', 'DESC');
         $query = $this->db->get();
-        
+
 		$data['data'] = $query->result();
         $data['recordsTotal'] = $query->num_rows();
         $data['recordsFiltered'] = $query->num_rows();
@@ -192,21 +192,21 @@ Class Hr_model extends CI_Model
         $arOrder = array('','payroll_empname');
         $searchValue =($param['searchValue'])?$param['searchValue']:'';
         if($searchValue){
-            $this->db->like('emp_name', $searchValue); 
+            $this->db->like('emp_name', $searchValue);
         }
-        
-        $this->db->where("overtime_status",1);
-        
+
+        $this->db->where("ot_status",1);
+
         if ($param['start'] != 'false' and $param['length'] != 'false') {
             $this->db->limit($param['length'],$param['start']);
         }
-        $this->db->select('*,DATE_FORMAT(date,\'%d/%m/%Y\')as date');
+        $this->db->select('*,DATE_FORMAT(ot_date,\'%d/%m/%Y\')as date');
         $this->db->from('tbl_overtime');
-        $this->db->join('tbl_employee','tbl_employee.emp_id = tbl_overtime.emp_id_fk');
-        $this->db->join('tbl_companyinfo','tbl_companyinfo.cmp_id = tbl_overtime.company_id_fk');
-        $this->db->order_by('overtime_id', 'DESC');
+        $this->db->join('tbl_employee','tbl_employee.emp_id = tbl_overtime.ot_emp_id_fk');
+        $this->db->join('tbl_companyinfo','tbl_companyinfo.cmp_id = tbl_overtime.ot_cmp_id_fk');
+        $this->db->order_by('ot_id','DESC');
         $query = $this->db->get();
-        
+
         $data['data'] = $query->result();
         $data['recordsTotal'] = $this->getOvertimeDetailsCount($param);
         $data['recordsFiltered'] = $this->getOvertimeDetailsCount($param);
@@ -217,34 +217,34 @@ Class Hr_model extends CI_Model
          $arOrder = array('','payroll_empname');
         $searchValue =($param['searchValue'])?$param['searchValue']:'';
         if($searchValue){
-            $this->db->like('emp_name', $searchValue); 
+            $this->db->like('emp_name', $searchValue);
         }
-        
-        $this->db->where("overtime_status",1);
-    
-        $this->db->select('*,DATE_FORMAT(date,\'%d/%m/%Y\')as date');
+
+        $this->db->where("ot_status",1);
+
+        $this->db->select('*,DATE_FORMAT(ot_date,\'%d/%m/%Y\')as date');
         $this->db->from('tbl_overtime');
-        $this->db->join('tbl_employee','tbl_employee.emp_id = tbl_overtime.emp_id_fk');
-        $this->db->join('tbl_companyinfo','tbl_companyinfo.cmp_id = tbl_overtime.company_id_fk');
-        $this->db->order_by('overtime_id', 'DESC');
+        $this->db->join('tbl_employee','tbl_employee.emp_id = tbl_overtime.ot_emp_id_fk');
+        $this->db->join('tbl_companyinfo','tbl_companyinfo.cmp_id = tbl_overtime.ot_cmp_id_fk');
+        $this->db->order_by('ot_id', 'DESC');
         $query = $this->db->get();
         return $query->num_rows();
     }
     public function getOvertimeDetailss($id)
     {
-       $this->db->select('*,DATE_FORMAT(date,\'%d/%m/%Y\')as date');
+       $this->db->select('*,DATE_FORMAT(ot_date,\'%d/%m/%Y\')as date');
         $this->db->from('tbl_overtime');
-        $this->db->join('tbl_employee','tbl_employee.emp_id = tbl_overtime.emp_id_fk');
-        $this->db->join('tbl_companyinfo','tbl_companyinfo.cmp_id = tbl_overtime.company_id_fk');
-        $this->db->where('overtime_id',$id);
-        $this->db->where("overtime_status",1);
+        $this->db->join('tbl_employee','tbl_employee.emp_id = tbl_overtime.ot_emp_id_fk');
+        $this->db->join('tbl_companyinfo','tbl_companyinfo.cmp_id = tbl_overtime.ot_cmp_id_fk');
+        $this->db->where('ot_id',$id);
+        $this->db->where("ot_status",1);
         $query = $this->db->get();
-        return $query->result(); 
+        return $query->result();
     }
     public function getOvertimeofEmployee($emp_id,$month)
     {
         $this->db->select('COALESCE(SUM(amount),0) AS over_amount');
-        $this->db->where('emp_id_fk',$emp_id);
+        $this->db->where('ot_emp_id_fk',$emp_id);
         $this->db->where('Month(date)',$month);
         return $this->db->get('tbl_overtime')->row()->over_amount;
 

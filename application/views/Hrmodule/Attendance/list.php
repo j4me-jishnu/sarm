@@ -17,7 +17,7 @@
         <div class="box-header">
           <div class="row">
             <div class="col-sm-10">
-              <h3>Attendance List</h3>  
+              <h3>Attendance List</h3>
             </div>
             <!-- <div class="col-sm-2">
               <a href="<?php echo base_url();?>addCustomer" class="btn btn-sm common-btn"><i class="fa fa-plus-square"></i>Add New</a>
@@ -35,7 +35,7 @@
                   </div><!-- /btn-group -->
                   <div id="result" type="hidden"></div>
                     <input type="text" required  placeholder="Date" class="form-control" id="date" name="att_date" value="<?php echo date('d/m/Y') ?>">
-                </div><!-- /input-group --> 
+                </div><!-- /input-group -->
               </div>
               <div class="form-group">
                 <div class="col-md-3">
@@ -47,7 +47,7 @@
                       <select name="company" id="company" class="form-control" required>
                         <option></option>
                         <?php
-                        foreach ($company as $row) 
+                        foreach ($company as $row)
                         {
                           ?>
                           <option value="<?php echo $row->cmp_id ?>"><?php echo $row->cmp_name; ?></option>
@@ -57,7 +57,7 @@
                     </select>
                   </div>
                 </div>
-              </div>  
+              </div>
             </div>
           </div>
           <table id="attendence_table" class="table table-bordered table-striped">

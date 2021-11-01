@@ -17,7 +17,7 @@
             <fieldset>
               <legend>Overtime Details</legend>
               <input type="hidden" id="response" value="<?php echo $this->session->flashdata('response');?>" />
-              <input type="hidden" name="overtime_id" value="<?php if(isset($records[0]->overtime_id)) echo $records[0]->overtime_id ?>">
+              <input type="hidden" name="ot_id" value="<?php if(isset($records[0]->ot_id)) echo $records[0]->ot_id ?>">
               <div class="form-group">
                 <label for="size_name" class="col-sm-4 control-label">Company</label>
 
@@ -25,7 +25,7 @@
                   <select name="company" id="company" class="form-control" required >
                     <option></option>
                     <?php
-                    foreach ($company as $row) 
+                    foreach ($company as $row)
                     {
                       ?>
                       <option value="<?php echo $row->cmp_id ?>" <?php if(isset($records[0]->company_id)) if ($records[0]->company_id == $row->cmp_id)  echo "selected" ?>><?php echo $row->cmp_name; ?></option>
@@ -45,7 +45,7 @@
               <div class="form-group">
                 <label for="size_name" class="col-sm-4 control-label">Amount<span style="color:red">*</span></label>
                 <div class="col-sm-5">
-                  <input type="text" name="amount" value="<?php if(isset($records[0]->amount)) echo $records[0]->amount ?>" class="form-control">
+                  <input type="text" name="amount" value="<?php if(isset($records[0]->ot_amount)) echo $records[0]->ot_amount ?>" class="form-control">
                 </div>
               </div>
               <!-- <div class="form-group">
