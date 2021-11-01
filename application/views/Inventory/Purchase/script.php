@@ -54,13 +54,13 @@ $(document).ready(function () {
             {
                 "data": "purchase_status",
                 "render": function(data, type, row) {
-                    if(data == 2)
-                    {
-                        return'<button type="button" class="btn btn-danger" style="width:90px;">Draft</button>';
-                    }
-                    else
-                    {
-                        return'<button type="button" class="btn btn-success" style="width:90px;">Saved</button>';
+
+                    if (data == 2) {
+                        return'<button type="button" style="width:90px;" class="btn btn-danger">DRAFT</button>';
+                    } else {
+                        return'<button type="button" style="width:90px;" class="btn btn-success">SAVED</button>';
+
+
                     }
                 }
             },
