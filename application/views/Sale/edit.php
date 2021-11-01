@@ -1,3 +1,9 @@
+<style>
+#invoice_number{
+pointer-events:none;
+background:grey;
+}
+</style>
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
