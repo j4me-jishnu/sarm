@@ -1,3 +1,9 @@
+<style>
+#invoice_number{
+pointer-events:none;
+background:grey;
+}
+</style>
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
@@ -272,20 +278,39 @@
               <div class="col-md-2">
                 <label>Net Total</label>
                 <input class="form-control" type="text" name="sum" id="sum" value="<?php if(isset($records[0]->net_total)) echo  $records[0]->net_total?>">
+                
+                    <!-- Dynamic Radio Button for Cash Or Bank -->
+                <!-- Added By Rajeev -->
+                <br>
+                <label for="chkYes">
+                    <input type="radio" id="chkYes" name="bank_or_cash" <?php echo($records[0]->bank_id == NULL) ? 'checked':'' ?> value="0" onclick="ShowHideDiv()"/>
+                    Cash
+                </label>
+                <label for="chkNo">
+                    <input type="radio" id="chkNo" name="bank_or_cash" <?php echo($records[0]->bank_id != NULL) ? 'checked':'' ?> value="1" onclick="ShowHideDiv()" />
+                    Bank
+                </label>
                 <label>Cash Payment</label>
-                <input class="form-control" type="text" name="cash" id="cash" value="<?php if(isset($records[0]->cash_paid)) echo  $records[0]->cash_paid?>" onkeyup="getNet();" required>
+                <input class="form-control" type="text" name="cash" id="cash" value="<?php echo($records[0]->bank_id == NULL) ? $records[0]->cash_paid:$records[0]->bank_paid ?>" onkeyup="getNet();" required> 
+                <div id="bank_select" style="display: none">
                 <label>Bank Payment</label>
-                <select class="form-control" name="bank_id">
-                  <option>select bank</option>
-                  <?php
-                  foreach ($bank as $bank) {
-                  ?>
-                    <option value="<?php echo $bank->bank_id ?>" <?php if ($bank->bank_id == $records[0]->bank_id) { echo 'selected';} ?>><?php echo $bank->bank_name ?></option>
-                  <?php
-                  }
-                  ?>
-                </select>
-                <input class="form-control" type="text" name="bank" id="bank" value="<?php if(isset($records[0]->bank_paid)) echo  $records[0]->bank_paid?>" onkeyup="getNet();" required>
+                  <select class="form-control" name="bank_id">
+                    <option>select bank</option>
+                    <?php
+                    foreach ($bank as $bank) {
+                        $selected = '';
+                      if($records[0]->bank_id == $bank->bank_id){
+                        $selected = 'selected';
+                      }
+                    ?>
+                      <option value="<?php echo $bank->bank_id ?>" <?php echo $selected ?>><?php echo $bank->bank_name ?></option>
+                    <?php
+                    }
+                    ?>
+                  </select>
+                </div>    
+                <br>
+
                 <label>Old Balance</label>
                 <input class="form-control" type="text" name="old_bal" id="old_bal" value="<?php if(isset($records[0]->old_balance)) echo  $records[0]->old_balance?>">
                 <label>Net Balance</label>
@@ -301,3 +326,9 @@
     </form>
   </section>
 </div>
+<script>
+  function ShowHideDiv() {
+        bank_select.style.display = chkYes.checked ? "block" : "none";
+        bank_select.style.display = chkNo.checked ? "block" : "none";
+    }
+</script>

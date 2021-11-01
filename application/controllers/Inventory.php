@@ -360,9 +360,10 @@ class Inventory extends MY_Controller {
 		$template['supplier'] = $this->General_model->getSuppliers();
 		$template['pcategory'] = $this->General_model->getPriceCategories();
 		$template['itemlist'] = $this->General_model->getItemlist();
+		$template['banklist'] = $this->General_model->getBankListTable();
 		$template['records'] = $this->Inventory_model->getPurchaseReportInvoice($invoice);
 		// $template['codes'] = $this->General_model->getCodes();
-		// print_r($template['records']);die();
+		// var_dump($template['records']);die();
 		$template['body'] = 'Inventory/Purchase/edit';
 		$template['script'] = 'Inventory/Purchase/editscript';
 		$this->load->view('template', $template);
