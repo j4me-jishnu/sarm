@@ -1,3 +1,9 @@
+<style>
+#invoice_number{
+pointer-events:none;
+background:grey;
+}
+</style>
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
@@ -112,7 +118,7 @@
               </div>
               <div class="col-md-4">
                   <label for="product_name" class="control-label">Refffernce Bill ID<span style="color:red">*</span></label>
-                  <input type="text" name="ref_bill_id" class="form-control" id="invoice_number" value="<?php if(isset($records[0]->reference_bill_id)) echo  $records[0]->reference_bill_id?>" required>
+                  <input type="text" name="ref_bill_id" class="form-control" id="reffernce bill" value="<?php if(isset($records[0]->reference_bill_id)) echo  $records[0]->reference_bill_id?>" required>
               </div>
             </div>
             <br>
@@ -271,6 +277,30 @@
                 <input class="form-control" type="text" name="frieght" id="frieght" value="<?php if(isset($records[0]->frieght)) echo  $records[0]->frieght?>" onkeyup="getNetTotal()" required>
                 <label>Packing Charge</label>
                 <input class="form-control" type="text" name="pack_chrg" id="pack_chrg" value="<?php if(isset($records[0]->packing_charge)) echo  $records[0]->packing_charge?>" onkeyup="getNetTotal()">
+                 <!-- Dynamic Radio Button for Cash Or Bank -->
+                <!-- Added By Rajeev -->
+                <label for="chkYes">
+                    <input type="radio" id="chkYes" name="bank_or_cash" <?php echo ($records[0]->bank_id == NULL) ? 'checked':'' ?> value="0" onclick="ShowHideDiv()" />
+                    Cash
+                </label>
+                <label for="chkNo">
+                    <input type="radio" id="chkNo" name="bank_or_cash" <?php echo ($records[0]->bank_id != NULL) ? 'checked':'' ?> value="1" onclick="ShowHideDiv()" />
+                    Bank
+                </label>
+                <div id="batext" style="display: none">
+                <label for="banks">Choose Bank:</label>
+                  <select name="bank_id" id="banks">
+                  <?php foreach($banklist as $banklists){ ?>
+                    <?php $selected = ''; 
+                      if($records[0]->bank_id == $banklists->bank_id){
+                          $selected = 'selected';
+                      }
+                    ?>
+                    <option value="<?php echo $banklists->bank_id ?>" <?php echo $selected; ?>><?php echo $banklists->bank_name ?></option>
+                    <?php } ?>
+                  </select>
+                </div>
+                <!-- end of radio button field -->
               </div>
               <div class="col-md-8"></div>
               <div class="col-md-2">
@@ -295,3 +325,10 @@
     </form>
   </section>
 </div>
+<script>
+  function ShowHideDiv() {
+        var chkYes = document.getElementById("chkYes");
+        var dvtext = document.getElementById("dvtext");
+        batext.style.display = chkNo.checked ? "block" : "none";
+    }
+</script>

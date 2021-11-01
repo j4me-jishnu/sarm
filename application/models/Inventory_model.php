@@ -78,6 +78,7 @@ Class Inventory_model extends CI_Model
 		$this->db->join('tbl_product','product_id = product_id_fk','left');
 		$this->db->join('tbl_purchasepayments','tbl_purchasepayments.invoice_number = tbl_purchase.invoice_number','left');
 		$this->db->join('tbl_supplier','tbl_supplier.supplier_id = tbl_purchase.supp_id','left');
+		$this->db->join('tbl_bank','tbl_bank.bank_id = tbl_purchase.bank_id','left');
 		$this->db->where('tbl_purchase.invoice_number',$invoice);
         return $query = $this->db->get()->result();
 	}
