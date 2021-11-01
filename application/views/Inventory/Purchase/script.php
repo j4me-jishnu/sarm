@@ -17,6 +17,7 @@ $(document).ready(function () {
         "serverSide": true,
         "bDestroy" : true,
         "searching":false,
+        "scrollX": true,
         "ajax": {
             "url": "<?php echo base_url();?>getPurchase/",
             "type": "POST",
@@ -31,15 +32,15 @@ $(document).ready(function () {
             $table.column(0).nodes().each(function(node,index,dt){
             $table.cell(node).data(index+1);
             });
-            $('td', row).eq(6).html('<center><a target ="_blank"  href="<?php echo base_url();?>purchase/invoice/'+data['auto_invoice']+'"><i class="fa  fa-file iconFontSize-medium" ></i></a></center>');
+            $('td', row).eq(7).html('<center><a target ="_blank"  href="<?php echo base_url();?>purchase/invoice/'+data['auto_invoice']+'"><i class="fa  fa-file iconFontSize-medium" ></i></a></center>');
             if(data['stockstatus']==0){
-                $('td', row).eq(7).html('<center><input type="hidden" class="invno" value="'+data['invoice_number']+'"/><a onclick="return masterStock('+data['invoice_number']+')"><i class="fa fa-check-square-o" ></i></a></center>');
-                $('td', row).eq(8).html('<center><a href="<?php echo base_url();?>Purchase/edit/'+data['invoice_number']+'"><i class="fa fa-edit iconFontSize-medium" ></i></a>&nbsp;&nbsp;&nbsp;<a onclick="return confirmDelete('+data['invoice_number']+')"><i class="fa fa-trash-o iconFontSize-medium" ></i></a>');
+                $('td', row).eq(8).html('<center><input type="hidden" class="invno" value="'+data['invoice_number']+'"/><a onclick="return masterStock('+data['invoice_number']+')"><i class="fa fa-check-square-o" ></i></a></center>');
+                $('td', row).eq(9).html('<center><a href="<?php echo base_url();?>Purchase/edit/'+data['invoice_number']+'"><i class="fa fa-edit iconFontSize-medium" ></i></a>&nbsp;&nbsp;&nbsp;<a onclick="return confirmDelete('+data['invoice_number']+')"><i class="fa fa-trash-o iconFontSize-medium" ></i></a>');
             }
 
             else{
-                $('td', row).eq(7).html('<center><i class="fa fa-cubes" ></i></center>');
-                $('td', row).eq(8).html('<center><a href="<?php echo base_url();?>Purchase/edit/'+data['invoice_number']+'" style="pointer-events: none"><i class="fa fa-edit iconFontSize-medium" ></i></a>&nbsp;&nbsp;&nbsp;<a onclick="return confirmDelete('+data['invoice_number']+')" style="pointer-events: none"><i class="fa fa-trash-o iconFontSize-medium" ></i></a>');
+                $('td', row).eq(8).html('<center><i class="fa fa-cubes" ></i></center>');
+                $('td', row).eq(9).html('<center><a href="<?php echo base_url();?>Purchase/edit/'+data['invoice_number']+'" style="pointer-events: none"><i class="fa fa-edit iconFontSize-medium" ></i></a>&nbsp;&nbsp;&nbsp;<a onclick="return confirmDelete('+data['invoice_number']+')" style="pointer-events: none"><i class="fa fa-trash-o iconFontSize-medium" ></i></a>');
             }
         },
 
@@ -50,6 +51,19 @@ $(document).ready(function () {
             { "data": "purchase_dat", "orderable": false },
             { "data": "prcount", "orderable": false },
             { "data": "net_total", "orderable": false },
+            {
+                "data": "purchase_status",
+                "render": function(data, type, row) {
+                    if(data == 2)
+                    {
+                        return'<button type="button" class="btn btn-danger" style="width:90px;">Draft</button>';
+                    }
+                    else
+                    {
+                        return'<button type="button" class="btn btn-success" style="width:90px;">Saved</button>';
+                    }
+                }
+            },
             { "data": "invoice_number", "orderable": false },
             { "data": "invoice_number", "orderable": false },
             { "data": "invoice_number", "orderable": false },
