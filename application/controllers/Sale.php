@@ -294,6 +294,7 @@ class Sale extends MY_Controller {
 		$template['itemlist'] = $this->General_model->getItemlist();
 		$template['bank'] = $this->Sale_model->GetBank();
 		$template['records'] = $this->Sale_model->getSaleReportInvoice($invoice);
+		// var_dump($template['records']);die;
 		$template['body'] = 'Sale/edit';
 		$template['script'] = 'Sale/editscript';
 		$this->load->view('template', $template);
