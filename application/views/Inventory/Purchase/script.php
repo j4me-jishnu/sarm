@@ -55,9 +55,9 @@ $(document).ready(function () {
                 "data": "purchase_status",
                 "render": function(data, type, row) {
                     if (data == 2) {
-                        return'<button type="button" class="btn btn-danger">DRAFT</button>';
+                        return'<button type="button" style="width:90px;" class="btn btn-danger">DRAFT</button>';
                     } else {
-                        return'<button type="button" class="btn btn-success">SAVED</button>';
+                        return'<button type="button" style="width:90px;" class="btn btn-success">SAVED</button>';
                     }
                 }
             },

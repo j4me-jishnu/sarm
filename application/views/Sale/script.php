@@ -328,6 +328,7 @@ $table = $('#sale_table').DataTable( {
         "serverSide": true,
         "bDestroy" : true,
         "searching":false,
+        "scrollX": true,
         "ajax": {
             "url": "<?php echo base_url();?>getSale/",
             "type": "POST",
@@ -358,9 +359,9 @@ $table = $('#sale_table').DataTable( {
                 "data": "sale_status",
                 "render": function(data, type, row) {
                     if (data == 2) {
-                        return'<button type="button" class="btn btn-danger">DRAFT</button>';
+                        return'<button type="button" style="width:90px;" class="btn btn-danger">DRAFT</button>';
                     } else {
-                        return'<button type="button" class="btn btn-success">SAVED</button>';
+                        return'<button type="button" style="width:90px;" class="btn btn-success">SAVED</button>';
                     }
                 }
             },
