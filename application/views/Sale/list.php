@@ -35,6 +35,7 @@
                 <th>SALE.DATE</th>
                 <th>ITEM.COUNT</th>
                 <th>TOTAL.PRICE</th>
+                <th>PROGRESS</th>
                 <th>VIEW/INVOICE</th>
                 <th>EDIT/DELETE</th>
               </tr>

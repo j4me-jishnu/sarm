@@ -279,6 +279,7 @@ class Sale extends MY_Controller {
   //       }
 			
 		$data = $this->Sale_model->getSaleReport($param);
+		// var_dump($data);die;
 		$json_data = json_encode($data);
     	echo $json_data;
 	}
