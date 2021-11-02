@@ -150,6 +150,7 @@ $route['Employee'] = 'Hrmodule/Employee';
 $route['getEmployee'] = 'Hrmodule/getEmployee';
 $route['addEmployee'] = 'Hrmodule/addEmployee';
 $route['Employee/delete'] = 'Hrmodule/deleteEmployee';
+$route['Employee/status'] = 'Hrmodule/changeEmployeeStatus';
 $route['Employee/edit/(:num)'] = 'Hrmodule/editEmployee/$1';
 
 $route['Attendance'] = 'Hrmodule/Attendance';

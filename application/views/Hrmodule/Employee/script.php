@@ -10,6 +10,7 @@
       autoclose: true,
       format: 'dd/mm/yyyy'
     });
+
   $table = $('#employee_table').DataTable( {
 		"processing": true,
         "serverSide": true,
@@ -28,7 +29,8 @@
 			$table.column(0).nodes().each(function(node,index,dt){
             $table.cell(node).data(index+1);
             });
-			$('td', row).eq(9).html('<center><a href="<?php echo base_url();?>Employee/edit/'+data['emp_id']+'"><i class="fa fa-edit iconFontSize-medium" ></i></a>&nbsp;&nbsp;&nbsp;<a onclick="return confirmDelete('+data['emp_id']+')"><i class="fa fa-trash-o iconFontSize-medium" ></i></a></center>');
+			$('td', row).eq(10).html('<center><a href="<?php echo base_url();?>Employee/edit/'+data['emp_id']+'"><i class="fa fa-edit iconFontSize-medium" ></i></a>&nbsp;&nbsp;&nbsp;<a onclick="return confirmDelete('+data['emp_id']+')"><i class="fa fa-trash-o iconFontSize-medium" ></i></a></center>');
+            
 		},
 
         "columns": [
@@ -50,6 +52,18 @@
                 }
             }, 
             { "data": "emp_salary", "orderable": false },
+            {
+            data: 'emp_act_status',
+            render: function (data, type, row) {
+                if(data == 0){
+                        return '<button type="button" class="btn btn-success" style="width:90px;">ACTIVE</button>';
+                    }
+                    else{
+                        return '<button type="button" class="btn btn-danger" style="width:90px;">INACTIVE</button>';    
+                    } 
+                }
+            }, 
+
             { "data": "emp_date", "orderable": false },
 			{ "data": "emp_id", "orderable": false }
         ]
@@ -72,4 +86,5 @@
 
     }
     }
+
 </script>

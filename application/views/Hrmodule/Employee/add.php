@@ -113,8 +113,19 @@
                       <input type="text"    class="form-control" name="old_balance2" id="old_balance2"  value="<?php if(isset($records->old_balance)) echo $records->old_balance ?>">
                     </div>
                   </div>
-                  
-                  
+
+                  <?php if(isset($records->emp_act_status)){ ?>
+                  <div class="form-group">
+                    <div class="col-sm-12 text-center">
+                    <label class="radio-inline">
+                      <input type="radio" name="act_status" <?php echo (@$records->emp_act_status==0) ? "checked":"" ?> value="0">Active
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" name="act_status" <?php echo (@$records->emp_act_status==1) ? "checked":"" ?> value="1">InActive
+                    </label>
+                    </div>
+                  </div>
+                  <?php } ?>
                   
                   <div class="form-group">
                     <center> <button type="submit" class="btn btn-primary">Save</button></center>

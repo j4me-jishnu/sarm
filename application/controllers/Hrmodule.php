@@ -68,6 +68,7 @@ class Hrmodule extends MY_Controller {
 						'debit_or_credit' => $this->input->post('debit_or_credit'),
 						'old_balance' => $this->input->post('old_balance2'),
 						'emp_date' => date("Y-m-d",strtotime($this->input->post('dob'))),
+						'emp_act_status' => $this->input->post('act_status'), 
 						'emp_status' => 1
 						);
 
@@ -123,6 +124,7 @@ class Hrmodule extends MY_Controller {
 	        redirect('/Employee/', 'refresh');
 		}
 	}
+	
 	public function deleteEmployee()
 	{
 		
