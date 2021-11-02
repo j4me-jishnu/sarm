@@ -20,7 +20,8 @@ Class Inventory_model extends CI_Model
         if ($purchase_date) {
         	$this->db->where('tbl_purchase.purchase_date', $purchase_date);
         }
-		$this->db->where("purchase_status >",0);
+
+		$this->db->where("purchase_status > ",0);
 		
         if ($param['start'] != 'false' and $param['length'] != 'false') {
             $this->db->limit($param['length'],$param['start']);

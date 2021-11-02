@@ -35,7 +35,8 @@ $table = $('#product_table').DataTable( {
         "serverSide": true,
         "bDestroy" : true,
         "ajax": {
-            "url": "<?php echo base_url();?>Overtime/get",
+            // "url": "<?php echo base_url();?>Overtime/get",
+            "url": "<?php echo base_url();?>Hrmodule/getOvertime",
             "type": "POST",
             "data" : function () {
 			}
@@ -44,27 +45,27 @@ $table = $('#product_table').DataTable( {
             $table.column(0).nodes().each(function(node,index,dt){
             $table.cell(node).data(index+1);
             });
-            $('td', row).eq(5).html('<a href="<?php echo base_url();?>Overtime/edit/'+data['overtime_id']+'"><i class="fa fa-edit iconFontSize-medium" ></i></a>&nbsp;&nbsp;&nbsp;<a onclick="return confirmDelete('+data['overtime_id']+')"><i class="fa fa-trash-o iconFontSize-medium" ></i></a>');
+            $('td', row).eq(5).html('<a href="<?php echo base_url();?>Overtime/edit/'+data['ot_id']+'"><i class="fa fa-edit iconFontSize-medium" ></i></a>&nbsp;&nbsp;&nbsp;<a onclick="return confirmDelete('+data['ot_id']+')"><i class="fa fa-trash-o iconFontSize-medium" ></i></a>');
         },
 
         "columns": [
-      		{ "data": "overtime_status", "orderable": false },
+      		{ "data": "ot_status", "orderable": false },
       		{ "data": "cmp_name", "orderable": false },
 			{ "data": "emp_name", "orderable": false },
 			// { "data": "adv_month", "orderable": false },
 			{ "data": "date", "orderable": false },
-			{ "data": "amount", "orderable": false },
-			{ "data": "overtime_id", "orderable": false }
-			
+			{ "data": "ot_amount", "orderable": false },
+			{ "data": "ot_id", "orderable": false }
+
         ]
-        
+
 });
-function confirmDelete(overtime_id){
+function confirmDelete(ot_id){
     var conf = confirm("Do you want to Delete ?");
     if(conf){
         $.ajax({
             url:"<?php echo base_url();?>Overtime/delete",
-            data:{overtime_id:overtime_id},
+            data:{ot_id:ot_id},
             method:"POST",
             datatype:"json",
             success:function(data){

@@ -110,8 +110,8 @@ $(document).on('change','#payroll_salmonth',function(){
             dataType : 'json',
             data:{emp_id:emp_id,month:month},
             success:function(data){
-                $('#overtime_amt').val(data);
-                $('#overtime_amt').focus();
+                $('#ot_amount').val(data);
+                $('#ot_amount').focus();
             }
     });
 });
@@ -119,11 +119,11 @@ $(document).on('click','.calc-salary',function(){
 	var basic = $('#payroll_basicpay').val();
 	var advance = $('#payroll_balance').val();
 	var days = $('#payroll_leaveamt').val();
-    var overtime_amt = $('#overtime_amt').val();
+    var ot_amount = $('#ot_amount').val();
 	var a = parseFloat(basic)/30;
 	var b = parseFloat(days) * parseFloat(a);
 
-	var total = parseFloat(basic) + parseFloat(overtime_amt) - parseFloat(advance) - parseFloat(b);
+	var total = parseFloat(basic) + parseFloat(ot_amount) - parseFloat(advance) - parseFloat(b);
 	// console.log(total);
 	$('#payroll_salary').val(total);
     $('#payroll_salary').focus();

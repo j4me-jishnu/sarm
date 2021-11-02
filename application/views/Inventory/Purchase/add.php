@@ -12,7 +12,7 @@
 
   <!-- Main content -->
   <section class="content">
-    <form method="post" id="purchase_form" action="<?php echo base_url(); ?>addPurchase"> 
+    <form method="post" id="purchase_form" action="<?php echo base_url(); ?>addPurchase">
     <div class="row">
       <div class="col-md-12">
         <div class="box">
@@ -45,7 +45,7 @@
                     <select name="company" id="company" class="form-control" required>
                       <option></option>
                       <?php
-                      foreach ($company as $row) 
+                      foreach ($company as $row)
                       {
                         ?>
                         <option value="<?php echo $row->cmp_id ?>" <?php if(isset($records->company_id)) if ($records->company_id == $row->cmp_id)  echo "selected" ?>><?php echo $row->cmp_name; ?></option>
@@ -90,9 +90,9 @@
                     }
                     ?>
                   </select>
-              <?php  
+              <?php
               }
-              ?>    
+              ?>
               </div>
               <div class="col-md-4">
                   <label for="product_name" class="control-label">Supplier Address <span style="color:red">*</span></label>
@@ -110,7 +110,7 @@
               </div>
               <div class="col-md-4">
                   <label for="product_name" class="control-label">Invoice Number<span style="color:red">*</span></label>
-                  <input type="text" name="invoice_number" class="form-control" id="invoice_number" value="<?php echo $invoice ?>" disabled>
+                  <input type="text" name="invoice_number" class="form-control" id="invoice_number" style="pointer-events:none;background:#e0ebeb;" value="<?php echo $invoice ?>">
               </div>
               <div class="col-md-4">
                 <label class="control-label">Price Category<span style="color:red">*</span></label>
@@ -119,13 +119,13 @@
                 foreach ($pcategory as $key) {
                 ?>
                 <option value="<?php echo $key->pcategory_id ?>"><?php echo $key->pcategory_name ?></option>
-                <?php 
+                <?php
                 }
                 ?>
                 </select>
               </div>
               <div class="col-md-4">
-                  <label for="product_name" class="control-label">Refffernce Bill ID<span style="color:red">*</span></label>
+                  <label for="product_name" class="control-label">Reference ID<span style="color:red">*</span></label>
                   <input type="text" name="ref_bill_id" class="form-control" id="invoice_number" required>
               </div>
             </div>
@@ -257,7 +257,7 @@
               <div class="col-md-8"></div>
               <div class="col-md-2">
                 <label>Total</label>
-                <input class="form-control" type="text" name="sum" id="sum">
+                <input class="form-control" type="text" name="sum" id="item_total" value="0">
                 <label>Cash Payment</label>
                 <input class="form-control" type="text" name="cash" id="cash" value="0" onkeyup="getNet();" required>
                 <label>Bank Payment</label>
@@ -293,8 +293,7 @@
     $('#draft').val(1);
     document.getElementById('purchase_form').submit();
   }
-
-  function ShowHideDiv() {
+  function ShowHideDiv(){
         var chkYes = document.getElementById("chkYes");
         var dvtext = document.getElementById("dvtext");
         batext.style.display = chkNo.checked ? "block" : "none";

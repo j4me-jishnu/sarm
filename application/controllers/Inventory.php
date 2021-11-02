@@ -54,6 +54,7 @@ class Inventory extends MY_Controller {
         }
 			
 		$data = $this->Inventory_model->getPurchaseReport($param);
+		// var_dump($data);
 		$json_data = json_encode($data);
     	echo $json_data;
 	}

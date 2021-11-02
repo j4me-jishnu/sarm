@@ -454,17 +454,18 @@ class Hrmodule extends MY_Controller {
 			$date = str_replace('/', '-', $this->input->post('date'));
 			$date = date("Y-m-d",strtotime($date));
 			$data = array(
-				'company_id_fk'=>$this->input->post('company'),
-				'emp_id_fk' =>$this->input->post('emp'),
-				'hours' =>0,
-				'amount' =>$this->input->post('amount'),
-				'date' =>$date,
-				'overtime_status'=>1
+				'ot_cmp_id_fk'=>$this->input->post('company'),
+				'ot_emp_id_fk' =>$this->input->post('emp'),
+				// 'hours' =>0,
+				'ot_amount' =>$this->input->post('amount'),
+				'ot_date' =>$date,
+				'ot_status'=>1,
+				'created_at'=>date('Y-m-d H:i:s'),
 			);
-			$overtime_id = $this->input->post('overtime_id');
-			if ($overtime_id)
+			$ot_id = $this->input->post('ot_id');
+			if ($ot_id)
 			{
-				$result = $this->General_model->update('tbl_overtime',$data,'overtime_id',$overtime_id);
+				$result = $this->General_model->update('tbl_overtime',$data,'ot_id',$ot_id);
 				$response_text = 'Overtime details  updated';
 			}
 			else
@@ -498,7 +499,7 @@ class Hrmodule extends MY_Controller {
 	{
 		if($this->session->userdata('user_type')=='C'){
 			$id = $this->session->userdata('id');
-			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			$template['color_change'] = $this->General_model->get_row('tbl_color','ot_cmp_id_fk',$id);
 			}
 		$template['records'] = $this->Hr_model->getOvertimeDetailss($id);
 		$template['company']=$this->General_model->getCompanies();
@@ -508,9 +509,9 @@ class Hrmodule extends MY_Controller {
 	}
 	public function deleteOvertime()
 	{
-		$overtime_id = $this->input->post('overtime_id');
-        $updateData = array('overtime_status' => 0);
-        $data = $this->General_model->update('tbl_overtime',$updateData,'overtime_id',$overtime_id);
+		$ot_id = $this->input->post('ot_id');
+        $updateData = array('ot_status' => 0);
+        $data = $this->General_model->update('tbl_overtime',$updateData,'ot_id',$ot_id);
         if($data) {
             $response['text'] = 'Deleted successfully';
             $response['type'] = 'success';
