@@ -1,3 +1,4 @@
+
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -34,9 +35,9 @@
                     <button type="button" class="btn btn-primary nohover">Date</button>
                   </div><!-- /btn-group -->
                   <div id="result" type="hidden"></div>
-                    <input type="text" required  placeholder="Date" class="form-control" id="date" name="att_date" value="<?php echo date('d/m/Y') ?>">
-                </div><!-- /input-group -->
+                    <input type="text" required  placeholder="Date" class="form-control" id="date" name="att_date" value="<?php echo date('d/m/Y') ?>">                </div><!-- /input-group -->
               </div>
+              
               <div class="form-group">
                 <div class="col-md-3">
                   <div class="input-group margin">
@@ -66,6 +67,7 @@
             <th>SlNo.</th>
             <th>Employee Name</th>
             <th>Attendance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Select all&nbsp;&nbsp;&nbsp;<input type="checkbox" id="pickbox_all"></th>
+            <th>Date</th>
           </tr>
           </thead>
           <tbody>
@@ -79,3 +81,30 @@
       </div>
     </section>
 </div>
+<!-- pop-up modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Add Dates</h4>
+        </div>
+        <div class="modal-body">
+      <form action="">
+        <div class="col-md-6">
+          <div class="input-group margin">
+            <div class="input-group-btn">
+                <button type="button" class="btn btn-primary nohover">Date</button>
+            </div>
+                <input type="text" required  placeholder="Date" class="form-control" id="date2" name="atte_dates[]" value="<?php echo date('d/m/Y') ?>">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+    </div>
+</div>
+<!-- end of pop-up modal -->

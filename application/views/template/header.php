@@ -125,7 +125,7 @@ desired effect
       <span class="logo-mini"><img src="<?php echo base_url();?>Images/logo1.jpg" style="max-width:40px"></span>
       <!-- logo for regular state and mobile devices -->
       <!-- <span class="logo-lg"><img src="<?php echo base_url();?>Images/logo.jpg" style="max-width:100px"></span> -->
-      <span style="font-weight: bold;font-size: 30px;">SARM</span>
+      <span style="font-weight: bold;font-size: 20px;"><?php echo  strtoupper( $this->session->userdata('user_name')); ?></span>
     </a>
 
     <!-- Header Navbar -->

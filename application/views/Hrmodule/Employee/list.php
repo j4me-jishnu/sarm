@@ -1,3 +1,4 @@
+
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -36,6 +37,7 @@
                   <th>EMAIL</th>
                   <th>TYPE</th>
                   <th>SALARY</th>
+                  <th>Status</th>
                   <th>DATE OF JOINING</th>
                   <th>EDIT/DELETE</th>
                 </tr>

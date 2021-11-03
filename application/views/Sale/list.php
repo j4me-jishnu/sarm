@@ -20,7 +20,7 @@
               <h3>Sale List</h3>  
             </div>
             <div class="col-sm-2">
-              <a href="<?php echo base_url();?>Sale/add" class="btn btn-sm common-btn"><i class="fa fa-plus-square"></i>Add New</a>
+              <a href="<?php echo base_url();?>Sale/add" class="btn btn-sm common-btn" target="_blank"><i class="fa fa-plus-square"></i>Add New</a>
             </div>
           </div>
           
