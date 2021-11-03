@@ -90,20 +90,29 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">Add Dates</h4>
         </div>
+      <form action="" name="form" method="POST">
         <div class="modal-body">
-      <form action="">
+        <div class="row">
         <div class="col-md-6">
-          <div class="input-group margin">
-            <div class="input-group-btn">
-                <button type="button" class="btn btn-primary nohover">Date</button>
-            </div>
-                <input type="text" required  placeholder="Date" class="form-control" id="date2" name="atte_dates[]" value="<?php echo date('d/m/Y') ?>">
+          <div class="form-group">
+            <label for="emp">Employee</label>
+            <input type="hidden" class="form-control" id="emp_ide" name="emp_id">
+            <input type="text" class="form-control" id="emp_name" name="emp_name" placeholder="Employee Name">
           </div>
         </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="emp">Select Dates</label>
+            <input type="text" required  placeholder="Date" class="form-control" id="date2" name="atte_dates[]" value="">
+          </div>
+        </div>
+        </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+          <button type="submit" id="submit_date" onclick="multi_submit()" class="btn btn-primary">Submit</button>
         </div>
       </div>
+      </form>
     </div>
     </div>
 </div>
