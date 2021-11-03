@@ -243,9 +243,9 @@ Class Hr_model extends CI_Model
     }
     public function getOvertimeofEmployee($emp_id,$month)
     {
-        $this->db->select('COALESCE(SUM(amount),0) AS over_amount');
+        $this->db->select('COALESCE(SUM(ot_amount),0) AS over_amount');
         $this->db->where('ot_emp_id_fk',$emp_id);
-        $this->db->where('Month(date)',$month);
+        $this->db->where('Month(ot_date)',$month);
         return $this->db->get('tbl_overtime')->row()->over_amount;
 
     }

@@ -57,6 +57,14 @@ class Hrmodule extends MY_Controller {
 		}
 		else {
 
+			if($this->input->post('act_status') != NULL){
+				$act_status = $this->input->post('act_status');
+			}
+			else
+			{
+				$act_status = 0;
+			}
+
 			$datas = array(
 						'emp_name' => $this->input->post('employname'),
 						'company_id'=> $this->input->post('company'),
@@ -68,7 +76,7 @@ class Hrmodule extends MY_Controller {
 						'debit_or_credit' => $this->input->post('debit_or_credit'),
 						'old_balance' => $this->input->post('old_balance2'),
 						'emp_date' => date("Y-m-d",strtotime($this->input->post('dob'))),
-						'emp_act_status' => $this->input->post('act_status'), 
+						'emp_act_status' => $act_status, 
 						'emp_status' => 1
 						);
 
