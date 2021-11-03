@@ -112,6 +112,7 @@ $(document).on('change','#payroll_salmonth',function(){
             success:function(data){
                 $('#ot_amount').val(data);
                 $('#ot_amount').focus();
+                console.log(data);
             }
     });
 });
