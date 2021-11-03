@@ -29,7 +29,13 @@ $table = $('#attendence_table').DataTable( {
     { "data": "emp_status", "orderable": false },
     { "data": "emp_name", "orderable": false },
     { "data": "emp_id", "orderable": false },
-    { "defaultContent":'<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Dates</button>'}
+    {
+            "data": null,
+            render:function(data, type, row)
+            {
+              return '<button class="btn btn-primary" id="multi_date" data-name="'+data.emp_name+'" data-id="'+data.emp_id+'" data-toggle="modal" onClick="multidat(this)" data-target="#myModal">Add Dates</button>';
+            },
+        }
   ]
 
 } );
@@ -49,17 +55,10 @@ $("#date").datepicker({
   todayHighlight: true
 })
 
-var multi_attendance = [];
-$("date2").each(function(index) { multi_attendance.push($(this).val()); });
-console.log(multi_attendance);
-
-
-
 function submit(){
   ckbox = document.getElementsByClassName("chkdata");
   var option = $('#option').val();
   var att_date = $('#date').val();
-  var mult_date = $('#date2').val();
   for(var i=0;i<ckbox.length;i++){
     element = ckbox[i];
     if(element.checked){
@@ -104,4 +103,34 @@ $(document).on('change','#company',function(){
   $table.ajax.reload();
 });
 
+function multidat(employee_details){
+  var employee_id = employee_details.getAttribute('data-id');
+  var employee_name = employee_details.getAttribute('data-name');
+  $('#emp_name').val(employee_name);
+  $('#emp_ide').val(employee_id);
+};
+
+function multi_submit(){
+  var id = $('#emp_ide').val();
+  var date = $('#date2').val();
+  var array = date.split(',');
+  for(var i=0;i<array.length;i++){
+    var dates = array[i];
+      if(id!='' && date!='')
+      {
+        $.ajax({
+          url:"<?php echo base_url();?>Attendence/multi_attend_reg",
+          type: 'POST',
+          data:{id:id,dates:dates},
+          dataType: 'json',
+          success:
+          function(data){
+            location.reload();
+          }
+        });
+
+      }
+  }
+
+}
 </script>

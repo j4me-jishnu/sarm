@@ -157,6 +157,7 @@ $route['Attendance'] = 'Hrmodule/Attendance';
 $route['Attendence/get'] = 'Hrmodule/getAttendence';
 $route['Attendence/attend_reg'] = 'Hrmodule/attend_reg';
 $route['Attendence/absent_reg'] = 'Hrmodule/absent_reg';
+$route['Attendence/multi_attend_reg'] = 'Hrmodule/multi_attend_reg';
 
 $route['PayAdvance'] = 'Hrmodule/PayAdvance';
 $route['PayAdvance/get'] = 'Hrmodule/getpayAdvance';

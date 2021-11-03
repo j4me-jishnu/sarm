@@ -174,6 +174,7 @@ class Hrmodule extends MY_Controller {
 			$id = $this->session->userdata('id');
 			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
 			}
+		$template['company']=$this->General_model->getCompanies();
 		$template['body'] = 'Hrmodule/Attendance/list';
 		$template['script'] = 'Hrmodule/Attendance/script';
 		$this->load->view('template', $template);
@@ -257,6 +258,35 @@ class Hrmodule extends MY_Controller {
         echo json_encode($result);
 	}
 
+	public function multi_attend_reg()
+	{
+		$emp_id = $this->input->post('id');
+		$at_date = str_replace('/', '-', $this->input->post('dates'));
+		$at_date = date("Y-m-d",strtotime($at_date));
+		$date = $at_date;
+		if($this->Hr_model->check_attendance($emp_id,$date) == 0)
+		{
+			$data = array(
+						'att_date'=> $at_date,
+						'emp_id'=> $emp_id,
+						'att_status'=> 1
+						);
+			$result = $this->General_model->add('tbl_empattendance',$data);
+			$response_text = 'Attendance Registered successfully';
+
+			if($result){
+	            $this->session->set_flashdata('response', "{&quot;text&quot;:&quot;$response_text&quot;,&quot;layout&quot;:&quot;topRight&quot;,&quot;type&quot;:&quot;success&quot;}");
+			}
+			else{
+            	$this->session->set_flashdata('response', '{&quot;text&quot;:&quot;Something went wrong,please try again later&quot;,&quot;layout&quot;:&quot;bottomRight&quot;,&quot;type&quot;:&quot;error&quot;}');
+			}
+		}
+		else
+		{
+			$this->session->set_flashdata('response', '{&quot;text&quot;:&quot;Attendence already exist,&quot;,&quot;layout&quot;:&quot;bottomRight&quot;,&quot;type&quot;:&quot;error&quot;}');
+		}
+        echo json_encode($result);
+	}
 	//PayAdvance
 	public function PayAdvance()
 	{
