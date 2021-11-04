@@ -110,7 +110,7 @@
               </div>
               <div class="col-md-4">
                   <label for="product_name" class="control-label">Invoice Number<span style="color:red">*</span></label>
-                  <input type="text" name="invoice_number" class="form-control" id="invoice_number" style="pointer-events:none;background:#e0ebeb;" value="<?php echo $invoice ?>">
+                  <input type="text" name="invoice_number" class="form-control" id="invoice_number"  value="<?php echo $invoice ?>">
               </div>
               <div class="col-md-4">
                 <label class="control-label">Price Category<span style="color:red">*</span></label>
@@ -128,6 +128,12 @@
                   <label for="product_name" class="control-label">Reference ID<span style="color:red">*</span></label>
                   <input type="text" name="ref_bill_id" class="form-control" id="invoice_number" required>
               </div>
+               <!-- checkbox to toggle popup modal -->
+              <div class="col-md-4" style="margin-top:30px;">
+                  <input type="checkbox" class="form-check-input" id="remark" name="remark_chk" value="1" data-toggle="modal" data-target="#myModal">
+                  <label for="remark" class="form-check-label">Remark</label>
+              </div>
+                <!-- end of reamrk check box -->
             </div>
             <br>
             <!-- <div class="row">
@@ -284,9 +290,37 @@
           </div>
         </div>
       </div>
+
+    <!-- Popup Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+        
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Add Remark</h4>
+            </div>
+            <div class="modal-body">
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1">Remarks</label>
+              <textarea class="form-control" name="remarks_text" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary" data-dismiss="modal">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- End of Popup Modal -->
+
+
     </form>
   </section>
 </div>
+
+
 <script>
   function saveAsdraft()
   {
@@ -298,4 +332,5 @@
         var dvtext = document.getElementById("dvtext");
         batext.style.display = chkNo.checked ? "block" : "none";
     }
+    
 </script>
