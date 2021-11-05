@@ -30,7 +30,7 @@
               <thead>
                 <tr>
                   <th>SlNO.</th>
-                  <th>SHOP NAME</th>
+                  <th>COMPANY NAME</th>
                   <th>NAME</th>
                   <th>ADDRESS</th>
                   <th>PHONE</th>
