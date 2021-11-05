@@ -20,14 +20,9 @@
             <div class="col-sm-6">
               <h3>Employee Piece Rate List</h3>  
             </div>
-            <div class="col-sm-4" style="float:right">
-              <div class="row">
-                <div class="col-md-4">
-                  <a href="<?php echo base_url();?>addPieceEmployee" class="btn btn-sm common-btn"><i class="fa fa-plus-square"></i>Add Piece Employee</a>
-                </div>
-              </div>
-          </div>
-              
+            <div class="col-sm-2" style="float: right; margin-top:20px; margin-right:30px;">
+              <a href="<?php echo base_url();?>addPieceEmployee" class="btn btn-sm common-btn"><i class="fa fa-plus-square"></i>Add Piece Rate Employee</a>
+            </div>  
           </div>
         </div>
         <div class="box-body">
@@ -42,7 +37,7 @@
                   <th>EMAIL</th>
                   <th>REMARK</th>
                   <th>RATE</th>
-                  <th>Status</th>
+                  <th>STATUS</th>
                   <th>EDIT/DELETE</th>
                 </tr>
               </thead>

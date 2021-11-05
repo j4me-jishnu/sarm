@@ -588,9 +588,9 @@ class Hrmodule extends MY_Controller {
         $param['order'] = (isset($_REQUEST['order'][0]['column']))?$_REQUEST['order'][0]['column']:'';
         $param['dir'] = (isset($_REQUEST['order'][0]['dir']))?$_REQUEST['order'][0]['dir']:'';
         $param['searchValue'] =(isset($_REQUEST['search']['value']))?$_REQUEST['search']['value']:'';
-		$data = 'hello';
-		// $data = $this->Hr_model->getPieceEmployee($param);
+		$data = $this->Hr_model->getPieceEmployee($param);
 		$json_data = json_encode($data);
+		echo $json_data;
 	}
 
 	public function addPieceEmployee()
@@ -628,12 +628,12 @@ class Hrmodule extends MY_Controller {
 						'emp_pr_piece_rate' => $this->input->post('employ_pr_rate'),
 						'emp_pr_old_bal' => $this->input->post('old_pr_balance2'),
 						'emp_pr_act_status' => $emp_pr_act_status,
-						'emp_pr_status' => 0
+						'emp_pr_status' => 1
 						);
 
-			$emp_id = $this->input->post('emp_id');
-			if($emp_id){
-				$result = $this->General_model->update('tbl_emp_piece_rate',$datas,'emp_pr_id ',$emp_id);
+			$emp_pr_id = $this->input->post('emp_pr_id');
+			if($emp_pr_id){
+				$result = $this->General_model->update('tbl_emp_piece_rate',$datas,'emp_pr_id ',$emp_pr_id);
 				$response_text = 'Employee Piece Rate details updated';
 			}
 			else{
@@ -646,7 +646,39 @@ class Hrmodule extends MY_Controller {
 			else{
 	            $this->session->set_flashdata('response', '{&quot;text&quot;:&quot;Something went wrong,please try again later&quot;,&quot;layout&quot;:&quot;bottomRight&quot;,&quot;type&quot;:&quot;error&quot;}');
 			}
-	        redirect('/Employee/', 'refresh');
+	        redirect('/PieceRateEmployee/', 'refresh');
 		}
+	}
+
+	public function editPieceRateEmployee($id=2)
+	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','ot_cmp_id_fk',$id);
+			}
+		$template['records'] = $this->Hr_model->getPieceEmployees($id);
+		// var_dump($template['records']);die;
+		$template['company']=$this->General_model->getCompanies();
+		$template['body'] = 'Hrmodule/PieceEmployee/add';
+		$template['script'] = 'Hrmodule/PieceEmployee/script';
+		$this->load->view('template', $template);
+	}
+
+	public function deletePeiceRateEmployee()
+	{
+		$emp_pr_id = $this->input->post('emp_pr_id');
+        $updateData = array('emp_pr_status' => 0);
+        $data = $this->General_model->update('tbl_emp_piece_rate',$updateData,'emp_pr_id',$emp_pr_id);
+        if($data) {
+            $response['text'] = 'Deleted successfully';
+            $response['type'] = 'success';
+        }
+        else{
+            $response['text'] = 'Something went wrong';
+            $response['type'] = 'error';
+        }
+        $response['layout'] = 'topRight';
+        $data_json = json_encode($response);
+        echo $data_json;
 	}
 }
