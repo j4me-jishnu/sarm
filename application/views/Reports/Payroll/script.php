@@ -36,31 +36,31 @@ var response = $("#response").val();
 		{
 			   extend: 'copy',
 			   exportOptions: {
-				   columns: [ 0,1,2,3,4 ]
+				   columns: [ 0,1,2,3,4,5,6,7,8 ]
 			   }
 		   },
 		   {
 			   extend: 'excel',
 			   exportOptions: {
-				   columns: [ 0,1,2,3,4 ]
+				   columns: [ 0,1,2,3,4,5,6,7,8 ]
 			   }
 		   },
 		   {
 			   extend: 'pdf',
 			   exportOptions: {
-				   columns: [ 0,1,2,3,4 ]
+				   columns: [ 0,1,2,3,4,5,6,7,8 ]
 			   }
 		   },
 		   {
 			   extend: 'print',
 			   exportOptions: {
-				   columns: [ 0,1,2,3,4 ]
+				   columns: [ 0,1,2,3,4,5,6,7,8 ]
 			   }
 		   },
 		   {
 			   extend: 'csv',
 			   exportOptions: {
-				   columns: [ 0,1,2,3,4 ]
+				   columns: [ 0,1,2,3,4,5,6,7,8 ]
 			   }
 		   },
 		],
