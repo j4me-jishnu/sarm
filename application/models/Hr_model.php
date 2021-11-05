@@ -288,4 +288,15 @@ Class Hr_model extends CI_Model
         $query = $this->db->get();
         return $query->num_rows();
     }
+
+    public function getPieceEmployees($id)
+    {
+       $this->db->select('*');
+        $this->db->from('tbl_emp_piece_rate');
+        $this->db->join('tbl_companyinfo','tbl_companyinfo.cmp_id = tbl_emp_piece_rate.emp_pr_cmp_id');
+        $this->db->where('emp_pr_id',$id);
+        $this->db->where("emp_pr_status",1);
+        $query = $this->db->get();
+        return $query->result();
+    }
 }
