@@ -153,6 +153,10 @@ $route['Employee/delete'] = 'Hrmodule/deleteEmployee';
 $route['Employee/status'] = 'Hrmodule/changeEmployeeStatus';
 $route['Employee/edit/(:num)'] = 'Hrmodule/editEmployee/$1';
 
+$route['PieceRateEmployee'] = 'Hrmodule/PieceRateEmployee';
+$route['getPieceEmployee'] = 'Hrmodule/getPieceEmployee';
+$route['addPieceEmployee'] = 'Hrmodule/addPieceEmployee';
+
 $route['Attendance'] = 'Hrmodule/Attendance';
 $route['Attendence/get'] = 'Hrmodule/getAttendence';
 $route['Attendence/attend_reg'] = 'Hrmodule/attend_reg';

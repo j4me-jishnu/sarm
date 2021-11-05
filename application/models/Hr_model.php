@@ -250,4 +250,42 @@ Class Hr_model extends CI_Model
 
     }
 
+    public function getPieceEmployee($param)
+    {
+        $searchValue =($param['searchValue'])?$param['searchValue']:'';
+        if($searchValue){
+            $this->db->like('emp_pr_name', $searchValue);
+        }
+
+        $this->db->where("emp_pr_status",1);
+
+        if ($param['start'] != 'false' and $param['length'] != 'false') {
+            $this->db->limit($param['length'],$param['start']);
+        }
+        $this->db->select('*');
+        $this->db->from('tbl_emp_piece_rate');
+        $this->db->join('tbl_companyinfo','tbl_companyinfo.cmp_id = tbl_emp_piece_rate.emp_pr_cmp_id');
+        $this->db->order_by('emp_pr_id','DESC');
+        $query = $this->db->get();
+
+        $data['data'] = $query->result();
+        $data['recordsTotal'] = $this->getPieceEmployeeCount($param);
+        $data['recordsFiltered'] = $this->getPieceEmployeeCount($param);
+        return $data;
+    }
+
+    public function getPieceEmployeeCount($param)
+    {
+        $searchValue =($param['searchValue'])?$param['searchValue']:'';
+        if($searchValue){
+            $this->db->like('emp_pr_name', $searchValue);
+        }
+        $this->db->where("emp_pr_status",1);
+        $this->db->select('*');
+        $this->db->from('tbl_emp_piece_rate');
+        $this->db->join('tbl_companyinfo','tbl_companyinfo.cmp_id = tbl_emp_piece_rate.emp_pr_cmp_id');
+        $this->db->order_by('emp_pr_id','DESC');
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
 }

@@ -113,6 +113,13 @@
                   </div>
               </div>
               <div class="form-group">
+                  <label for="size_name" class="col-sm-4 control-label">Salary Mode </label>
+
+                  <div class="col-sm-5">
+                    <input type="text" readonly id="salary_mode" name="payroll_salary" class="form-control" >
+                  </div>
+              </div>
+              <div class="form-group">
                         <label for="size_name" class="col-sm-4 control-label">Salary Date </label>
 
                         <div class="col-sm-5">

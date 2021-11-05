@@ -567,4 +567,86 @@ class Hrmodule extends MY_Controller {
 		$data=$this->Hr_model->getOvertimeofEmployee($this->input->post('emp_id'),$this->input->post('month'));
         echo json_encode($data);
 	}
+
+
+	public function PieceRateEmployee()
+	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
+		$template['body'] = 'Hrmodule/PieceEmployee/list';
+		$template['script'] = 'Hrmodule/PieceEmployee/script';
+		$this->load->view('template', $template);
+	}
+
+	public function getPieceEmployee()
+	{
+		$param['draw'] = (isset($_REQUEST['draw']))?$_REQUEST['draw']:'';
+        $param['length'] =(isset($_REQUEST['length']))?$_REQUEST['length']:'10';
+        $param['start'] = (isset($_REQUEST['start']))?$_REQUEST['start']:'0';
+        $param['order'] = (isset($_REQUEST['order'][0]['column']))?$_REQUEST['order'][0]['column']:'';
+        $param['dir'] = (isset($_REQUEST['order'][0]['dir']))?$_REQUEST['order'][0]['dir']:'';
+        $param['searchValue'] =(isset($_REQUEST['search']['value']))?$_REQUEST['search']['value']:'';
+		$data = 'hello';
+		// $data = $this->Hr_model->getPieceEmployee($param);
+		$json_data = json_encode($data);
+	}
+
+	public function addPieceEmployee()
+	{
+		$this->form_validation->set_rules('employ_pr_name', 'Name', 'required');
+		$this->form_validation->set_rules('employ_pr_rate','Piece Rate','required');
+		if ($this->form_validation->run() == FALSE)
+		{
+			if($this->session->userdata('user_type')=='C'){
+				$id = $this->session->userdata('id');
+				$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+				}
+			$template['company']=$this->General_model->getCompanies();
+			$template['body'] = 'Hrmodule/PieceEmployee/add';
+			$template['script'] = 'Hrmodule/PieceEmployee/script';
+			$this->load->view('template', $template);
+		}
+		else {
+
+			if($this->input->post('emp_pr_act_status') != NULL){
+				$emp_pr_act_status = $this->input->post('emp_pr_act_status');
+			}
+			else
+			{
+				$emp_pr_act_status = 0;
+			}
+
+			$datas = array(
+						'emp_pr_name' => $this->input->post('employ_pr_name'),
+						'emp_pr_cmp_id'=> $this->input->post('company_pr_id'),
+						'emp_pr_address' => $this->input->post('employ_pr_address'),
+						'emp_pr_phone' => $this->input->post('employ_pr_phone'),
+						'emp_pr_email' => $this->input->post('employ_pr_email'),
+						'emp_pr_material_ty' => $this->input->post('employ_pr_remark'),
+						'emp_pr_piece_rate' => $this->input->post('employ_pr_rate'),
+						'emp_pr_old_bal' => $this->input->post('old_pr_balance2'),
+						'emp_pr_act_status' => $emp_pr_act_status,
+						'emp_pr_status' => 0
+						);
+
+			$emp_id = $this->input->post('emp_id');
+			if($emp_id){
+				$result = $this->General_model->update('tbl_emp_piece_rate',$datas,'emp_pr_id ',$emp_id);
+				$response_text = 'Employee Piece Rate details updated';
+			}
+			else{
+				$result = $this->General_model->add('tbl_emp_piece_rate',$datas);
+				$response_text = 'Employee Piece Rate details Added';
+			}
+			if($result){
+	            $this->session->set_flashdata('response', "{&quot;text&quot;:&quot;$response_text&quot;,&quot;layout&quot;:&quot;topRight&quot;,&quot;type&quot;:&quot;success&quot;}");
+			}
+			else{
+	            $this->session->set_flashdata('response', '{&quot;text&quot;:&quot;Something went wrong,please try again later&quot;,&quot;layout&quot;:&quot;bottomRight&quot;,&quot;type&quot;:&quot;error&quot;}');
+			}
+	        redirect('/Employee/', 'refresh');
+		}
+	}
 }

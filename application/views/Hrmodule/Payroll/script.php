@@ -48,7 +48,7 @@ $(document).on('change','#company',function(){
                 var html = '<option disabled="disabled" value="0" selected="selected">select</option>';
                 var i;
                 for(i=0; i<data.length; i++){
-                    html += '<option value='+data[i].emp_id+'>'+data[i].emp_name+'</option>';
+                    html += '<option value='+data[i].emp_id+' data-mode='+data[i].emp_mode+'>'+data[i].emp_name+'</option>';
                 }
                 $('#emp').html(html);
                 $('#emp').focus();
@@ -112,10 +112,14 @@ $(document).on('change','#payroll_salmonth',function(){
             success:function(data){
                 $('#ot_amount').val(data);
                 $('#ot_amount').focus();
-                console.log(data);
+                
             }
     });
 });
+
+
+
+
 $(document).on('click','.calc-salary',function(){
 	var basic = $('#payroll_basicpay').val();
 	var advance = $('#payroll_balance').val();

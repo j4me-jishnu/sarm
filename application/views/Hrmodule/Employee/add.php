@@ -41,6 +41,10 @@
                       </select>
                     </div>
                   </div>
+                  <!-- <div class="form-group" style="text-align:center">
+                    <input type="checkbox" class="form-check-input" id="Piece_rate" data-toggle="modal" data-target="#myModal">
+                    <label class="form-check-label" for="Piece_rate" >is Piece Rate Employee</label>
+                  </div> -->
                   <div class="form-group">
                     <label for="size_name" class="col-sm-4 control-label">Employee Name <span style="color:red">*</span></label>
 
@@ -137,5 +141,46 @@
         </div>
       </div>
     </section>
+
+      <!-- Modal -->
+  <!-- <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog"> -->
+    
+      <!-- Modal content-->
+      <!-- <div class="modal-content" style="border-radius: 5px !important;">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Piece Rate Employee Details</h4>
+        </div>
+        <div class="modal-body" style="margin-left: 30px;">
+        <form>
+          <div class="form-group col-md-12">
+            <label for="emp_name_1">Employee Name</label>
+            <input type="text" class="form-control" id="emp_name_1" >
+          </div>
+          <div class="form-group col-md-12">
+            <label for="emp_add_1">Address</label>
+            <textarea class="form-control" id="emp_add_1" rows="3"></textarea>
+          </div>
+          <div class="form-group col-md-12">
+          <label for="emp_phone_1">Phone</label>
+            <input type="text" class="form-control" id="emp_phone_1">
+          </div>
+          <div class="form-group col-md-12">
+          <label for="emp_email_1">Email</label>
+            <input type="text" class="form-control" id="emp_email_1">
+          </div>
+          <div class="form-group col-md-12">
+          <label for="emp_salary_1">Basic Salary</label>
+            <input type="text" class="form-control" id="emp_salary_1">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        </div>
+      </div> -->
+      
+    <!-- </div>
+  </div> -->
+
   </form>
 </div>
