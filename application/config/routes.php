@@ -297,3 +297,7 @@ $route['Trialbalance/get'] = 'Accountsreports/getTrialbalance';
 $route['Balancesheet'] = 'Accountsreports/Balancesheet';
 $route['Balancesheet/get'] = 'Accountsreports/getBalancesheet';
 $route['addProfit'] = 'Accountsreports/addProfit';
+
+//Payroll Report
+$route['payrollReport'] = 'Reports/payrollReport';
+$route['getPayrollReport'] = 'Reports/getPayrollReport';
