@@ -113,7 +113,15 @@ class Inventory extends MY_Controller {
 			else{
 				$bank_id = NULL;
 			}
-
+			// Remark Check Box
+			$remark_checkbox = $this->input->post('remark_chk');
+			if($remark_checkbox == 1){
+				$remark_text = $this->input->post('remarks_text');
+			}
+			else
+			{
+				$remark_text = "";
+			}
 			$purchase_quantity = $this->input->post('quantity');
 			$purchase_price = $this->input->post('price');
 			$discount_price = $this->input->post('discount'); 
@@ -158,6 +166,7 @@ class Inventory extends MY_Controller {
 					  'discount_price' =>$discount_price[$i],
 					  'discount_type' =>$discount_type,
 					  'total_price' =>$total_price[$i],
+					  'purchase_remarks' =>$remark_text,
 					  'purchase_date' =>$purchase_date,
 					  'stockstatus' =>0,
 					  'purchase_status' =>1

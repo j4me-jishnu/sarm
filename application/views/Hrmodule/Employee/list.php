@@ -17,12 +17,20 @@
       <div class="box">
         <div class="box-header">
           <div class="row">
-            <div class="col-sm-10">
+            <div class="col-sm-6">
               <h3>Employee List</h3>  
             </div>
-            <div class="col-sm-2">
-              <a href="<?php echo base_url();?>addEmployee" class="btn btn-sm common-btn"><i class="fa fa-plus-square"></i>Add New</a>
-            </div>
+            <div class="col-sm-4" style="float:right">
+              <div class="row">
+                <div class="col-md-4">
+                  <a href="<?php echo base_url();?>addEmployee" class="btn btn-sm common-btn"><i class="fa fa-plus-square"></i> Add Employee</a>
+                </div>
+                <!-- <div class="col-md-4">
+                  <a href="<?php echo base_url();?>PieceRateEmployee" class="btn btn-sm common-btn"><i class="fa fa-user"></i> Piece Rate Employee</a>
+                </div> -->
+              </div>
+          </div>
+              
           </div>
         </div>
         <div class="box-body">
