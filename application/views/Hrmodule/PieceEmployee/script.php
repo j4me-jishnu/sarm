@@ -46,10 +46,10 @@
             data: 'emp_pr_act_status',
             render: function (data, type, row) {
                 if(data == 0){
-                        return '<button type="button" class="btn btn-success" style="width:90px;">ACTIVE</button>';
+                        return '<i class="fa fa-toggle-on" style="color:green;font-size:30px;"></i>';
                     }
                     else{
-                        return '<button type="button" class="btn btn-danger" style="width:90px;">INACTIVE</button>';    
+                        return '<i class="fa fa-toggle-off" style="color:red;font-size:30px;"></i>';    
                     } 
                 }
             }, 
