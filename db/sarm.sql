@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Oct 28, 2021 at 12:30 PM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 7.4.24
+-- Host: 127.0.0.1:3306
+-- Generation Time: Nov 05, 2021 at 07:09 AM
+-- Server version: 10.4.13-MariaDB
+-- PHP Version: 7.4.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -27,15 +27,17 @@ SET time_zone = "+00:00";
 -- Table structure for table `tbl_advance`
 --
 
-CREATE TABLE `tbl_advance` (
-  `adv_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tbl_advance`;
+CREATE TABLE IF NOT EXISTS `tbl_advance` (
+  `adv_id` int(11) NOT NULL AUTO_INCREMENT,
   `company_id` int(11) NOT NULL,
   `emp_id` varchar(50) NOT NULL,
   `adv_month` int(11) NOT NULL,
   `adv_amount` int(11) NOT NULL,
   `adv_date` date NOT NULL,
-  `adv_status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `adv_status` int(11) NOT NULL,
+  PRIMARY KEY (`adv_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_advance`
@@ -50,12 +52,14 @@ INSERT INTO `tbl_advance` (`adv_id`, `company_id`, `emp_id`, `adv_month`, `adv_a
 -- Table structure for table `tbl_area`
 --
 
-CREATE TABLE `tbl_area` (
-  `area_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tbl_area`;
+CREATE TABLE IF NOT EXISTS `tbl_area` (
+  `area_id` int(11) NOT NULL AUTO_INCREMENT,
   `area_name` varchar(50) NOT NULL,
   `area_status` int(11) NOT NULL,
-  `area_description` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `area_description` varchar(50) NOT NULL,
+  PRIMARY KEY (`area_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_area`
@@ -72,8 +76,9 @@ INSERT INTO `tbl_area` (`area_id`, `area_name`, `area_status`, `area_description
 -- Table structure for table `tbl_bank`
 --
 
-CREATE TABLE `tbl_bank` (
-  `bank_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tbl_bank`;
+CREATE TABLE IF NOT EXISTS `tbl_bank` (
+  `bank_id` int(11) NOT NULL AUTO_INCREMENT,
   `bank_name` varchar(50) DEFAULT NULL,
   `bank_accno` varchar(50) DEFAULT NULL,
   `bank_branch` varchar(50) DEFAULT NULL,
@@ -82,8 +87,9 @@ CREATE TABLE `tbl_bank` (
   `bank_status` int(11) DEFAULT NULL,
   `old_balance` int(11) NOT NULL,
   `debit_credit` int(11) DEFAULT NULL,
-  `bank_debit_credit` tinyint(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `bank_debit_credit` tinyint(10) NOT NULL,
+  PRIMARY KEY (`bank_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_bank`
@@ -92,10 +98,10 @@ CREATE TABLE `tbl_bank` (
 INSERT INTO `tbl_bank` (`bank_id`, `bank_name`, `bank_accno`, `bank_branch`, `bank_ifsc`, `bank_cmp`, `bank_status`, `old_balance`, `debit_credit`, `bank_debit_credit`) VALUES
 (2, 'A', '213', 'DSF', '1231', 5, 0, 0, 0, 0),
 (3, 'm', '12121332', 'DSFsfasfsdgsddsgsdgdsg', '12314665654541321', 5, 0, 0, 0, 0),
-(4, 'Canara Bank', '123', 'DSF', '123', 5, 1, 0, 1, 0),
-(5, 'State Bank of India', '6546873123', 'waedasds', 'ADCV14412', 5, 1, 0, NULL, 1),
+(4, 'A', '123', 'DSF', '123', 5, 1, 0, 1, 0),
+(5, 'dsadas', '6546873123', 'waedasds', 'ADCV14412', 5, 1, 0, NULL, 1),
 (7, 'ING Vysya Bank2323', '7894561230', 'Edapally', 'AQWL4758PQ', 6, 0, 0, NULL, 1),
-(8, 'FEDERAL BANK', '00001235645569887', 'Malappuram', 'FDRL001241', 6, 1, 0, NULL, 0);
+(8, 'Bandhan Bank232', '7894561230', 'Kochi', 'CERT1234REW', 5, 1, 5000, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -103,14 +109,16 @@ INSERT INTO `tbl_bank` (`bank_id`, `bank_name`, `bank_accno`, `bank_branch`, `ba
 -- Table structure for table `tbl_bank_details`
 --
 
-CREATE TABLE `tbl_bank_details` (
-  `bank_id` int(10) NOT NULL,
+DROP TABLE IF EXISTS `tbl_bank_details`;
+CREATE TABLE IF NOT EXISTS `tbl_bank_details` (
+  `bank_id` int(10) NOT NULL AUTO_INCREMENT,
   `bank_name` varchar(255) NOT NULL,
   `bank_ac_no` mediumtext NOT NULL,
   `bank_created_at` date NOT NULL,
   `bank_updated_at` date NOT NULL,
-  `bank_status` int(10) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `bank_status` int(10) NOT NULL,
+  PRIMARY KEY (`bank_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_bank_details`
@@ -127,12 +135,14 @@ INSERT INTO `tbl_bank_details` (`bank_id`, `bank_name`, `bank_ac_no`, `bank_crea
 -- Table structure for table `tbl_category`
 --
 
-CREATE TABLE `tbl_category` (
-  `category_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tbl_category`;
+CREATE TABLE IF NOT EXISTS `tbl_category` (
+  `category_id` int(11) NOT NULL AUTO_INCREMENT,
   `category_name` varchar(255) NOT NULL,
   `category_description` text NOT NULL,
-  `category_status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `category_status` int(11) NOT NULL,
+  PRIMARY KEY (`category_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_category`
@@ -155,12 +165,14 @@ INSERT INTO `tbl_category` (`category_id`, `category_name`, `category_descriptio
 -- Table structure for table `tbl_color`
 --
 
-CREATE TABLE `tbl_color` (
-  `color_id` int(10) NOT NULL,
+DROP TABLE IF EXISTS `tbl_color`;
+CREATE TABLE IF NOT EXISTS `tbl_color` (
+  `color_id` int(10) NOT NULL AUTO_INCREMENT,
   `company_id_fk` int(10) DEFAULT NULL,
   `color_name` varchar(255) DEFAULT NULL,
-  `color_status` int(10) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `color_status` int(10) DEFAULT NULL,
+  PRIMARY KEY (`color_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_color`
@@ -168,7 +180,7 @@ CREATE TABLE `tbl_color` (
 
 INSERT INTO `tbl_color` (`color_id`, `company_id_fk`, `color_name`, `color_status`) VALUES
 (6, 7, '#D88', 1),
-(5, 5, '#AAA', 1),
+(5, 5, '#882', 1),
 (4, 6, '#B84', 1),
 (7, 8, '#84B', 1);
 
@@ -178,15 +190,17 @@ INSERT INTO `tbl_color` (`color_id`, `company_id_fk`, `color_name`, `color_statu
 -- Table structure for table `tbl_companyinfo`
 --
 
-CREATE TABLE `tbl_companyinfo` (
-  `cmp_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tbl_companyinfo`;
+CREATE TABLE IF NOT EXISTS `tbl_companyinfo` (
+  `cmp_id` int(11) NOT NULL AUTO_INCREMENT,
   `cmp_name` varchar(50) NOT NULL,
   `cmp_adress` text DEFAULT NULL,
   `cmp_gst` varchar(50) DEFAULT NULL,
   `cmp_email` varchar(50) DEFAULT NULL,
   `cmp_phone` varchar(50) DEFAULT NULL,
-  `cmp_status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `cmp_status` int(11) NOT NULL,
+  PRIMARY KEY (`cmp_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_companyinfo`
@@ -204,8 +218,9 @@ INSERT INTO `tbl_companyinfo` (`cmp_id`, `cmp_name`, `cmp_adress`, `cmp_gst`, `c
 -- Table structure for table `tbl_customer`
 --
 
-CREATE TABLE `tbl_customer` (
-  `cust_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tbl_customer`;
+CREATE TABLE IF NOT EXISTS `tbl_customer` (
+  `cust_id` int(11) NOT NULL AUTO_INCREMENT,
   `company_id` int(11) NOT NULL,
   `custname` varchar(50) NOT NULL,
   `custaddress` text NOT NULL,
@@ -214,8 +229,9 @@ CREATE TABLE `tbl_customer` (
   `old_balance` double NOT NULL DEFAULT 0,
   `custstatus` int(11) NOT NULL,
   `cust_pcategory` int(11) NOT NULL,
-  `debit_credit` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `debit_credit` int(11) NOT NULL,
+  PRIMARY KEY (`cust_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_customer`
@@ -228,7 +244,7 @@ INSERT INTO `tbl_customer` (`cust_id`, `company_id`, `custname`, `custaddress`, 
 (8, 5, 'ashkar', 'dsagfdg', 8484984, 'cust@gmail.com', 2000, 0, 11, 0),
 (9, 6, 'preethi', 'asd dsafs', 84849844234, 'customer@gmail.com', 500, 1, 2, 0),
 (10, 6, 'Ajith', 'kkm', 8484984, 'cust@gmail.com', 1000, 1, 2, 0),
-(11, 5, 'Rajnikanth', 'Chenkottil, Kerala', 9876543210, 'repx@hexa.com', 20000, 1, 1, 0),
+(11, 5, 'Rajnikanth', 'Chenkottil, Kerala', 9876543210, 'repx@hexa.com', 0, 1, 1, 0),
 (12, 6, 'Mukesh456789', 'poverty', 7894561230, 'help2@help.com', 200000, 0, 1, 0),
 (13, 6, 'JISHNU', 'TESTADDRESS', 8089706022, 'TEST@GMAIL.COM', 120, 1, 1, 1);
 
@@ -238,20 +254,67 @@ INSERT INTO `tbl_customer` (`cust_id`, `company_id`, `custname`, `custaddress`, 
 -- Table structure for table `tbl_empabsent`
 --
 
-CREATE TABLE `tbl_empabsent` (
-  `absent_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tbl_empabsent`;
+CREATE TABLE IF NOT EXISTS `tbl_empabsent` (
+  `absent_id` int(11) NOT NULL AUTO_INCREMENT,
   `absent_date` date NOT NULL,
   `month` int(11) NOT NULL,
   `emp_id` int(11) NOT NULL,
-  `absent_status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `absent_status` int(11) NOT NULL,
+  PRIMARY KEY (`absent_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=107 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_empabsent`
 --
 
 INSERT INTO `tbl_empabsent` (`absent_id`, `absent_date`, `month`, `emp_id`, `absent_status`) VALUES
-(1, '2021-04-09', 4, 1, 1);
+(61, '2021-11-03', 11, 7, 1),
+(62, '2021-11-03', 11, 9, 1),
+(63, '2021-11-03', 11, 4, 1),
+(64, '2021-11-03', 11, 8, 1),
+(65, '2021-11-03', 11, 6, 1),
+(66, '2021-11-03', 11, 5, 1),
+(67, '2021-11-03', 11, 3, 1),
+(68, '2021-11-03', 11, 10, 1),
+(69, '2021-11-03', 11, 2, 1),
+(70, '2021-11-04', 11, 9, 1),
+(71, '2021-11-04', 11, 10, 1),
+(72, '2021-11-04', 11, 8, 1),
+(73, '2021-11-04', 11, 7, 1),
+(74, '2021-11-04', 11, 4, 1),
+(75, '2021-11-04', 11, 5, 1),
+(76, '2021-11-04', 11, 6, 1),
+(77, '2021-11-04', 11, 3, 1),
+(78, '2021-11-04', 11, 2, 1),
+(79, '2021-11-05', 11, 7, 1),
+(80, '2021-11-05', 11, 6, 1),
+(81, '2021-11-05', 11, 10, 1),
+(82, '2021-11-05', 11, 3, 1),
+(83, '2021-11-05', 11, 9, 1),
+(84, '2021-11-05', 11, 5, 1),
+(85, '2021-11-05', 11, 8, 1),
+(86, '2021-11-05', 11, 4, 1),
+(87, '2021-11-05', 11, 2, 1),
+(88, '2021-11-08', 11, 9, 1),
+(89, '2021-11-08', 11, 6, 1),
+(90, '2021-11-08', 11, 8, 1),
+(91, '2021-11-08', 11, 3, 1),
+(92, '2021-11-08', 11, 10, 1),
+(93, '2021-11-08', 11, 4, 1),
+(94, '2021-11-08', 11, 5, 1),
+(95, '2021-11-08', 11, 7, 1),
+(96, '2021-11-08', 11, 2, 1),
+(97, '2021-11-09', 11, 9, 1),
+(98, '2021-11-09', 11, 4, 1),
+(99, '2021-11-09', 11, 5, 1),
+(100, '2021-11-09', 11, 10, 1),
+(101, '2021-11-09', 11, 11, 1),
+(102, '2021-11-09', 11, 6, 1),
+(103, '2021-11-09', 11, 7, 1),
+(104, '2021-11-09', 11, 3, 1),
+(105, '2021-11-09', 11, 8, 1),
+(106, '2021-11-09', 11, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -259,23 +322,37 @@ INSERT INTO `tbl_empabsent` (`absent_id`, `absent_date`, `month`, `emp_id`, `abs
 -- Table structure for table `tbl_empattendance`
 --
 
-CREATE TABLE `tbl_empattendance` (
-  `att_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tbl_empattendance`;
+CREATE TABLE IF NOT EXISTS `tbl_empattendance` (
+  `att_id` int(11) NOT NULL AUTO_INCREMENT,
   `att_date` date NOT NULL,
   `emp_id` int(11) NOT NULL,
-  `att_status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `att_status` tinyint(1) NOT NULL,
+  PRIMARY KEY (`att_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_empattendance`
 --
 
 INSERT INTO `tbl_empattendance` (`att_id`, `att_date`, `emp_id`, `att_status`) VALUES
-(31, '2021-04-15', 2, 1),
-(32, '2021-04-15', 3, 1),
-(33, '2021-04-15', 1, 1),
-(34, '2021-04-09', 3, 1),
-(35, '2021-04-09', 2, 1);
+(58, '2021-11-03', 11, 1),
+(59, '2021-11-04', 11, 1),
+(60, '2021-11-05', 11, 1),
+(61, '2021-11-02', 11, 1),
+(62, '2021-11-10', 11, 1),
+(63, '2021-11-08', 11, 1),
+(64, '2021-11-01', 11, 1),
+(65, '2021-11-11', 11, 1),
+(66, '2021-10-06', 12, 1),
+(67, '2021-10-11', 12, 1),
+(68, '2021-10-08', 12, 1),
+(69, '2021-10-12', 12, 1),
+(70, '2021-10-13', 12, 1),
+(71, '2021-10-09', 12, 1),
+(72, '2021-10-15', 12, 1),
+(73, '2021-10-14', 12, 1),
+(74, '2021-10-07', 12, 1);
 
 -- --------------------------------------------------------
 
@@ -283,8 +360,9 @@ INSERT INTO `tbl_empattendance` (`att_id`, `att_date`, `emp_id`, `att_status`) V
 -- Table structure for table `tbl_employee`
 --
 
-CREATE TABLE `tbl_employee` (
-  `emp_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tbl_employee`;
+CREATE TABLE IF NOT EXISTS `tbl_employee` (
+  `emp_id` int(11) NOT NULL AUTO_INCREMENT,
   `company_id` int(11) NOT NULL,
   `emp_name` varchar(50) NOT NULL,
   `emp_address` text NOT NULL,
@@ -293,19 +371,61 @@ CREATE TABLE `tbl_employee` (
   `emp_date` date NOT NULL,
   `emp_mode` tinyint(10) NOT NULL COMMENT 'Wages=0&Salary=1',
   `emp_salary` int(11) NOT NULL,
-  `emp_status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `debit_or_credit` tinyint(10) NOT NULL COMMENT 'debit=0&credit=1',
+  `old_balance` int(10) NOT NULL,
+  `emp_act_status` tinyint(4) NOT NULL,
+  `emp_status` int(11) NOT NULL,
+  PRIMARY KEY (`emp_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_employee`
 --
 
-INSERT INTO `tbl_employee` (`emp_id`, `company_id`, `emp_name`, `emp_address`, `emp_phone`, `emp_email`, `emp_date`, `emp_mode`, `emp_salary`, `emp_status`) VALUES
-(1, 5, 'AJITH', '   gdgh ', 213, 'abc@gmail.com', '2021-01-04', 0, 30000, 1),
-(2, 5, 'Akhilesh', '  fgsdgdf', 213, 'abc@gmail.com', '2021-01-04', 0, 20000, 1),
-(3, 6, 'abc', '  gdsgd', 213, 'abc@gmail.com', '2021-01-04', 0, 40000, 1),
-(4, 5, 'Jishnu Mohan', '    erqeasdasdsad  ', 98745614233, 'wewe@hr.com', '1970-01-01', 1, 1000, 1),
-(5, 5, 'Anoop', 'Thachillath House,  Test post Po, Test Place, Malappuram, Kerala  ', 9562546598, 'test@test.com', '1970-01-01', 0, 36000, 1);
+INSERT INTO `tbl_employee` (`emp_id`, `company_id`, `emp_name`, `emp_address`, `emp_phone`, `emp_email`, `emp_date`, `emp_mode`, `emp_salary`, `debit_or_credit`, `old_balance`, `emp_act_status`, `emp_status`) VALUES
+(1, 5, 'AJITH', '   gdgh ', 213, 'abc@gmail.com', '2021-01-04', 0, 30000, 0, 0, 0, 1),
+(2, 5, 'Akhilesh', '  fgsdgdf', 213, 'abc@gmail.com', '2021-01-04', 0, 20000, 0, 0, 0, 1),
+(3, 6, 'abc', '  gdsgd', 213, 'abc@gmail.com', '2021-01-04', 0, 40000, 0, 0, 0, 1),
+(4, 5, 'Jishnu Mohan', '    erqeasdasdsad  ', 98745614233, 'wewe@hr.com', '1970-01-01', 1, 1000, 0, 0, 0, 1),
+(5, 5, 'Ajith kumar', 'n43-ca-1-16/4, sundar colony, navi mumbai, mumbai  ', 9874561230, 'abc@gmail.com', '2021-07-10', 0, 1000, 0, 0, 0, 1),
+(6, 5, 'Rajnikanth', ' heroku,hello world   ', 9874561230, 'abc@gmail.com', '1970-01-01', 1, 500, 1, 2000, 0, 1),
+(7, 5, 'Sachin Tendulkar 333', '   adasdasdasdas ', 7894661320, 'gfc@hars.com', '1970-01-01', 0, 600, 0, 6000, 0, 1),
+(8, 5, 'Viajy', 'aweqadasdfsqa  ', 9876966556, 'abc@gmail.com', '1970-01-01', 1, 1000, 0, 2000, 0, 1),
+(9, 5, 'innocent', 'awsedadasda  ', 789854654, 'abc@gmail.com', '1970-01-01', 0, 500, 1, 6000, 0, 1),
+(10, 6, 'Akhilesh', '         asdasda       ', 946312312, 'abc@gmail.com', '1970-01-01', 1, 500, 0, 2522, 0, 1),
+(11, 8, 'Aron Yates', 'House 4 , Paripally, Near Edapally, Kayankulam, Alappuzha', 1234567890, 'aron@business.com', '2021-01-11', 1, 10000, 0, 2000, 0, 1),
+(12, 8, 'Patrick Mahomes', 'KC,MO  ', 7894561230, 'stpatrick@hehe.com', '2021-06-10', 0, 500, 0, 100, 0, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_emp_piece_rate`
+--
+
+DROP TABLE IF EXISTS `tbl_emp_piece_rate`;
+CREATE TABLE IF NOT EXISTS `tbl_emp_piece_rate` (
+  `emp_pr_id` int(10) NOT NULL AUTO_INCREMENT,
+  `emp_pr_cmp_id` int(10) NOT NULL,
+  `emp_pr_name` varchar(255) NOT NULL,
+  `emp_pr_address` varchar(255) NOT NULL,
+  `emp_pr_phone` bigint(20) NOT NULL,
+  `emp_pr_email` varchar(255) NOT NULL,
+  `emp_pr_material_ty` varchar(255) NOT NULL,
+  `emp_pr_piece_rate` double NOT NULL,
+  `emp_pr_old_bal` double NOT NULL,
+  `emp_pr_act_status` tinyint(4) NOT NULL,
+  `emp_pr_status` tinyint(4) NOT NULL,
+  PRIMARY KEY (`emp_pr_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_emp_piece_rate`
+--
+
+INSERT INTO `tbl_emp_piece_rate` (`emp_pr_id`, `emp_pr_cmp_id`, `emp_pr_name`, `emp_pr_address`, `emp_pr_phone`, `emp_pr_email`, `emp_pr_material_ty`, `emp_pr_piece_rate`, `emp_pr_old_bal`, `emp_pr_act_status`, `emp_pr_status`) VALUES
+(1, 5, 'Anil Ambani', ' Respek 2 ', 7889455612, 'e@e.com', 'Magnesium', 25, 1000, 0, 1),
+(2, 6, 'Charlie Clips', 'New Jearsy, NY  ', 7889456512, 'rr@g.com', 'Steel Bars', 500, 1000, 0, 1),
+(3, 6, 'Charlie Clips', ' New Jearsy, NY   ', 7889456512, 'rr@g.com', 'Steel Barssss', 500, 1000, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -313,14 +433,16 @@ INSERT INTO `tbl_employee` (`emp_id`, `company_id`, `emp_name`, `emp_address`, `
 -- Table structure for table `tbl_finyear`
 --
 
-CREATE TABLE `tbl_finyear` (
-  `finyear_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tbl_finyear`;
+CREATE TABLE IF NOT EXISTS `tbl_finyear` (
+  `finyear_id` int(11) NOT NULL AUTO_INCREMENT,
   `fin_year` varchar(50) NOT NULL,
   `fin_startdate` varchar(50) NOT NULL,
   `fin_enddate` varchar(50) NOT NULL,
   `fin_status` int(11) NOT NULL,
-  `status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `status` int(11) NOT NULL,
+  PRIMARY KEY (`finyear_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_finyear`
@@ -337,15 +459,17 @@ INSERT INTO `tbl_finyear` (`finyear_id`, `fin_year`, `fin_startdate`, `fin_endda
 -- Table structure for table `tbl_groups`
 --
 
-CREATE TABLE `tbl_groups` (
-  `group_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tbl_groups`;
+CREATE TABLE IF NOT EXISTS `tbl_groups` (
+  `group_id` int(11) NOT NULL AUTO_INCREMENT,
   `group_name` varchar(100) NOT NULL,
   `group_desc` text NOT NULL,
   `group_status` int(11) NOT NULL,
   `type_id_fk` int(11) NOT NULL,
   `default` int(11) NOT NULL COMMENT '1=default',
-  `group_parent_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `group_parent_id` int(11) NOT NULL,
+  PRIMARY KEY (`group_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_groups`
@@ -391,8 +515,9 @@ INSERT INTO `tbl_groups` (`group_id`, `group_name`, `group_desc`, `group_status`
 -- Table structure for table `tbl_journal`
 --
 
-CREATE TABLE `tbl_journal` (
-  `journal_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tbl_journal`;
+CREATE TABLE IF NOT EXISTS `tbl_journal` (
+  `journal_id` int(11) NOT NULL AUTO_INCREMENT,
   `company_id_fk` int(11) NOT NULL,
   `fin_year` int(11) NOT NULL,
   `journal_date` date NOT NULL,
@@ -402,8 +527,9 @@ CREATE TABLE `tbl_journal` (
   `narration` text NOT NULL,
   `note` text NOT NULL,
   `journal_status` int(11) NOT NULL,
-  `journal_inv` varchar(25) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `journal_inv` varchar(25) NOT NULL,
+  PRIMARY KEY (`journal_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_journal`
@@ -430,15 +556,17 @@ INSERT INTO `tbl_journal` (`journal_id`, `company_id_fk`, `fin_year`, `journal_d
 -- Table structure for table `tbl_ledgerbalance`
 --
 
-CREATE TABLE `tbl_ledgerbalance` (
-  `led_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tbl_ledgerbalance`;
+CREATE TABLE IF NOT EXISTS `tbl_ledgerbalance` (
+  `led_id` int(11) NOT NULL AUTO_INCREMENT,
   `company_id_fk` int(11) NOT NULL,
   `ledgerhead_id_fk` int(11) NOT NULL,
   `date` date NOT NULL,
   `balance` double NOT NULL DEFAULT 0,
   `debit_credit` int(11) NOT NULL COMMENT '1=debit 2=credit',
-  `ledgerbalance_status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `ledgerbalance_status` int(11) NOT NULL,
+  PRIMARY KEY (`led_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_ledgerbalance`
@@ -485,16 +613,18 @@ INSERT INTO `tbl_ledgerbalance` (`led_id`, `company_id_fk`, `ledgerhead_id_fk`, 
 -- Table structure for table `tbl_ledgerhead`
 --
 
-CREATE TABLE `tbl_ledgerhead` (
-  `ledgerhead_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tbl_ledgerhead`;
+CREATE TABLE IF NOT EXISTS `tbl_ledgerhead` (
+  `ledgerhead_id` int(11) NOT NULL AUTO_INCREMENT,
   `group_id_fk` int(11) NOT NULL,
   `ledger_head` varchar(100) NOT NULL,
   `ledgerhead_desc` text NOT NULL,
   `opening_bal` double NOT NULL,
   `debit_or_credit` int(11) NOT NULL COMMENT '1=debit 2=credit',
   `ledgerhead_status` int(11) NOT NULL,
-  `company_id_fk` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `company_id_fk` int(11) NOT NULL,
+  PRIMARY KEY (`ledgerhead_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_ledgerhead`
@@ -526,7 +656,13 @@ INSERT INTO `tbl_ledgerhead` (`ledgerhead_id`, `group_id_fk`, `ledger_head`, `le
 (24, 27, 'TAX @ PURCHASE', 'TEST', 200, 1, 1, 5),
 (25, 12, '', 'Bank', 0, 0, 0, 6),
 (26, 12, 'ING Vysya Bank2323', 'Bank', 0, 2, 0, 6),
-(27, 12, 'FEDERAL BANK', 'Bank', 0, 1, 1, 6);
+(27, 27, 'Sachin Tendulkar 333', 'Employee', 6000, 1, 1, 5),
+(28, 29, 'Viajy', 'Employee', 2000, 1, 1, 5),
+(29, 27, 'innocent', 'Employee', 6000, 2, 1, 5),
+(30, 12, 'Bandhan Bank232', 'Bank', 5000, 2, 1, 5),
+(31, 29, 'Akhilesh', 'Employee', 2522, 1, 1, 6),
+(32, 29, 'Aron Yates', 'Employee', 2000, 1, 1, 8),
+(33, 27, 'Patrick Mahomes', 'Employee', 100, 1, 1, 8);
 
 -- --------------------------------------------------------
 
@@ -534,8 +670,9 @@ INSERT INTO `tbl_ledgerhead` (`ledgerhead_id`, `group_id_fk`, `ledger_head`, `le
 -- Table structure for table `tbl_login`
 --
 
-CREATE TABLE `tbl_login` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tbl_login`;
+CREATE TABLE IF NOT EXISTS `tbl_login` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_name` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
@@ -543,8 +680,9 @@ CREATE TABLE `tbl_login` (
   `cmp_id` int(11) NOT NULL,
   `created_date` datetime NOT NULL,
   `updated_date` datetime NOT NULL,
-  `status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `status` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_login`
@@ -563,14 +701,16 @@ INSERT INTO `tbl_login` (`id`, `user_name`, `email`, `password`, `user_type`, `c
 -- Table structure for table `tbl_openingstock`
 --
 
-CREATE TABLE `tbl_openingstock` (
-  `opening_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tbl_openingstock`;
+CREATE TABLE IF NOT EXISTS `tbl_openingstock` (
+  `opening_id` int(11) NOT NULL AUTO_INCREMENT,
   `company_id` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
   `stock` int(25) NOT NULL,
   `opening_status` int(11) NOT NULL,
-  `finyr` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `finyr` int(11) NOT NULL,
+  PRIMARY KEY (`opening_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_openingstock`
@@ -587,7 +727,8 @@ INSERT INTO `tbl_openingstock` (`opening_id`, `company_id`, `item_id`, `stock`, 
 (54, 5, 64, 0, 1, 3),
 (55, 5, 65, 0, 1, 3),
 (56, 5, 66, 0, 1, 3),
-(57, 6, 67, 1000, 1, 3);
+(57, 6, 67, 1000, 1, 3),
+(58, 5, 68, 100, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -595,23 +736,30 @@ INSERT INTO `tbl_openingstock` (`opening_id`, `company_id`, `item_id`, `stock`, 
 -- Table structure for table `tbl_overtime`
 --
 
-CREATE TABLE `tbl_overtime` (
-  `ot_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tbl_overtime`;
+CREATE TABLE IF NOT EXISTS `tbl_overtime` (
+  `ot_id` int(11) NOT NULL AUTO_INCREMENT,
   `ot_cmp_id_fk` int(11) NOT NULL,
   `ot_emp_id_fk` int(11) NOT NULL,
   `ot_amount` varchar(100) NOT NULL,
   `ot_date` varchar(20) NOT NULL,
   `ot_status` tinyint(4) NOT NULL,
   `created_at` datetime NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`ot_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_overtime`
 --
 
 INSERT INTO `tbl_overtime` (`ot_id`, `ot_cmp_id_fk`, `ot_emp_id_fk`, `ot_amount`, `ot_date`, `ot_status`, `created_at`, `updated_at`) VALUES
-(1, 6, 4, '2500', '2021-10-21', 1, '2021-10-28 07:45:19', '2021-10-28 04:50:58');
+(1, 6, 4, '2500', '2021-10-21', 0, '2021-10-28 07:45:19', '2021-10-28 04:50:58'),
+(2, 5, 1, '500', '2021-11-10', 1, '2021-11-03 05:05:05', '2021-11-03 05:05:05'),
+(3, 5, 4, '200', '2021-11-02', 1, '2021-11-03 05:14:23', '2021-11-03 05:14:23'),
+(4, 8, 11, '500', '2021-11-03', 1, '2021-11-03 05:29:03', '2021-11-03 05:29:03'),
+(5, 8, 11, '500', '2021-11-08', 1, '2021-11-03 05:34:17', '2021-11-03 05:34:17'),
+(6, 8, 11, '500', '2021-11-05', 1, '2021-11-03 05:45:17', '2021-11-03 05:45:17');
 
 -- --------------------------------------------------------
 
@@ -619,8 +767,9 @@ INSERT INTO `tbl_overtime` (`ot_id`, `ot_cmp_id_fk`, `ot_emp_id_fk`, `ot_amount`
 -- Table structure for table `tbl_payroll`
 --
 
-CREATE TABLE `tbl_payroll` (
-  `payroll_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tbl_payroll`;
+CREATE TABLE IF NOT EXISTS `tbl_payroll` (
+  `payroll_id` int(11) NOT NULL AUTO_INCREMENT,
   `company_id` int(11) DEFAULT NULL,
   `payroll_emp_id` int(11) DEFAULT NULL,
   `payroll_basicsalary` int(11) DEFAULT NULL,
@@ -629,15 +778,17 @@ CREATE TABLE `tbl_payroll` (
   `payroll_salary` int(11) DEFAULT NULL,
   `payroll_salarydate` date DEFAULT NULL,
   `payroll_status` int(11) DEFAULT NULL,
-  `payroll_salmonth` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `payroll_salmonth` int(11) NOT NULL,
+  PRIMARY KEY (`payroll_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_payroll`
 --
 
 INSERT INTO `tbl_payroll` (`payroll_id`, `company_id`, `payroll_emp_id`, `payroll_basicsalary`, `payroll_leaveamt`, `payroll_advance`, `payroll_salary`, `payroll_salarydate`, `payroll_status`, `payroll_salmonth`) VALUES
-(1, 5, 1, 30000, 1, 2000, 27000, '2021-04-30', 1, 4);
+(1, 5, 1, 30000, 1, 2000, 27000, '2021-04-30', 1, 4),
+(2, 8, 12, 500, 0, 0, 500, '1970-01-01', 1, 10);
 
 -- --------------------------------------------------------
 
@@ -645,12 +796,14 @@ INSERT INTO `tbl_payroll` (`payroll_id`, `company_id`, `payroll_emp_id`, `payrol
 -- Table structure for table `tbl_pricecategory`
 --
 
-CREATE TABLE `tbl_pricecategory` (
-  `pcategory_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tbl_pricecategory`;
+CREATE TABLE IF NOT EXISTS `tbl_pricecategory` (
+  `pcategory_id` int(11) NOT NULL AUTO_INCREMENT,
   `pcategory_name` varchar(255) NOT NULL,
   `pcategory_description` text NOT NULL,
-  `pcategory_status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `pcategory_status` int(11) NOT NULL,
+  PRIMARY KEY (`pcategory_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_pricecategory`
@@ -668,14 +821,16 @@ INSERT INTO `tbl_pricecategory` (`pcategory_id`, `pcategory_name`, `pcategory_de
 -- Table structure for table `tbl_pricelist`
 --
 
-CREATE TABLE `tbl_pricelist` (
-  `price_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tbl_pricelist`;
+CREATE TABLE IF NOT EXISTS `tbl_pricelist` (
+  `price_id` int(11) NOT NULL AUTO_INCREMENT,
   `item_id` int(11) NOT NULL,
   `pcategory_id` int(11) NOT NULL,
   `item_price` int(20) DEFAULT NULL,
   `company_id` int(11) NOT NULL,
-  `price_status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `price_status` int(11) NOT NULL,
+  PRIMARY KEY (`price_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=129 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_pricelist`
@@ -741,7 +896,11 @@ INSERT INTO `tbl_pricelist` (`price_id`, `item_id`, `pcategory_id`, `item_price`
 (121, 67, 1, 122, 6, 1),
 (122, 67, 2, 130, 6, 1),
 (123, 67, 3, 150, 6, 1),
-(124, 67, 4, 170, 6, 1);
+(124, 67, 4, 170, 6, 1),
+(125, 68, 1, 200, 5, 1),
+(126, 68, 2, 200, 5, 1),
+(127, 68, 3, 300, 5, 1),
+(128, 68, 4, 500, 5, 1);
 
 -- --------------------------------------------------------
 
@@ -749,8 +908,9 @@ INSERT INTO `tbl_pricelist` (`price_id`, `item_id`, `pcategory_id`, `item_price`
 -- Table structure for table `tbl_product`
 --
 
-CREATE TABLE `tbl_product` (
-  `product_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tbl_product`;
+CREATE TABLE IF NOT EXISTS `tbl_product` (
+  `product_id` int(11) NOT NULL AUTO_INCREMENT,
   `supplier_id` int(11) NOT NULL,
   `maincategory_id` int(11) DEFAULT NULL,
   `subcategory_id` int(11) DEFAULT NULL,
@@ -762,30 +922,33 @@ CREATE TABLE `tbl_product` (
   `product_status` int(11) NOT NULL,
   `product_type` varchar(25) NOT NULL,
   `goods_or_service` int(10) NOT NULL COMMENT 'goods=0&Service=1',
+  `product_remark` mediumtext DEFAULT NULL,
   `company_id` int(11) NOT NULL,
-  `active_status` int(11) NOT NULL DEFAULT 1 COMMENT '(1=active,0=desabled)'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `active_status` int(11) NOT NULL DEFAULT 1 COMMENT '(1=active,0=desabled)',
+  PRIMARY KEY (`product_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_product`
 --
 
-INSERT INTO `tbl_product` (`product_id`, `supplier_id`, `maincategory_id`, `subcategory_id`, `product_code`, `product_name`, `product_unit`, `product_description`, `min_stock`, `product_status`, `product_type`, `goods_or_service`, `company_id`, `active_status`) VALUES
-(1, 1, 5, 1, 'code1', 'Acer Display', '2', 'ADFHDF', 5, 1, 'RM', 0, 5, 1),
-(2, 0, 5, 1, 'mp1', 'cover', '2', 'ghdfgh ggds', 10, 0, 'MP', 0, 5, 1),
-(3, 0, 5, 1, 'mp22', 'Galaxyy', '2', 'trhyfh ', 15, 1, 'MP', 0, 5, 1),
-(4, 1, 5, 1, 'code2', 'abc', '2', 'rehfeh', 1500, 1, 'RM', 0, 5, 1),
-(5, 1, 5, 1, 'codes1', 'mobile', '2', 'sdfjagsakng', 10, 1, 'RM', 0, 5, 1),
-(6, 1, 5, 1, 'AS00', 'ALUMINIUM SHEETS', '3', '', 0, 1, 'RM', 0, 5, 1),
-(7, 1, 5, 1, 'AV00', 'ALUMINIUM VESSELS', '3', '', 0, 1, 'RM', 0, 5, 1),
-(8, 1, 5, 1, 'PK00', 'PK SET', '4', '', 0, 1, 'RM', 0, 5, 1),
-(9, 1, 5, 1, 'KLM1620', 'KALAM', '3', '', 0, 1, 'RM', 0, 5, 1),
-(62, 1, 6, 1, 'code20', 'Viewsonic Display', '', 'Lcd Monitor', 0, 1, 'RM', 0, 5, 1),
-(63, 1, 6, 1, 'code21', 'Dell Inspiron', '', 'Laptop', 0, 1, 'RM', 0, 5, 1),
-(64, 1, 6, 1, 'code22', 'Epson Printer', '', 'Home Printer', 0, 1, 'RM', 0, 5, 1),
-(65, 1, 6, 1, 'code23', 'Sonos Soundbar', '', 'Soundbar', 0, 1, 'RM', 0, 5, 1),
-(66, 1, 6, 1, 'code24', 'Levis Jeans', '', 'Mens Jeans', 0, 1, 'RM', 0, 5, 1),
-(67, 3, 5, 1, 'mp1', 'Acer Display', '3', 'adasd', 1500, 1, 'RM', 1, 6, 1);
+INSERT INTO `tbl_product` (`product_id`, `supplier_id`, `maincategory_id`, `subcategory_id`, `product_code`, `product_name`, `product_unit`, `product_description`, `min_stock`, `product_status`, `product_type`, `goods_or_service`, `product_remark`, `company_id`, `active_status`) VALUES
+(1, 1, 5, 1, 'code1', 'Acer Display', '2', 'ADFHDF', 5, 1, 'RM', 0, NULL, 5, 1),
+(2, 0, 5, 1, 'mp1', 'cover', '2', 'ghdfgh ggds', 10, 0, 'MP', 0, NULL, 5, 1),
+(3, 0, 5, 1, 'mp22', 'Galaxyy', '2', 'trhyfh ', 15, 1, 'MP', 0, NULL, 5, 1),
+(4, 1, 5, 1, 'code2', 'abc', '2', 'rehfeh', 1500, 1, 'RM', 0, NULL, 5, 1),
+(5, 1, 5, 1, 'codes1', 'mobile', '2', 'sdfjagsakng', 10, 1, 'RM', 0, NULL, 5, 1),
+(6, 1, 5, 1, 'AS00', 'ALUMINIUM SHEETS', '3', '', 0, 1, 'RM', 0, NULL, 5, 1),
+(7, 1, 5, 1, 'AV00', 'ALUMINIUM VESSELS', '3', '', 0, 1, 'RM', 0, NULL, 5, 1),
+(8, 1, 5, 1, 'PK00', 'PK SET', '4', '', 0, 1, 'RM', 0, NULL, 5, 1),
+(9, 1, 5, 1, 'KLM1620', 'KALAM', '3', '', 0, 1, 'RM', 0, NULL, 5, 1),
+(62, 1, 6, 1, 'code20', 'Viewsonic Display', '', 'Lcd Monitor', 0, 1, 'RM', 0, NULL, 5, 1),
+(63, 1, 6, 1, 'code21', 'Dell Inspiron', '', 'Laptop', 0, 1, 'RM', 0, NULL, 5, 1),
+(64, 1, 6, 1, 'code22', 'Epson Printer', '', 'Home Printer', 0, 1, 'RM', 0, NULL, 5, 1),
+(65, 1, 6, 1, 'code23', 'Sonos Soundbar', '', 'Soundbar', 0, 1, 'RM', 0, NULL, 5, 1),
+(66, 1, 6, 1, 'code24', 'Levis Jeans', '', 'Mens Jeans', 0, 1, 'RM', 0, NULL, 5, 1),
+(67, 3, 5, 1, 'mp1', 'Acer Display', '3', 'adasd', 1500, 1, 'RM', 1, NULL, 6, 1),
+(68, 4, 5, 1, 'MARK45', 'Reno', '3', 'wdasdasdsad', 10, 1, 'RM', 1, 'helloasdasdasdasdsad', 5, 1);
 
 -- --------------------------------------------------------
 
@@ -793,14 +956,16 @@ INSERT INTO `tbl_product` (`product_id`, `supplier_id`, `maincategory_id`, `subc
 -- Table structure for table `tbl_production`
 --
 
-CREATE TABLE `tbl_production` (
-  `production_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tbl_production`;
+CREATE TABLE IF NOT EXISTS `tbl_production` (
+  `production_id` int(11) NOT NULL AUTO_INCREMENT,
   `company_id_fk` int(11) NOT NULL,
   `area_id_fk` int(11) NOT NULL,
   `fin_year` int(11) NOT NULL,
   `date` date NOT NULL,
-  `production_status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `production_status` int(11) NOT NULL,
+  PRIMARY KEY (`production_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_production`
@@ -819,14 +984,16 @@ INSERT INTO `tbl_production` (`production_id`, `company_id_fk`, `area_id_fk`, `f
 -- Table structure for table `tbl_productioninput`
 --
 
-CREATE TABLE `tbl_productioninput` (
-  `input_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tbl_productioninput`;
+CREATE TABLE IF NOT EXISTS `tbl_productioninput` (
+  `input_id` int(11) NOT NULL AUTO_INCREMENT,
   `production_id_fk` int(11) NOT NULL,
   `product_code` varchar(50) NOT NULL,
   `product_id` int(11) NOT NULL,
   `used_quantity` int(11) NOT NULL,
-  `input_status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `input_status` int(11) NOT NULL,
+  PRIMARY KEY (`input_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_productioninput`
@@ -846,14 +1013,16 @@ INSERT INTO `tbl_productioninput` (`input_id`, `production_id_fk`, `product_code
 -- Table structure for table `tbl_productionoutput`
 --
 
-CREATE TABLE `tbl_productionoutput` (
-  `output_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tbl_productionoutput`;
+CREATE TABLE IF NOT EXISTS `tbl_productionoutput` (
+  `output_id` int(11) NOT NULL AUTO_INCREMENT,
   `production_id_fk` int(11) NOT NULL,
   `product_code` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `produced_quantity` int(11) NOT NULL,
-  `output_status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `output_status` int(11) NOT NULL,
+  PRIMARY KEY (`output_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_productionoutput`
@@ -871,13 +1040,15 @@ INSERT INTO `tbl_productionoutput` (`output_id`, `production_id_fk`, `product_co
 -- Table structure for table `tbl_profit`
 --
 
-CREATE TABLE `tbl_profit` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tbl_profit`;
+CREATE TABLE IF NOT EXISTS `tbl_profit` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `cmp_id_fk` int(11) NOT NULL,
   `amount` int(11) NOT NULL,
   `profit_loss` int(11) NOT NULL COMMENT '1=profit,2=loss',
-  `fin_year` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `fin_year` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_profit`
@@ -892,8 +1063,9 @@ INSERT INTO `tbl_profit` (`id`, `cmp_id_fk`, `amount`, `profit_loss`, `fin_year`
 -- Table structure for table `tbl_purchase`
 --
 
-CREATE TABLE `tbl_purchase` (
-  `purchase_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tbl_purchase`;
+CREATE TABLE IF NOT EXISTS `tbl_purchase` (
+  `purchase_id` int(11) NOT NULL AUTO_INCREMENT,
   `product_id_fk` int(11) NOT NULL,
   `supp_id` int(11) NOT NULL DEFAULT 0,
   `cmp_id` int(11) NOT NULL,
@@ -908,42 +1080,47 @@ CREATE TABLE `tbl_purchase` (
   `discount_type` int(11) NOT NULL,
   `tax_per` float NOT NULL DEFAULT 0,
   `total_price` double NOT NULL,
+  `purchase_remarks` mediumtext DEFAULT NULL,
   `purchase_date` date NOT NULL,
   `stockstatus` int(11) NOT NULL,
-  `purchase_status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `purchase_status` int(11) NOT NULL,
+  PRIMARY KEY (`purchase_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_purchase`
 --
 
-INSERT INTO `tbl_purchase` (`purchase_id`, `product_id_fk`, `supp_id`, `cmp_id`, `bank_id`, `price_category`, `finyear`, `invoice_number`, `reference_bill_id`, `purchase_quantity`, `purchase_price`, `discount_price`, `discount_type`, `tax_per`, `total_price`, `purchase_date`, `stockstatus`, `purchase_status`) VALUES
-(3, 1, 1, 5, NULL, 3, '3', '1234567890', NULL, 20, 300, 0, 1, 0, 6000, '2021-05-06', 1, 1),
-(4, 3, 1, 5, NULL, 3, '3', '1234567890', NULL, 10, 3, 0, 1, 0, 30, '2021-05-06', 1, 1),
-(5, 4, 1, 5, NULL, 3, '3', '1234567890', NULL, 5, 100, 0, 1, 0, 500, '2021-05-06', 1, 1),
-(6, 1, 1, 5, NULL, 1, '3', '123', NULL, 10, 100, 10, 0, 0, 990, '2021-05-07', 0, 0),
-(7, 3, 1, 5, NULL, 1, '3', '213124', NULL, 10, 1, 0, 1, 0, 10, '2021-05-06', 0, 0),
-(8, 3, 1, 5, NULL, 1, '3', '465', NULL, 10, 1, 0, 1, 0, 10, '2021-05-10', 0, 2),
-(9, 1, 1, 5, NULL, 1, '3', '365', NULL, 10, 100, 0, 1, 0, 1000, '2021-05-10', 0, 2),
-(10, 1, 1, 5, NULL, 1, '3', '456', NULL, 10, 100, 0, 1, 0, 1000, '2021-05-10', 0, 2),
-(11, 1, 1, 5, NULL, 4, '3', '852', NULL, 10, 400, 0, 1, 0, 4000, '2021-05-10', 0, 1),
-(12, 1, 1, 5, NULL, 1, '3', '2020', NULL, 10, 100, 0, 1, 0, 1000, '2021-05-11', 1, 1),
-(13, 4, 1, 5, NULL, 1, '3', '2020', NULL, 10, 100, 500, 1, 0, 500, '2021-05-11', 1, 1),
-(14, 1, 1, 5, NULL, 1, '3', '2021', NULL, 10, 100, 100, 0, 0, 900, '2021-05-11', 1, 1),
-(15, 5, 1, 5, NULL, 1, '3', '2021', NULL, 10, 100, 0, 1, 0, 1000, '2021-05-11', 1, 1),
-(16, 3, 1, 5, NULL, 1, '3', '2022', NULL, 10, 1, 5, 0, 0, 5, '2021-05-11', 1, 1),
-(17, 5, 1, 5, NULL, 1, '3', '2022', NULL, 10, 100, 0, 1, 0, 1000, '2021-05-11', 1, 1),
-(18, 1, 1, 5, NULL, 1, '3', '7', NULL, 10, 100, 0, 1, 0, 1000, '2021-05-10', 0, 0),
-(19, 3, 1, 5, NULL, 1, '3', '8', NULL, 10, 1, 0, 1, 0, 10, '2021-05-12', 0, 0),
-(20, 6, 1, 5, NULL, 1, '3', '44', NULL, 50, 125, 0, 1, 0, 6250, '2021-05-12', 1, 1),
-(21, 6, 1, 5, NULL, 1, '3', '99', NULL, -5, 125, 0, 1, 0, -625, '2021-05-12', 1, 1),
-(22, 66, 4, 5, NULL, 1, '3', '1', 'ARP321252', 10, 100, 12, 1, 0, 880, '2021-10-22', 0, 0),
-(23, 65, 4, 5, NULL, 1, '3', '1', 'ARP321252', 1, 100, 20, 1, 0, 80, '2021-10-22', 0, 0),
-(24, 66, 4, 5, NULL, 1, '3', '12', 'PBR1234C1', 20, 100, 10, 1, 0, 1800, '2021-10-22', 0, 1),
-(25, 65, 4, 5, NULL, 1, '3', '12', 'PBR1234C1', 20, 100, 10, 1, 0, 1800, '2021-10-22', 0, 1),
-(26, 3, 1, 5, 2, 1, '3', '14', '7845', 10, 1, 1, 0, 0, 9, '2021-10-25', 0, 1),
-(27, 62, 1, 5, 2, 1, '3', '14', '7845', 20, 100, 20, 0, 0, 1980, '2021-10-25', 0, 1),
-(28, 7, 4, 5, 4, 1, '3', '1212', 'ARP23DAS', 20, 100, 10, 1, 0, 1800, '2021-10-25', 0, 1);
+INSERT INTO `tbl_purchase` (`purchase_id`, `product_id_fk`, `supp_id`, `cmp_id`, `bank_id`, `price_category`, `finyear`, `invoice_number`, `reference_bill_id`, `purchase_quantity`, `purchase_price`, `discount_price`, `discount_type`, `tax_per`, `total_price`, `purchase_remarks`, `purchase_date`, `stockstatus`, `purchase_status`) VALUES
+(3, 1, 1, 5, NULL, 3, '3', '1234567890', NULL, 20, 300, 0, 1, 0, 6000, NULL, '2021-05-06', 1, 1),
+(4, 3, 1, 5, NULL, 3, '3', '1234567890', NULL, 10, 3, 0, 1, 0, 30, NULL, '2021-05-06', 1, 1),
+(5, 4, 1, 5, NULL, 3, '3', '1234567890', NULL, 5, 100, 0, 1, 0, 500, NULL, '2021-05-06', 1, 1),
+(6, 1, 1, 5, NULL, 1, '3', '123', NULL, 10, 100, 10, 0, 0, 990, NULL, '2021-05-07', 0, 0),
+(7, 3, 1, 5, NULL, 1, '3', '213124', NULL, 10, 1, 0, 1, 0, 10, NULL, '2021-05-06', 0, 0),
+(8, 3, 1, 5, NULL, 1, '3', '465', NULL, 10, 1, 0, 1, 0, 10, NULL, '2021-05-10', 0, 2),
+(9, 1, 1, 5, NULL, 1, '3', '365', NULL, 10, 100, 0, 1, 0, 1000, NULL, '2021-05-10', 0, 2),
+(10, 1, 1, 5, NULL, 1, '3', '456', NULL, 10, 100, 0, 1, 0, 1000, NULL, '2021-05-10', 0, 2),
+(11, 1, 1, 5, NULL, 4, '3', '852', NULL, 10, 400, 0, 1, 0, 4000, NULL, '2021-05-10', 0, 1),
+(12, 1, 1, 5, NULL, 1, '3', '2020', NULL, 10, 100, 0, 1, 0, 1000, NULL, '2021-05-11', 1, 1),
+(13, 4, 1, 5, NULL, 1, '3', '2020', NULL, 10, 100, 500, 1, 0, 500, NULL, '2021-05-11', 1, 1),
+(14, 1, 1, 5, NULL, 1, '3', '2021', NULL, 10, 100, 100, 0, 0, 900, NULL, '2021-05-11', 1, 1),
+(15, 5, 1, 5, NULL, 1, '3', '2021', NULL, 10, 100, 0, 1, 0, 1000, NULL, '2021-05-11', 1, 1),
+(16, 3, 1, 5, NULL, 1, '3', '2022', NULL, 10, 1, 5, 0, 0, 5, NULL, '2021-05-11', 1, 1),
+(17, 5, 1, 5, NULL, 1, '3', '2022', NULL, 10, 100, 0, 1, 0, 1000, NULL, '2021-05-11', 1, 1),
+(18, 1, 1, 5, NULL, 1, '3', '7', NULL, 10, 100, 0, 1, 0, 1000, NULL, '2021-05-10', 0, 0),
+(19, 3, 1, 5, NULL, 1, '3', '8', NULL, 10, 1, 0, 1, 0, 10, NULL, '2021-05-12', 0, 0),
+(20, 6, 1, 5, NULL, 1, '3', '44', NULL, 50, 125, 0, 1, 0, 6250, NULL, '2021-05-12', 1, 1),
+(21, 6, 1, 5, NULL, 1, '3', '99', NULL, -5, 125, 0, 1, 0, -625, NULL, '2021-05-12', 1, 1),
+(22, 66, 4, 5, NULL, 1, '3', '1', 'ARP321252', 10, 100, 12, 1, 0, 880, NULL, '2021-10-22', 0, 0),
+(23, 65, 4, 5, NULL, 1, '3', '1', 'ARP321252', 1, 100, 20, 1, 0, 80, NULL, '2021-10-22', 0, 0),
+(24, 66, 4, 5, NULL, 1, '3', '12', 'PBR1234C1', 20, 100, 10, 1, 0, 1800, NULL, '2021-10-22', 0, 1),
+(25, 65, 4, 5, NULL, 1, '3', '12', 'PBR1234C1', 20, 100, 10, 1, 0, 1800, NULL, '2021-10-22', 0, 1),
+(26, 3, 1, 5, 2, 1, '3', '14', '7845', 10, 1, 1, 0, 0, 9, NULL, '2021-10-25', 0, 1),
+(27, 62, 1, 5, 2, 1, '3', '14', '7845', 20, 100, 20, 0, 0, 1980, NULL, '2021-10-25', 0, 1),
+(28, 7, 4, 5, 4, 1, '3', '1212', 'ARP23DAS', 20, 100, 10, 1, 0, 1800, NULL, '2021-10-25', 1, 1),
+(31, 4, 1, 5, 8, 1, '3', '1213', '63546544', 250, 1, 10, 1, 0, 225, NULL, '2021-10-29', 0, 1),
+(32, 65, 1, 5, 8, 1, '3', '1213', '63546544', 50, 125, 15, 1, 0, 5312.5, NULL, '2021-10-29', 0, 1),
+(33, 1, 4, 5, NULL, 1, '3', '1214', 'AERT7854', 52, 100, 0, 1, 0, 5200, 'Hello Its ME', '2021-11-04', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -951,8 +1128,9 @@ INSERT INTO `tbl_purchase` (`purchase_id`, `product_id_fk`, `supp_id`, `cmp_id`,
 -- Table structure for table `tbl_purchasepayments`
 --
 
-CREATE TABLE `tbl_purchasepayments` (
-  `purchase_payment_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tbl_purchasepayments`;
+CREATE TABLE IF NOT EXISTS `tbl_purchasepayments` (
+  `purchase_payment_id` int(11) NOT NULL AUTO_INCREMENT,
   `invoice_number` int(11) NOT NULL,
   `tax_amount` double NOT NULL,
   `bill_discount` double NOT NULL,
@@ -964,8 +1142,9 @@ CREATE TABLE `tbl_purchasepayments` (
   `bank_paid` double NOT NULL,
   `old_balance` double NOT NULL,
   `net_balance` double NOT NULL,
-  `payment_status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `payment_status` int(11) NOT NULL,
+  PRIMARY KEY (`purchase_payment_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_purchasepayments`
@@ -988,7 +1167,9 @@ INSERT INTO `tbl_purchasepayments` (`purchase_payment_id`, `invoice_number`, `ta
 (15, 1, 0, 0, 1, 0, 0, 960, 0, 0, 100, 1060, 0),
 (16, 12, 0, 0, 1, 0, 0, 3600, 0, 0, 100, 3700, 1),
 (17, 14, 0, 0, 1, 0, 0, 1989, 0, 0, 22820, 24809, 1),
-(18, 1212, 0, 0, 1, 0, 0, 1800, 0, 0, 3700, 5500, 1);
+(18, 1212, 0, 0, 1, 0, 0, 1800, 0, 0, 3700, 5500, 1),
+(20, 1213, 45, 10, 1, 50, 60, 5537.5, 0, 0, 0, 29943.25, 1),
+(21, 1214, 0, 0, 1, 0, 0, 5200, 5200, 0, 5500, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -996,13 +1177,15 @@ INSERT INTO `tbl_purchasepayments` (`purchase_payment_id`, `invoice_number`, `ta
 -- Table structure for table `tbl_rawmaterials`
 --
 
-CREATE TABLE `tbl_rawmaterials` (
-  `raw_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tbl_rawmaterials`;
+CREATE TABLE IF NOT EXISTS `tbl_rawmaterials` (
+  `raw_id` int(11) NOT NULL AUTO_INCREMENT,
   `prod_id` int(11) NOT NULL,
   `raw_itemid` int(11) NOT NULL,
   `raw_quantity` int(11) NOT NULL,
-  `raw_status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `raw_status` int(11) NOT NULL,
+  PRIMARY KEY (`raw_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_rawmaterials`
@@ -1020,8 +1203,9 @@ INSERT INTO `tbl_rawmaterials` (`raw_id`, `prod_id`, `raw_itemid`, `raw_quantity
 -- Table structure for table `tbl_receipt`
 --
 
-CREATE TABLE `tbl_receipt` (
-  `receipt_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tbl_receipt`;
+CREATE TABLE IF NOT EXISTS `tbl_receipt` (
+  `receipt_id` int(11) NOT NULL AUTO_INCREMENT,
   `receip_id_fk` varchar(11) NOT NULL,
   `finyear_id_fk` int(11) NOT NULL,
   `receipt_amount` varchar(100) NOT NULL,
@@ -1029,8 +1213,9 @@ CREATE TABLE `tbl_receipt` (
   `received_to` varchar(200) NOT NULL,
   `narration` varchar(250) NOT NULL,
   `receipt_status` int(11) NOT NULL,
-  `company_id_fk` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `company_id_fk` int(11) NOT NULL,
+  PRIMARY KEY (`receipt_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_receipt`
@@ -1048,12 +1233,14 @@ INSERT INTO `tbl_receipt` (`receipt_id`, `receip_id_fk`, `finyear_id_fk`, `recei
 -- Table structure for table `tbl_receipthead`
 --
 
-CREATE TABLE `tbl_receipthead` (
-  `receipt_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tbl_receipthead`;
+CREATE TABLE IF NOT EXISTS `tbl_receipthead` (
+  `receipt_id` int(11) NOT NULL AUTO_INCREMENT,
   `receipt_head` varchar(250) NOT NULL,
   `receipt_desc` varchar(255) NOT NULL,
-  `receipt_status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `receipt_status` int(11) NOT NULL,
+  PRIMARY KEY (`receipt_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_receipthead`
@@ -1069,8 +1256,9 @@ INSERT INTO `tbl_receipthead` (`receipt_id`, `receipt_head`, `receipt_desc`, `re
 -- Table structure for table `tbl_sale`
 --
 
-CREATE TABLE `tbl_sale` (
-  `sale_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tbl_sale`;
+CREATE TABLE IF NOT EXISTS `tbl_sale` (
+  `sale_id` int(11) NOT NULL AUTO_INCREMENT,
   `product_id_fk` int(11) NOT NULL,
   `cust_id` int(11) NOT NULL DEFAULT 0,
   `cmp_id` int(11) NOT NULL,
@@ -1083,20 +1271,32 @@ CREATE TABLE `tbl_sale` (
   `discount_type` int(11) NOT NULL,
   `tax_per` float NOT NULL DEFAULT 0,
   `total_price` double NOT NULL,
+  `sale_remark` mediumtext DEFAULT NULL,
   `sale_date` date NOT NULL,
   `stockstatus` int(11) NOT NULL,
-  `sale_status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `sale_status` int(11) NOT NULL,
+  PRIMARY KEY (`sale_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_sale`
 --
 
-INSERT INTO `tbl_sale` (`sale_id`, `product_id_fk`, `cust_id`, `cmp_id`, `price_category`, `finyear`, `invoice_number`, `sale_quantity`, `sale_price`, `discount_price`, `discount_type`, `tax_per`, `total_price`, `sale_date`, `stockstatus`, `sale_status`) VALUES
-(16, 8, 5, 5, 1, '3', '', -2, 140, 0, 1, 0, -280, '1970-01-01', 0, 1),
-(17, 9, 5, 5, 1, '3', '1', 2, 265, 0, 1, 0, 397.5, '2021-05-18', 0, 1),
-(18, 1, 5, 5, 1, '3', '10', 1, 100, 0, 1, 0, 100, '2021-06-14', 0, 1),
-(19, 1, 5, 5, 2, '3', '', 2, 200, 10, 1, 0, 360, '2021-10-19', 0, 1);
+INSERT INTO `tbl_sale` (`sale_id`, `product_id_fk`, `cust_id`, `cmp_id`, `price_category`, `finyear`, `invoice_number`, `sale_quantity`, `sale_price`, `discount_price`, `discount_type`, `tax_per`, `total_price`, `sale_remark`, `sale_date`, `stockstatus`, `sale_status`) VALUES
+(16, 8, 5, 5, 1, '3', '', -2, 140, 0, 1, 0, -280, NULL, '1970-01-01', 0, 1),
+(17, 9, 5, 5, 1, '3', '1', 2, 265, 0, 1, 0, 397.5, NULL, '2021-05-18', 0, 1),
+(18, 1, 5, 5, 1, '3', '10', 1, 100, 0, 1, 0, 100, NULL, '2021-06-14', 0, 0),
+(19, 1, 5, 5, 2, '3', '1', 2, 200, 10, 1, 0, 360, NULL, '2021-10-19', 0, 1),
+(20, 6, 11, 5, 2, '3', '2', 25, 52, 10, 1, 0, 1170, NULL, '2021-10-07', 0, 1),
+(21, 64, 11, 5, 2, '3', '3', 263, 200, 0, 1, 0, 52600, NULL, '2021-04-21', 0, 1),
+(22, 5, 5, 5, 2, '3', '4', 3, 200, 0, 1, 0, 600, NULL, '2021-04-29', 0, 1),
+(23, 65, 11, 5, 2, '3', '5', 50, 200, 0, 1, 0, 10000, NULL, '2021-04-23', 0, 1),
+(24, 5, 5, 5, 2, '3', '6', 10, 2, 10, 1, 0, 18, NULL, '2021-09-30', 0, 1),
+(25, 6, 11, 5, 2, '3', '7', 50, 200, 10, 1, 0, 9000, NULL, '2021-10-07', 0, 1),
+(26, 4, 11, 5, 2, '3', '8', 63, 2, 2, 1, 0, 123.48, NULL, '2021-04-21', 0, 2),
+(27, 9, 11, 5, 2, '3', '8', 56, 210, 41, 1, 0, 6938.4, NULL, '2021-04-21', 0, 2),
+(28, 6, 11, 5, 1, '3', '9', 50, 100, 10, 1, 0, 4500, '', '2021-11-04', 0, 1),
+(29, 4, 11, 5, 1, '3', '10', 80, 100, 10, 1, 0, 7200, 'Sale Remark', '2021-11-04', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -1104,32 +1304,44 @@ INSERT INTO `tbl_sale` (`sale_id`, `product_id_fk`, `cust_id`, `cmp_id`, `price_
 -- Table structure for table `tbl_salepayments`
 --
 
-CREATE TABLE `tbl_salepayments` (
-  `sale_payment_id` int(11) NOT NULL,
-  `invoice_number` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tbl_salepayments`;
+CREATE TABLE IF NOT EXISTS `tbl_salepayments` (
+  `sale_payment_id` int(11) NOT NULL AUTO_INCREMENT,
+  `invoice_number` int(11) DEFAULT NULL,
   `tax_amount` double NOT NULL,
   `bill_discount` double NOT NULL,
   `bill_discount_type` int(11) NOT NULL,
   `frieght` double NOT NULL,
   `packing_charge` double NOT NULL,
   `net_total` double NOT NULL,
-  `cash_paid` double NOT NULL,
-  `bank_paid` double NOT NULL,
-  `bank_id` int(11) NOT NULL,
+  `cash_paid` double DEFAULT NULL,
+  `bank_paid` double DEFAULT NULL,
+  `bank_id` int(11) DEFAULT NULL,
   `old_balance` double NOT NULL,
   `net_balance` double NOT NULL,
-  `payment_status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `payment_status` int(11) NOT NULL,
+  PRIMARY KEY (`sale_payment_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_salepayments`
 --
 
 INSERT INTO `tbl_salepayments` (`sale_payment_id`, `invoice_number`, `tax_amount`, `bill_discount`, `bill_discount_type`, `frieght`, `packing_charge`, `net_total`, `cash_paid`, `bank_paid`, `bank_id`, `old_balance`, `net_balance`, `payment_status`) VALUES
-(9, 0, 0, 0, 1, 0, 0, -280, 0, 0, 0, 1000, 720, 1),
+(9, 0, 0, 0, 1, 0, 0, -280, 0, 0, 0, 1000, 720, 0),
 (10, 1, 0, 0, 1, 0, 0, 397.5, 0, 0, 0, 720, 1117.5, 1),
-(11, 10, 0, 0, 1, 0, 0, 100, 100, 0, 0, 1117.5, 1117.5, 1),
-(12, 0, 0, 0, 1, 0, 0, 360, 500, 0, 0, 1117.5, 0, 1);
+(11, 10, 0, 0, 1, 0, 0, 100, 100, 0, 0, 1117.5, 1117.5, 0),
+(12, 0, 0, 0, 1, 0, 0, 360, 500, 0, 0, 1117.5, 0, 0),
+(13, NULL, 0, 0, 1, 0, 0, 99, 0, NULL, 8, 120, 0, 1),
+(14, 2, 0, 0, 1, 0, 0, 1170, 0, 5000, 8, 20000, 0, 1),
+(15, 3, 0, 0, 1, 0, 0, 52600, 53000, 0, NULL, 0, 0, 1),
+(16, 4, 0, 0, 1, 0, 0, 600, 0, 0, NULL, -100, 500, 1),
+(17, 5, 0, 0, 1, 0, 0, 10000, 0, 10000, 8, 0, 0, 1),
+(18, 6, 0, 0, 1, 0, 0, 18, 0, 18, 8, 500, 0, 1),
+(19, 7, 0, 0, 1, 0, 0, 9000, 0, 9000, 8, 0, 0, 1),
+(20, 8, 0, 0, 1, 0, 0, 7061.879999999999, 1000, NULL, NULL, 0, 0, 1),
+(21, 9, 0, 0, 1, 0, 0, 4500, 4500, 0, NULL, 0, 0, 1),
+(22, 10, 0, 0, 1, 0, 0, 7200, 7200, 0, NULL, 0, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -1137,30 +1349,33 @@ INSERT INTO `tbl_salepayments` (`sale_payment_id`, `invoice_number`, `tax_amount
 -- Table structure for table `tbl_stock`
 --
 
-CREATE TABLE `tbl_stock` (
-  `stock_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tbl_stock`;
+CREATE TABLE IF NOT EXISTS `tbl_stock` (
+  `stock_id` int(11) NOT NULL AUTO_INCREMENT,
   `finyear` int(11) DEFAULT NULL,
   `item_id` int(11) NOT NULL,
   `stock` int(11) NOT NULL DEFAULT 0,
   `company_id` int(11) NOT NULL,
-  `stock_status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `stock_status` int(11) NOT NULL,
+  PRIMARY KEY (`stock_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_stock`
 --
 
 INSERT INTO `tbl_stock` (`stock_id`, `finyear`, `item_id`, `stock`, `company_id`, `stock_status`) VALUES
-(1, 3, 1, 37, 5, 1),
+(1, 3, 1, 38, 5, 1),
 (2, 3, 2, 0, 5, 0),
 (3, 3, 3, 20, 5, 1),
-(4, 3, 4, 15, 5, 1),
-(5, 3, 5, 20, 5, 1),
-(6, 3, 6, 20, 5, 1),
-(7, 3, 7, 18, 5, 1),
+(4, 3, 4, -65, 5, 1),
+(5, 3, 5, 7, 5, 1),
+(6, 3, 6, -105, 5, 1),
+(7, 3, 7, 38, 5, 1),
 (8, 3, 8, 32, 5, 1),
 (9, 3, 9, -2, 5, 1),
-(10, 3, 67, 0, 6, 1);
+(10, 3, 67, 0, 6, 1),
+(11, 3, 68, 0, 5, 1);
 
 -- --------------------------------------------------------
 
@@ -1168,13 +1383,15 @@ INSERT INTO `tbl_stock` (`stock_id`, `finyear`, `item_id`, `stock`, `company_id`
 -- Table structure for table `tbl_subcategory`
 --
 
-CREATE TABLE `tbl_subcategory` (
-  `subcategory_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tbl_subcategory`;
+CREATE TABLE IF NOT EXISTS `tbl_subcategory` (
+  `subcategory_id` int(11) NOT NULL AUTO_INCREMENT,
   `subcategory_name` varchar(255) NOT NULL,
   `subcategory_description` text NOT NULL,
   `main_category_id` int(11) NOT NULL,
-  `subcategory_status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `subcategory_status` int(11) NOT NULL,
+  PRIMARY KEY (`subcategory_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_subcategory`
@@ -1191,8 +1408,9 @@ INSERT INTO `tbl_subcategory` (`subcategory_id`, `subcategory_name`, `subcategor
 -- Table structure for table `tbl_supplier`
 --
 
-CREATE TABLE `tbl_supplier` (
-  `supplier_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tbl_supplier`;
+CREATE TABLE IF NOT EXISTS `tbl_supplier` (
+  `supplier_id` int(11) NOT NULL AUTO_INCREMENT,
   `supplier_name` varchar(60) NOT NULL,
   `supplier_address` text NOT NULL,
   `supplier_phone` varchar(20) NOT NULL,
@@ -1202,18 +1420,19 @@ CREATE TABLE `tbl_supplier` (
   `supplier_pcategory` int(11) NOT NULL,
   `supplier_status` int(11) NOT NULL,
   `debit_credit` int(11) NOT NULL,
-  `supplier_type` enum('0','1') NOT NULL COMMENT 'debitor=0&Creditor=1'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `supplier_type` enum('0','1') NOT NULL COMMENT 'debitor=0&Creditor=1',
+  PRIMARY KEY (`supplier_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_supplier`
 --
 
 INSERT INTO `tbl_supplier` (`supplier_id`, `supplier_name`, `supplier_address`, `supplier_phone`, `supplier_email`, `supplier_oldbal`, `company_id`, `supplier_pcategory`, `supplier_status`, `debit_credit`, `supplier_type`) VALUES
-(1, 'new supplier', 'abc', '123', 'abc@gmail.com', 24809, 5, 1, 1, 0, '1'),
+(1, 'new supplier', 'abc', '123', 'abc@gmail.com', 29943.25, 5, 1, 1, 0, '1'),
 (2, 'new supplier2', 'abcd', '4948949', 'abcd@gmail.com', 20000, 6, 2, 0, 0, '1'),
 (3, 'ashkar asr', 'calicut', '999999999', 'ashkarasr@gmail.com', 1500, 6, 3, 1, 0, '1'),
-(4, 'Rajeev R', 'adetrfwefvcadftwf', '9876543210', 'hello@edge.com', 5500, 5, 1, 1, 0, '0'),
+(4, 'Rajeev R', 'adetrfwefvcadftwf', '9876543210', 'hello@edge.com', 0, 5, 1, 1, 0, '0'),
 (6, 'Aroma Supplierswrtfwertwer', 'adasdsdasd', '9876543210', 'hello@edge.com', 100, 6, 1, 0, 0, '0'),
 (7, 'ABHI', 'TEST', '9895626232', 'TEST@GMAIL.COM', 130, 5, 2, 1, 0, '1');
 
@@ -1223,13 +1442,15 @@ INSERT INTO `tbl_supplier` (`supplier_id`, `supplier_name`, `supplier_address`, 
 -- Table structure for table `tbl_taxdetails`
 --
 
-CREATE TABLE `tbl_taxdetails` (
-  `tax_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tbl_taxdetails`;
+CREATE TABLE IF NOT EXISTS `tbl_taxdetails` (
+  `tax_id` int(11) NOT NULL AUTO_INCREMENT,
   `taxname` varchar(50) NOT NULL,
   `taxamount` double NOT NULL,
   `taxdetails` text NOT NULL,
-  `tax_status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `tax_status` int(11) NOT NULL,
+  PRIMARY KEY (`tax_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_taxdetails`
@@ -1245,11 +1466,13 @@ INSERT INTO `tbl_taxdetails` (`tax_id`, `taxname`, `taxamount`, `taxdetails`, `t
 -- Table structure for table `tbl_type`
 --
 
-CREATE TABLE `tbl_type` (
-  `type_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tbl_type`;
+CREATE TABLE IF NOT EXISTS `tbl_type` (
+  `type_id` int(11) NOT NULL AUTO_INCREMENT,
   `type_name` varchar(50) NOT NULL,
-  `type_status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `type_status` int(11) NOT NULL,
+  PRIMARY KEY (`type_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_type`
@@ -1268,12 +1491,14 @@ INSERT INTO `tbl_type` (`type_id`, `type_name`, `type_status`) VALUES
 -- Table structure for table `tbl_unit`
 --
 
-CREATE TABLE `tbl_unit` (
-  `unit_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tbl_unit`;
+CREATE TABLE IF NOT EXISTS `tbl_unit` (
+  `unit_id` int(11) NOT NULL AUTO_INCREMENT,
   `unit_name` varchar(255) NOT NULL,
   `unit_description` text NOT NULL,
-  `unit_status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `unit_status` int(11) NOT NULL,
+  PRIMARY KEY (`unit_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_unit`
@@ -1293,8 +1518,9 @@ INSERT INTO `tbl_unit` (`unit_id`, `unit_name`, `unit_description`, `unit_status
 -- Table structure for table `tbl_voucher`
 --
 
-CREATE TABLE `tbl_voucher` (
-  `voucher_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tbl_voucher`;
+CREATE TABLE IF NOT EXISTS `tbl_voucher` (
+  `voucher_id` int(11) NOT NULL AUTO_INCREMENT,
   `vouch_id_fk` int(11) NOT NULL,
   `finyear_id_fk` int(11) NOT NULL,
   `voucher_amount` varchar(100) NOT NULL,
@@ -1302,7 +1528,8 @@ CREATE TABLE `tbl_voucher` (
   `voucher_date` date NOT NULL,
   `narration` varchar(250) NOT NULL,
   `voucher_status` int(11) NOT NULL,
-  `company_id_fk` int(11) NOT NULL
+  `company_id_fk` int(11) NOT NULL,
+  PRIMARY KEY (`voucher_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1311,12 +1538,14 @@ CREATE TABLE `tbl_voucher` (
 -- Table structure for table `tbl_vouchhead`
 --
 
-CREATE TABLE `tbl_vouchhead` (
-  `vouch_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tbl_vouchhead`;
+CREATE TABLE IF NOT EXISTS `tbl_vouchhead` (
+  `vouch_id` int(11) NOT NULL AUTO_INCREMENT,
   `vouch_head` varchar(250) NOT NULL,
   `vouch_desc` varchar(255) NOT NULL,
-  `vouch_status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `vouch_status` int(11) NOT NULL,
+  PRIMARY KEY (`vouch_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_vouchhead`
@@ -1325,518 +1554,6 @@ CREATE TABLE `tbl_vouchhead` (
 INSERT INTO `tbl_vouchhead` (`vouch_id`, `vouch_head`, `vouch_desc`, `vouch_status`) VALUES
 (2, 'VOUCHER1', 'SNSDBNKSDNFKJDSFBDSKJFD', 0),
 (3, 'VOUCHER1', 'DAF', 1);
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `tbl_advance`
---
-ALTER TABLE `tbl_advance`
-  ADD PRIMARY KEY (`adv_id`);
-
---
--- Indexes for table `tbl_area`
---
-ALTER TABLE `tbl_area`
-  ADD PRIMARY KEY (`area_id`);
-
---
--- Indexes for table `tbl_bank`
---
-ALTER TABLE `tbl_bank`
-  ADD PRIMARY KEY (`bank_id`);
-
---
--- Indexes for table `tbl_bank_details`
---
-ALTER TABLE `tbl_bank_details`
-  ADD PRIMARY KEY (`bank_id`);
-
---
--- Indexes for table `tbl_category`
---
-ALTER TABLE `tbl_category`
-  ADD PRIMARY KEY (`category_id`);
-
---
--- Indexes for table `tbl_color`
---
-ALTER TABLE `tbl_color`
-  ADD PRIMARY KEY (`color_id`);
-
---
--- Indexes for table `tbl_companyinfo`
---
-ALTER TABLE `tbl_companyinfo`
-  ADD PRIMARY KEY (`cmp_id`);
-
---
--- Indexes for table `tbl_customer`
---
-ALTER TABLE `tbl_customer`
-  ADD PRIMARY KEY (`cust_id`);
-
---
--- Indexes for table `tbl_empabsent`
---
-ALTER TABLE `tbl_empabsent`
-  ADD PRIMARY KEY (`absent_id`);
-
---
--- Indexes for table `tbl_empattendance`
---
-ALTER TABLE `tbl_empattendance`
-  ADD PRIMARY KEY (`att_id`);
-
---
--- Indexes for table `tbl_employee`
---
-ALTER TABLE `tbl_employee`
-  ADD PRIMARY KEY (`emp_id`);
-
---
--- Indexes for table `tbl_finyear`
---
-ALTER TABLE `tbl_finyear`
-  ADD PRIMARY KEY (`finyear_id`);
-
---
--- Indexes for table `tbl_groups`
---
-ALTER TABLE `tbl_groups`
-  ADD PRIMARY KEY (`group_id`);
-
---
--- Indexes for table `tbl_journal`
---
-ALTER TABLE `tbl_journal`
-  ADD PRIMARY KEY (`journal_id`);
-
---
--- Indexes for table `tbl_ledgerbalance`
---
-ALTER TABLE `tbl_ledgerbalance`
-  ADD PRIMARY KEY (`led_id`);
-
---
--- Indexes for table `tbl_ledgerhead`
---
-ALTER TABLE `tbl_ledgerhead`
-  ADD PRIMARY KEY (`ledgerhead_id`);
-
---
--- Indexes for table `tbl_login`
---
-ALTER TABLE `tbl_login`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `tbl_openingstock`
---
-ALTER TABLE `tbl_openingstock`
-  ADD PRIMARY KEY (`opening_id`);
-
---
--- Indexes for table `tbl_overtime`
---
-ALTER TABLE `tbl_overtime`
-  ADD PRIMARY KEY (`ot_id`);
-
---
--- Indexes for table `tbl_payroll`
---
-ALTER TABLE `tbl_payroll`
-  ADD PRIMARY KEY (`payroll_id`);
-
---
--- Indexes for table `tbl_pricecategory`
---
-ALTER TABLE `tbl_pricecategory`
-  ADD PRIMARY KEY (`pcategory_id`);
-
---
--- Indexes for table `tbl_pricelist`
---
-ALTER TABLE `tbl_pricelist`
-  ADD PRIMARY KEY (`price_id`);
-
---
--- Indexes for table `tbl_product`
---
-ALTER TABLE `tbl_product`
-  ADD PRIMARY KEY (`product_id`);
-
---
--- Indexes for table `tbl_production`
---
-ALTER TABLE `tbl_production`
-  ADD PRIMARY KEY (`production_id`);
-
---
--- Indexes for table `tbl_productioninput`
---
-ALTER TABLE `tbl_productioninput`
-  ADD PRIMARY KEY (`input_id`);
-
---
--- Indexes for table `tbl_productionoutput`
---
-ALTER TABLE `tbl_productionoutput`
-  ADD PRIMARY KEY (`output_id`);
-
---
--- Indexes for table `tbl_profit`
---
-ALTER TABLE `tbl_profit`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `tbl_purchase`
---
-ALTER TABLE `tbl_purchase`
-  ADD PRIMARY KEY (`purchase_id`);
-
---
--- Indexes for table `tbl_purchasepayments`
---
-ALTER TABLE `tbl_purchasepayments`
-  ADD PRIMARY KEY (`purchase_payment_id`);
-
---
--- Indexes for table `tbl_rawmaterials`
---
-ALTER TABLE `tbl_rawmaterials`
-  ADD PRIMARY KEY (`raw_id`);
-
---
--- Indexes for table `tbl_receipt`
---
-ALTER TABLE `tbl_receipt`
-  ADD PRIMARY KEY (`receipt_id`);
-
---
--- Indexes for table `tbl_receipthead`
---
-ALTER TABLE `tbl_receipthead`
-  ADD PRIMARY KEY (`receipt_id`);
-
---
--- Indexes for table `tbl_sale`
---
-ALTER TABLE `tbl_sale`
-  ADD PRIMARY KEY (`sale_id`);
-
---
--- Indexes for table `tbl_salepayments`
---
-ALTER TABLE `tbl_salepayments`
-  ADD PRIMARY KEY (`sale_payment_id`);
-
---
--- Indexes for table `tbl_stock`
---
-ALTER TABLE `tbl_stock`
-  ADD PRIMARY KEY (`stock_id`);
-
---
--- Indexes for table `tbl_subcategory`
---
-ALTER TABLE `tbl_subcategory`
-  ADD PRIMARY KEY (`subcategory_id`);
-
---
--- Indexes for table `tbl_supplier`
---
-ALTER TABLE `tbl_supplier`
-  ADD PRIMARY KEY (`supplier_id`);
-
---
--- Indexes for table `tbl_taxdetails`
---
-ALTER TABLE `tbl_taxdetails`
-  ADD PRIMARY KEY (`tax_id`);
-
---
--- Indexes for table `tbl_type`
---
-ALTER TABLE `tbl_type`
-  ADD PRIMARY KEY (`type_id`);
-
---
--- Indexes for table `tbl_unit`
---
-ALTER TABLE `tbl_unit`
-  ADD PRIMARY KEY (`unit_id`);
-
---
--- Indexes for table `tbl_voucher`
---
-ALTER TABLE `tbl_voucher`
-  ADD PRIMARY KEY (`voucher_id`);
-
---
--- Indexes for table `tbl_vouchhead`
---
-ALTER TABLE `tbl_vouchhead`
-  ADD PRIMARY KEY (`vouch_id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `tbl_advance`
---
-ALTER TABLE `tbl_advance`
-  MODIFY `adv_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `tbl_area`
---
-ALTER TABLE `tbl_area`
-  MODIFY `area_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `tbl_bank`
---
-ALTER TABLE `tbl_bank`
-  MODIFY `bank_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT for table `tbl_bank_details`
---
-ALTER TABLE `tbl_bank_details`
-  MODIFY `bank_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `tbl_category`
---
-ALTER TABLE `tbl_category`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- AUTO_INCREMENT for table `tbl_color`
---
-ALTER TABLE `tbl_color`
-  MODIFY `color_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT for table `tbl_companyinfo`
---
-ALTER TABLE `tbl_companyinfo`
-  MODIFY `cmp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT for table `tbl_customer`
---
-ALTER TABLE `tbl_customer`
-  MODIFY `cust_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-
---
--- AUTO_INCREMENT for table `tbl_empabsent`
---
-ALTER TABLE `tbl_empabsent`
-  MODIFY `absent_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `tbl_empattendance`
---
-ALTER TABLE `tbl_empattendance`
-  MODIFY `att_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
-
---
--- AUTO_INCREMENT for table `tbl_employee`
---
-ALTER TABLE `tbl_employee`
-  MODIFY `emp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `tbl_finyear`
---
-ALTER TABLE `tbl_finyear`
-  MODIFY `finyear_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `tbl_groups`
---
-ALTER TABLE `tbl_groups`
-  MODIFY `group_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
-
---
--- AUTO_INCREMENT for table `tbl_journal`
---
-ALTER TABLE `tbl_journal`
-  MODIFY `journal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
-
---
--- AUTO_INCREMENT for table `tbl_ledgerbalance`
---
-ALTER TABLE `tbl_ledgerbalance`
-  MODIFY `led_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
-
---
--- AUTO_INCREMENT for table `tbl_ledgerhead`
---
-ALTER TABLE `tbl_ledgerhead`
-  MODIFY `ledgerhead_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
-
---
--- AUTO_INCREMENT for table `tbl_login`
---
-ALTER TABLE `tbl_login`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT for table `tbl_openingstock`
---
-ALTER TABLE `tbl_openingstock`
-  MODIFY `opening_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
-
---
--- AUTO_INCREMENT for table `tbl_overtime`
---
-ALTER TABLE `tbl_overtime`
-  MODIFY `ot_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `tbl_payroll`
---
-ALTER TABLE `tbl_payroll`
-  MODIFY `payroll_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `tbl_pricecategory`
---
-ALTER TABLE `tbl_pricecategory`
-  MODIFY `pcategory_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `tbl_pricelist`
---
-ALTER TABLE `tbl_pricelist`
-  MODIFY `price_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
-
---
--- AUTO_INCREMENT for table `tbl_product`
---
-ALTER TABLE `tbl_product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
-
---
--- AUTO_INCREMENT for table `tbl_production`
---
-ALTER TABLE `tbl_production`
-  MODIFY `production_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `tbl_productioninput`
---
-ALTER TABLE `tbl_productioninput`
-  MODIFY `input_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT for table `tbl_productionoutput`
---
-ALTER TABLE `tbl_productionoutput`
-  MODIFY `output_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `tbl_profit`
---
-ALTER TABLE `tbl_profit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `tbl_purchase`
---
-ALTER TABLE `tbl_purchase`
-  MODIFY `purchase_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
-
---
--- AUTO_INCREMENT for table `tbl_purchasepayments`
---
-ALTER TABLE `tbl_purchasepayments`
-  MODIFY `purchase_payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
-
---
--- AUTO_INCREMENT for table `tbl_rawmaterials`
---
-ALTER TABLE `tbl_rawmaterials`
-  MODIFY `raw_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `tbl_receipt`
---
-ALTER TABLE `tbl_receipt`
-  MODIFY `receipt_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `tbl_receipthead`
---
-ALTER TABLE `tbl_receipthead`
-  MODIFY `receipt_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `tbl_sale`
---
-ALTER TABLE `tbl_sale`
-  MODIFY `sale_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
-
---
--- AUTO_INCREMENT for table `tbl_salepayments`
---
-ALTER TABLE `tbl_salepayments`
-  MODIFY `sale_payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
---
--- AUTO_INCREMENT for table `tbl_stock`
---
-ALTER TABLE `tbl_stock`
-  MODIFY `stock_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT for table `tbl_subcategory`
---
-ALTER TABLE `tbl_subcategory`
-  MODIFY `subcategory_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `tbl_supplier`
---
-ALTER TABLE `tbl_supplier`
-  MODIFY `supplier_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT for table `tbl_taxdetails`
---
-ALTER TABLE `tbl_taxdetails`
-  MODIFY `tax_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `tbl_type`
---
-ALTER TABLE `tbl_type`
-  MODIFY `type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `tbl_unit`
---
-ALTER TABLE `tbl_unit`
-  MODIFY `unit_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `tbl_voucher`
---
-ALTER TABLE `tbl_voucher`
-  MODIFY `voucher_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `tbl_vouchhead`
---
-ALTER TABLE `tbl_vouchhead`
-  MODIFY `vouch_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
