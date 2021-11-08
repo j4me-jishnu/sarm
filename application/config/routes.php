@@ -301,3 +301,8 @@ $route['addProfit'] = 'Accountsreports/addProfit';
 //Payroll Report
 $route['payrollReport'] = 'Reports/payrollReport';
 $route['getPayrollReport'] = 'Reports/getPayrollReport';
+
+//Attendance Report
+$route['attendanceReport'] = 'Reports/attendanceReport';
+$route['getAttendanceTabele'] = 'Reports/getAttendanceTabele';
+$route['getAbsentTable'] = 'Reports/getAbsentTable';
