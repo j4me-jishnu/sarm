@@ -45,7 +45,7 @@
                   <th>EMAIL</th>
                   <th>TYPE</th>
                   <th>SALARY</th>
-                  <th>Status</th>
+                  <th>STATUS</th>
                   <th>DATE OF JOINING</th>
                   <th>EDIT/DELETE</th>
                 </tr>

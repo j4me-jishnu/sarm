@@ -297,3 +297,16 @@ $route['Trialbalance/get'] = 'Accountsreports/getTrialbalance';
 $route['Balancesheet'] = 'Accountsreports/Balancesheet';
 $route['Balancesheet/get'] = 'Accountsreports/getBalancesheet';
 $route['addProfit'] = 'Accountsreports/addProfit';
+
+//Payroll Report
+$route['payrollReport'] = 'Reports/payrollReport';
+$route['getPayrollReport'] = 'Reports/getPayrollReport';
+
+//Attendance Report
+$route['attendanceReport'] = 'Reports/attendanceReport';
+$route['getAttendanceTabele'] = 'Reports/getAttendanceTabele';
+$route['getAbsentTable'] = 'Reports/getAbsentTable';
+
+//Stock Report
+$route['stockReport'] = 'Reports/stockReport';
+$route['getStockReport'] = 'Reports/getStockReport';
