@@ -284,7 +284,7 @@
               {echo "active";}
             if($this->uri->segment(1)=="Purchasereport")
               {echo "active";}
-            if($this->uri->segment(1)=="Stockreport")
+            if($this->uri->segment(1)=="stockReport")
               {echo "active";}
             if($this->uri->segment(1)=="Productionreport")
               {echo "active";}
@@ -301,7 +301,7 @@
           <ul class="treeview-menu ">
             <li class="<?php if($this->uri->segment(1)=="Salereport"){echo "active";}?>" ><a  href="<?php echo base_url();?>Salereport"><i class="fa fa-file-text-o"></i> <span>Sale Report</span></a></li>
             <li class="<?php if($this->uri->segment(1)=="Purchasereport"){echo "active";}?>" ><a  href="<?php echo base_url();?>Purchasereport"><i class="fa fa-file-text-o"></i> <span>Purchase Report</span></a></li>
-            <li class="<?php if($this->uri->segment(1)=="Stockreport"){echo "active";}?>" ><a  href="<?php echo base_url();?>Stockreport"><i class="fa fa-file-text-o"></i> <span>Stock Report</span></a></li> 
+            <li class="<?php if($this->uri->segment(1)=="stockReport"){echo "active";}?>" ><a  href="<?php echo base_url();?>stockReport"><i class="fa fa-file-text-o"></i> <span>Stock Report</span></a></li> 
             <li class="<?php if($this->uri->segment(1)=="Productionreport"){echo "active";}?>" ><a  href="<?php echo base_url();?>Productionreport"><i class="fa fa-file-text-o"></i> <span>Production Report</span></a></li>
             <li class="<?php if($this->uri->segment(1)=="payrollReport"){echo "active";}?>" ><a  href="<?php echo base_url();?>payrollReport"><i class="fa fa-file-text-o"></i> <span>Payroll Report</span></a></li>
             <li class="<?php if($this->uri->segment(1)=="attendanceReport"){echo "active";}?>" ><a  href="<?php echo base_url();?>attendanceReport"><i class="fa fa-file-text-o"></i> <span>Attendance Report</span></a></li>

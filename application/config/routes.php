@@ -306,3 +306,7 @@ $route['getPayrollReport'] = 'Reports/getPayrollReport';
 $route['attendanceReport'] = 'Reports/attendanceReport';
 $route['getAttendanceTabele'] = 'Reports/getAttendanceTabele';
 $route['getAbsentTable'] = 'Reports/getAbsentTable';
+
+//Stock Report
+$route['stockReport'] = 'Reports/stockReport';
+$route['getStockReport'] = 'Reports/getStockReport';
