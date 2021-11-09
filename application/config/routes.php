@@ -319,3 +319,7 @@ $route['getProductionReportOP'] = 'Reports/getProductionReportOP';
 //Sale Report
 $route['saleReport'] = 'Reports/saleReport';
 $route['getSaleTable'] = 'Reports/getSaleTable';
+
+//Purchase Report
+$route['purchaseReport'] = 'Reports/purchaseReport';
+$route['getPurchaseTable'] = 'Reports/getPurchaseTable';

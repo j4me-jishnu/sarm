@@ -38,92 +38,88 @@ var response = $("#response").val();
         "paging":   false,
         "ordering": false,
         "info":     false,
-		  dom: 'lBfrtip',
+         dom: 'lBfrtip',
 			buttons: [
 				{
-					title:'Sale Report',
+					title:'Purchase Report',
 					extend: 'copy',
 					exportOptions: {
-						columns: [ 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16 ]
+						columns: [ 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14 ]
 					}
 				},
 				{
-					title:'Sale Report',
+					title:'Purchase Report',
 					extend: 'excel',
 					exportOptions: {
-						columns: [ 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16 ]
+						columns: [ 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14 ]
 					}
 				},
 				{
-					title:'Sale Report',
+					title:'Purchase Report',
 					extend: 'pdf',
 					exportOptions: {
-						columns: [ 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16 ]
+						columns: [ 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14 ]
 					}
 				},
 				{
-					title:'Sale Report',
+					title:'Purchase Report',
 					extend: 'print',
 					exportOptions: {
-						columns: [ 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16 ]
+						columns: [ 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14 ]
 					}
 				},
 				{
 					extend: 'csv',
 					exportOptions: {
-						columns: [ 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16 ]
+						columns: [ 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14 ]
 					}
 				},
 			],
-        
         "ajax": {
-            "url": "<?php echo base_url();?>getSaleTable",
+            "url": "<?php echo base_url();?>getPurchaseTable",
             "type": "POST",
             "data" : function (d) {
                     d.invoice_no = $("#purchase_invoice_no").val();
 					d.product_num1 = $("#product").val();
 					d.start_date = $("#pmsDateStart").val();
                     d.end_date = $("#pmsDateEnd").val();
+					//alert(d.product_num);
 				}
         },
-
         "createdRow": function ( row, data, index ) {
           
-          $table.column(0).nodes().each(function(node,index,dt){
-          $table.cell(node).data(index+1);
-          });
-      },
-
+            $table.column(0).nodes().each(function(node,index,dt){
+            $table.cell(node).data(index+1);
+            });
+		
+            },
 
         "columns": [
-            { "data": "sale_status", "orderable": false },
+            { "data": "purchase_status", "orderable": false },
             { "data": "invoice_number", "orderable": false },
-            { "data": "sale_date", "orderable": false },
+            { "data": "reference_bill_id", "orderable": false },
             { "data": "cmp_name", "orderable": false },
-			{ "data": "product_name", "orderable": false },
-			{ "data": "sale_quantity", "orderable": false },
-			{ "data": "sale_price", "orderable": false },
-			{ "data": "discount_price", "orderable": false },
-			{ "data": "tax_per", "orderable": false },
-			{ "data": "total_price", "orderable": false },
-			{ "data": "frieght", "orderable": false },
+            { "data": "supplier_name", "orderable": false },
+            { "data": "purchase_date", "orderable": false },
+            { "data": "purchase_quantity", "orderable": false },
+            { "data": "purchase_price", "orderable": false },
+            { "data": "tax_amount", "orderable": false },
+            { "data": "frieght", "orderable": false },
             { "data": "packing_charge", "orderable": false },
+            { "data": "total_price", "orderable": false },
             { "data": "net_total", "orderable": false },
-            { "data": "cash_paid", "orderable": false },
-            { "data": "bank_paid", "orderable": false },
             { "data": "old_balance", "orderable": false },
             { "data": "net_balance", "orderable": false },
          ]
         
     } );
-    $('#product').keyup(function (){
-	$table.ajax.reload();
-	});
     
+   $('#product').keyup(function (){
+	$table.ajax.reload();
+	}); 
   });
 	
 	$('#search').click(function () {
-        
         $table.ajax.reload();
     });
 </script>

@@ -316,6 +316,77 @@ Class Reports_model extends CI_Model{
 			$query = $this->db->get();
 			return $query->num_rows();
 		}
+
+
+		public function getPurchaseTables($param){
+			$arOrder = array('','invoice_no','shop','product_num1');
+			$invoice_no =(isset($param['invoice_no']))?$param['invoice_no']:'';
+			$product_num1 =(isset($param['product_num1']))?$param['product_num1']:'';
+			$shop =(isset($param['shop']))?$param['shop']:'';
+			$start_date =(isset($param['start_date']))?$param['start_date']:'';
+			$end_date =(isset($param['end_date']))?$param['end_date']:'';
+			
+			if($invoice_no){
+				$this->db->where('invoice_number', $invoice_no); 
+			}
+			if($product_num1){
+				$this->db->like('tbl_supplier.supplier_name', $product_num1); 
+			}
+			if($start_date){
+				$this->db->where('purchase_date >=', $start_date);
+			}
+			if($end_date){
+				$this->db->where('purchase_date <=', $end_date); 
+			}
+			$this->db->where("purchase_status >",0);
+			$this->db->select('*');
+			$this->db->from('tbl_purchase');
+			$this->db->join('tbl_product','tbl_product.product_id = tbl_purchase.product_id_fk');
+			$this->db->join('tbl_supplier','tbl_supplier.supplier_id = tbl_purchase.supp_id');
+			$this->db->join('tbl_companyinfo','tbl_companyinfo.cmp_id = tbl_purchase.cmp_id');
+			$this->db->join('tbl_purchasepayments','tbl_purchasepayments.invoice_number = tbl_purchase.invoice_number');
+			$this->db->group_by('purchase_id', 'DESC');
+			$query = $this->db->get();
+			
+			$data['data'] = $query->result();
+			$data['recordsTotal'] = $this->getPurchaseTablesTotalCount($param);
+			$data['recordsFiltered'] = $this->getPurchaseTablesTotalCount($param);
+			return $data;
+	
+		}
+		public function getPurchaseTablesTotalCount($param){
+			$invoice_no =(isset($param['invoice_no']))?$param['invoice_no']:'';
+			$product_num =(isset($param['product_num']))?$param['product_num']:'';
+			$shop =(isset($param['shop']))?$param['shop']:'';
+			$start_date =(isset($param['start_date']))?$param['start_date']:'';
+			$end_date =(isset($param['end_date']))?$param['end_date']:'';
+			
+			if($invoice_no){
+				$this->db->where('invoice_number', $invoice_no); 
+			}
+			if($product_num){
+				$this->db->like('tbl_product.product_num', $product_num); 
+			}
+			if($shop!=0){
+				$this->db->where('shop_id_fk', $shop); 
+			}
+			if($start_date){
+				$this->db->where('purchase_date >=', $start_date);
+			}
+			if($end_date){
+				$this->db->where('purchase_date <=', $end_date); 
+			}
+			$this->db->where("purchase_status >",0);
+			$this->db->select('*');
+			$this->db->from('tbl_purchase');
+			$this->db->join('tbl_product','tbl_product.product_id = tbl_purchase.product_id_fk');
+			$this->db->join('tbl_supplier','tbl_supplier.supplier_id = tbl_purchase.supp_id');
+			$this->db->join('tbl_companyinfo','tbl_companyinfo.cmp_id = tbl_purchase.cmp_id');
+			$this->db->join('tbl_purchasepayments','tbl_purchasepayments.invoice_number = tbl_purchase.invoice_number');
+			$this->db->group_by('purchase_id', 'DESC');
+			$query = $this->db->get();
+			return $query->num_rows();
+		}
 }
 
 ?>

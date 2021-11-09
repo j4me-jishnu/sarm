@@ -173,12 +173,48 @@ class Reports extends MY_Controller {
 
 			public function saleReport()
 				{
-					$template['body'] = 'Reports/Sale/list';
-					$template['script'] = 'Reports/Sale/script';
-					$this->load->view('template', $template);
+				$template['body'] = 'Reports/Sale/list';
+				$template['script'] = 'Reports/Sale/script';
+				$this->load->view('template', $template);
 				}
 
 			public function getSaleTable(){
+		
+				$param['draw'] = (isset($_REQUEST['draw']))?$_REQUEST['draw']:'';
+				$param['length'] =(isset($_REQUEST['length']))?$_REQUEST['length']:'10'; 
+				$param['start'] = (isset($_REQUEST['start']))?$_REQUEST['start']:'0';
+				$param['order'] = (isset($_REQUEST['order'][0]['column']))?$_REQUEST['order'][0]['column']:'';
+				$param['dir'] = (isset($_REQUEST['order'][0]['dir']))?$_REQUEST['order'][0]['dir']:'';
+				$param['searchValue'] =(isset($_REQUEST['search']['value']))?$_REQUEST['search']['value']:'';
+					
+				$start_date =(isset($_REQUEST['start_date']))?$_REQUEST['start_date']:'';
+				$end_date =(isset($_REQUEST['end_date']))?$_REQUEST['end_date']:'';
+				$param['invoice_no'] = (isset($_REQUEST['invoice_no']))?$_REQUEST['invoice_no']:'';
+				$param['product_num1'] = (isset($_REQUEST['product_num1']))?$_REQUEST['product_num1']:'';
+					
+				if($start_date){
+					$start_date = str_replace('/', '-', $start_date);
+					$param['start_date'] =  date("Y-m-d",strtotime($start_date));
+				}
+				   
+				if($end_date){
+					$end_date = str_replace('/', '-', $end_date);
+					$param['end_date'] =  date("Y-m-d",strtotime($end_date));
+				}
+					
+					$data = $this->Reports_model->getSaleTables($param);
+					$json_data = json_encode($data);
+					echo $json_data;
+				}
+				
+			public function purchaseReport()
+				{
+					$template['body'] = 'Reports/Purchase/list';
+					$template['script'] = 'Reports/Purchase/script';
+					$this->load->view('template', $template);
+				}
+				
+			public function getPurchaseTable(){
 		
 					$param['draw'] = (isset($_REQUEST['draw']))?$_REQUEST['draw']:'';
 					$param['length'] =(isset($_REQUEST['length']))?$_REQUEST['length']:'10'; 
@@ -202,7 +238,7 @@ class Reports extends MY_Controller {
 						$param['end_date'] =  date("Y-m-d",strtotime($end_date));
 					}
 					
-					$data = $this->Reports_model->getSaleTables($param);
+					$data = $this->Reports_model->getPurchaseTables($param);
 					$json_data = json_encode($data);
 					echo $json_data;
 				}	
