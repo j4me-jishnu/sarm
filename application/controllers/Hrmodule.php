@@ -236,8 +236,10 @@ class Hrmodule extends MY_Controller {
 			$session = $this->input->post('session');
 			$at_date = str_replace('/', '-', $this->input->post('att_date'));
 			$at_date = date("Y-m-d",strtotime($at_date));
+			$month = date("m",strtotime($at_date));
 			$data = array(
 						'att_date'=> $at_date,
+						'month' => $month,
 						'emp_id'=> $emp_id,
 						'att_status'=> 1
 						);
@@ -263,11 +265,13 @@ class Hrmodule extends MY_Controller {
 		$emp_id = $this->input->post('id');
 		$at_date = str_replace('/', '-', $this->input->post('dates'));
 		$at_date = date("Y-m-d",strtotime($at_date));
+		$month = date("m",strtotime($at_date));
 		$date = $at_date;
 		if($this->Hr_model->check_attendance($emp_id,$date) == 0)
 		{
 			$data = array(
 						'att_date'=> $at_date,
+						'month' => $month,
 						'emp_id'=> $emp_id,
 						'att_status'=> 1
 						);
@@ -369,6 +373,11 @@ class Hrmodule extends MY_Controller {
 		$data=$this->Hr_model->getBasicofEmployee($this->input->post('emp_id'));
         echo json_encode($data);
 	}
+	public function getSalaryMode()
+	{
+		$data=$this->Hr_model->getSalaryMode($this->input->post('emp_id'));
+        echo json_encode($data);
+	}
 	public function editPayAdvance($id)
 	{
 		if($this->session->userdata('user_type')=='C'){
@@ -462,6 +471,13 @@ class Hrmodule extends MY_Controller {
 		$data=$this->Hr_model->getLeavesofEmployee($this->input->post('emp_id'),$this->input->post('month'));
         echo json_encode($data);
 	}
+
+	public function getAttendanceofEmployee()
+	{
+		$data=$this->Hr_model->getAttendanceofEmployee($this->input->post('emp_id'),$this->input->post('month'));
+        echo json_encode($data);
+	}
+
 
 	public function Overtime()
 	{

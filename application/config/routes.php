@@ -171,6 +171,8 @@ $route['PayAdvance/add'] = 'Hrmodule/addPayAdvance';
 $route['getEmployeesbyCompany'] = 'Hrmodule/getEmployeesbyCompany';
 $route['getBasicofEmployee'] = 'Hrmodule/getBasicofEmployee';
 $route['PayAdvance/edit/(:num)'] = 'Hrmodule/editPayAdvance/$1';
+$route['getSalaryMode'] = 'Hrmodule/getSalaryMode';
+$route['getAttendanceofEmployee'] = 'Hrmodule/getAttendanceofEmployee';
 
 $route['Payroll'] = 'Hrmodule/Payroll';
 $route['Payroll/get'] = 'Hrmodule/getPayroll';

@@ -27,7 +27,6 @@ class Sale extends MY_Controller {
 	}
 	public function add()
 	{
-		
 		$this->form_validation->set_rules('company', 'company', 'required');
 		if ($this->form_validation->run() == FALSE) {
 			if($this->session->userdata('user_type')=='C'){
