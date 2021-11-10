@@ -65,11 +65,11 @@
                 <thead>
                 <tr>
                     <th>SINO</th>
-					<th>DATE</th>
+					          <th>DATE</th>
                     <th>EMPLOYEE NAME</th>
                     <!--<th>STATUS</th>
                     <th><center>EDIT/DELETE</center></th>-->
-				</tr>
+				        </tr>
                 </thead>
                 <tbody>
                 </tbody>

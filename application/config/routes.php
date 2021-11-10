@@ -310,3 +310,16 @@ $route['getAbsentTable'] = 'Reports/getAbsentTable';
 //Stock Report
 $route['stockReport'] = 'Reports/stockReport';
 $route['getStockReport'] = 'Reports/getStockReport';
+
+//Production Report
+$route['productionReport'] = 'Reports/productionReport';
+$route['getProductionReportRM'] = 'Reports/getProductionReportRM';
+$route['getProductionReportOP'] = 'Reports/getProductionReportOP';
+
+//Sale Report
+$route['saleReport'] = 'Reports/saleReport';
+$route['getSaleTable'] = 'Reports/getSaleTable';
+
+//Purchase Report
+$route['purchaseReport'] = 'Reports/purchaseReport';
+$route['getPurchaseTable'] = 'Reports/getPurchaseTable';
