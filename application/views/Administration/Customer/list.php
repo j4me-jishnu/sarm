@@ -33,7 +33,7 @@
                   <th>NAME</th>
                   <th>ADDRESS</th>
                   <th>PHONE</th>
-                  <th>OLD BALANCE</th>
+                  <th>OPENING BALANCE</th>
                   <th>DR/CR</th>
                   <th>EDIT/DELETE</th>
                 </tr>

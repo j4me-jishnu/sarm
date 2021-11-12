@@ -25,9 +25,6 @@
                 <div class="col-md-4">
                   <a href="<?php echo base_url();?>addEmployee" class="btn btn-sm common-btn"><i class="fa fa-plus-square"></i> Add Employee</a>
                 </div>
-                <!-- <div class="col-md-4">
-                  <a href="<?php echo base_url();?>PieceRateEmployee" class="btn btn-sm common-btn"><i class="fa fa-user"></i> Piece Rate Employee</a>
-                </div> -->
               </div>
           </div>
               

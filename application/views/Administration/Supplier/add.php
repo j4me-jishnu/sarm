@@ -82,7 +82,7 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="size_name" class="col-sm-4 control-label">Old Balance</label>
+                  <label for="size_name" class="col-sm-4 control-label">Opening Balance</label>
 
                   <div class="col-sm-5">
                     <input type="text"  class="form-control" name="supplier_oldbal" id="supplier_oldbal"  value="<?php if(isset($records->supplier_oldbal)) echo $records->supplier_oldbal ?>">

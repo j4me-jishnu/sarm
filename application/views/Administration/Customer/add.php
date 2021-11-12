@@ -85,7 +85,7 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="size_name" class="col-sm-4 control-label">Old Balance</label>
+                  <label for="size_name" class="col-sm-4 control-label">Opening Balance</label>
 
                   <div class="col-sm-5">
                     <input type="text"  class="form-control" name="old_balance" id="old_balance"  value="<?php if(isset($records->old_balance)) echo $records->old_balance ?>">
