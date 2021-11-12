@@ -118,7 +118,18 @@
 
                   </div>
                 </div>
-
+                <?php if(isset($records->supplier_act_status)){ ?>      
+                <div class="form-group">
+                  <div class="col-sm-12 text-center">
+                  <label class="radio-inline">
+                    <input type="radio" name="supplier_act_status" value="0" <?php if (@$records->supplier_act_status == 0)  echo "checked" ?>>Active
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" name="supplier_act_status" value="1" <?php if (@$records->supplier_act_status == 1)  echo "checked" ?>>Inactive
+                  </label>
+                  </div>
+                </div>
+                <?php } ?>  
                 <div class="form-group">
                   <center> <button type="submit" class="btn btn-primary">Save</button></center>
                 </div>

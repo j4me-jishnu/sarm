@@ -205,6 +205,7 @@ class Administration extends MY_Controller {
 						'supplier_pcategory' =>$this->input->post('category'),
 						'supplier_status' => 1,
 						'supplier_type'	=>$this->input->post('supplier_type'),
+						'supplier_act_status' =>$this->input->post('supplier_act_status'),
 						);
 
 			$data2 = array(

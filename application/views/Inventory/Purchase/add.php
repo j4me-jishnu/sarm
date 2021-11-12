@@ -19,21 +19,7 @@
           <fieldset>
             <legend>Purchase Information</legend>
             <input type="hidden" id="response" value="<?php echo $this->session->flashdata('response');?>" />
-            <!-- <div class="row">
-              <div class="col-md-8"></div>
-              <div class="col-md-4">
-
-                <div class="dropdown">
-                  <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown">Save
-                  <span class="caret"></span></button>
-                  <ul class="dropdown-menu">
-                    <li><a href="#">Save</a></li>
-                    <li><a href="#">Save as Draft</a></li>
-                  </ul>
-                </div>
-
-              </div>
-            </div> -->
+          
             <div class="row">
               <div class="col-md-2">
               <?php if($this->session->userdata['user_type']!='C')
@@ -128,34 +114,9 @@
                   <label for="product_name" class="control-label">Reference ID<span style="color:red">*</span></label>
                   <input type="text" name="ref_bill_id" class="form-control" id="invoice_number" required>
               </div>
-               <!-- checkbox to toggle popup modal -->
-              <div class="col-md-4" style="margin-top:30px;">
-                  <input type="checkbox" class="form-check-input" id="remark" name="remark_chk" value="1" data-toggle="modal" data-target="#myModal">
-                  <label for="remark" class="form-check-label">Remark</label>
-              </div>
-                <!-- end of reamrk check box -->
             </div>
             <br>
-            <!-- <div class="row">
-              <div class="col-md-6">
-              </div>
-              <div class="col-md-2" style="text-align: right;">
-                <label class="control-label">Price Category<span style="color:red">*</span></label>
-              </div>
-              <div class="col-md-4">
-                <?php
-                foreach ($pcategory as $key) {
-                ?>
-                <div class="col-sm-2">
-                  <label class="radio">
-                      <input type="radio" name="optradio" onchange="changePrice()" value="<?php echo $key->pcategory_id ?>" ><?php echo $key->pcategory_name ?>
-                    </label>
-                </div>
-                <?php
-                }
-                ?>
-              </div>
-            </div> -->
+
             <br>
             <div class="row">
               <div class="col-md-2">
@@ -173,53 +134,14 @@
               <div class="col-md-2">
                 <label>Discount</label>
               </div>
-              <!-- <div class="col-md-2">
-                <label>Tax</label>
-              </div> -->
+
               <div class="col-md-2">
                 <label>Total</label>
               </div>
             </div>
             <input type="hidden" name="counter" id="counter" value="0">
             <input type="hidden" name="counter_old" id="counter_old">
-            <!-- <div class="box box-success">
-              <div class="row">
-                <div class="col-md-2">
-                  <input type="checkbox" name="item_index[]"/>
-                    <select name="product_id_fk[]" class="form-control product_id"  id="productid_1" autofocus />
-                    <option></option>
-                    <?php
-                    foreach ($itemlist as $value) {
-                    ?>
-                      <option value="<?php echo $value->product_id ?>"><?php echo $value->product_name ?></option>
-                    <?php
-                    }
-                    ?>
-                    </select>
-                </div>
-                <div class="col-md-2">
-                  <br>
-                  <input type="text" name="quantity[]" class="form-control" id="quantity_1" placeholder="Quantity" onkeyup="getSum(1);">
-                </div>
-                <div class="col-md-2">
-                  <br>
-                  <input type="text" name="price[]" class="form-control" id="price_1" placeholder="Price" onkeyup="getSum(1);" onchange="getSum(1);">
-                </div>
-                <div class="col-md-2">
-                  <input type="radio" name="disradio_1" id="disradio_1" onchange="getSum(1);" value="0">price&nbsp;
-                  <input type="radio" name="disradio_1" id="disradio_1" onchange="getSum(1);" value="1" checked>%
-                  <input type="text" name="discount[]" id="discount_1" class="form-control" placeholder="Discount" onkeyup="getSum(1);">
-                </div>
-                <div class="col-md-2">
-                  <br>
-                  <input type="text" class="form-control" name="tax[]" id="tax_1" onkeyup="getSum(1);">
-                </div>
-                <div class="col-md-2">
-                  <br>
-                  <input type="text" name="total[]" id="total_1" class="form-control" placeholder="Total">
-                </div>
-              </div>
-            </div> -->
+     
             <DIV id="service" class="box-body no-padding" ></div>
             <i class="fa fa-fw fa-plus-square fa-2x" onClick="addMore();" Style="color:green;"></i>
             <i class="fa fa-fw fa-minus-square pull-right fa-2x" onClick="deleteRow();" Style="color:red;"></i>
@@ -290,32 +212,6 @@
           </div>
         </div>
       </div>
-
-    <!-- Popup Modal -->
-    <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog">
-        
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Add Remark</h4>
-            </div>
-            <div class="modal-body">
-            <div class="form-group">
-              <label for="exampleFormControlTextarea1">Remarks</label>
-              <textarea class="form-control" name="remarks_text" id="exampleFormControlTextarea1" rows="3"></textarea>
-            </div>
-            </div>
-            <div class="modal-footer">
-              <button type="submit" class="btn btn-primary" data-dismiss="modal">Submit</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    <!-- End of Popup Modal -->
-
-
     </form>
   </section>
 </div>

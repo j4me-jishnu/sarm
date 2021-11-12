@@ -32,6 +32,14 @@ Class Hr_model extends CI_Model
 		$this->db->where('emp_id',$emp_id);
         return $query = $this->db->get()->row();
 	}
+    public function getPREmployeeData($emp_id)
+	{
+		$this->db->select('*');
+		$this->db->from('tbl_emp_piece_rate');
+		$this->db->where('emp_pr_fk',$emp_id);
+        $query = $this->db->get();
+        return $query->result();
+	}
 	public function getAttendenceData($param)
 	{
 		$arOrder = array('','emp_name');
@@ -201,6 +209,15 @@ Class Hr_model extends CI_Model
 		$this->db->where("emp_id",$emp_id);
         $query = $this->db->get();
     	return $query->num_rows();
+    }
+
+    public function getAllAttendanceofEmployee($emp_id)
+    {
+    	$this->db->select('att_date');
+		$this->db->from('tbl_empattendance');
+		$this->db->where("emp_id",$emp_id);
+        $query = $this->db->get();
+    	return $query->result();
     }
 
     public function getOvertimeDetails($param)

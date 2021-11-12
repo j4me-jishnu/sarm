@@ -22,7 +22,7 @@
 			$table.column(0).nodes().each(function(node,index,dt){
             $table.cell(node).data(index+1);
             });
-			$('td', row).eq(7).html('<center><a href="<?php echo base_url();?>editSupplier/'+data['supplier_id']+'"><i class="fa fa-edit iconFontSize-medium" ></i></a>&nbsp;&nbsp;&nbsp;<a onclick="return confirmDelete('+data['supplier_id']+')"><i class="fa fa-trash-o iconFontSize-medium" ></i></a></center><br>');
+			$('td', row).eq(8).html('<center><a href="<?php echo base_url();?>editSupplier/'+data['supplier_id']+'"><i class="fa fa-edit iconFontSize-medium" ></i></a>&nbsp;&nbsp;&nbsp;<a onclick="return confirmDelete('+data['supplier_id']+')"><i class="fa fa-trash-o iconFontSize-medium" ></i></a></center><br>');
           
         },
 
@@ -38,9 +38,20 @@
             "className": "text-center",
             render: function (data, type, row) {
                 if (data == '0') {
-                    return '<i class="fas fa-arrow-left" style="color:green"></i>';
+                    return '<i class="ion-arrow-left-c" style="color:green"></i>';
                 }else{
-                    return '<i class="fas fa-arrow-right" style="color:red"></i>';
+                    return '<i class="ion-arrow-right-c" style="color:red"></i>';
+                }
+                }
+            }, 
+            {
+            data: 'supplier_act_status',
+            "className": "text-center",
+            render: function (data, type, row) {
+                if (data == '0') {
+                    return '<i class="fa fa-toggle-on" style="color:green;font-size:30px;"></i>';
+                }else{
+                    return '<i class="fa fa-toggle-off" style="color:red;font-size:30px;"></i>';    
                 }
                 }
             }, 

@@ -33,9 +33,16 @@ $table = $('#attendence_table').DataTable( {
             "data": null,
             render:function(data, type, row)
             {
+              return '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myAttenModal" onclick="attendance('+data.emp_id+')"><i class="fa fa-calendar" aria-hidden="true"></i></button>';
+            },
+    },
+    {
+            "data": null,
+            render:function(data, type, row)
+            {
               return '<button class="btn btn-primary" id="multi_date" data-name="'+data.emp_name+'" data-id="'+data.emp_id+'" data-toggle="modal" onClick="multidat(this)" data-target="#myModal">Add Dates</button>';
             },
-        }
+    }
   ]
 
 } );
@@ -55,6 +62,39 @@ $("#date").datepicker({
   todayHighlight: true
 })
 
+function attendance(emp_id){
+  var tips = ['some description', 'some other description'];
+  $.ajax({
+          url:"<?php echo base_url();?>getAllAttendanceofEmployee",
+          type: 'POST',
+          data:{emp_id:emp_id},
+          dataType: 'json',
+          success:
+          function(data){
+          var hello = [];
+           for(var i=0;i<=data.length-1;i++){
+              hello.push(data[i].att_date);
+           }
+           $("#datepicker45").datepicker({
+              dateFormat: 'yy-mm-dd',
+              beforeShowDay: highlightDays,
+            })
+
+            function highlightDays(date) {
+              for (var i = 0; i < hello.length; i++) {
+              if (new Date(hello[i]).toString() == date.toString()) {
+                return [true, 'highlight', tips[i]];
+              }
+            }
+                return [true, ''];
+             }
+          }
+        });
+
+    
+  
+
+}
 function submit(){
   ckbox = document.getElementsByClassName("chkdata");
   var option = $('#option').val();

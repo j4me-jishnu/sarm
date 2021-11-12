@@ -46,8 +46,11 @@
             render: function (data, type, row) {
                 if (data == '0') {
                     return 'Wages';
-                }else{
+                }else if(data == '1'){
                     return 'Salary';
+                }
+                else if(data == '2'){
+                    return 'Piece Rate';
                 }
                 }
             }, 
@@ -86,5 +89,76 @@
 
     }
     }
+    function peiceRateCheck() {
+        if (document.getElementById('piece_rate1').checked) {
+           document.getElementById('pr_table').style.display = 'block';
+           document.getElementById('basic_salary').style.display = 'none';
+        } 
+    }
+    function WagesCheck() {
+        if (document.getElementById('wages_rate1').checked) {
+           document.getElementById('pr_table').style.display = 'none';
+           document.getElementById('basic_salary').style.display = 'block';
+        } 
+    }
+    function SalaryCheck() {
+        if (document.getElementById('salary_rate1').checked) {
+           document.getElementById('pr_table').style.display = 'none';
+           document.getElementById('basic_salary').style.display = 'block';
+        } 
+    }
 
+function addRow() {
+  var table = document.getElementById("subscriptionTable");
+  var rowCount = table.rows.length;
+  var row = table.insertRow(rowCount);
+  var cell1 = row.insertCell(0);
+  var element1 = document.createElement("input");
+  element1.type = "checkbox";
+  element1.name = "chkbox[]";
+  cell1.appendChild(element1);
+
+  var cell2 = row.insertCell(1);
+
+  var cell3 = row.insertCell(2);
+  var element2 = document.createElement("input");
+  element2.type = "text";
+  element2.name = "pr_item[]";
+  cell3.appendChild(element2);
+
+  var cell4 = row.insertCell(3);
+  var element3 = document.createElement("input");
+  element3.type = "text";
+  element3.name = "pr_kg_pc[]";
+  cell4.appendChild(element3);
+
+  var cell5 = row.insertCell(4);
+  var element4 = document.createElement("input");
+  element4.type = "text";
+  element4.name = "pr_rate[]";
+  cell5.appendChild(element4);
+
+  cell2.innerHTML = rowCount;
+}
+
+
+function deleteRow(tableID) {
+  try {
+    var table = document.getElementById("subscriptionTable");
+    var rowCount = table.rows.length;
+
+    for (var i = 0; i < rowCount; i++) {
+      var row = table.rows[i];
+      var chkbox = row.cells[0].childNodes[0];
+      if (null != chkbox && true == chkbox.checked) {
+        table.deleteRow(i);
+        rowCount--;
+        i--;
+      }
+    }
+  } catch (e) {
+    alert(e);
+  }
+}
+    
 </script>
