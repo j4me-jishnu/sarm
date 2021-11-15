@@ -326,3 +326,16 @@ $route['getSaleTable'] = 'Reports/getSaleTable';
 //Purchase Report
 $route['purchaseReport'] = 'Reports/purchaseReport';
 $route['getPurchaseTable'] = 'Reports/getPurchaseTable';
+
+//Company Reports
+//Purchase Reports//
+$route['cmpPurchaseReport'] = 'Companyreport/purchaseReport';
+$route['GetcmpPurchaseReport'] = 'Companyreport/getPurchaseTable';
+
+//Sale Reports
+$route['cmpSaleReport'] = 'Companyreport/saleReport';
+$route['GetcmpSaleReport'] = 'Companyreport/getSaleTable';
+
+//Stock Reports
+$route['cmpStockReport'] = 'Companyreport/stockReport';
+$route['GetcmpStockReport'] = 'Companyreport/getStockReport';
