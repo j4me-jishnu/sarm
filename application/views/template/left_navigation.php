@@ -447,6 +447,30 @@
           </ul>
         </li>
 
+        <!-- Company Report -->
+        <li class="treeview 
+          <?php 
+            if($this->uri->segment(1)=="saleReport")
+              {echo "active";}
+            if($this->uri->segment(1)=="purchaseReport")
+              {echo "active";}
+            if($this->uri->segment(1)=="stockReport")
+              {echo "active";}
+            if($this->uri->segment(1)=="productionReport")
+              {echo "active";}
+          ?>">
+          <a><i class="fa fa-line-chart"></i><span>Reports</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu ">
+            <li class="<?php if($this->uri->segment(1)=="saleReport"){echo "active";}?>" ><a  href="<?php echo base_url();?>saleReport"><i class="fa fa-file-text-o"></i> <span>Sale Report</span></a></li>
+            <li class="<?php if($this->uri->segment(1)=="purchaseReport"){echo "active";}?>" ><a  href="<?php echo base_url();?>purchaseReport"><i class="fa fa-file-text-o"></i> <span>Purchase Report</span></a></li>
+            <li class="<?php if($this->uri->segment(1)=="stockReport"){echo "active";}?>" ><a  href="<?php echo base_url();?>stockReport"><i class="fa fa-file-text-o"></i> <span>Stock Report</span></a></li> 
+            <li class="<?php if($this->uri->segment(1)=="productionReport"){echo "active";}?>" ><a  href="<?php echo base_url();?>productionReport"><i class="fa fa-file-text-o"></i> <span>Production Report</span></a></li>
+          </ul>
+        </li>  
 
     <?php } ?>
 

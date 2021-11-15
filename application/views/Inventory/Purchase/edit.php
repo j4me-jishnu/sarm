@@ -1,4 +1,9 @@
-
+<style>
+   #list{
+  overflow-x: scroll;
+  width: auto;
+  }
+</style>
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
@@ -211,6 +216,13 @@
                   <br>
                   <input type="text" name="total[]" id="total_<?php echo $i; ?>" class="form-control" placeholder="Total" value="<?php if(isset($key->total_price)) echo  $key->total_price?>">
                 </div>
+                <?php if(isset($key->purchase_remarks)){ ?>
+                <div class="col-md-2">
+                  <input class="form-check-input" type="checkbox" value="1" id="flexCheckDefault" name="remark_chk[]" checked>
+                  <label class="form-check-label" for="flexCheckDefault">remark</label>
+                  <input type="text" name="remarks_text[]" id="myModal_<?php echo $i; ?>" class="form-control" placeholder="Remark" value="<?php if(isset($key->purchase_remarks)) echo  $key->purchase_remarks?>">
+                </div>
+                <?php } ?>
               </div>
             </div>
             <?php 

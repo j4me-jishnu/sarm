@@ -127,10 +127,10 @@
                 </select>
               </div>
                <!-- checkbox to toggle popup modal -->
-               <div class="col-md-4" style="margin-top:30px;">
+               <!-- <div class="col-md-4" style="margin-top:30px;">
                   <input type="checkbox" class="form-check-input" id="remark" name="remark_chk" value="1" data-toggle="modal" data-target="#myModal">
                   <label for="remark" class="form-check-label">Remark</label>
-              </div>
+              </div> -->
                 <!-- end of reamrk check box -->
             </div>
             <br>
@@ -294,31 +294,6 @@
           </div>
         </div>
       </div>
-
-        <!-- Popup Modal -->
-    <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog">
-        
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Add Remark</h4>
-            </div>
-            <div class="modal-body">
-            <div class="form-group">
-              <label for="exampleFormControlTextarea1">Remarks</label>
-              <textarea class="form-control" name="remarks_text" id="exampleFormControlTextarea1" rows="3"></textarea>
-            </div>
-            </div>
-            <div class="modal-footer">
-              <button type="submit" class="btn btn-primary" data-dismiss="modal">Submit</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    <!-- End of Popup Modal -->
-
     </form>
   </section>
 </div>

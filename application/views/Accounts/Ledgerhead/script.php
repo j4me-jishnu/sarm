@@ -24,7 +24,13 @@ $table = $('#ledgerhead_table').DataTable( {
 			$table.column(0).nodes().each(function(node,index,dt){
             $table.cell(node).data(index+1);
             });
-            $('td', row).eq(8).html('<center><a href="<?php echo base_url();?>Ledgerhead/edit/'+data['ledgerhead_id']+'"><i class="fa fa-edit iconFontSize-medium" ></i></a>&nbsp;&nbsp;&nbsp;<a onclick="return confirmDelete('+data['ledgerhead_id']+')"><i class="fa fa-trash-o iconFontSize-medium" ></i></a></center>');
+            if(data['ledger_default'] == 0){
+                $('td', row).eq(8).html('<center><a href="<?php echo base_url();?>Ledgerhead/edit/'+data['ledgerhead_id']+'"><i class="fa fa-edit iconFontSize-medium" ></i></a>&nbsp;&nbsp;&nbsp;<a onclick="return confirmDelete('+data['ledgerhead_id']+')"><i class="fa fa-trash-o iconFontSize-medium" ></i></a></center>');
+            }
+            else
+            {
+                $('td', row).eq(8).html('<center><i class="fa fa-cubes"></i></center>');    
+            }
             if(data['debit_or_credit'] == 1)
             {
                 $('td', row).eq(7).html('<center>Debit</center>');

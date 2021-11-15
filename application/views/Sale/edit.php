@@ -207,6 +207,13 @@
                   <br>
                   <input type="text" name="total[]" id="total_<?php echo $i; ?>" class="form-control" placeholder="Total" value="<?php if(isset($key->total_price)) echo  $key->total_price?>">
                 </div>
+                <?php if(isset($key->sale_remark)) { ?>
+                <div class="col-md-2">
+                  <input class="form-check-input" type="checkbox" value="1" id="flexCheckDefault" name="remark_chk[]" checked>
+                  <label class="form-check-label" for="flexCheckDefault">remark</label>
+                  <input type="text" name="remarks_text" id="myModal_<?php echo $i; ?>" class="form-control" placeholder="Total" value="<?php if(isset($key->sale_remark)) echo  $key->sale_remark?>">
+                </div>
+                <?php } ?>
               </div>
             </div>
             <?php 
