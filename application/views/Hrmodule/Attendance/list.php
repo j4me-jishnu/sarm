@@ -1,4 +1,16 @@
+<style>
+  td.highlight {
+  border: none !important;
+  padding: 1px 0 1px 1px !important;
+  background: none !important;
+  overflow: hidden;
+}
 
+td.highlight a {
+  background: #ad3f29 url(bg.png) 50% 50% repeat-x !important;
+  border: 1px #88a276 solid !important;
+}
+</style>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -66,7 +78,8 @@
           <tr>
             <th>SlNo.</th>
             <th>Employee Name</th>
-            <th>Attendance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Select all&nbsp;&nbsp;&nbsp;<input type="checkbox" id="pickbox_all"></th>
+            <th>Attendance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="pickbox_all"></th>
+            <th>Attendance View</th>
             <th>Date</th>
           </tr>
           </thead>
@@ -117,3 +130,25 @@
     </div>
 </div>
 <!-- end of pop-up modal -->
+
+<!-- popup modal for attendance -->
+<!-- Modal -->
+<div id="myAttenModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <div id="datepicker45"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>

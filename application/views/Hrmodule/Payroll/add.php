@@ -82,7 +82,15 @@
                     <input type="text" value="0"  id="payroll_balance" name="payroll_balance" class="form-control" >
                   </div>
               </div>
+              
+              <div class="form-group">
+                  <label for="size_name" class="col-sm-4 control-label">Attended Dates</label>
 
+                  <div class="col-sm-5">
+                    <input type="text" readonly id="attandance_dates" name="attandance_dates" class="form-control" >
+                  </div>
+              </div>
+              
               <div class="form-group">
                   <label for="size_name" class="col-sm-4 control-label">Leave Deductions</label>
 
@@ -116,7 +124,7 @@
                   <label for="size_name" class="col-sm-4 control-label">Salary Mode </label>
 
                   <div class="col-sm-5">
-                    <input type="text" readonly id="salary_mode" name="payroll_salary" class="form-control" >
+                    <input type="text" readonly id="salary_mode" name="salary_mode" class="form-control" >
                   </div>
               </div>
               <div class="form-group">

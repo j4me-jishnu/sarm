@@ -27,7 +27,6 @@ class Sale extends MY_Controller {
 	}
 	public function add()
 	{
-		
 		$this->form_validation->set_rules('company', 'company', 'required');
 		if ($this->form_validation->run() == FALSE) {
 			if($this->session->userdata('user_type')=='C'){
@@ -77,16 +76,6 @@ class Sale extends MY_Controller {
 			$sale_price = $this->input->post('price');
 			$discount_price = $this->input->post('discount'); 
 		
-			// Remark Check Box
-			$remark_checkbox = $this->input->post('remark_chk');
-			if($remark_checkbox == 1){
-				$remark_text = $this->input->post('remarks_text');
-			}
-			else
-			{
-				$remark_text = "";
-			}
-
 			$tax_per = $this->input->post('tax');
 			$total_price = $this->input->post('total');
 			$counter = $this->input->post('counter');
@@ -122,7 +111,15 @@ class Sale extends MY_Controller {
 							break;
 						}
 					}
-					
+					//remark checkbox
+					$remark_checkbox = $this->input->post('remark_chk');
+					if($remark_checkbox[$i] == 1){
+						$remark_text = $this->input->post('remarks_text');
+					}
+					else
+					{
+						$remark_text = "";
+					}
 					$data=array(
 					  'product_id_fk' =>$product_id[$i],
 					  'cust_id' =>$cust_id,
@@ -135,7 +132,7 @@ class Sale extends MY_Controller {
 					  'discount_price' =>$discount_price[$i],
 					  'discount_type' =>$discount_type,
 					  'total_price' =>$total_price[$i],
-					  'sale_remark' =>$remark_text,
+					  'sale_remark' =>$remark_text[$i],
 					  'sale_date' =>$sale_date,
 					  'stockstatus' =>0,
 					  'sale_status' =>1

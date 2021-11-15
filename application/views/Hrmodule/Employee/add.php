@@ -83,21 +83,61 @@
                   <div class="form-group">
                     <div class="col-sm-12 text-center">
                     <label class="radio-inline">
-                      <input type="radio" name="salary_mode" <?php echo (@$records->emp_mode==0) ? "checked":"" ?> value="0">Wages
+                      <input type="radio" id="wages_rate1" onclick="WagesCheck()" name="salary_mode" <?php echo (@$records->emp_mode==0) ? "checked":"" ?> value="0">Wages
                     </label>
                     <label class="radio-inline">
-                      <input type="radio" name="salary_mode" <?php echo (@$records->emp_mode==1) ? "checked":"" ?> value="1">Salary
+                      <input type="radio" id="salary_rate1" onclick="SalaryCheck()" name="salary_mode" <?php echo (@$records->emp_mode==1) ? "checked":"" ?> value="1">Salary
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" id="piece_rate1" onclick="peiceRateCheck()" name="salary_mode" <?php echo (@$records->emp_mode==2) ? "checked":"" ?> value="2">Peice Rate
                     </label>
                     </div>
                   </div>      
 
-                  <div class="form-group">
+                  <div class="form-group" id="basic_salary">
                     <label for="size_name" class="col-sm-4 control-label">Basic Salary</label>
 
-                    <div class="col-sm-5">
+                    <div class="col-sm-5" >
                       <input type="text"    class="form-control" name="employsalary" id="employsalary"  value="<?php if(isset($records->emp_salary)) echo $records->emp_salary ?>">
                     </div>
                   </div>
+                  
+                  <!-- Dynamic Table -->
+                  <div class="col-sm-6" id="pr_table" style="display:none; margin-left:250px;">
+                  
+                    <input type="button" id="add" class="btn btn-success" value="Add Row" onclick="addRow('subscriptionTable')" />
+
+                    <input type="button" id="subtract" class="btn btn-danger" value="Delete Row" onclick="deleteRow('subscriptionTable')" />
+                                     
+                  <table class="table table-bordered" id="subscriptionTable" width="700px">
+                    
+                      <tr>
+                        <th scope="col">ROW</th>
+                        <th scope="col">SR.NO</th>
+                        <th scope="col">ITEM</th>
+                        <th scope="col">KG/PCS</th>
+                        <th scope="col">RATE</th>
+                      </tr>
+                        <?php if(isset($pr_records)) { ?>
+                        <?php foreach($pr_records as $records2) { ?>  
+                          <?php echo '<tr><td><input type="checkbox" name="chk" /></td>
+                          <td> 1 </td>
+                          <td> <input type="text" name="pr_item[]" value="'.$records2->emp_pr_item.'" /> </td>
+                          <td> <input type="text" name="pr_kg_pc[]" value="'.$records2->emp_pr_kg_pcs.'" /> </td>
+                          <td> <input type="text" name="pr_rate[]" value="'.$records2->emp_pr_rate.'" /> </td></tr>
+                          <td><input type="hidden" name="pr_ide[]" value="'.$records2->emp_pr_id.'"></input></td>' ?>
+                        <?php } } else { ?>
+                      <tr>
+                          <td><input type="checkbox" name="chk" /></td>
+                          <td> 1 </td>
+                          <td> <input type="text" name="pr_item[]" /> </td>
+                          <td> <input type="text" name="pr_kg_pc[]"/> </td>
+                          <td> <input type="text" name="pr_rate[]"/> </td>
+                        <?php } ?>  
+                      </tr>                  
+                  </table>
+                  </div>
+                  <!-- End of Dynaic Table -->
 
                   <div class="form-group">
                     <div class="col-sm-12 text-center">
@@ -111,7 +151,7 @@
                   </div>
                   
                   <div class="form-group">
-                    <label for="size_name" class="col-sm-4 control-label">Old Balance</label>
+                    <label for="size_name" class="col-sm-4 control-label">Opening Balance</label>
 
                     <div class="col-sm-5">
                       <input type="text"    class="form-control" name="old_balance2" id="old_balance2"  value="<?php if(isset($records->old_balance)) echo $records->old_balance ?>">

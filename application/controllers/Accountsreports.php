@@ -276,7 +276,7 @@ class Accountsreports extends MY_Controller
 			$template['currentliabilty'] = $this->Accountsreports_model->getCurrentLiabilty($cmp,$fyr);
 
 			$template['capital'] = $this->Accountsreports_model->getCapital($cmp);
-
+			
 			$template['profitloss'] = $this->Accountsreports_model->getProfitloss($cmp,$fyr);
 
 			if($this->session->userdata('user_type')=='C'){

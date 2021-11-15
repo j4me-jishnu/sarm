@@ -447,6 +447,28 @@
           </ul>
         </li>
 
+        <!-- Company Report -->
+        <li class="treeview 
+          <?php 
+            if($this->uri->segment(1)=="cmpSaleReport")
+              {echo "active";}
+            if($this->uri->segment(1)=="cmpPurchaseReport")
+              {echo "active";}
+            if($this->uri->segment(1)=="cmpStockReport")
+              {echo "active";}
+
+          ?>">
+          <a><i class="fa fa-line-chart"></i><span>Reports</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu ">
+            <li class="<?php if($this->uri->segment(1)=="cmpSaleReport"){echo "active";}?>" ><a  href="<?php echo base_url();?>cmpSaleReport"><i class="fa fa-file-text-o"></i> <span>Sale Report</span></a></li>
+            <li class="<?php if($this->uri->segment(1)=="cmpPurchaseReport"){echo "active";}?>" ><a  href="<?php echo base_url();?>cmpPurchaseReport"><i class="fa fa-file-text-o"></i> <span>Purchase Report</span></a></li>
+            <li class="<?php if($this->uri->segment(1)=="cmpStockReport"){echo "active";}?>" ><a  href="<?php echo base_url();?>cmpStockReport"><i class="fa fa-file-text-o"></i> <span>Stock Report</span></a></li> 
+          </ul>
+        </li>  
 
     <?php } ?>
 

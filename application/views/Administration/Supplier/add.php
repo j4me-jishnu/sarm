@@ -82,7 +82,7 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="size_name" class="col-sm-4 control-label">Old Balance</label>
+                  <label for="size_name" class="col-sm-4 control-label">Opening Balance</label>
 
                   <div class="col-sm-5">
                     <input type="text"  class="form-control" name="supplier_oldbal" id="supplier_oldbal"  value="<?php if(isset($records->supplier_oldbal)) echo $records->supplier_oldbal ?>">
@@ -118,7 +118,18 @@
 
                   </div>
                 </div>
-
+                <?php if(isset($records->supplier_act_status)){ ?>      
+                <div class="form-group">
+                  <div class="col-sm-12 text-center">
+                  <label class="radio-inline">
+                    <input type="radio" name="supplier_act_status" value="0" <?php if (@$records->supplier_act_status == 0)  echo "checked" ?>>Active
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" name="supplier_act_status" value="1" <?php if (@$records->supplier_act_status == 1)  echo "checked" ?>>Inactive
+                  </label>
+                  </div>
+                </div>
+                <?php } ?>  
                 <div class="form-group">
                   <center> <button type="submit" class="btn btn-primary">Save</button></center>
                 </div>

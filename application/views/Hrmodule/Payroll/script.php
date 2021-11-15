@@ -53,6 +53,7 @@ $(document).on('change','#company',function(){
                 $('#emp').html(html);
                 $('#emp').focus();
                 $('#payroll_basicpay').val('');
+    
             }
     });
     return false;
@@ -68,9 +69,34 @@ $(document).on('change','#emp',function(){
                 $('#payroll_basicpay').val(data);
                 $('#payroll_basicpay').focus();
             }
+            
     });
     return false;
 }); 
+
+$(document).on('change','#emp',function(){
+	var emp_id = $('#emp').val();
+	$.ajax({
+            url:'<?php echo base_url(); ?>getSalaryMode',
+            method:'post',
+            dataType : 'json',
+            data:{emp_id:emp_id},
+            success:function(data){
+                if(data == 0){
+                    var salary_mode = 'Wages';
+                }
+                else
+                {
+                    salary_mode = 'Salary';
+                }
+                $('#salary_mode').val(salary_mode);
+                $('#salary_mode').focus();
+            }
+            
+    });
+    return false;
+}); 
+
 $(document).on('change','#payroll_salmonth',function(){
 	var emp_id = $('#emp').val();
 	var month = $('#payroll_salmonth').val();
@@ -101,6 +127,23 @@ $(document).on('change','#payroll_salmonth',function(){
     });
     return false;
 });
+
+$(document).on('change','#payroll_salmonth',function(){
+	var emp_id = $('#emp').val();
+	var month = $('#payroll_salmonth').val();
+	$.ajax({
+            url:'<?php echo base_url(); ?>getAttendanceofEmployee',
+            method:'post',
+            dataType : 'json',
+            data:{emp_id:emp_id,month:month},
+            success:function(data){
+                $('#attandance_dates').val(data);
+                $('#attandance_dates').focus();
+            }
+    });
+    return false;
+});
+
 $(document).on('change','#payroll_salmonth',function(){
     var emp_id = $('#emp').val();
     var month = $('#payroll_salmonth').val();
@@ -125,13 +168,25 @@ $(document).on('click','.calc-salary',function(){
 	var advance = $('#payroll_balance').val();
 	var days = $('#payroll_leaveamt').val();
     var ot_amount = $('#ot_amount').val();
-	var a = parseFloat(basic)/30;
-	var b = parseFloat(days) * parseFloat(a);
+    var salary_mode = $('#salary_mode').val();
+    var attendance_days = $('#attandance_dates').val();
+    console.log(salary_mode);
+    if(salary_mode == 'Salary'){
+	    var a = parseFloat(basic)/30;
+	    var b = parseFloat(days) * parseFloat(a);
 
-	var total = parseFloat(basic) + parseFloat(ot_amount) - parseFloat(advance) - parseFloat(b);
-	// console.log(total);
-	$('#payroll_salary').val(total);
-    $('#payroll_salary').focus();
+	    var total = parseFloat(basic) + parseFloat(ot_amount) - parseFloat(advance) - parseFloat(b);
+	    // console.log(total);
+	    $('#payroll_salary').val(total);
+        $('#payroll_salary').focus();
+    }
+    else if(salary_mode == 'Wages')
+    {
+        var sal = parseFloat(basic) * parseFloat(attendance_days);
+        var total = parseFloat(sal) - parseFloat(advance);
+        $('#payroll_salary').val(total);
+        $('#payroll_salary').focus();
+    }
 });
 $('#payroll_salarydate').datepicker({
       autoclose: true,

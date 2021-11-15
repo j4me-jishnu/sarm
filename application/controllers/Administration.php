@@ -71,6 +71,14 @@ class Administration extends MY_Controller {
 			{
 				$company =  $this->session->userdata['cmp_id'];
 			}
+			if($this->input->post('radio_val') == '0'){
+				// ledgerhead debit value is 1
+				$ledger_head_status = 1;
+			}
+			else if($this->input->post('radio_val') == '1'){
+				// ledgerhead debit value is 2
+				$ledger_head_status = 2;
+			}
 			$datas = array(
 						// 'customer_type'=>$this->input->post('optradio'),
 						'custname' => $this->input->post('cust_name'),
@@ -88,12 +96,16 @@ class Administration extends MY_Controller {
 				'group_id_fk'	=> 15,
 				'ledger_head' =>$this->input->post('cust_name'),
 				'ledgerhead_desc' => 'Customer',
-				'opening_bal'	=> 0,
+				'opening_bal'	=> $this->input->post('old_balance'),
+				'debit_or_credit' => $ledger_head_status,
 				'ledgerhead_status'	=> 1,
 				'company_id_fk'	=>	$company,
 			);
 			$data3 =array(
 				'ledger_head' =>$this->input->post('cust_name'),
+				'opening_bal'	=> $this->input->post('old_balance'),
+				'debit_or_credit' => $ledger_head_status,
+				'company_id_fk'	=>	$company,
 			);
 
 			$cust_id = $this->input->post('cust_id');
@@ -194,6 +206,23 @@ class Administration extends MY_Controller {
 			{
 				$company =  $this->session->userdata['cmp_id'];
 			}
+
+			if($this->input->post('supplier_act_status') != NULL){
+				$suppelier_active_status = $this->input->post('supplier_act_status');
+			}
+			else{
+				$suppelier_active_status = 0;
+			}
+
+			if($this->input->post('supplier_type') == '0'){
+				//debit is 1 in ledger head
+				$suppelier_types = 1;
+			}
+			else if($this->input->post('supplier_type') == '1'){
+				//credit is 2 in ledger head
+				$suppelier_types = 2;
+			}
+
 			$data = array(
 						'supplier_name' => $this->input->post('supplier_name'),
 						'supplier_address' => $this->input->post('supplier_address'),
@@ -205,21 +234,22 @@ class Administration extends MY_Controller {
 						'supplier_pcategory' =>$this->input->post('category'),
 						'supplier_status' => 1,
 						'supplier_type'	=>$this->input->post('supplier_type'),
+						'supplier_act_status' =>$suppelier_active_status,
 						);
 
 			$data2 = array(
 				'group_id_fk'	=>	21,
 				'ledger_head'	=>	$this->input->post('supplier_name'),
 				'ledgerhead_desc'	=>	'Supplier',
-				'opening_bal'	=>	0,
-				'debit_or_credit'	=> $this->input->post('supplier_type'),
+				'opening_bal'	=>	$this->input->post('supplier_oldbal'),
+				'debit_or_credit'	=> $suppelier_types,
 				'ledgerhead_status'	=> 1,
 				'company_id_fk'	=>	$company,
 			);
 
 			$data3	=	array(
 				'ledger_head'	=>	$this->input->post('supplier_name'),
-				'debit_or_credit'	=> $this->input->post('supplier_type'),
+				'debit_or_credit'	=> $suppelier_types,
 				'company_id_fk'	=>	$company,
 
 			);

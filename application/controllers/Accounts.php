@@ -680,7 +680,17 @@ class Accounts extends MY_Controller {
 		else
 		{
 			$ledgerhead_id = $this->input->post('ledgerhead_id');
-
+			//set Default
+			$default = $this->input->post('default_id');
+			if($default == 1){
+				//disable edit and delete
+				$setDefault = 1;
+			}
+			else
+			{
+				//enable edit and delete
+				$setDefault = 0;
+			}
 			$data = array(
 						'group_id_fk' =>$this->input->post('groups'),
 						'ledger_head' =>$this->input->post('ledger_head'),
@@ -688,18 +698,19 @@ class Accounts extends MY_Controller {
 						'ledgerhead_status' =>1,
 						'opening_bal' => $this->input->post('opening_bal'),
 						'debit_or_credit' => $this->input->post('optradio'),
-						'company_id_fk' => $this->input->post('company')
+						'company_id_fk' => $this->input->post('company'),
+						'ledger_default' => $setDefault,
 						);
 			$day= date('d') - 1;
 			$monthyear=date('Y-m');
 			$date=$monthyear.-$day;
 			if($this->input->post('optradio') == 1)
 			{
-				$debit_credit=2;
+				$debit_credit=1;
 			}
 			else if($this->input->post('optradio') == 2)
 			{
-				$debit_credit=1;
+				$debit_credit=2;
 			}
 
 			if($ledgerhead_id)

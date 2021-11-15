@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 05, 2021 at 07:09 AM
+-- Generation Time: Nov 10, 2021 at 07:04 AM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.9
 
@@ -180,7 +180,7 @@ CREATE TABLE IF NOT EXISTS `tbl_color` (
 
 INSERT INTO `tbl_color` (`color_id`, `company_id_fk`, `color_name`, `color_status`) VALUES
 (6, 7, '#D88', 1),
-(5, 5, '#882', 1),
+(5, 5, '#BED', 1),
 (4, 6, '#B84', 1),
 (7, 8, '#84B', 1);
 
@@ -238,7 +238,7 @@ CREATE TABLE IF NOT EXISTS `tbl_customer` (
 --
 
 INSERT INTO `tbl_customer` (`cust_id`, `company_id`, `custname`, `custaddress`, `custphone`, `custemail`, `old_balance`, `custstatus`, `cust_pcategory`, `debit_credit`) VALUES
-(5, 5, 'Sneha', 'gdgbd', 8484984, 'cust@gmail.com', 0, 1, 10, 0),
+(5, 5, 'Sneha', 'gdgbd', 8484984, 'cust@gmail.com', 4500, 1, 10, 0),
 (6, 6, 'nicemon', 'dsgg', 84849, 'cust1@gmail.com', 10000, 1, 11, 0),
 (7, 5, 'preethi', 'gdfgh', 8484984, 'cust@gmail.com', 5000, 0, 10, 0),
 (8, 5, 'ashkar', 'dsagfdg', 8484984, 'cust@gmail.com', 2000, 0, 11, 0),
@@ -326,6 +326,7 @@ DROP TABLE IF EXISTS `tbl_empattendance`;
 CREATE TABLE IF NOT EXISTS `tbl_empattendance` (
   `att_id` int(11) NOT NULL AUTO_INCREMENT,
   `att_date` date NOT NULL,
+  `month` int(10) DEFAULT NULL,
   `emp_id` int(11) NOT NULL,
   `att_status` tinyint(1) NOT NULL,
   PRIMARY KEY (`att_id`)
@@ -335,24 +336,24 @@ CREATE TABLE IF NOT EXISTS `tbl_empattendance` (
 -- Dumping data for table `tbl_empattendance`
 --
 
-INSERT INTO `tbl_empattendance` (`att_id`, `att_date`, `emp_id`, `att_status`) VALUES
-(58, '2021-11-03', 11, 1),
-(59, '2021-11-04', 11, 1),
-(60, '2021-11-05', 11, 1),
-(61, '2021-11-02', 11, 1),
-(62, '2021-11-10', 11, 1),
-(63, '2021-11-08', 11, 1),
-(64, '2021-11-01', 11, 1),
-(65, '2021-11-11', 11, 1),
-(66, '2021-10-06', 12, 1),
-(67, '2021-10-11', 12, 1),
-(68, '2021-10-08', 12, 1),
-(69, '2021-10-12', 12, 1),
-(70, '2021-10-13', 12, 1),
-(71, '2021-10-09', 12, 1),
-(72, '2021-10-15', 12, 1),
-(73, '2021-10-14', 12, 1),
-(74, '2021-10-07', 12, 1);
+INSERT INTO `tbl_empattendance` (`att_id`, `att_date`, `month`, `emp_id`, `att_status`) VALUES
+(58, '2021-11-03', 11, 11, 1),
+(59, '2021-11-04', 11, 11, 1),
+(60, '2021-11-05', 11, 11, 1),
+(61, '2021-11-02', 11, 11, 1),
+(62, '2021-11-10', 11, 11, 1),
+(63, '2021-11-08', 11, 11, 1),
+(64, '2021-11-01', 11, 11, 1),
+(65, '2021-11-11', 11, 11, 1),
+(66, '2021-10-06', 10, 12, 1),
+(67, '2021-10-11', 10, 12, 1),
+(68, '2021-10-08', 10, 12, 1),
+(69, '2021-10-12', 10, 12, 1),
+(70, '2021-10-13', 10, 12, 1),
+(71, '2021-10-09', 10, 12, 1),
+(72, '2021-10-15', 10, 12, 1),
+(73, '2021-10-14', 10, 12, 1),
+(74, '2021-10-07', 10, 12, 1);
 
 -- --------------------------------------------------------
 
@@ -376,7 +377,7 @@ CREATE TABLE IF NOT EXISTS `tbl_employee` (
   `emp_act_status` tinyint(4) NOT NULL,
   `emp_status` int(11) NOT NULL,
   PRIMARY KEY (`emp_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_employee`
@@ -385,7 +386,7 @@ CREATE TABLE IF NOT EXISTS `tbl_employee` (
 INSERT INTO `tbl_employee` (`emp_id`, `company_id`, `emp_name`, `emp_address`, `emp_phone`, `emp_email`, `emp_date`, `emp_mode`, `emp_salary`, `debit_or_credit`, `old_balance`, `emp_act_status`, `emp_status`) VALUES
 (1, 5, 'AJITH', '   gdgh ', 213, 'abc@gmail.com', '2021-01-04', 0, 30000, 0, 0, 0, 1),
 (2, 5, 'Akhilesh', '  fgsdgdf', 213, 'abc@gmail.com', '2021-01-04', 0, 20000, 0, 0, 0, 1),
-(3, 6, 'abc', '  gdsgd', 213, 'abc@gmail.com', '2021-01-04', 0, 40000, 0, 0, 0, 1),
+(3, 6, 'abc', '    gdsgd  ', 213, 'abc@gmail.com', '2021-01-04', 0, 40000, 0, 0, 0, 1),
 (4, 5, 'Jishnu Mohan', '    erqeasdasdsad  ', 98745614233, 'wewe@hr.com', '1970-01-01', 1, 1000, 0, 0, 0, 1),
 (5, 5, 'Ajith kumar', 'n43-ca-1-16/4, sundar colony, navi mumbai, mumbai  ', 9874561230, 'abc@gmail.com', '2021-07-10', 0, 1000, 0, 0, 0, 1),
 (6, 5, 'Rajnikanth', ' heroku,hello world   ', 9874561230, 'abc@gmail.com', '1970-01-01', 1, 500, 1, 2000, 0, 1),
@@ -394,7 +395,8 @@ INSERT INTO `tbl_employee` (`emp_id`, `company_id`, `emp_name`, `emp_address`, `
 (9, 5, 'innocent', 'awsedadasda  ', 789854654, 'abc@gmail.com', '1970-01-01', 0, 500, 1, 6000, 0, 1),
 (10, 6, 'Akhilesh', '         asdasda       ', 946312312, 'abc@gmail.com', '1970-01-01', 1, 500, 0, 2522, 0, 1),
 (11, 8, 'Aron Yates', 'House 4 , Paripally, Near Edapally, Kayankulam, Alappuzha', 1234567890, 'aron@business.com', '2021-01-11', 1, 10000, 0, 2000, 0, 1),
-(12, 8, 'Patrick Mahomes', 'KC,MO  ', 7894561230, 'stpatrick@hehe.com', '2021-06-10', 0, 500, 0, 100, 0, 1);
+(12, 8, 'Patrick Mahomes', 'KC,MO  ', 7894561230, 'stpatrick@hehe.com', '2021-06-10', 0, 500, 0, 100, 0, 1),
+(13, 6, 'Nithya', 'ernakulam  ', 77878854, 'r@e.com', '2021-01-10', 1, 10000, 0, 1000, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -423,7 +425,7 @@ CREATE TABLE IF NOT EXISTS `tbl_emp_piece_rate` (
 --
 
 INSERT INTO `tbl_emp_piece_rate` (`emp_pr_id`, `emp_pr_cmp_id`, `emp_pr_name`, `emp_pr_address`, `emp_pr_phone`, `emp_pr_email`, `emp_pr_material_ty`, `emp_pr_piece_rate`, `emp_pr_old_bal`, `emp_pr_act_status`, `emp_pr_status`) VALUES
-(1, 5, 'Anil Ambani', ' Respek 2 ', 7889455612, 'e@e.com', 'Magnesium', 25, 1000, 0, 1),
+(1, 5, 'Anil Ambani', '  Respek 2  ', 7889455612, 'e@e.com', 'Magnesium', 25, 1000, 1, 1),
 (2, 6, 'Charlie Clips', 'New Jearsy, NY  ', 7889456512, 'rr@g.com', 'Steel Bars', 500, 1000, 0, 1),
 (3, 6, 'Charlie Clips', ' New Jearsy, NY   ', 7889456512, 'rr@g.com', 'Steel Barssss', 500, 1000, 0, 0);
 
@@ -624,7 +626,7 @@ CREATE TABLE IF NOT EXISTS `tbl_ledgerhead` (
   `ledgerhead_status` int(11) NOT NULL,
   `company_id_fk` int(11) NOT NULL,
   PRIMARY KEY (`ledgerhead_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_ledgerhead`
@@ -662,7 +664,8 @@ INSERT INTO `tbl_ledgerhead` (`ledgerhead_id`, `group_id_fk`, `ledger_head`, `le
 (30, 12, 'Bandhan Bank232', 'Bank', 5000, 2, 1, 5),
 (31, 29, 'Akhilesh', 'Employee', 2522, 1, 1, 6),
 (32, 29, 'Aron Yates', 'Employee', 2000, 1, 1, 8),
-(33, 27, 'Patrick Mahomes', 'Employee', 100, 1, 1, 8);
+(33, 27, 'Patrick Mahomes', 'Employee', 100, 1, 1, 8),
+(34, 29, 'Nithya', 'Employee', 1000, 1, 1, 6);
 
 -- --------------------------------------------------------
 
@@ -780,7 +783,7 @@ CREATE TABLE IF NOT EXISTS `tbl_payroll` (
   `payroll_status` int(11) DEFAULT NULL,
   `payroll_salmonth` int(11) NOT NULL,
   PRIMARY KEY (`payroll_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_payroll`
@@ -788,7 +791,8 @@ CREATE TABLE IF NOT EXISTS `tbl_payroll` (
 
 INSERT INTO `tbl_payroll` (`payroll_id`, `company_id`, `payroll_emp_id`, `payroll_basicsalary`, `payroll_leaveamt`, `payroll_advance`, `payroll_salary`, `payroll_salarydate`, `payroll_status`, `payroll_salmonth`) VALUES
 (1, 5, 1, 30000, 1, 2000, 27000, '2021-04-30', 1, 4),
-(2, 8, 12, 500, 0, 0, 500, '1970-01-01', 1, 10);
+(2, 8, 12, 500, 0, 0, 500, '1970-01-01', 1, 10),
+(3, 6, 13, 10000, 0, 0, 0, '2021-11-01', 1, 10);
 
 -- --------------------------------------------------------
 
@@ -1276,7 +1280,7 @@ CREATE TABLE IF NOT EXISTS `tbl_sale` (
   `stockstatus` int(11) NOT NULL,
   `sale_status` int(11) NOT NULL,
   PRIMARY KEY (`sale_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_sale`
@@ -1296,7 +1300,8 @@ INSERT INTO `tbl_sale` (`sale_id`, `product_id_fk`, `cust_id`, `cmp_id`, `price_
 (26, 4, 11, 5, 2, '3', '8', 63, 2, 2, 1, 0, 123.48, NULL, '2021-04-21', 0, 2),
 (27, 9, 11, 5, 2, '3', '8', 56, 210, 41, 1, 0, 6938.4, NULL, '2021-04-21', 0, 2),
 (28, 6, 11, 5, 1, '3', '9', 50, 100, 10, 1, 0, 4500, '', '2021-11-04', 0, 1),
-(29, 4, 11, 5, 1, '3', '10', 80, 100, 10, 1, 0, 7200, 'Sale Remark', '2021-11-04', 0, 1);
+(29, 4, 11, 5, 1, '3', '10', 80, 100, 10, 1, 0, 7200, 'Sale Remark', '2021-11-04', 0, 1),
+(30, 1, 5, 5, 1, '3', '11', 50, 100, 10, 1, 0, 4500, '', '2021-11-24', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -1321,7 +1326,7 @@ CREATE TABLE IF NOT EXISTS `tbl_salepayments` (
   `net_balance` double NOT NULL,
   `payment_status` int(11) NOT NULL,
   PRIMARY KEY (`sale_payment_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_salepayments`
@@ -1341,7 +1346,8 @@ INSERT INTO `tbl_salepayments` (`sale_payment_id`, `invoice_number`, `tax_amount
 (19, 7, 0, 0, 1, 0, 0, 9000, 0, 9000, 8, 0, 0, 1),
 (20, 8, 0, 0, 1, 0, 0, 7061.879999999999, 1000, NULL, NULL, 0, 0, 1),
 (21, 9, 0, 0, 1, 0, 0, 4500, 4500, 0, NULL, 0, 0, 1),
-(22, 10, 0, 0, 1, 0, 0, 7200, 7200, 0, NULL, 0, 0, 1);
+(22, 10, 0, 0, 1, 0, 0, 7200, 7200, 0, NULL, 0, 0, 1),
+(23, 11, 0, 0, 1, 0, 0, 4500, 0, 0, NULL, 0, 4500, 1);
 
 -- --------------------------------------------------------
 
@@ -1365,7 +1371,7 @@ CREATE TABLE IF NOT EXISTS `tbl_stock` (
 --
 
 INSERT INTO `tbl_stock` (`stock_id`, `finyear`, `item_id`, `stock`, `company_id`, `stock_status`) VALUES
-(1, 3, 1, 38, 5, 1),
+(1, 3, 1, -12, 5, 1),
 (2, 3, 2, 0, 5, 0),
 (3, 3, 3, 20, 5, 1),
 (4, 3, 4, -65, 5, 1),

@@ -43,7 +43,7 @@ class Hrmodule extends MY_Controller {
 	public function addEmployee()
 	{
 		$this->form_validation->set_rules('employname', 'Name', 'required');
-		$this->form_validation->set_rules('employsalary','lang:Salary','required|numeric|greater_than[0.99]|regex_match[/^[0-9,]+$/]');
+		// $this->form_validation->set_rules('employsalary','lang:Salary','required|numeric|greater_than[0.99]|regex_match[/^[0-9,]+$/]');
 		if ($this->form_validation->run() == FALSE)
 		{
 			if($this->session->userdata('user_type')=='C'){
@@ -64,21 +64,23 @@ class Hrmodule extends MY_Controller {
 			{
 				$act_status = 0;
 			}
+			
+				$datas = array(
+					'emp_name' => $this->input->post('employname'),
+					'company_id'=> $this->input->post('company'),
+					'emp_address' => $this->input->post('employaddress'),
+					'emp_phone' => $this->input->post('employphone'),
+					'emp_email' => $this->input->post('employemail'),
+					'emp_mode' => $this->input->post('salary_mode'),
+					'emp_salary' => $this->input->post('employsalary'),
+					'debit_or_credit' => $this->input->post('debit_or_credit'),
+					'old_balance' => $this->input->post('old_balance2'),
+					'emp_date' => date("Y-m-d",strtotime($this->input->post('dob'))),
+					'emp_act_status' => $act_status, 
+					'emp_status' => 1
+					);
 
-			$datas = array(
-						'emp_name' => $this->input->post('employname'),
-						'company_id'=> $this->input->post('company'),
-						'emp_address' => $this->input->post('employaddress'),
-						'emp_phone' => $this->input->post('employphone'),
-						'emp_email' => $this->input->post('employemail'),
-						'emp_mode' => $this->input->post('salary_mode'),
-						'emp_salary' => $this->input->post('employsalary'),
-						'debit_or_credit' => $this->input->post('debit_or_credit'),
-						'old_balance' => $this->input->post('old_balance2'),
-						'emp_date' => date("Y-m-d",strtotime($this->input->post('dob'))),
-						'emp_act_status' => $act_status, 
-						'emp_status' => 1
-						);
+			
 
 			if($this->input->post('salary_mode')==0){
 				$salary_mode = 27;
@@ -115,11 +117,53 @@ class Hrmodule extends MY_Controller {
 				$emp_name = $this->General_model->get_data('tbl_employee','emp_id','emp_name',$emp_id);
 				$data['emp_id'] = $emp_id;
 				$result = $this->General_model->update('tbl_employee',$datas,'emp_id',$emp_id);
+
+				if($this->input->post('salary_mode') == '2'){
+					$emp_item = $this->input->post('pr_item');
+					$emp_pc_kg = $this->input->post('pr_kg_pc');
+					$emp_rates = $this->input->post('pr_rate');
+					$emp_ide = $this->input->post('pr_ide');
+					$count = count($this->input->post('pr_item'));
+					$sort = array_map(null,$emp_item,$emp_pc_kg,$emp_rates,$emp_ide);
+					foreach($sort as $sorts){
+						$emp_pr = array(
+		
+							'emp_pr_item' => $sorts[0],
+							'emp_pr_kg_pcs' => $sorts[1],
+							'emp_pr_rate' => $sorts[2],
+							'emp_pr_status' => 1, 
+						);
+
+						$result_emp = $this->General_model->update('tbl_emp_piece_rate',$emp_pr,'emp_pr_id',$sorts[3]);
+					}
+				}
+
 				$result2 = $this->General_model->update('tbl_ledgerhead',$data3,'ledger_head',$emp_name[0]->emp_name);
 				$response_text = 'Employee details updated';
 			}
 			else{
-				$result = $this->General_model->add('tbl_employee',$datas);
+				$result = $this->General_model->add_returnID('tbl_employee',$datas);
+
+				//check if employee is Peice rate
+				if($this->input->post('salary_mode') == '2'){
+					$emp_item = $this->input->post('pr_item');
+					$emp_pc_kg = $this->input->post('pr_kg_pc');
+					$emp_rates = $this->input->post('pr_rate');
+					$count = count($this->input->post('pr_item'));
+					//multiple entry for peice rate exist enter into 
+					$sort = array_map(null,$emp_item,$emp_pc_kg,$emp_rates);
+					foreach($sort as $sorts){
+						$emp_pr = array(
+							'emp_pr_fk' => $result,
+							'emp_pr_item' => $sorts[0],
+							'emp_pr_kg_pcs' => $sorts[1],
+							'emp_pr_rate' => $sorts[2],
+							'emp_pr_status' => 1, 
+						);
+
+						$result_emp = $this->General_model->add('tbl_emp_piece_rate',$emp_pr);
+					}
+				}	
 				$result2 = $this->General_model->add('tbl_ledgerhead',$data2);
 				$response_text = 'Employee details Added';
 			}
@@ -131,7 +175,7 @@ class Hrmodule extends MY_Controller {
 			}
 	        redirect('/Employee/', 'refresh');
 		}
-	}
+		}
 	
 	public function deleteEmployee()
 	{
@@ -140,8 +184,10 @@ class Hrmodule extends MY_Controller {
 		$emp_name = $this->General_model->get_data('tbl_employee','emp_id','emp_name',$emp_id);
 		$updateData2 = array('ledgerhead_status' => 0);
         $updateData = array('emp_status' => 0);
+		$updateData3 = array('emp_pr_status' => 0);
         $data = $this->General_model->update('tbl_employee',$updateData,'emp_id',$emp_id);
 		$data2 = $this->General_model->update('tbl_ledgerhead',$updateData2,'ledger_head',$emp_name[0]->emp_name);
+		$data3 = $this->General_model->update('tbl_emp_piece_rate',$updateData3,'emp_pr_fk',$emp_id);
         if($data) {
             $response['text'] = 'Deleted successfully';
             $response['type'] = 'success';
@@ -161,9 +207,11 @@ class Hrmodule extends MY_Controller {
 			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
 			}
 		$template['records'] = $this->Hr_model->getEmployeeData($emp_id);
+		$template['pr_records'] = $this->Hr_model->getPREmployeeData($emp_id);
 		$template['company']=$this->General_model->getCompanies();
 		$template['body'] = 'Hrmodule/Employee/add';
 		$template['script'] = 'Hrmodule/Employee/script';
+		// var_dump($template['pr_records']);die;
 		$this->load->view('template', $template);
 	}
 
@@ -236,8 +284,10 @@ class Hrmodule extends MY_Controller {
 			$session = $this->input->post('session');
 			$at_date = str_replace('/', '-', $this->input->post('att_date'));
 			$at_date = date("Y-m-d",strtotime($at_date));
+			$month = date("m",strtotime($at_date));
 			$data = array(
 						'att_date'=> $at_date,
+						'month' => $month,
 						'emp_id'=> $emp_id,
 						'att_status'=> 1
 						);
@@ -263,11 +313,13 @@ class Hrmodule extends MY_Controller {
 		$emp_id = $this->input->post('id');
 		$at_date = str_replace('/', '-', $this->input->post('dates'));
 		$at_date = date("Y-m-d",strtotime($at_date));
+		$month = date("m",strtotime($at_date));
 		$date = $at_date;
 		if($this->Hr_model->check_attendance($emp_id,$date) == 0)
 		{
 			$data = array(
 						'att_date'=> $at_date,
+						'month' => $month,
 						'emp_id'=> $emp_id,
 						'att_status'=> 1
 						);
@@ -369,6 +421,11 @@ class Hrmodule extends MY_Controller {
 		$data=$this->Hr_model->getBasicofEmployee($this->input->post('emp_id'));
         echo json_encode($data);
 	}
+	public function getSalaryMode()
+	{
+		$data=$this->Hr_model->getSalaryMode($this->input->post('emp_id'));
+        echo json_encode($data);
+	}
 	public function editPayAdvance($id)
 	{
 		if($this->session->userdata('user_type')=='C'){
@@ -462,6 +519,19 @@ class Hrmodule extends MY_Controller {
 		$data=$this->Hr_model->getLeavesofEmployee($this->input->post('emp_id'),$this->input->post('month'));
         echo json_encode($data);
 	}
+
+	public function getAttendanceofEmployee()
+	{
+		$data=$this->Hr_model->getAttendanceofEmployee($this->input->post('emp_id'),$this->input->post('month'));
+        echo json_encode($data);
+	}
+
+	public function getAllAttendanceofEmployee()
+	{
+		$data=$this->Hr_model->getAllAttendanceofEmployee($this->input->post('emp_id'));
+        echo json_encode($data);
+	}
+
 
 	public function Overtime()
 	{

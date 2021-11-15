@@ -171,6 +171,9 @@ $route['PayAdvance/add'] = 'Hrmodule/addPayAdvance';
 $route['getEmployeesbyCompany'] = 'Hrmodule/getEmployeesbyCompany';
 $route['getBasicofEmployee'] = 'Hrmodule/getBasicofEmployee';
 $route['PayAdvance/edit/(:num)'] = 'Hrmodule/editPayAdvance/$1';
+$route['getSalaryMode'] = 'Hrmodule/getSalaryMode';
+$route['getAttendanceofEmployee'] = 'Hrmodule/getAttendanceofEmployee';
+$route['getAllAttendanceofEmployee'] = 'Hrmodule/getAllAttendanceofEmployee';
 
 $route['Payroll'] = 'Hrmodule/Payroll';
 $route['Payroll/get'] = 'Hrmodule/getPayroll';
@@ -323,3 +326,16 @@ $route['getSaleTable'] = 'Reports/getSaleTable';
 //Purchase Report
 $route['purchaseReport'] = 'Reports/purchaseReport';
 $route['getPurchaseTable'] = 'Reports/getPurchaseTable';
+
+//Company Reports
+//Purchase Reports//
+$route['cmpPurchaseReport'] = 'Companyreport/purchaseReport';
+$route['GetcmpPurchaseReport'] = 'Companyreport/getPurchaseTable';
+
+//Sale Reports
+$route['cmpSaleReport'] = 'Companyreport/saleReport';
+$route['GetcmpSaleReport'] = 'Companyreport/getSaleTable';
+
+//Stock Reports
+$route['cmpStockReport'] = 'Companyreport/stockReport';
+$route['GetcmpStockReport'] = 'Companyreport/getStockReport';

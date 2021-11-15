@@ -70,15 +70,22 @@
                   <label for="size_name" class="col-sm-4 control-label">Opening Balance<span style="color:red">*</span></label>
                   <div class="col-sm-5">
                     <input type="text" data-pms-required="true"  class="form-control" name="opening_bal" id="opening_bal"  value="<?php if(isset($records[0]->opening_bal)) echo $records[0]->opening_bal ?>">
-                    <label class="radio-inline">
+                    
+                  </div>
+              </div>
+              <div class="form-group" style="margin-left:520px;">
+              <label class="radio-inline">
                       <input type="radio" name="optradio" value="1">Debit
                     </label>
                     <label class="radio-inline">
                       <input type="radio" name="optradio" value="2">Credit
                     </label>
-                  </div>
               </div>
-              <div class="form-group">
+              <div class="form-group" style="margin-left:540px;">
+                <input type="checkbox"  name="default_id" value="1" <?php echo($records[0]->ledger_default == 1)? 'checked':''  ?>>
+                <label >Set Default</label><br>
+              </div>
+              <div class="form-group" style="margin-left: 50px;">
                   <center> <button type="submit" class="btn btn-primary">Save</button></center>
               </div>
             </fieldset>.
