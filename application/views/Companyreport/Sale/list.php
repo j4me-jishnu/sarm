@@ -52,7 +52,7 @@
 			</div>
 			<div class="col-sm-1">
 				<div class="input-group">
-					<a href="<?php echo base_url();?>saleReport"><button class="btn bg-primary btn-flat margin" >Refresh</button></a>
+					<a href="<?php echo base_url();?>cmpSaleReport"><button type="button" class="btn bg-primary margin" >Refresh</button></a>
 				</div>
 			</div>
 		</div>

@@ -1,4 +1,11 @@
+<style>
+  .gradient-btn2 .btn {
+    background-image: linear-gradient(to bottom, rgba(255,255,255,0.5), rgba(255,255,255,0.2) 49%, rgba(0,0,0,0.15) 51%, rgba(0,0,0,0.05));
+    background-repeat: repeat-x;
+    border: 1px solid black;
+}
 
+</style>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -33,18 +40,23 @@
 		<div class="col-sm-8">
 		<div class="input-group-btn">
       <div class="row">
-        
-      <button type="button" id="search" class="btn btn-primary nohover" >Search</button>
-      
-      <button type="button" id="print" class="btn btn-primary nohover" onclick="showTableData()" >Print</button>
+        <button type="button" id="search" class="btn btn-primary nohover" >Search</button>
       </div>
 		
 
 		</div>
 	</div>
+	</div>
+	</div>
+  <div class="row">
+    <div class="col-sm-6 gradient-btn2">
+    <button type="button" id="print" class="btn btn-light nohover" onclick="showTableData()" >Print</button>
+      
+      <button type="button" id="excel2" class="btn btn-light nohover" onclick="showExcelSheet()">CSV</button>
 
-	</div>
-	</div>
+      <button type="button" id="excel2" class="btn btn-light nohover" onclick="showPDFSheet()">PDF</button>
+    </div>
+  </div>
       <div class="row">
 		<div class="box">
 		
