@@ -665,58 +665,64 @@ class Hrmodule extends MY_Controller {
 
 	public function addPieceEmployee()
 	{
-		$this->form_validation->set_rules('employ_pr_name', 'Name', 'required');
-		$this->form_validation->set_rules('employ_pr_rate','Piece Rate','required');
+		$this->form_validation->set_rules('emp_pr_id', 'Employee', 'required');
 		if ($this->form_validation->run() == FALSE)
 		{
 			if($this->session->userdata('user_type')=='C'){
 				$id = $this->session->userdata('id');
 				$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
 				}
-			$template['company']=$this->General_model->getCompanies();
+			$template['employee']=$this->Hr_model->getPeicerateEmp();
+			// var_dump($template['employee']);die();
 			$template['body'] = 'Hrmodule/PieceEmployee/add';
 			$template['script'] = 'Hrmodule/PieceEmployee/script';
 			$this->load->view('template', $template);
 		}
 		else {
-
-			if($this->input->post('emp_pr_act_status') != NULL){
-				$emp_pr_act_status = $this->input->post('emp_pr_act_status');
-			}
-			else
-			{
-				$emp_pr_act_status = 0;
-			}
-
-			$datas = array(
-						'emp_pr_name' => $this->input->post('employ_pr_name'),
-						'emp_pr_cmp_id'=> $this->input->post('company_pr_id'),
-						'emp_pr_address' => $this->input->post('employ_pr_address'),
-						'emp_pr_phone' => $this->input->post('employ_pr_phone'),
-						'emp_pr_email' => $this->input->post('employ_pr_email'),
-						'emp_pr_material_ty' => $this->input->post('employ_pr_remark'),
-						'emp_pr_piece_rate' => $this->input->post('employ_pr_rate'),
-						'emp_pr_old_bal' => $this->input->post('old_pr_balance2'),
-						'emp_pr_act_status' => $emp_pr_act_status,
-						'emp_pr_status' => 1
-						);
-
-			$emp_pr_id = $this->input->post('emp_pr_id');
-			if($emp_pr_id){
-				$result = $this->General_model->update('tbl_emp_piece_rate',$datas,'emp_pr_id ',$emp_pr_id);
+			$emp_pr_edit_id = $this->input->post('emp_pr_edit_id');
+			
+			if($emp_pr_edit_id){
+				$result = $this->General_model->update('tbl_emp_piece_rate',$datas,'emp_pr_id ',$emp_pr_edit_id);
 				$response_text = 'Employee Piece Rate details updated';
 			}
 			else{
-				$result = $this->General_model->add('tbl_emp_piece_rate',$datas);
-				$response_text = 'Employee Piece Rate details Added';
+
+					$emp_item = $this->input->post('pr_item');
+					$emp_pc_kg = $this->input->post('pr_kg_pc');
+					$emp_rates = $this->input->post('pr_rate');
+					$sort = array_map(null,$emp_item,$emp_pc_kg,$emp_rates);
+					foreach($sort as $sorts){
+						$emp_pr = array(
+							'emp_pr_fk' => $this->input->post('emp_pr_id'),
+							'emp_pr_item' => $sorts[0],
+							'emp_pr_kg_pcs' => $sorts[1],
+							'emp_pr_rate' => $sorts[2],
+							'emp_pr_status' => 1, 
+						);
+
+					$result = $this->General_model->add('tbl_emp_piece_rate',$emp_pr);
+					}
+					$response_text = 'Employee Piece Rate details Added';
+
+						$datap = array(
+							'emp_fk' => $this->input->post('emp_pr_id'),
+							'emp_pr_pay_total' => $this->input->post('emp_pr_total'),
+							'emp_pr_pay_advance' => $this->input->post('emp_pr_advance'),
+							'emp_pr_net_bal' => $this->input->post('emp_pr_net_bal'),
+							'emp_pr_paid_amt' => $this->input->post('emp_pr_paid_amt'),
+							'emp_pr_pay_balance' => $this->input->post('emp_pr_balance'),
+							'emp_pr_pay_status' => 1,
+						);
+					$result2 = $this->General_model->add('tbl_emp_peice_rate_pay',$datap);
 			}
+			
 			if($result){
 	            $this->session->set_flashdata('response', "{&quot;text&quot;:&quot;$response_text&quot;,&quot;layout&quot;:&quot;topRight&quot;,&quot;type&quot;:&quot;success&quot;}");
 			}
 			else{
 	            $this->session->set_flashdata('response', '{&quot;text&quot;:&quot;Something went wrong,please try again later&quot;,&quot;layout&quot;:&quot;bottomRight&quot;,&quot;type&quot;:&quot;error&quot;}');
 			}
-	        redirect('/PieceRateEmployee/', 'refresh');
+	        redirect('/addPieceEmployee/', 'refresh');
 		}
 	}
 
@@ -727,7 +733,6 @@ class Hrmodule extends MY_Controller {
 			$template['color_change'] = $this->General_model->get_row('tbl_color','ot_cmp_id_fk',$id);
 			}
 		$template['records'] = $this->Hr_model->getPieceEmployees($id);
-		// var_dump($template['records']);die;
 		$template['company']=$this->General_model->getCompanies();
 		$template['body'] = 'Hrmodule/PieceEmployee/add';
 		$template['script'] = 'Hrmodule/PieceEmployee/script';
@@ -751,4 +756,17 @@ class Hrmodule extends MY_Controller {
         $data_json = json_encode($response);
         echo $data_json;
 	}
+
+	// public function peiceRateajax()
+	// {
+	// 	$data = $this->Hr_model->peiceRateajaxTable();
+	// 	echo json_encode($data);
+	// }
+
+	// public function itemsTableAjax()
+	// {
+	// 	$emp_id = $this->input->post('emp_id');
+	// 	$data = $this->Hr_model->rateajaxTable($emp_id);
+	// 	echo json_encode($data);
+	// }
 }

@@ -160,5 +160,47 @@ function deleteRow(tableID) {
     alert(e);
   }
 }
+
+// function PeiceRateFun()
+// {
+//     $.ajax({
+//             url:"<?php echo base_url();?>peiceRateajax",
+//             method:"POST",
+//             datatype:"json",
+//             success:function(data){
+//                 var select = '<option>SELECT</option>';
+//                 data = JSON.parse(data);
+//                 $.each(data, function(i,datas) {
+//                     select += '<option value="'+datas.emp_id+'">'+datas.emp_name+'</option>';
+//                 });
+//                 $('#exampleFormControlSelect1').html(select);
+//             }
+//         });
+
+// }
+
+// $(document).on('change',function(){
+//   var emp_id = $('#exampleFormControlSelect1').val();
+//   var table ='';
+//   var plus =1;
+//   $.ajax({
+//       url:"<?php echo base_url() ?>itemsTableAjax",
+//       method:"POST",
+//       datatype:"json",
+//       data:{emp_id:emp_id},
+//       success:function(data){
+//           data = JSON.parse(data);
+//           $.each(data,function(i,datap){
+//               table += '<tr id="count_'+plus+'"><td>'+datap.emp_pr_item+'</td><td>'+datap.emp_pr_kg_pcs+'</td><td>'+datap.emp_pr_rate+'</td></tr>'
+//               plus++;
+//           })
+          
+//           $('#pr_tables').html(table);
+//       }
+//   })
+// })
+  
+// $(document).on('change','#exampleFormControlSelect1',function(){
     
+// })  
 </script>

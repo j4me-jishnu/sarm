@@ -324,11 +324,40 @@ Class Hr_model extends CI_Model
 
     public function getPieceEmployees($id)
     {
-       $this->db->select('*');
+        $this->db->select('*');
         $this->db->from('tbl_emp_piece_rate');
         $this->db->join('tbl_companyinfo','tbl_companyinfo.cmp_id = tbl_emp_piece_rate.emp_pr_cmp_id');
         $this->db->where('emp_pr_id',$id);
         $this->db->where("emp_pr_status",1);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function peiceRateajaxTable()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_employee');
+        $this->db->where('emp_mode',2);
+        $this->db->where('emp_status',1);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function rateajaxTable($emp_id)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_emp_piece_rate');
+        $this->db->where('emp_pr_fk',$emp_id);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function getPeicerateEmp()
+    {
+        $this->db->select('emp_id,emp_name');
+        $this->db->from('tbl_employee');
+        $this->db->where('emp_mode',2);
+        $this->db->where('emp_status',1);
         $query = $this->db->get();
         return $query->result();
     }

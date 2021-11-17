@@ -25,9 +25,9 @@
                 <div class="col-md-4">
                   <a href="<?php echo base_url();?>addEmployee" class="btn btn-sm common-btn"><i class="fa fa-plus-square"></i> Add Employee</a>
                 </div>
-                <div class="col-md-4">
-                <button class="btn btn-sm common-btn" data-toggle="modal" data-target="#myModal"><i class="fa fa-money"></i> Peice Rate</button>
-                </div>
+                <!-- <div class="col-md-4">
+                <button class="btn btn-sm common-btn" data-toggle="modal" onclick="PeiceRateFun()" data-target="#myModal"><i class="fa fa-money"></i> Peice Rate</button>
+                </div> -->
               </div>
           </div>
               
@@ -59,11 +59,11 @@
 </div>
 
 <!-- Pop Up Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+<!-- <div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog"> -->
 
     <!-- Modal content-->
-    <div class="modal-content">
+    <!-- <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Peice Rate</h4>
@@ -75,20 +75,34 @@
             <input type="date" class="form-control" id="date_pr" aria-describedby="date_pr" placeholder="Select Date">
           </div>
            <div class="form-group">
-              <label for="exampleFormControlSelect1">Example select</label>
+              <label for="exampleFormControlSelect1">Choose Employee</label>
               <select class="form-control" id="exampleFormControlSelect1">
                 <option>SELECT</option>
                 <option>Manohar</option>
                 <option>Roshan</option>
               </select>
             </div>
+            <div class="form-group">
+              <label for="qty_p_r">Choose Quantity</label>
+              <select class="form-control" id="qty_p_r">
+                <option>SELECT</option>
+                <option>KG</option>
+                <option>PCS</option>
+              </select>
+            </div>
           <div class="form-group">
-            <label for="quantity_pr">Choose Quantity</label>
-            <input type="text" class="form-control" id="quantity_pr" placeholder="Select">
-          </div>
-          <div class="form-group">
-            <label for="item_pr">Rate</label>
-            <input type="text" class="form-control" id="item_pr" >
+          <table align="center" class="table table-striped" >
+              <thead>
+                <tr>
+                  <th scope="col">Item</th>
+                  <th scope="col">Kg/Pcs</th>
+                  <th scope="col">Rate</th>
+                </tr>
+              </thead>
+              <tbody id="pr_tables">
+
+              </tbody>
+            </table>
           </div>
           <div class="form-group">
             <label for="total_pr">Total Rate</label>
@@ -119,5 +133,5 @@
     </div>
 
   </div>
-</div>
+</div> -->
 <!-- End -->

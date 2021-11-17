@@ -159,6 +159,7 @@ $route['addPieceEmployee'] = 'Hrmodule/addPieceEmployee';
 $route['editPieceRateEmployee/(:num)'] = 'Hrmodule/editPieceRateEmployee/$1';
 $route['deletePeiceRateEmployee'] = 'Hrmodule/deletePeiceRateEmployee';
 
+
 $route['Attendance'] = 'Hrmodule/Attendance';
 $route['Attendence/get'] = 'Hrmodule/getAttendence';
 $route['Attendence/attend_reg'] = 'Hrmodule/attend_reg';

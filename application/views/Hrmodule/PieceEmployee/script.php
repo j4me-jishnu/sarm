@@ -39,7 +39,7 @@
             { "data": "emp_pr_name", "orderable": false },
             { "data": "emp_pr_address", "orderable": false },
             { "data": "emp_pr_phone", "orderable": false },
-			{ "data": "emp_pr_email", "orderable": false },
+			      { "data": "emp_pr_email", "orderable": false },
             { "data": "emp_pr_material_ty", "orderable": false },
             { "data": "emp_pr_piece_rate", "orderable": false },
             {
@@ -74,5 +74,75 @@
 
     }
     }
+
+   
+$(".delete").on('click', function() {
+	$('.case:checkbox:checked').parents("tr").remove();
+    $('.check_all').prop("checked", false); 
+	check();
+
+});
+
+
+var i=2;
+$(".addmore").on('click',function(){
+	count=$('table tr').length;
+    var data="<tr><td><input type='checkbox'  class='case'/></td><td><span id='snum"+i+"'>"+count+".</span></td>";
+    data +="<td><input type='text' class='form-control' id='pr_item_"+i+"' name='pr_item[]'/></td> <td><input type='text' class='form-control' id='pr_pcs_kg_"+i+"' name='pr_kg_pc[]'/></td><td><input type='text' class='form-control' id='pr_rate_"+i+"' onchange='calFun("+i+")' name='pr_rate[]'/></td><td><input type='text' onchange='totalFun("+i+")' class='form-control' id='tot_"+i+"' name='pr_total[]'/></td></tr>";
+	$('table').append(data);
+	i++;
+});
+
+function select_all() {
+	$('input[class=case]:checkbox').each(function(){ 
+		if($('input[class=check_all]:checkbox:checked').length == 0){ 
+			$(this).prop("checked", false); 
+		} else {
+			$(this).prop("checked", true); 
+		} 
+	});
+}
+
+function check(){
+	obj=$('table tr').find('span');
+	$.each( obj, function( key, value ) {
+	id=value.id;
+	$('#'+id).html(key+1);
+	});
+	}
+
+//total calculation
+function calFun(row)
+{
+  var peices = $('#pr_pcs_kg_'+row+'').val();
+  var rate = $('#pr_rate_'+row+'').val();
+  var multiply = parseFloat(peices) * parseFloat(rate);
+  $('#tot_'+row+'').val(parseFloat(multiply));
+   totalFun(row);
+}
+const total_calculation = [];
+function totalFun(row)
+{
+  total_calculation.push(parseFloat($('#tot_'+row+'').val()));
+  const sum_final =total_calculation.reduce((a,b) => a + b, 0);
+  $('#emp_pr_total').val(sum_final);
+  
+}
+
+function advanceFun()
+{
+  var advance = $('#emp_pr_adv').val();
+  var total = $('#emp_pr_total').val();
+  var advance_final = parseFloat(total) - parseFloat(advance);
+  $('#emp_pr_net_bal').val(advance_final);
+}
+
+function paidFun()
+{
+  var paid = $('#emp_pr_pay_amt').val();
+  var net_bal = $('#emp_pr_net_bal').val();
+  var balance_amt = parseFloat(net_bal) - parseFloat(paid);
+  $('#emp_pr_balance').val(balance_amt);
+}
 
 </script>

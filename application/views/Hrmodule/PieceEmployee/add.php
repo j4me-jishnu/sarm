@@ -19,91 +19,89 @@
               <input type="hidden" id="response" value="<?php echo $this->session->flashdata('response');?>" />
 
               <div class="form-group">
-               <input type="hidden" name="emp_pr_id" value="<?php if(isset($records[0]->emp_pr_id)) echo $records[0]->emp_pr_id ?>"/>
+               <input type="hidden" name="emp_pr_edit_id" value="<?php if(isset($records[0]->emp_pr_id)) echo $records[0]->emp_pr_id ?>"/>
                <?php echo validation_errors(); ?>
                <div class="box-body">
 
                 <div class="form-group">
                   <div class="form-group">
-                    <label for="size_name" class="col-sm-4 control-label">Company</label>
+                    <label for="size_name" class="col-sm-4 control-label">Select Employee</label>
 
                     <div class="col-sm-5">
-                      <select name="company_pr_id" class="form-control" required>
-                        <option></option>
+                      <select name="emp_pr_id" class="form-control" required>
+                        <option>SELECT</option>
                         <?php
-                        foreach ($company as $row) 
+                        foreach ($employee as $row) 
                         {
                           ?>
-                          <option value="<?php echo $row->cmp_id ?>" <?php if(isset($records[0]->emp_pr_cmp_id)) if ($records[0]->emp_pr_cmp_id == $row->cmp_id)  echo "selected" ?>><?php echo $row->cmp_name; ?></option>
+                          <option value="<?php echo $row->emp_id; ?>"><?php echo $row->emp_name; ?></option>
                           <?php
                         }
                         ?>
                       </select>
                     </div>
                   </div>
+
+                  <!-- Dynamic Table -->
+                  <div class="container" style="margin-left: 10px;">
+                  <button type="button" class='delete btn btn-danger'>- Delete</button>
+                  <button type="button" class='addmore btn btn-success'>+ Add More</button>
+                  <table  class="table table-bordered" id="supercelltable"  CELLSPACING=0 style="width:1100px;">
+                    <tr>
+                      <th scope="col"><input class='check_all' type='checkbox' onclick="select_all()"/></th>
+                      <th scope="col">S. No</th>
+                      <th scope="col">ITEM</th>
+                      <th scope="col">PCS/KG</th>
+                      <th scope="col">RATE</th>
+                      <th scope="col">TOTAL</th>
+                    </tr>
+                    <tr>
+                      <td><input type='checkbox' class='case'/></td>
+                      <td><span id='snum'>1.</span></td>
+                      <td><input type='text' class="form-control" id='pr_item_1' name='pr_item[]'/></td>
+                      <td><input type='text' class="form-control" id='pr_pcs_kg_1' name='pr_kg_pc[]'/></td>
+                      <td><input type='text' class="form-control" id='pr_rate_1' onchange="calFun(1)" name='pr_rate[]'/></td>
+                      <td><input type='text' class="form-control" id='tot_1' onchange="totalFun(1)" name="pr_total[]"/> </td>
+                    </tr>
+                  </table>
+                  </div>
+                  <!-- End of Dynaic Table -->
+                  <br>
                   <div class="form-group">
-                    <label for="size_name" class="col-sm-4 control-label">Employee Name <span style="color:red">*</span></label>
+                    <label for="size_name" class="col-sm-4 control-label">Total <span style="color:red">*</span></label>
 
                     <div class="col-sm-5">
-                      <input type="text"  required  class="form-control" name="employ_pr_name" id="employname"  value="<?php if(isset($records[0]->emp_pr_name)) echo $records[0]->emp_pr_name ?>">
+                      <input type="text" class="form-control" name="emp_pr_total" id="emp_pr_total"  value="<?php if(isset($records[0]->emp_pr_name)) echo $records[0]->emp_pr_name ?>">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="size_name" class="col-sm-4 control-label">Address</label>
-
+                    <label for="size_name" class="col-sm-4 control-label">Advance</label>
+                        
                     <div class="col-sm-5">
-                      <textarea class="form-control" name="employ_pr_address"> <?php if(isset($records[0]->emp_pr_address)) echo $records[0]->emp_pr_address ?> </textarea>
+                    <input type="text"  class="form-control" onchange="advanceFun()" name="emp_pr_advance" id="emp_pr_adv"  value="<?php if(isset($records[0]->emp_pr_email)) echo $records[0]->emp_pr_email ?>">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="size_name" class="col-sm-4 control-label">Phone</label>
+                    <label for="size_name" class="col-sm-4 control-label">Net Balance</label>
                     <div class="col-sm-5">
-                      <input type="text"  required  class="form-control" name="employ_pr_phone" id="custphone"  value="<?php if(isset($records[0]->emp_pr_phone)) echo $records[0]->emp_pr_phone ?>">
+                      <input type="text"  class="form-control"  name="emp_pr_net_bal" id="emp_pr_net_bal"  value="<?php if(isset($records[0]->emp_pr_phone)) echo $records[0]->emp_pr_phone ?>">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="size_name" class="col-sm-4 control-label">Email</label>
+                    <label for="size_name" class="col-sm-4 control-label">Paid Amount</label>
 
                     <div class="col-sm-5">
-                      <input type="text"  required  class="form-control" name="employ_pr_email" id="custemail"  value="<?php if(isset($records[0]->emp_pr_email)) echo $records[0]->emp_pr_email ?>">
+                      <input type="text"  class="form-control" onchange="paidFun()" name="emp_pr_paid_amt" id="emp_pr_pay_amt"  value="<?php if(isset($records[0]->emp_pr_email)) echo $records[0]->emp_pr_email ?>">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="size_name" class="col-sm-4 control-label">Balance</label>
+
+                    <div class="col-sm-5">
+                      <input type="text" class="form-control" name="emp_pr_balance" id="emp_pr_balance"  value="<?php if(isset($records[0]->emp_pr_email)) echo $records[0]->emp_pr_email ?>">
                     </div>
                   </div>
                   
-                  <div class="form-group">
-                    <label for="size_name" class="col-sm-4 control-label">Remark</label>
-
-                    <div class="col-sm-5">
-                      <input type="text"    class="form-control" name="employ_pr_remark" id="employsalary"  value="<?php if(isset($records[0]->emp_pr_material_ty)) echo $records[0]->emp_pr_material_ty ?>">
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="size_name" class="col-sm-4 control-label">Piece Rate</label>
-
-                    <div class="col-sm-5">
-                      <input type="text"    class="form-control" name="employ_pr_rate" id="employsalary"  value="<?php if(isset($records[0]->emp_pr_piece_rate)) echo $records[0]->emp_pr_piece_rate ?>">
-                    </div>
-                  </div>
-                  
-                  <div class="form-group">
-                    <label for="size_name" class="col-sm-4 control-label">Old Balance</label>
-
-                    <div class="col-sm-5">
-                      <input type="text"    class="form-control" name="old_pr_balance2" id="old_balance2"  value="<?php if(isset($records[0]->emp_pr_old_bal)) echo $records[0]->emp_pr_old_bal ?>">
-                    </div>
-                  </div>
-                  <?php if(isset($records[0]->emp_pr_act_status)){ ?>
-                  <div class="form-group" style="margin-left: 420px;">
-                    <div class="col-sm-2">
-                        <input type="radio" name="emp_pr_act_status" <?php echo ($records[0]->emp_pr_act_status == 0) ?  "checked" : "" ;  ?> id="active" value="0">
-                        <label for="active">Active</label>
-                    </div>
-                    <div class="col-sm-2">
-                        <input type="radio" name="emp_pr_act_status" <?php echo ($records[0]->emp_pr_act_status == 1) ?  "checked" : "" ;  ?> id="inactive" value="1">
-                        <label for="inactive">InActive</label>
-                    </div>
-                  </div>
-                  <?php } ?>  
                   <div class="form-group">
                     <center> <button type="submit" class="btn btn-primary">Save</button></center>
                   </div>
