@@ -86,6 +86,16 @@
                   </label>
                   </div>
               </div>
+              <div class="form-group text-center">
+                  <div class="col-sm-12">
+                  <label class="radio-inline">
+                    <input type="radio" name="bank_status" <?php if(@$records[0]->bank_act_status==0) echo "checked" ?> value="0">Active
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" name="bank_status" <?php if(@$records[0]->bank_act_status==1) echo "checked" ?> value="1">InActive
+                  </label>
+                  </div>
+              </div>
               <div class="form-group">
                   <center> <button type="submit" class="btn btn-primary">Save</button></center>
               </div>

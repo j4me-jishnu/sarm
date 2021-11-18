@@ -79,6 +79,14 @@ class Administration extends MY_Controller {
 				// ledgerhead debit value is 2
 				$ledger_head_status = 2;
 			}
+			if($this->input->post('cust_is_salary') == '1')
+			{
+				$isSalary = 1;
+			}
+			else
+			{
+				$isSalary = 0;
+			}
 			$datas = array(
 						// 'customer_type'=>$this->input->post('optradio'),
 						'custname' => $this->input->post('cust_name'),
@@ -89,7 +97,9 @@ class Administration extends MY_Controller {
 						'old_balance'=>$this->input->post('old_balance'),
 						'cust_pcategory'=>$this->input->post('category'),
 						'custstatus' => 1,
-						'debit_credit'	=>$this->input->post('radio_val'),
+						'debit_credit' =>$this->input->post('radio_val'),
+						'cust_act_status' =>$this->input->post('cust_act_status'),
+						'cust_is_salary' =>$this->input->post('cust_is_salary'),
 						);
 
 			$data2 = array(
@@ -222,6 +232,14 @@ class Administration extends MY_Controller {
 				//credit is 2 in ledger head
 				$suppelier_types = 2;
 			}
+			if($this->input->post('salary_is_cust') == '1')
+			{
+				$is_customer = 1;
+			}
+			else
+			{
+				$is_customer = 0;
+			}
 
 			$data = array(
 						'supplier_name' => $this->input->post('supplier_name'),
@@ -235,6 +253,7 @@ class Administration extends MY_Controller {
 						'supplier_status' => 1,
 						'supplier_type'	=>$this->input->post('supplier_type'),
 						'supplier_act_status' =>$suppelier_active_status,
+						'supplier_is_cust' =>$is_customer,
 						);
 
 			$data2 = array(
@@ -566,6 +585,7 @@ class Administration extends MY_Controller {
 						'bank_debit_credit' => $this->input->post('bank_type'),
 						'bank_status' => 1,
 						'old_balance' => $this->input->post('opening_bal'),
+						'bank_act_status' => $this->input->post('bank_status'),
 
 						);
 			if($this->input->post('bank_type') == 0)

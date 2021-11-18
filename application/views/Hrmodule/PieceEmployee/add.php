@@ -118,6 +118,14 @@
                       <input type="text" class="form-control" name="emp_pr_balance" id="emp_pr_balance"  value="<?php if(isset($records[0]->emp_pr_pay_balance)) echo $records[0]->emp_pr_pay_balance ?>">
                     </div>
                   </div>
+
+                  <div class="form-group">
+                    <label for="size_name" class="col-sm-4 control-label">Salary Date</label>
+
+                    <div class="col-sm-5">
+                      <input type="date" class="form-control" name="emp_pr_date" id="emp_pr_date"  value="<?php if(isset($records[0]->emp_pr_pay_date)) echo $records[0]->emp_pr_pay_date ?>">
+                    </div>
+                  </div>
                   
                   <div class="form-group">
                     <center> <button type="submit" class="btn btn-primary">Save</button></center>

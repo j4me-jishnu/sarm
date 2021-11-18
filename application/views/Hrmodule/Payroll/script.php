@@ -164,26 +164,36 @@ $(document).on('change','#payroll_salmonth',function(){
 
 
 $(document).on('click','.calc-salary',function(){
+    var a = 0;
+    var b = 0;
 	var basic = $('#payroll_basicpay').val();
 	var advance = $('#payroll_balance').val();
 	var days = $('#payroll_leaveamt').val();
     var ot_amount = $('#ot_amount').val();
     var salary_mode = $('#salary_mode').val();
     var attendance_days = $('#attandance_dates').val();
-    console.log(salary_mode);
+    // console.log(salary_mode);
     if(salary_mode == 'Salary'){
+      
 	    var a = parseFloat(basic)/30;
 	    var b = parseFloat(days) * parseFloat(a);
 
 	    var total = parseFloat(basic) + parseFloat(ot_amount) - parseFloat(advance) - parseFloat(b);
-	    // console.log(total);
+	    console.log(total);
 	    $('#payroll_salary').val(total);
         $('#payroll_salary').focus();
     }
     else if(salary_mode == 'Wages')
     {
-        var sal = parseFloat(basic) * parseFloat(attendance_days);
+        if(parseFloat(attendance_days)==0){
+            var total = parseFloat(basic);
+        }
+        else{
+            var sal = parseFloat(basic) * parseFloat(attendance_days);
         var total = parseFloat(sal) - parseFloat(advance);
+        }
+       
+        // console.log(total);
         $('#payroll_salary').val(total);
         $('#payroll_salary').focus();
     }

@@ -670,7 +670,9 @@ class Hrmodule extends MY_Controller {
 						'emp_pr_pay_advance' => $this->input->post('emp_pr_advance'),
 						'emp_pr_net_bal' => $this->input->post('emp_pr_net_bal'),
 						'emp_pr_paid_amt' => $this->input->post('emp_pr_paid_amt'),
+						'emp_pr_pay_date' => $this->input->post('emp_pr_date'),
 						'emp_pr_pay_balance' => $this->input->post('emp_pr_balance'),
+						'emp_pr_pay_status' => 1,
 					);	
 					
 				$result = $this->General_model->update('tbl_emp_peice_rate_pay',$emp_pay,'emp_pr_pay_id ',$emp_pr_pay_id);
@@ -701,6 +703,7 @@ class Hrmodule extends MY_Controller {
 							'emp_pr_pay_advance' => $this->input->post('emp_pr_advance'),
 							'emp_pr_net_bal' => $this->input->post('emp_pr_net_bal'),
 							'emp_pr_paid_amt' => $this->input->post('emp_pr_paid_amt'),
+							'emp_pr_pay_date' => $this->input->post('emp_pr_date'),
 							'emp_pr_pay_balance' => $this->input->post('emp_pr_balance'),
 							'emp_pr_pay_status' => 1,
 						);

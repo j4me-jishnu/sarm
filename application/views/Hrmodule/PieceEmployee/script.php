@@ -27,7 +27,7 @@
 			$table.column(0).nodes().each(function(node,index,dt){
             $table.cell(node).data(index+1);
             });
-			$('td', row).eq(8).html('<center><a href="<?php echo base_url();?>editPieceRateEmployee/'+data['emp_id']+'"><i class="fa fa-edit iconFontSize-medium" ></i></a>&nbsp;&nbsp;&nbsp;<a onclick="return confirmDelete('+data['emp_id']+')"><i class="fa fa-trash-o iconFontSize-medium" ></i></a></center>');
+			$('td', row).eq(9).html('<center><a href="<?php echo base_url();?>editPieceRateEmployee/'+data['emp_id']+'"><i class="fa fa-edit iconFontSize-medium" ></i></a>&nbsp;&nbsp;&nbsp;<a onclick="return confirmDelete('+data['emp_id']+')"><i class="fa fa-trash-o iconFontSize-medium" ></i></a></center>');
             $('td', row).eq(2).html('<button class="btn btn-primary btn-sm" data-toggle="modal" onclick="Itemlistfun('+data['emp_id']+')" data-target="#myModal"><i class="fa fa-sitemap"></i></button>');
             
         },
@@ -44,6 +44,7 @@
             { "data": "emp_pr_net_bal", "orderable": false },
             { "data": "emp_pr_paid_amt", "orderable": false },
             { "data": "emp_pr_pay_balance", "orderable": false },
+            { "data": "emp_pr_pay_date", "orderable": false },
 			{ "data": "emp_id", "orderable": false }
         ]
         

@@ -38,9 +38,9 @@
             "className": "text-center",
             render: function (data, type, row) {
                 if (data == '0') {
-                    return '<i class="ion-arrow-left-c" style="color:green"></i>';
+                    return '<i class="ion-arrow-left-c" style="color:red"></i>';
                 }else{
-                    return '<i class="ion-arrow-right-c" style="color:red"></i>';
+                    return '<i class="ion-arrow-right-c" style="color:green"></i>';
                 }
                 }
             }, 

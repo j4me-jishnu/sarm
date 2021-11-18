@@ -130,6 +130,10 @@
                   </div>
                 </div>
                 <?php } ?>  
+                <div class="form-group text-center">
+                    <input type="checkbox"  name="salary_is_cust" value="1" <?php if(@$records->supplier_is_cust=='1') echo 'Checked' ?>>
+                    <label for="vehicle1"> is Customer</label>
+                </div>
                 <div class="form-group">
                   <center> <button type="submit" class="btn btn-primary">Save</button></center>
                 </div>

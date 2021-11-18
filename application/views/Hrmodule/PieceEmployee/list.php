@@ -37,6 +37,7 @@
                   <th>NET BALANCE</th>
                   <th>PAID AMOUNT</th>
                   <th>PAYMENT BALANCE</th>
+                  <th>DATE</th>
                   <th>EDIT/DELETE</th>
                 </tr>
               </thead>

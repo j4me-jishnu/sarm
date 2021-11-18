@@ -35,6 +35,7 @@
                   <th>PHONE</th>
                   <th>OPENING BALANCE</th>
                   <th>DR/CR</th>
+                  <th>STATUS</th>
                   <th>EDIT/DELETE</th>
                 </tr>
               </thead>

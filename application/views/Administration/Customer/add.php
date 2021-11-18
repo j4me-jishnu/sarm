@@ -114,6 +114,19 @@
                     </select>
                   </div>
                 </div>
+                <?php if(isset($records->cust_act_status)) { ?>
+                <div class="form-group text-center">
+
+                  <label class="radio-inline"><input type="radio" name="cust_act_status" <?php if(@$records->cust_act_status=='0') echo 'Checked' ?> value="0">Active</label>
+                  <label class="radio-inline"><input type="radio" name="cust_act_status" <?php if(@$records->cust_act_status=='1') echo 'Checked' ?> value="1">InActive</label>
+
+                </div>
+                <?php } ?>
+                <div class="form-group text-center">
+                    <input type="checkbox"  name="cust_is_salary" value="1" <?php if(@$records->cust_is_salary=='1') echo 'Checked' ?>>
+                    <label for="vehicle1"> is Salary</label>
+                </div>
+
                 <div class="form-group">
                   <center> <button type="submit" class="btn btn-primary">Save</button></center>
                 </div>
