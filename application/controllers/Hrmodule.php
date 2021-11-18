@@ -118,52 +118,12 @@ class Hrmodule extends MY_Controller {
 				$data['emp_id'] = $emp_id;
 				$result = $this->General_model->update('tbl_employee',$datas,'emp_id',$emp_id);
 
-				if($this->input->post('salary_mode') == '2'){
-					$emp_item = $this->input->post('pr_item');
-					$emp_pc_kg = $this->input->post('pr_kg_pc');
-					$emp_rates = $this->input->post('pr_rate');
-					$emp_ide = $this->input->post('pr_ide');
-					$count = count($this->input->post('pr_item'));
-					$sort = array_map(null,$emp_item,$emp_pc_kg,$emp_rates,$emp_ide);
-					foreach($sort as $sorts){
-						$emp_pr = array(
-		
-							'emp_pr_item' => $sorts[0],
-							'emp_pr_kg_pcs' => $sorts[1],
-							'emp_pr_rate' => $sorts[2],
-							'emp_pr_status' => 1, 
-						);
-
-						$result_emp = $this->General_model->update('tbl_emp_piece_rate',$emp_pr,'emp_pr_id',$sorts[3]);
-					}
-				}
-
 				$result2 = $this->General_model->update('tbl_ledgerhead',$data3,'ledger_head',$emp_name[0]->emp_name);
 				$response_text = 'Employee details updated';
 			}
 			else{
 				$result = $this->General_model->add_returnID('tbl_employee',$datas);
-
-				//check if employee is Peice rate
-				if($this->input->post('salary_mode') == '2'){
-					$emp_item = $this->input->post('pr_item');
-					$emp_pc_kg = $this->input->post('pr_kg_pc');
-					$emp_rates = $this->input->post('pr_rate');
-					$count = count($this->input->post('pr_item'));
-					//multiple entry for peice rate exist enter into 
-					$sort = array_map(null,$emp_item,$emp_pc_kg,$emp_rates);
-					foreach($sort as $sorts){
-						$emp_pr = array(
-							'emp_pr_fk' => $result,
-							'emp_pr_item' => $sorts[0],
-							'emp_pr_kg_pcs' => $sorts[1],
-							'emp_pr_rate' => $sorts[2],
-							'emp_pr_status' => 1, 
-						);
-
-						$result_emp = $this->General_model->add('tbl_emp_piece_rate',$emp_pr);
-					}
-				}	
+	
 				$result2 = $this->General_model->add('tbl_ledgerhead',$data2);
 				$response_text = 'Employee details Added';
 			}
@@ -184,10 +144,8 @@ class Hrmodule extends MY_Controller {
 		$emp_name = $this->General_model->get_data('tbl_employee','emp_id','emp_name',$emp_id);
 		$updateData2 = array('ledgerhead_status' => 0);
         $updateData = array('emp_status' => 0);
-		$updateData3 = array('emp_pr_status' => 0);
         $data = $this->General_model->update('tbl_employee',$updateData,'emp_id',$emp_id);
 		$data2 = $this->General_model->update('tbl_ledgerhead',$updateData2,'ledger_head',$emp_name[0]->emp_name);
-		$data3 = $this->General_model->update('tbl_emp_piece_rate',$updateData3,'emp_pr_fk',$emp_id);
         if($data) {
             $response['text'] = 'Deleted successfully';
             $response['type'] = 'success';
@@ -207,7 +165,7 @@ class Hrmodule extends MY_Controller {
 			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
 			}
 		$template['records'] = $this->Hr_model->getEmployeeData($emp_id);
-		$template['pr_records'] = $this->Hr_model->getPREmployeeData($emp_id);
+		// $template['pr_records'] = $this->Hr_model->getPREmployeeData($emp_id);
 		$template['company']=$this->General_model->getCompanies();
 		$template['body'] = 'Hrmodule/Employee/add';
 		$template['script'] = 'Hrmodule/Employee/script';
@@ -661,6 +619,15 @@ class Hrmodule extends MY_Controller {
 		$data = $this->Hr_model->getPieceEmployee($param);
 		$json_data = json_encode($data);
 		echo $json_data;
+		
+	}
+
+	public function getItemLists()
+	{
+		$emp_id = $this->input->post('emp_id');
+		$data = $this->Hr_model->getItemTable($emp_id);
+		$json_data = json_encode($data);
+		echo $json_data;
 	}
 
 	public function addPieceEmployee()
@@ -680,9 +647,33 @@ class Hrmodule extends MY_Controller {
 		}
 		else {
 			$emp_pr_edit_id = $this->input->post('emp_pr_edit_id');
-			
+			$emp_pr_pay_id = $this->input->post('emp_pr_pay_id');
 			if($emp_pr_edit_id){
-				$result = $this->General_model->update('tbl_emp_piece_rate',$datas,'emp_pr_id ',$emp_pr_edit_id);
+					$emp_item = $this->input->post('pr_item');
+					$emp_pc_kg = $this->input->post('pr_kg_pc');
+					$emp_rates = $this->input->post('pr_rate');
+					$emp_ide2 = $this->input->post('pr_table_id');
+					$sort = array_map(null,$emp_item,$emp_pc_kg,$emp_rates,$emp_ide2);
+					foreach($sort as $sorts)
+					{
+						$item = array(
+							'emp_pr_fk' => $this->input->post('emp_pr_id'),
+							'emp_pr_item' => $sorts[0],
+							'emp_pr_kg_pcs' => $sorts[1],
+							'emp_pr_rate' => $sorts[2],	
+						);
+						$result2 = $this->General_model->update('tbl_emp_piece_rate',$item,'emp_pr_id',$sorts[3]);
+					}
+					$emp_pay = array(
+						'emp_fk' => $this->input->post('emp_pr_id'),
+						'emp_pr_pay_total' => $this->input->post('emp_pr_total'),
+						'emp_pr_pay_advance' => $this->input->post('emp_pr_advance'),
+						'emp_pr_net_bal' => $this->input->post('emp_pr_net_bal'),
+						'emp_pr_paid_amt' => $this->input->post('emp_pr_paid_amt'),
+						'emp_pr_pay_balance' => $this->input->post('emp_pr_balance'),
+					);	
+					
+				$result = $this->General_model->update('tbl_emp_peice_rate_pay',$emp_pay,'emp_pr_pay_id ',$emp_pr_pay_id);
 				$response_text = 'Employee Piece Rate details updated';
 			}
 			else{
@@ -722,18 +713,20 @@ class Hrmodule extends MY_Controller {
 			else{
 	            $this->session->set_flashdata('response', '{&quot;text&quot;:&quot;Something went wrong,please try again later&quot;,&quot;layout&quot;:&quot;bottomRight&quot;,&quot;type&quot;:&quot;error&quot;}');
 			}
-	        redirect('/addPieceEmployee/', 'refresh');
+	        redirect('/PieceRateEmployee/', 'refresh');
 		}
 	}
 
-	public function editPieceRateEmployee($id=2)
+	public function editPieceRateEmployee($emp_id=24)
 	{
 		if($this->session->userdata('user_type')=='C'){
 			$id = $this->session->userdata('id');
 			$template['color_change'] = $this->General_model->get_row('tbl_color','ot_cmp_id_fk',$id);
 			}
-		$template['records'] = $this->Hr_model->getPieceEmployees($id);
-		$template['company']=$this->General_model->getCompanies();
+		$template['employee']=$this->Hr_model->getPeicerateEmp();
+		$template['records'] = $this->Hr_model->getPieceEmployees($emp_id);
+		$template['itemlist'] = $this->Hr_model->getItemListTable($emp_id);
+		// var_dump($template['records']); die;
 		$template['body'] = 'Hrmodule/PieceEmployee/add';
 		$template['script'] = 'Hrmodule/PieceEmployee/script';
 		$this->load->view('template', $template);

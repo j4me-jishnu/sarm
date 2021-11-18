@@ -30,14 +30,13 @@
               <thead>
                 <tr>
                   <th>SlNO.</th>
-                  <th>COMPANY NAME</th>
                   <th>NAME</th>
-                  <th>ADDRESS</th>
-                  <th>PHONE</th>
-                  <th>EMAIL</th>
-                  <th>REMARK</th>
-                  <th>RATE</th>
-                  <th>STATUS</th>
+                  <th>ITEM</th>
+                  <th>TOTAL</th>
+                  <th>ADVANCE</th>
+                  <th>NET BALANCE</th>
+                  <th>PAID AMOUNT</th>
+                  <th>PAYMENT BALANCE</th>
                   <th>EDIT/DELETE</th>
                 </tr>
               </thead>
@@ -48,3 +47,36 @@
       </div>
     </section>
 </div>
+
+<!-- Pop Up Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog">
+      
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Peice Employee Lists</h4>
+          </div>
+          <div class="modal-body">
+            <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">ITEM</th>
+                <th scope="col">PCS/KG</th>
+                <th scope="col">RATE</th>
+              </tr>
+            </thead>
+            <tbody id="lists1">
+    
+            </tbody>
+          </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+<!-- End Modal -->

@@ -24,36 +24,27 @@
         },
         "createdRow": function ( row, data, index ) { 
           
-          // console.log(data);
-          
 			$table.column(0).nodes().each(function(node,index,dt){
             $table.cell(node).data(index+1);
             });
-			$('td', row).eq(9).html('<center><a href="<?php echo base_url();?>editPieceRateEmployee/'+data['emp_pr_id']+'"><i class="fa fa-edit iconFontSize-medium" ></i></a>&nbsp;&nbsp;&nbsp;<a onclick="return confirmDelete('+data['emp_pr_id']+')"><i class="fa fa-trash-o iconFontSize-medium" ></i></a></center>');
+			$('td', row).eq(8).html('<center><a href="<?php echo base_url();?>editPieceRateEmployee/'+data['emp_id']+'"><i class="fa fa-edit iconFontSize-medium" ></i></a>&nbsp;&nbsp;&nbsp;<a onclick="return confirmDelete('+data['emp_id']+')"><i class="fa fa-trash-o iconFontSize-medium" ></i></a></center>');
+            $('td', row).eq(2).html('<button class="btn btn-primary btn-sm" data-toggle="modal" onclick="Itemlistfun('+data['emp_id']+')" data-target="#myModal"><i class="fa fa-sitemap"></i></button>');
             
-		},
+        },
 
         "columns": [
-            { "data": "emp_pr_status", "orderable": true },
-            { "data": "cmp_name", "orderable": false },
-            { "data": "emp_pr_name", "orderable": false },
-            { "data": "emp_pr_address", "orderable": false },
-            { "data": "emp_pr_phone", "orderable": false },
-			      { "data": "emp_pr_email", "orderable": false },
-            { "data": "emp_pr_material_ty", "orderable": false },
-            { "data": "emp_pr_piece_rate", "orderable": false },
+            { "data": "emp_status", "orderable": true },
+            { "data": "emp_name", "orderable": false },
             {
-            data: 'emp_pr_act_status',
-            render: function (data, type, row) {
-                if(data == 0){
-                        return '<i class="fa fa-toggle-on" style="color:green;font-size:30px;"></i>';
-                    }
-                    else{
-                        return '<i class="fa fa-toggle-off" style="color:red;font-size:30px;"></i>';    
-                    } 
-                }
-            }, 
-			{ "data": "emp_pr_id", "orderable": false }
+              "data": null,
+              "defaultContent": ""
+            },
+			{ "data": "emp_pr_pay_total", "orderable": false },
+            { "data": "emp_pr_pay_advance", "orderable": false },
+            { "data": "emp_pr_net_bal", "orderable": false },
+            { "data": "emp_pr_paid_amt", "orderable": false },
+            { "data": "emp_pr_pay_balance", "orderable": false },
+			{ "data": "emp_id", "orderable": false }
         ]
         
     } );
@@ -143,6 +134,27 @@ function paidFun()
   var net_bal = $('#emp_pr_net_bal').val();
   var balance_amt = parseFloat(net_bal) - parseFloat(paid);
   $('#emp_pr_balance').val(balance_amt);
+}
+
+function Itemlistfun(emp_id)
+{
+    $.ajax({
+            url:"<?php echo base_url();?>getItemLists",
+            data:{emp_id:emp_id},
+            method:"POST",
+            datatype:"json",
+            success:function(data){
+                var list = $.parseJSON(data);
+                var count = list.length;
+               for(var i=0;i<=count-1;i++)
+               {
+                   var table = table + '<tr><td>'+list[i].emp_pr_item+'</td><td>'+list[i].emp_pr_kg_pcs+'</td><td>'+list[i].emp_pr_rate+'</td></tr>'
+                   
+                   
+               }
+                $('#lists1').html(table);
+            }
+        });
 }
 
 </script>

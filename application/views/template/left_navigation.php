@@ -200,7 +200,7 @@
           </a>
           <ul class="treeview-menu ">
             <li class="<?php if($this->uri->segment(1)=="Employee"){echo "active";}?>" ><a href="<?php echo base_url();?>Employee"><i class="glyphicon glyphicon-share-alt"></i> <span>HR details</span></a></li>
-            <li class="<?php if($this->uri->segment(1)=="addPieceEmployee"){echo "active";}?>" ><a href="<?php echo base_url();?>addPieceEmployee"><i class="glyphicon glyphicon-share-alt"></i> <span>Peice Rate Details</span></a></li>
+            <li class="<?php if($this->uri->segment(1)=="PieceRateEmployee"){echo "active";}?>" ><a href="<?php echo base_url();?>PieceRateEmployee"><i class="glyphicon glyphicon-share-alt"></i> <span>Peice Rate Details</span></a></li>
             <li class="<?php if($this->uri->segment(1)=="Attendance"){echo "active";}?>" ><a href="<?php echo base_url();?>Attendance"><i class="glyphicon glyphicon-share-alt"></i> <span>Attendance</span></a></li>
             <li class="<?php if($this->uri->segment(1)=="PayAdvance"){echo "active";}?>" ><a href="<?php echo base_url();?>PayAdvance"><i class="glyphicon glyphicon-share-alt"></i> <span>Advance Payment</span></a></li>
             <li class="<?php if($this->uri->segment(1)=="Overtime"){echo "active";}?>" ><a href="<?php echo base_url();?>Overtime"><i class="glyphicon glyphicon-share-alt"></i> <span>Overtime</span></a></li>
