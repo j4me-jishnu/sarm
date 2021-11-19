@@ -129,6 +129,10 @@ class Product extends MY_Controller {
         $param['dir'] = (isset($_REQUEST['order'][0]['dir']))?$_REQUEST['order'][0]['dir']:'';
         $param['searchValue'] =(isset($_REQUEST['search']['value']))?$_REQUEST['search']['value']:'';
         $param['product_code'] = (isset($_REQUEST['product_code']))?$_REQUEST['product_code']:'';
+		if($this->session->userdata('user_type') == 'C')
+		{
+			$param['type_company'] = $this->session->userdata('cmp_id');
+		}
     	$data = $this->Administration_model->getProductTable($param);
     	$json_data = json_encode($data);
 
@@ -573,6 +577,10 @@ class Product extends MY_Controller {
         $param['searchValue'] =(isset($_REQUEST['search']['value']))?$_REQUEST['search']['value']:'';
 		
 		// $param['shpname'] =(isset($_REQUEST['shpname']))?$_REQUEST['shpname']:'';
+		if($this->session->userdata('user_type') == 'C')
+		{
+			$param['type_company'] = $this->session->userdata('cmp_id');
+		}
         
 		$data = $this->Administration_model->getOpenstockReport($param);
 		$json_data = json_encode($data);

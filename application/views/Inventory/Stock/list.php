@@ -67,7 +67,7 @@
               </div>
             </div>
             <div class="col-sm-3">
-              <button style="margin-top: 10px;" type="button" class="btn btn-md btn-primary" id="search_button">Search</button>&nbsp;<button style="margin-top: 10px;background-color: #271454;color: white;" type="button" class="btn btn-md" id="refresh">Refresh</button>
+              <button style="margin-top: 10px;" type="button" class="btn btn-md btn-primary" id="search_button">Search</button>&nbsp;<button style="margin-top: 10px;" type="button" class="btn btn-primary nohover" id="refresh">Refresh</button>
             </div>
           </div>
             <div class="box-body table-responsive">

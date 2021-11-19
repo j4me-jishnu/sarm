@@ -8,6 +8,11 @@ class Settings_model extends CI_Model
 		$searchValue =($param['searchValue'])?$param['searchValue']:'';
 		$start_date =(isset($param['start_date']))?$param['start_date']:'';
 		$end_date =(isset($param['end_date']))?$param['end_date']:'';
+		$type_company =(isset($param['type_company']))?$param['type_company']:'';
+		if($type_company){
+			$this->db->where('cmp_id',$type_company);
+		}
+
 		if($searchValue){
             $this->db->like('cmp_name', $searchValue); 
         }

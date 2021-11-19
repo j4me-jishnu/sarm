@@ -18,11 +18,11 @@
               <legend>Production Details</legend>
               <input type="hidden" id="response" value="<?php echo $this->session->flashdata('response');?>" />
               <div class="form-group"></div>
+              <?php if($this->session->userdata['user_type']!='C')
+                  { ?>
               <div class="form-group">
                   <label for="size_name" class="control-label col-sm-4">Company<span style="color:red">*</span></label>
                   <div class="col-sm-5">
-                  <?php if($this->session->userdata['user_type']!='C')
-                  { ?>
                         <select name="company" id="company" class="form-control" required>
                           <option></option>
                           <?php
@@ -35,8 +35,8 @@
                           ?>
                         </select>
                       </div>
-                  <?php } ?>
-              </div>    
+              </div>  
+              <?php } ?>  
               <div class="form-group">
                 <label for="size_name" class="col-sm-4 control-label">Area</label>
 
