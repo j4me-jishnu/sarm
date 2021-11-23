@@ -259,7 +259,7 @@ function addMore()
             }
         }    
 	}
-function getNetTotal()
+    window.onload = function getNetTotal()
 {
     var counter = $('#counter').val();
     var old_bal=$('#old_bal').val();
@@ -269,17 +269,20 @@ function getNetTotal()
     var pack_chrg=$('#pack_chrg').val();
     var dis_type=$('input[type="radio"][name="bill_dis"]:checked').val();
     var sum = 0;
+    var round_off = 0;
     for (var i = 1; i <= counter; i++) 
     {
         if ($('#total_'+i+'').val()) 
         {
             var sum = parseFloat(sum) + parseFloat($('#total_'+i+'').val());
+            var round_off = Math.floor(parseFloat(sum) + parseFloat($('#total_'+i+'').val()));
         }
     }
     if (tax_amt) 
     {
         // var tax_amt = parseFloat(sum) * parseFloat(tax_amt) / 100;
         sum = parseFloat(sum) + parseFloat(tax_amt);
+        var round_off = Math.floor(parseFloat(sum) + parseFloat(tax_amt));
     }
     if (bill_discount) 
     {
@@ -287,21 +290,28 @@ function getNetTotal()
         {
             var bill_discount=parseFloat(sum)*parseFloat(bill_discount)/100;
             sum = parseFloat(sum) - parseFloat(bill_discount);
+            var round_off = Math.floor(parseFloat(sum) - parseFloat(bill_discount));
         }
         else
         {
             sum = parseFloat(sum) - parseFloat(bill_discount);
+            var round_off = Math.floor(parseFloat(sum) - parseFloat(bill_discount));
         }    
     }
     if (frieght) 
     {
         sum = parseFloat(sum) + parseFloat(frieght);  
+        var round_off = Math.floor(parseFloat(sum) + parseFloat(frieght));
     }
     if (pack_chrg) 
     {
         sum = parseFloat(sum) + parseFloat(pack_chrg);
+        var round_off = Math.floor(parseFloat(sum) + parseFloat(pack_chrg));
     }
+    if(isNaN(sum)){ sum = 0; }
+    if(isNaN(round_off)){ round_off = 0; }
     $('#sum').val(sum);
+    $('#round_off').val(round_off);
     var cash = $('#cash').val();
     var bank = $('#bank').val();
     var net_bal = parseFloat(old_bal) + parseFloat (sum);
@@ -318,8 +328,25 @@ function getNetTotal()
         var cash = parseFloat(cash) + parseFloat(bank);
         net_bal = parseFloat(net_bal) - parseFloat(cash);
     }
-    $('#net_bal').val(net_bal);    
+
+    //if value is NaN show zero (0)
+    if(isNaN(net_bal)){ net_bal = 0; } 
+    
+    $('#net_bal').val(net_bal);  
+
+     roundOffDiff(sum,round_off);
+    
 }
+
+function roundOffDiff(sum,round_off)
+{   
+    var sum2 = sum;
+    var round_off_amt2 = round_off;
+    var differnce = sum2 - round_off_amt2;
+    if(isNaN(differnce)){ differnce = 0; }
+    $('#round_off_diff').val(differnce);
+}
+
 function getNet()
 {
     var cash = $('#cash').val();
@@ -340,6 +367,7 @@ function getNet()
         var cash = parseFloat(cash) + parseFloat(bank);
         net_bal = parseFloat(net_bal) - parseFloat(cash);
     }
+    if(isNaN(net_bal)){ net_bal = 0; }
     $('#net_bal').val(net_bal);  
     
 }    

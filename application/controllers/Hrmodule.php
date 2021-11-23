@@ -674,8 +674,20 @@ class Hrmodule extends MY_Controller {
 						'emp_pr_pay_balance' => $this->input->post('emp_pr_balance'),
 						'emp_pr_pay_status' => 1,
 					);	
-					
+					$employee23 = $this->General_model->get_row('tbl_employee','emp_id',$emp_pr_edit_id);
+					$lederhead = array(
+						'group_id_fk' => 27,
+						'ledger_head' => $employee23[0]->emp_name,
+						'emp_name' => 'Peice Rate Employee',
+						'opening_bal' => $this->input->post('emp_pr_balance'),
+						'debit_or_credit' => 2,
+						'ledgerhead_status' => 1,
+						'company_id_fk' => $this->session->userdata('cmp_id'),
+						'ledger_default' => 0,
+					);
+				$emp_name = $this->General_model->get_row('tbl_employee','emp_id',$emp_pr_edit_id);		
 				$result = $this->General_model->update('tbl_emp_peice_rate_pay',$emp_pay,'emp_pr_pay_id ',$emp_pr_pay_id);
+				$result47 = $this->General_model->update('tbl_ledgerhead',$lederhead,'ledger_head ',$emp_name[0]->emp_name);
 				$response_text = 'Employee Piece Rate details updated';
 			}
 			else{
@@ -707,7 +719,20 @@ class Hrmodule extends MY_Controller {
 							'emp_pr_pay_balance' => $this->input->post('emp_pr_balance'),
 							'emp_pr_pay_status' => 1,
 						);
+
+						$employee23 = $this->General_model->get_row('tbl_employee','emp_id',$emp_pr_edit_id);
+					$lederhead = array(
+						'group_id_fk' => 27,
+						'ledger_head' => $employee23[0]->emp_name,
+						'emp_name' => 'Peice Rate Employee',
+						'opening_bal' => $this->input->post('emp_pr_balance'),
+						'debit_or_credit' => 2,
+						'ledgerhead_status' => 1,
+						'company_id_fk' => $this->session->userdata('cmp_id'),
+						'ledger_default' => 0,
+					);
 					$result2 = $this->General_model->add('tbl_emp_peice_rate_pay',$datap);
+					$result56 = $this->General_model->add('tbl_ledgerhead',$lederhead);
 			}
 			
 			if($result){

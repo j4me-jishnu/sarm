@@ -13,7 +13,7 @@
 
   <!-- Main content -->
   <section class="content">
-    <form method="post" action="<?php echo base_url(); ?>Sale/add"> 
+    <form method="post" id="purchase_form" action="<?php echo base_url(); ?>Sale/add"> 
     <div class="row">
       <div class="col-md-12">
         <div class="box">
@@ -21,6 +21,7 @@
             <legend>Edit Sale Information</legend>
             <input type="hidden" id="response" value="<?php echo $this->session->flashdata('response');?>" />
             <input type="hidden" name="invoice_number_edit" id="invoice_number" value="<?php if(isset($records[0]->invoice_number)) echo  $records[0]->invoice_number?>">
+            <input type="hidden" name="sale_pay_id" id="sale_pay_id" value="<?php if(isset($records[0]->sale_payment_id)) echo  $records[0]->sale_payment_id?>">
             <div class="row">
               <div class="col-md-2">
               <?php if($this->session->userdata['user_type']!='C')
@@ -207,6 +208,7 @@
                   <br>
                   <input type="text" name="total[]" id="total_<?php echo $i; ?>" class="form-control" placeholder="Total" value="<?php if(isset($key->total_price)) echo  $key->total_price?>">
                 </div>
+                <input type="hidden" name="pro_table_id[]" id="product_table_id_<?php echo $i; ?>" value="<?php if(isset($key->sale_id)) echo  $key->sale_id?>">
                 <?php if(isset($key->sale_remark)) { ?>
                 <div class="col-md-2">
                   <input class="form-check-input" type="checkbox" value="1" id="flexCheckDefault" name="remark_chk[]" checked>
@@ -265,6 +267,7 @@
             <hr>
             <div class="row" style="background-color: #a3a8a5 ">
               <div class="col-md-2">
+                <input type="hidden" name="sale_pay_id" value="<?php if(isset($records[0]->sale_payment_id)) echo  $records[0]->sale_payment_id?>">
                 <label>Tax Amount</label>
                 <input class="form-control" type="text" name="tax_sum" id="tax_sum" value="<?php if(isset($records[0]->tax_amount)) echo  $records[0]->tax_amount?>" onkeyup="getNetTotal()">
                 <label>Bill Discount</label><br>
@@ -317,8 +320,19 @@
                 <input class="form-control" type="text" name="old_bal" id="old_bal" value="<?php if(isset($records[0]->old_balance)) echo  $records[0]->old_balance?>">
                 <label>Net Balance</label>
                 <input type="text" name="net_bal" id="net_bal" class="form-control" style="height: 50px;" value="<?php if(isset($records[0]->net_balance)) echo  $records[0]->net_balance?>">
+                <label>Round Off Amount</label>
+                <input type="text" name="round_off" id="round_off" class="form-control"  value="<?php if(isset($records[0]->sale_round_off_amt)) echo  $records[0]->sale_round_off_amt?>">
+                <input type="text" name="round_off_diff" id="round_off_diff" class="form-control"  value="0">
                 <br>
-                <input type="submit" name="Submit" value="Save" class="btn btn-success btn-lg">
+                <!-- <input type="submit" name="Submit" value="Save" class="btn btn-success btn-lg"> -->
+                <div class="dropdown">
+                  <button class="btn btn-success dropdown-toggle btn-lg" type="button" data-toggle="dropdown">Save
+                  <span class="caret"></span></button>
+                  <ul class="dropdown-menu">
+                    <li><a type="submit" href="#" onclick="document.getElementById('purchase_form').submit();">Save</a></li>
+                    <li><a href="#" onclick="saveAsdraft();">Save as Draft</a></li>
+                  </ul>
+                </div><input type="hidden" name="draft" id="draft">
               </div>
             </div>
             </fieldset>
@@ -329,6 +343,12 @@
   </section>
 </div>
 <script>
+   function saveAsdraft()
+  {
+    $('#draft').val(2);
+    document.getElementById('purchase_form').submit();
+  }
+
   function ShowHideDiv() {
         bank_select.style.display = chkYes.checked ? "block" : "none";
         bank_select.style.display = chkNo.checked ? "block" : "none";

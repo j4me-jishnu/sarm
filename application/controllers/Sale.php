@@ -80,7 +80,7 @@ class Sale extends MY_Controller {
 			$total_price = $this->input->post('total');
 			$counter = $this->input->post('counter');
 			$draft = $this->input->post('draft');
-			if ($draft != 1) 
+			if ($draft != 1 && $draft != 2) 
 			{
 				$invc_no = $this->input->post('invoice_number_edit');
 				if (isset($invc_no)) 
@@ -137,7 +137,7 @@ class Sale extends MY_Controller {
 					  'stockstatus' =>0,
 					  'sale_status' =>1
 					);
-					$result = $this->General_model->add('tbl_sale',$data);
+					$result = $this->General_model->add_returnID('tbl_sale',$data);
 					$insert_id = $this->db->insert_id();
 
 					$stok = $this->Inventory_model->get_stk($product_id[$i]);
@@ -173,18 +173,90 @@ class Sale extends MY_Controller {
 	  					'cash_paid' => $cash_amt,
 	  					'bank_paid' => $bank_amt,
 	  					'bank_id' => $bank_id4,
-	  					'old_balance'=>$this->input->post('old_bal'),
-	  					'net_balance'=>$this->input->post('net_bal'),
+	  					'old_balance' => $this->input->post('old_bal'),
+	  					'net_balance' => $this->input->post('net_bal'),
+						'round_off_amt' => $this->input->post('round_off'),
 	  					'payment_status'=>1 
 	  					);
 						  
 				$result = $this->General_model->add('tbl_salepayments',$datap);
+				if($invc_no)
+				{
+					$this->db->where('sale_id_fk',$invc_no)->delete('tbl_ledgerhead');
+				}			  
 				$upData = array('old_balance' =>$this->input->post('net_bal'));
 				$stk = $this->General_model->update('tbl_customer',$upData,'cust_id',$cust_id);
 				$response_text = 'Sale added successfully';
+
+				if($this->input->post('round_off_diff') > 0){		  
+				//Insert Round Off Difference in ledgerHead
+				
+					$round_off_diff = array(
+						'group_id_fk' => 27,
+						'ledger_head' => 'Round_off@Sale',
+						'ledgerhead_desc' => 'Round off Sale',
+						'opening_bal' => $this->input->post('round_off_diff'),
+						'debit_or_credit' => 1,
+						'ledgerhead_status' => 1,
+						'company_id_fk' => $company,
+						'sale_id_fk' => $this->input->post('invoice_number'),
+						'ledger_default' => 0
+					);
+				$result45 = $this->General_model->add('tbl_ledgerhead',$round_off_diff); 	 
+				
 			}
+		}
+			
 			else
 			{
+				if($draft == 2)
+				{
+					//Update AS DRAFT//
+					$invc_no = $this->input->post('invoice_number_edit');
+					$prod_table_id = $this->input->post('pro_table_id');
+					$prod_pay_id = $this->input->post('sale_pay_id');
+					$j=1;
+					for ($i=0; $i < $counter; $i++) 
+					{ 
+						$data=array(
+						'product_id_fk' =>$product_id[$i],
+						'cust_id' =>$cust_id,
+						'cmp_id' =>$cmp_id,
+						'finyear' => $fyr,
+						'price_category'=>$this->input->post('optradio'),
+						'invoice_number' =>$this->input->post('invoice_number'),
+						'sale_quantity' =>$sale_quantity[$i],
+						'sale_price' =>$sale_price[$i],
+						'discount_price' =>$discount_price[$i],
+						'discount_type' =>$this->input->post('disradio_'.$j.''),
+						'total_price' =>$total_price[$i],
+						'sale_date' =>$sale_date,
+						'stockstatus' =>0,
+						'sale_status' =>2 //draft
+						);
+						$result = $this->General_model->update('tbl_sale',$data,'sale_id',$prod_table_id[$i]);
+						// $insert_id = $this->db->insert_id();
+					$j++;	
+					}
+					$datap = array(
+							'invoice_number' =>$this->input->post('invoice_number'),
+							'tax_amount'=>$this->input->post('tax_sum'),
+							'bill_discount'=>$this->input->post('bill_discount'),
+							'bill_discount_type'=>$this->input->post('bill_dis'),
+							'frieght'=>$this->input->post('frieght'),
+							'packing_charge'=>$this->input->post('pack_chrg'),
+							'net_total' =>$this->input->post('sum'),
+							'cash_paid' =>$this->input->post('cash'),
+							'bank_paid' =>$this->input->post('bank'),
+							'old_balance'=>$this->input->post('old_bal'),
+							'round_off_amt' => $this->input->post('round_off'),
+							'net_balance'=>$this->input->post('net_bal'),
+							'payment_status'=>1 
+							);
+					$result = $this->General_model->update('tbl_salepayments',$datap,'sale_payment_id',$prod_pay_id);
+					$response_text = 'Draft added successfully';
+				}
+				else{
 				$j=1;
 				for ($i=0; $i < $counter; $i++) 
 				{ 
@@ -219,11 +291,13 @@ class Sale extends MY_Controller {
 	  					'cash_paid' =>$this->input->post('cash'),
 	  					'bank_paid' =>$this->input->post('bank'),
 	  					'old_balance'=>$this->input->post('old_bal'),
+						'round_off_amt' => $this->input->post('round_off'),
 	  					'net_balance'=>$this->input->post('net_bal'),
 	  					'payment_status'=>1 
 	  					);
 				$result = $this->General_model->add('tbl_salepayments',$datap);
 				$response_text = 'Draft added successfully';
+					}
 			}
 			
 			if($result)
