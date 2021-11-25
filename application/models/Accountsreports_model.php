@@ -533,231 +533,250 @@ class Accountsreports_model extends CI_Model
 	}
 	public function getFixedAssetsDetails($cmp,$fyr)
 	{
-		$this->db->select('*');
-		$this->db->from('tbl_ledgerhead');
-		$this->db->where('company_id_fk',$cmp);
-		$this->db->where('group_id_fk',17);//17 fixed assest
-		$this->db->where('ledgerhead_status',1);
-		$result = $this->db->get()->result();
-		$z=0;$data=array();
-		for ($i=0; $i < count($result); $i++) 
-		{ 
-			$this->db->select('*,SUM(debit_amt) as sum_deb,SUM(credit_amt) as sum_cr')->from('tbl_journal');
-			$this->db->join('tbl_ledgerhead','ledger_head_id = ledgerhead_id');
-			$this->db->where('ledger_head_id',$result[$i]->ledgerhead_id);
-			$this->db->where('tbl_journal.company_id_fk',$cmp);
-			$this->db->where('tbl_journal.fin_year',$fyr);
-			$this->db->where('journal_status',1);
-			$this->db->group_by('ledger_head_id');
-			$response = $this->db->get()->result();
-			// echo $this->db->last_query();
-			// print_r($response);
-			if($response)
-			{
-				for ($k=0; $k < count($response) ; $k++) 
-				{ 
-					$data[$z] = array(
-						             'ledger_head' => $response[$k]->ledger_head,
-						             'debit_amt' => $response[$k]->sum_deb,
-						             'credit_amt'   => $response[$k]->sum_cr,
-									);
-					$z=$z+1;
-				}
+		$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN opening_bal ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN opening_bal ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk = 17 AND company_id_fk = '.$cmp.'';
+		$query = $this->db->query($sql);
+		return $data = $query->result();
+		// $this->db->select('*');
+		// $this->db->from('tbl_ledgerhead');
+		// $this->db->where('company_id_fk',$cmp);
+		// $this->db->where('group_id_fk',17);//17 fixed assest
+		// $this->db->where('ledgerhead_status',1);
+		// return $result = $this->db->get()->result();
+		// $z=0;$data=array();
+		// for ($i=0; $i < count($result); $i++) 
+		// { 
+		// 	$this->db->select('*,SUM(debit_amt) as sum_deb,SUM(credit_amt) as sum_cr')->from('tbl_journal');
+		// 	$this->db->join('tbl_ledgerhead','ledger_head_id = ledgerhead_id');
+		// 	$this->db->where('ledger_head_id',$result[$i]->ledgerhead_id);
+		// 	$this->db->where('tbl_journal.company_id_fk',$cmp);
+		// 	$this->db->where('tbl_journal.fin_year',$fyr);
+		// 	$this->db->where('journal_status',1);
+		// 	$this->db->group_by('ledger_head_id');
+		// 	$response = $this->db->get()->result();
+		// 	// echo $this->db->last_query();
+		// 	// print_r($response);
+		// 	if($response)
+		// 	{
+		// 		for ($k=0; $k < count($response) ; $k++) 
+		// 		{ 
+		// 			$data[$z] = array(
+		// 				             'ledger_head' => $response[$k]->ledger_head,
+		// 				             'debit_amt' => $response[$k]->sum_deb,
+		// 				             'credit_amt'   => $response[$k]->sum_cr,
+		// 							);
+		// 			$z=$z+1;
+		// 		}
 				
-			}
-		}
-		return $data;
+		// 	}
+		// }
+		// return $data;
 	}
 	public function getCurrentAssetsDetails($cmp,$fyr)
 	{
-		$array = array(12,13,14,15,16);
-		$this->db->select('*');
-		$this->db->from('tbl_ledgerhead');
-		$this->db->where('company_id_fk',$cmp);
-		$this->db->where_in('group_id_fk',$array);//current assets
-		$this->db->where('ledgerhead_status',1);
-		$result = $this->db->get()->result();
+		$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN opening_bal ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN opening_bal ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk IN (12,13,14,15,16) AND company_id_fk = '.$cmp.'';
+		$query = $this->db->query($sql);
+		return $data = $query->result();
+		// $array = array(12,13,14,15,16);
+		// $this->db->select('*');
+		// $this->db->from('tbl_ledgerhead');
+		// $this->db->where('company_id_fk',$cmp);
+		// $this->db->where_in('group_id_fk',$array);//current assets
+		// $this->db->where('ledgerhead_status',1);
+		// $result = $this->db->get()->result();
 		// print_r($result);die;
-		$z=0;
-		$data=array();
-		for ($i=0; $i < count($result); $i++) 
-		{ 
-			$this->db->select('*,SUM(debit_amt) as sum_deb,SUM(credit_amt) as sum_cr')->from('tbl_journal');
-			$this->db->join('tbl_ledgerhead','ledger_head_id = ledgerhead_id');
-			$this->db->where('ledger_head_id',$result[$i]->ledgerhead_id);
-			$this->db->where('tbl_journal.company_id_fk',$cmp);
-			$this->db->where('tbl_journal.fin_year',$fyr);
-			$this->db->where('journal_status',1);
-			$this->db->group_by('ledger_head_id');
-			$response = $this->db->get()->result();
-			// echo $this->db->last_query();
-			// print_r($response);
-			if($response)
-			{
-				for ($k=0; $k < count($response) ; $k++) 
-				{ 
-					$data[$z] = array(
-						             'ledger_head' => $response[$k]->ledger_head,
-						             'debit_amt' => $response[$k]->sum_deb,
-						             'credit_amt'   => $response[$k]->sum_cr,
-									);
-					$z=$z+1;
-				}
-			}
-		}
-		return $data;
+		// $z=0;
+		// $data=array();
+		// for ($i=0; $i < count($result); $i++) 
+		// { 
+		// 	$this->db->select('*,SUM(debit_amt) as sum_deb,SUM(credit_amt) as sum_cr')->from('tbl_journal');
+		// 	$this->db->join('tbl_ledgerhead','ledger_head_id = ledgerhead_id');
+		// 	$this->db->where('ledger_head_id',$result[$i]->ledgerhead_id);
+		// 	$this->db->where('tbl_journal.company_id_fk',$cmp);
+		// 	$this->db->where('tbl_journal.fin_year',$fyr);
+		// 	$this->db->where('journal_status',1);
+		// 	$this->db->group_by('ledger_head_id');
+		// 	$response = $this->db->get()->result();
+		// 	// echo $this->db->last_query();
+		// 	// print_r($response);
+		// 	if($response)
+		// 	{
+		// 		for ($k=0; $k < count($response) ; $k++) 
+		// 		{ 
+		// 			$data[$z] = array(
+		// 				             'ledger_head' => $response[$k]->ledger_head,
+		// 				             'debit_amt' => $response[$k]->sum_deb,
+		// 				             'credit_amt'   => $response[$k]->sum_cr,
+		// 							);
+		// 			$z=$z+1;
+		// 		}
+		// 	}
+		// }
+		// return $data;
 	}
 	public function getCurrentLiabiltyDetails($cmp,$fyr)
 	{
-		$array = array(20,21);
-		$this->db->select('*');
-		$this->db->from('tbl_ledgerhead');
-		$this->db->where('company_id_fk',$cmp);
-		$this->db->where_in('group_id_fk',$array);//current liability
-		$this->db->where('ledgerhead_status',1);
-		$result = $this->db->get()->result();
-		$z=0;$data=array();
-		for ($i=0; $i < count($result); $i++) 
-		{ 
-			$this->db->select('*,SUM(debit_amt) as sum_deb,SUM(credit_amt) as sum_cr')->from('tbl_journal');
-			$this->db->join('tbl_ledgerhead','ledger_head_id = ledgerhead_id');
-			$this->db->where('ledger_head_id',$result[$i]->ledgerhead_id);
-			$this->db->where('tbl_journal.company_id_fk',$cmp);
-			$this->db->where('tbl_journal.fin_year',$fyr);
-			$this->db->where('journal_status',1);
-			$this->db->group_by('ledger_head_id');
-			$response = $this->db->get()->result();
-			// echo $this->db->last_query();
-			// print_r($response);
-			if($response)
-			{
-				for ($k=0; $k < count($response) ; $k++) 
-				{ 
-					$data[$z] = array(
-						             'ledger_head' => $response[$k]->ledger_head,
-						             'debit_amt' => $response[$k]->sum_deb,
-						             'credit_amt'   => $response[$k]->sum_cr,
-									);
-					$z=$z+1;
-				}
+		$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN opening_bal ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN opening_bal ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk IN (20,21) AND company_id_fk = '.$cmp.'';
+		$query = $this->db->query($sql);
+		return $data = $query->result();
+		// $array = array(20,21);
+		// $this->db->select('*');
+		// $this->db->from('tbl_ledgerhead');
+		// $this->db->where('company_id_fk',$cmp);
+		// $this->db->where_in('group_id_fk',$array);//current liability
+		// $this->db->where('ledgerhead_status',1);
+		// $result = $this->db->get()->result();
+		// $z=0;$data=array();
+		// for ($i=0; $i < count($result); $i++) 
+		// { 
+		// 	$this->db->select('*,SUM(debit_amt) as sum_deb,SUM(credit_amt) as sum_cr')->from('tbl_journal');
+		// 	$this->db->join('tbl_ledgerhead','ledger_head_id = ledgerhead_id');
+		// 	$this->db->where('ledger_head_id',$result[$i]->ledgerhead_id);
+		// 	$this->db->where('tbl_journal.company_id_fk',$cmp);
+		// 	$this->db->where('tbl_journal.fin_year',$fyr);
+		// 	$this->db->where('journal_status',1);
+		// 	$this->db->group_by('ledger_head_id');
+		// 	$response = $this->db->get()->result();
+		// 	// echo $this->db->last_query();
+		// 	// print_r($response);
+		// 	if($response)
+		// 	{
+		// 		for ($k=0; $k < count($response) ; $k++) 
+		// 		{ 
+		// 			$data[$z] = array(
+		// 				             'ledger_head' => $response[$k]->ledger_head,
+		// 				             'debit_amt' => $response[$k]->sum_deb,
+		// 				             'credit_amt'   => $response[$k]->sum_cr,
+		// 							);
+		// 			$z=$z+1;
+		// 		}
 				
-			}
-		}
-		return $data;
+		// 	}
+		// }
+		// return $data;
 	}
 	public function getFixedLiabiltyDetails($cmp,$fyr)
 	{
-		$array = array(19);
-		$this->db->select('*');
-		$this->db->from('tbl_ledgerhead');
-		$this->db->where('company_id_fk',$cmp);
-		$this->db->where_in('group_id_fk',$array);//current liability
-		$this->db->where('ledgerhead_status',1);
-		$result = $this->db->get()->result();
+		
+		$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN opening_bal ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN opening_bal ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk = 19 AND company_id_fk = '.$cmp.'';
+		$query = $this->db->query($sql);
+		return $data = $query->result();
+		// $array = array(19);
+		// $this->db->select('*');
+		// $this->db->from('tbl_ledgerhead');
+		// $this->db->where('company_id_fk',$cmp);
+		// $this->db->where_in('group_id_fk',$array);//current liability
+		// $this->db->where('ledgerhead_status',1);
+		// $result = $this->db->get()->result();
 		// print_r($result);die();
-		$z=0;$data=array();
-		for ($i=0; $i < count($result); $i++) 
-		{ 
-			$this->db->select('*,SUM(debit_amt) as sum_deb,SUM(credit_amt) as sum_cr')->from('tbl_journal');
-			$this->db->join('tbl_ledgerhead','ledger_head_id = ledgerhead_id');
-			$this->db->where('ledger_head_id',$result[$i]->ledgerhead_id);
-			$this->db->where('tbl_journal.company_id_fk',$cmp);
-			$this->db->where('tbl_journal.fin_year',$fyr);
-			$this->db->where('journal_status',1);
-			$this->db->group_by('ledger_head_id');
-			$response = $this->db->get()->result();
-			// echo $this->db->last_query();
-			// print_r($response);
-			if($response)
-			{
-				for ($k=0; $k < count($response) ; $k++) 
-				{ 
-					$data[$z] = array(
-						             'ledger_head' => $response[$k]->ledger_head,
-						             'debit_amt' => $response[$k]->sum_deb,
-						             'credit_amt'   => $response[$k]->sum_cr,
-									);
-					$z=$z+1;
-				}
-			}
-		}
-		return $data;
+		// $z=0;$data=array();
+		// for ($i=0; $i < count($result); $i++) 
+		// { 
+		// 	$this->db->select('*,SUM(debit_amt) as sum_deb,SUM(credit_amt) as sum_cr')->from('tbl_journal');
+		// 	$this->db->join('tbl_ledgerhead','ledger_head_id = ledgerhead_id');
+		// 	$this->db->where('ledger_head_id',$result[$i]->ledgerhead_id);
+		// 	$this->db->where('tbl_journal.company_id_fk',$cmp);
+		// 	$this->db->where('tbl_journal.fin_year',$fyr);
+		// 	$this->db->where('journal_status',1);
+		// 	$this->db->group_by('ledger_head_id');
+		// 	$response = $this->db->get()->result();
+		// 	// echo $this->db->last_query();
+		// 	// print_r($response);
+		// 	if($response)
+		// 	{
+		// 		for ($k=0; $k < count($response) ; $k++) 
+		// 		{ 
+		// 			$data[$z] = array(
+		// 				             'ledger_head' => $response[$k]->ledger_head,
+		// 				             'debit_amt' => $response[$k]->sum_deb,
+		// 				             'credit_amt'   => $response[$k]->sum_cr,
+		// 							);
+		// 			$z=$z+1;
+		// 		}
+		// 	}
+		// }
+		// return $data;
 	}
 	public function getAllDirectincomes($cmp,$fyr)
 	{
-		$array = array(24,25);
-		$this->db->select('*');
-		$this->db->from('tbl_ledgerhead');
-		$this->db->where('company_id_fk',$cmp);
-		$this->db->where_in('group_id_fk',$array);//current liability
-		$this->db->where('ledgerhead_status',1);
-		$result = $this->db->get()->result();
-		// print_r($result);die();
-		$z=0;$data=array();
-		for ($i=0; $i < count($result); $i++) 
-		{ 
-			$this->db->select('*,SUM(debit_amt) as sum_deb,SUM(credit_amt) as sum_cr')->from('tbl_journal');
-			$this->db->join('tbl_ledgerhead','ledger_head_id = ledgerhead_id');
-			$this->db->where('ledger_head_id',$result[$i]->ledgerhead_id);
-			$this->db->where('tbl_journal.company_id_fk',$cmp);
-			$this->db->where('tbl_journal.fin_year',$fyr);
-			$this->db->where('journal_status',1);
-			$this->db->group_by('ledger_head_id');
-			$response = $this->db->get()->result();
-			// echo $this->db->last_query();
-			// print_r($response);
-			if($response)
-			{
-				for ($k=0; $k < count($response) ; $k++) 
-				{ 
-					$data[$z] = array(
-						             'ledger_head' => $response[$k]->ledger_head,
-						             'debit_amt' => $response[$k]->sum_deb,
-						             'credit_amt'   => $response[$k]->sum_cr,
-									);
-					$z=$z+1;
-				}
-			}
-		}
-		return $data;
+		$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN opening_bal ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN opening_bal ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk IN (24,25) AND company_id_fk = '.$cmp.'';
+		$query = $this->db->query($sql);
+		return $data = $query->result();
+		// $array = array(24,25);
+		// $this->db->select('*');
+		// $this->db->from('tbl_ledgerhead');
+		// $this->db->where('company_id_fk',$cmp);
+		// $this->db->where_in('group_id_fk',$array);//current liability
+		// $this->db->where('ledgerhead_status',1);
+		// $result = $this->db->get()->result();
+		// // print_r($result);die();
+		// $z=0;$data=array();
+		// for ($i=0; $i < count($result); $i++) 
+		// { 
+		// 	$this->db->select('*,SUM(debit_amt) as sum_deb,SUM(credit_amt) as sum_cr')->from('tbl_journal');
+		// 	$this->db->join('tbl_ledgerhead','ledger_head_id = ledgerhead_id');
+		// 	$this->db->where('ledger_head_id',$result[$i]->ledgerhead_id);
+		// 	$this->db->where('tbl_journal.company_id_fk',$cmp);
+		// 	$this->db->where('tbl_journal.fin_year',$fyr);
+		// 	$this->db->where('journal_status',1);
+		// 	$this->db->group_by('ledger_head_id');
+		// 	$response = $this->db->get()->result();
+		// 	// echo $this->db->last_query();
+		// 	// print_r($response);
+		// 	if($response)
+		// 	{
+		// 		for ($k=0; $k < count($response) ; $k++) 
+		// 		{ 
+		// 			$data[$z] = array(
+		// 				             'ledger_head' => $response[$k]->ledger_head,
+		// 				             'debit_amt' => $response[$k]->sum_deb,
+		// 				             'credit_amt'   => $response[$k]->sum_cr,
+		// 							);
+		// 			$z=$z+1;
+		// 		}
+		// 	}
+		// }
+		// return $data;
 	}
 	public function getAllinDirectincomes($cmp,$fyr)
 	{
-		$array = array(26);
-		$this->db->select('*');
-		$this->db->from('tbl_ledgerhead');
-		$this->db->where('company_id_fk',$cmp);
-		$this->db->where_in('group_id_fk',$array);//current liability
-		$this->db->where('ledgerhead_status',1);
-		$result = $this->db->get()->result();
-		// print_r($result);die();
-		$z=0;$data=array();
-		for ($i=0; $i < count($result); $i++) 
-		{ 
-			$this->db->select('*,SUM(debit_amt) as sum_deb,SUM(credit_amt) as sum_cr')->from('tbl_journal');
-			$this->db->join('tbl_ledgerhead','ledger_head_id = ledgerhead_id');
-			$this->db->where('ledger_head_id',$result[$i]->ledgerhead_id);
-			$this->db->where('tbl_journal.company_id_fk',$cmp);
-			$this->db->where('tbl_journal.fin_year',$fyr);
-			$this->db->where('journal_status',1);
-			$this->db->group_by('ledger_head_id');
-			$response = $this->db->get()->result();
-			// echo $this->db->last_query();
-			// print_r($response);
-			if($response)
-			{
-				for ($k=0; $k < count($response) ; $k++) 
-				{ 
-					$data[$z] = array(
-						             'ledger_head' => $response[$k]->ledger_head,
-						             'debit_amt' => $response[$k]->sum_deb,
-						             'credit_amt'   => $response[$k]->sum_cr,
-									);
-					$z=$z+1;
-				}
-			}
-		}
-		return $data;	
+		$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN opening_bal ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN opening_bal ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk = 26 AND company_id_fk = '.$cmp.'';
+		$query = $this->db->query($sql);
+		return $data = $query->result();
+		// $array = array(26);
+		// $this->db->select('*');
+		// $this->db->from('tbl_ledgerhead');
+		// $this->db->where('company_id_fk',$cmp);
+		// $this->db->where_in('group_id_fk',$array);//current liability
+		// $this->db->where('ledgerhead_status',1);
+		// $result = $this->db->get()->result();
+		// // print_r($result);die();
+		// $z=0;$data=array();
+		// for ($i=0; $i < count($result); $i++) 
+		// { 
+		// 	$this->db->select('*,SUM(debit_amt) as sum_deb,SUM(credit_amt) as sum_cr')->from('tbl_journal');
+		// 	$this->db->join('tbl_ledgerhead','ledger_head_id = ledgerhead_id');
+		// 	$this->db->where('ledger_head_id',$result[$i]->ledgerhead_id);
+		// 	$this->db->where('tbl_journal.company_id_fk',$cmp);
+		// 	$this->db->where('tbl_journal.fin_year',$fyr);
+		// 	$this->db->where('journal_status',1);
+		// 	$this->db->group_by('ledger_head_id');
+		// 	$response = $this->db->get()->result();
+		// 	// echo $this->db->last_query();
+		// 	// print_r($response);
+		// 	if($response)
+		// 	{
+		// 		for ($k=0; $k < count($response) ; $k++) 
+		// 		{ 
+		// 			$data[$z] = array(
+		// 				             'ledger_head' => $response[$k]->ledger_head,
+		// 				             'debit_amt' => $response[$k]->sum_deb,
+		// 				             'credit_amt'   => $response[$k]->sum_cr,
+		// 							);
+		// 			$z=$z+1;
+		// 		}
+		// 	}
+		// }
+		// return $data;	
 	}
 	public function getAllDirectexpenses($cmp,$fyr)
 	{
@@ -770,107 +789,114 @@ class Accountsreports_model extends CI_Model
 		{
 			for ($p=0; $p < count($group_by) ; $p++) 
 			{ 
-				$array[$p]=$group_by[$p]->group_id;	
+				$array[$p]=$group_by[$p]->group_id;
+				$directexpense = implode(',',$array);	
 			}
 		}
-		// print_r($array);die;
+		$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN opening_bal ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN opening_bal ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND company_id_fk = '.$cmp.' AND group_id_fk IN('.$directexpense.')';
+		$query = $this->db->query($sql);
+		return $data = $query->result();
+		// // print_r($array);die;
 
-		$this->db->select('*');
-		$this->db->from('tbl_ledgerhead');
-		$this->db->where('company_id_fk',$cmp);
-		$this->db->where_in('group_id_fk',$array);
-		$this->db->where('ledgerhead_status',1);
-		$result = $this->db->get()->result();
-		// print_r($result);die();
-		$z=0;$data=array();
-		for ($i=0; $i < count($result); $i++) 
-		{ 
-			$this->db->select('*,SUM(debit_amt) as sum_deb,SUM(credit_amt) as sum_cr')->from('tbl_journal');
-			$this->db->join('tbl_ledgerhead','ledger_head_id = ledgerhead_id');
-			$this->db->where('ledger_head_id',$result[$i]->ledgerhead_id);
-			$this->db->where('tbl_journal.company_id_fk',$cmp);
-			$this->db->where('tbl_journal.fin_year',$fyr);
-			$this->db->where('journal_status',1);
-			$this->db->group_by('ledger_head_id');
-			$response = $this->db->get()->result();
-			// echo $this->db->last_query();
-			// print_r($response);die;
-			if($response)
-			{
-				for ($k=0; $k < count($response) ; $k++) 
-				{ 
-					$data[$z] = array(
-						             'ledger_head' => $response[$k]->ledger_head,
-						             'debit_amt' => $response[$k]->sum_deb,
-						             'credit_amt'   => $response[$k]->sum_cr,
-									);
-					$z=$z+1;
-				}
-			}
-			else
-			{
-				$maxdate=$this->db->select_max('date')->where('ledgerhead_id_fk',$result[$i]->ledgerhead_id)->get('tbl_ledgerbalance')->row()->date;
-				$this->db->select('*');
-				$this->db->from('tbl_ledgerbalance');
-				$this->db->join('tbl_ledgerhead','ledgerhead_id_fk = ledgerhead_id');
-				$this->db->where('ledgerhead_id_fk',$result[$i]->ledgerhead_id);
-				$this->db->where('tbl_ledgerbalance.company_id_fk',$cmp);
-				$this->db->where('tbl_ledgerbalance.date',$maxdate);
-				$this->db->where('tbl_ledgerbalance.ledgerbalance_status',1);
-				$abc=$this->db->get()->result();
-				if($abc)
-				{
-					for ($m=0; $m < count($abc) ; $m++) 
-					{ 
-						$data[$z] = array(
-						             'ledger_head' => $abc[$m]->ledger_head,
-						             'debit_amt' => $abc[$m]->balance,
-						             'credit_amt'   => 0,
-									);
-						$z=$z+1;
-					}
-				}	
-			}
-		}
-		return $data;
+		// $this->db->select('*');
+		// $this->db->from('tbl_ledgerhead');
+		// $this->db->where('company_id_fk',$cmp);
+		// $this->db->where_in('group_id_fk',$array);
+		// $this->db->where('ledgerhead_status',1);
+		// $result = $this->db->get()->result();
+		// // print_r($result);die();
+		// $z=0;$data=array();
+		// for ($i=0; $i < count($result); $i++) 
+		// { 
+		// 	$this->db->select('*,SUM(debit_amt) as sum_deb,SUM(credit_amt) as sum_cr')->from('tbl_journal');
+		// 	$this->db->join('tbl_ledgerhead','ledger_head_id = ledgerhead_id');
+		// 	$this->db->where('ledger_head_id',$result[$i]->ledgerhead_id);
+		// 	$this->db->where('tbl_journal.company_id_fk',$cmp);
+		// 	$this->db->where('tbl_journal.fin_year',$fyr);
+		// 	$this->db->where('journal_status',1);
+		// 	$this->db->group_by('ledger_head_id');
+		// 	$response = $this->db->get()->result();
+		// 	// echo $this->db->last_query();
+		// 	// print_r($response);die;
+		// 	if($response)
+		// 	{
+		// 		for ($k=0; $k < count($response) ; $k++) 
+		// 		{ 
+		// 			$data[$z] = array(
+		// 				             'ledger_head' => $response[$k]->ledger_head,
+		// 				             'debit_amt' => $response[$k]->sum_deb,
+		// 				             'credit_amt'   => $response[$k]->sum_cr,
+		// 							);
+		// 			$z=$z+1;
+		// 		}
+		// 	}
+		// 	else
+		// 	{
+		// 		$maxdate=$this->db->select_max('date')->where('ledgerhead_id_fk',$result[$i]->ledgerhead_id)->get('tbl_ledgerbalance')->row()->date;
+		// 		$this->db->select('*');
+		// 		$this->db->from('tbl_ledgerbalance');
+		// 		$this->db->join('tbl_ledgerhead','ledgerhead_id_fk = ledgerhead_id');
+		// 		$this->db->where('ledgerhead_id_fk',$result[$i]->ledgerhead_id);
+		// 		$this->db->where('tbl_ledgerbalance.company_id_fk',$cmp);
+		// 		$this->db->where('tbl_ledgerbalance.date',$maxdate);
+		// 		$this->db->where('tbl_ledgerbalance.ledgerbalance_status',1);
+		// 		$abc=$this->db->get()->result();
+		// 		if($abc)
+		// 		{
+		// 			for ($m=0; $m < count($abc) ; $m++) 
+		// 			{ 
+		// 				$data[$z] = array(
+		// 				             'ledger_head' => $abc[$m]->ledger_head,
+		// 				             'debit_amt' => $abc[$m]->balance,
+		// 				             'credit_amt'   => 0,
+		// 							);
+		// 				$z=$z+1;
+		// 			}
+		// 		}	
+		// 	}
+		// }
+		// return $data;
 	}
 	public function getAllinDirectexpenses($cmp,$fyr)
 	{
-		$array = array(29);
-		$this->db->select('*');
-		$this->db->from('tbl_ledgerhead');
-		$this->db->where('company_id_fk',$cmp);
-		$this->db->where_in('group_id_fk',$array);//current liability
-		$this->db->where('ledgerhead_status',1);
-		$result = $this->db->get()->result();
-		// print_r($result);die();
-		$z=0;$data=array();
-		for ($i=0; $i < count($result); $i++) 
-		{ 
-			$this->db->select('*,SUM(debit_amt) as sum_deb,SUM(credit_amt) as sum_cr')->from('tbl_journal');
-			$this->db->join('tbl_ledgerhead','ledger_head_id = ledgerhead_id');
-			$this->db->where('ledger_head_id',$result[$i]->ledgerhead_id);
-			$this->db->where('tbl_journal.company_id_fk',$cmp);
-			$this->db->where('tbl_journal.fin_year',$fyr);
-			$this->db->where('journal_status',1);
-			$this->db->group_by('ledger_head_id');
-			$response = $this->db->get()->result();
-			// echo $this->db->last_query();
-			// print_r($response);
-			if($response)
-			{
-				for ($k=0; $k < count($response) ; $k++) 
-				{ 
-					$data[$z] = array(
-						             'ledger_head' => $response[$k]->ledger_head,
-						             'debit_amt' => $response[$k]->sum_deb,
-						             'credit_amt'   => $response[$k]->sum_cr,
-									);
-					$z=$z+1;
-				}
-			}
-		}
-		return $data;
+		$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN opening_bal ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN opening_bal ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk = 29 AND company_id_fk = '.$cmp.'';
+		$query = $this->db->query($sql);
+		return $data = $query->result();
+		// $array = array(29);
+		// $this->db->select('*');
+		// $this->db->from('tbl_ledgerhead');
+		// $this->db->where('company_id_fk',$cmp);
+		// $this->db->where_in('group_id_fk',$array);//current liability
+		// $this->db->where('ledgerhead_status',1);
+		// $result = $this->db->get()->result();
+		// // print_r($result);die();
+		// $z=0;$data=array();
+		// for ($i=0; $i < count($result); $i++) 
+		// { 
+		// 	$this->db->select('*,SUM(debit_amt) as sum_deb,SUM(credit_amt) as sum_cr')->from('tbl_journal');
+		// 	$this->db->join('tbl_ledgerhead','ledger_head_id = ledgerhead_id');
+		// 	$this->db->where('ledger_head_id',$result[$i]->ledgerhead_id);
+		// 	$this->db->where('tbl_journal.company_id_fk',$cmp);
+		// 	$this->db->where('tbl_journal.fin_year',$fyr);
+		// 	$this->db->where('journal_status',1);
+		// 	$this->db->group_by('ledger_head_id');
+		// 	$response = $this->db->get()->result();
+		// 	// echo $this->db->last_query();
+		// 	// print_r($response);
+		// 	if($response)
+		// 	{
+		// 		for ($k=0; $k < count($response) ; $k++) 
+		// 		{ 
+		// 			$data[$z] = array(
+		// 				             'ledger_head' => $response[$k]->ledger_head,
+		// 				             'debit_amt' => $response[$k]->sum_deb,
+		// 				             'credit_amt'   => $response[$k]->sum_cr,
+		// 							);
+		// 			$z=$z+1;
+		// 		}
+		// 	}
+		// }
+		// return $data;
 	}
 	public function getFixedAssets($cmp,$fyr)
 	{

@@ -127,6 +127,7 @@ function advanceFun()
   var total = $('#emp_pr_total').val();
   var advance_final = parseFloat(total) - parseFloat(advance);
   $('#emp_pr_net_bal').val(advance_final);
+  
 }
 
 function paidFun()

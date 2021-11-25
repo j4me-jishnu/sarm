@@ -205,7 +205,7 @@ class Accountsreports extends MY_Controller
 		{
 			$template['fin_year']  = $this->General_model->fin_year();
 			$template['company']=$this->General_model->getCompanies();
-			$cmp=$this->input->post('company');
+			$cmp=5;
 			$template['company_id'] = $this->input->post('company');
 
 			$fnyr = $this->General_model->fin_year();
@@ -213,27 +213,35 @@ class Accountsreports extends MY_Controller
 
 			//long term assets or fixed asset
 			$template['fixed'] = $this->Accountsreports_model->getFixedAssetsDetails($cmp,$fyr);
+			//var_dump($template['fixed']); die;
 
 			//short term assets or current assets
 			$template['current'] = $this->Accountsreports_model->getCurrentAssetsDetails($cmp,$fyr);
+			//var_dump($template['current']); die;
 
 			//longterm liability
 			$template['liabilty'] = $this->Accountsreports_model->getFixedLiabiltyDetails($cmp,$fyr);
+			//var_dump($template['liabilty']); die;
 
 			//current liability
 			$template['currentliabilty'] = $this->Accountsreports_model->getCurrentLiabiltyDetails($cmp,$fyr);
+			//var_dump($template['currentliabilty']); die;
 
 			//all direct income
 			$template['direct_income'] = $this->Accountsreports_model->getAllDirectincomes($cmp,$fyr);
+			//var_dump($template['direct_income']); die;
 
 			//all indirect income
 			$template['indirect_income'] = $this->Accountsreports_model->getAllinDirectincomes($cmp,$fyr);
+			//var_dump($template['indirect_income']); die;
 
 			//all direct expense
 			$template['direct_exp'] = $this->Accountsreports_model->getAllDirectexpenses($cmp,$fyr);
+			//var_dump($template['direct_exp']); die;
 
 			//all indirect expense
 			$template['indirect_exp'] = $this->Accountsreports_model->getAllinDirectexpenses($cmp,$fyr);
+			//var_dump($template['indirect_exp']); die;
 			
 			if($this->session->userdata('user_type')=='C'){
 				$id = $this->session->userdata('id');
