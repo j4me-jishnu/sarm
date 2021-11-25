@@ -93,6 +93,13 @@ class Settings extends MY_Controller {
         $param['dir'] = (isset($_REQUEST['order'][0]['dir']))?$_REQUEST['order'][0]['dir']:'';
         $param['searchValue'] =(isset($_REQUEST['search']['value']))?$_REQUEST['search']['value']:'';
         
+		//for Comapny menu 
+		//if Company login only show that company details
+		if($this->session->userdata('user_type') == 'C'){
+			$ide = $this->session->userdata('cmp_id');
+			$param['type_company'] = $ide; 
+		}
+
 		$start_date =(isset($_REQUEST['start_date']))?$_REQUEST['start_date']:'';
         $end_date =(isset($_REQUEST['end_date']))?$_REQUEST['end_date']:'';
 		if($start_date){

@@ -19,9 +19,11 @@
             <div class="col-sm-10">
               <h3>Company List</h3>  
             </div>
+            <?php if($this->session->userdata('user_type') == 'A'){ ?>
             <div class="col-sm-2">
               <a href="<?php echo base_url();?>addCompany" class="btn btn-sm common-btn"><i class="fa fa-plus-square"></i>Add New</a>
             </div>
+            <?php } ?>
           </div>
         </div>
         <div class="box-body">

@@ -63,7 +63,12 @@ $("#date").datepicker({
 })
 
 function attendance(emp_id){
-  var tips = ['some description', 'some other description'];
+
+ 
+  var dates = [];
+  var final = [];
+  var calender_array =[];
+  
   $.ajax({
           url:"<?php echo base_url();?>getAllAttendanceofEmployee",
           type: 'POST',
@@ -71,30 +76,31 @@ function attendance(emp_id){
           dataType: 'json',
           success:
           function(data){
-          var hello = [];
-           for(var i=0;i<=data.length-1;i++){
-              hello.push(data[i].att_date);
-           }
-           $("#datepicker45").datepicker({
-              dateFormat: 'yy-mm-dd',
-              beforeShowDay: highlightDays,
-            })
-
-            function highlightDays(date) {
-              for (var i = 0; i < hello.length; i++) {
-              if (new Date(hello[i]).toString() == date.toString()) {
-                return [true, 'highlight', tips[i]];
+            for(var i=0;i<=data.length-1;i++)
+              {
+                final.push(data[i].att_date); 
               }
+              console.log(final);
+              $('#datepicker45').datepicker({
+                multidate: true,
+                beforeShowDay: function (date) {
+
+                  var allDates = date.getFullYear() + "-" + ('0' + (date.getMonth() + 1)).slice(-2) + "-" + ('0' + date.getDate()).slice(-2);
+                  if (final.indexOf(allDates) != -1) {
+                    return {
+                        classes: 'highlight',
+                        tooltip: 'Hello'
+                          }
+                  } else {
+                    return false;
+                  }
+
             }
-                return [true, ''];
-             }
-          }
         });
 
-    
-  
-
-}
+            }
+        });
+      }
 function submit(){
   ckbox = document.getElementsByClassName("chkdata");
   var option = $('#option').val();
@@ -173,4 +179,8 @@ function multi_submit(){
   }
 
 }
+
+$('#myAttenModal').on('hidden.bs.modal', function () {
+ location.reload();
+});
 </script>

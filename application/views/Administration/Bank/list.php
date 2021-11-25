@@ -37,6 +37,7 @@
                   <th>BRANCH</th>
                   <th>IFSC</th>
                   <th>DR/CR</th>
+                  <th>STATUS</th>
                   <th><center>EDIT/DELETE</center></th>
                 </tr>
                 </thead>

@@ -285,6 +285,10 @@ class Category extends MY_Controller {
 	}
 	public function subCategoryedit($sub_cat)
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['records'] = $this->General_model->get_row($this->t_subcategory,'subcategory_id',$sub_cat);
 		$template['mainCategory'] = $this->General_model->getMainCategorylist();
 		$template['body'] = 'Administration/Category/Product/Sub/add';

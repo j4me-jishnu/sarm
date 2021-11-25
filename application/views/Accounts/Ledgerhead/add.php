@@ -82,7 +82,7 @@
                     </label>
               </div>
               <div class="form-group" style="margin-left:540px;">
-                <input type="checkbox"  name="default_id" value="1" <?php echo($records[0]->ledger_default == 1)? 'checked':''  ?>>
+                <input type="checkbox"  name="default_id" value="1" <?php echo(@$records[0]->ledger_default == 1)? 'checked':''  ?>>
                 <label >Set Default</label><br>
               </div>
               <div class="form-group" style="margin-left: 50px;">

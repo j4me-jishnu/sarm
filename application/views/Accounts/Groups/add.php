@@ -50,10 +50,10 @@
                   </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-4 control-label"></label>
-                <div class="col-sm-5">
-                  <label>Do you want to make it default ?</label>
+                
+                <div class="col-sm-5" style="margin-left: 450px;">
                   <input type="checkbox" name="default" value="1" <?php if(isset($records[0]->default)) if($records[0]->default == 1){ echo "checked";} ?>>
+                  <label>Do you want to make it default ?</label>
                 </div>
               </div>
               <div class="form-group">

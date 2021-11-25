@@ -40,7 +40,7 @@
                   </div>
                 </div><br><br>
                 <div class="form-group">
-                  <center><input type="submit" class="btn common-btn" name="submit"></center>
+                  <center><input type="submit" class="btn common-btn" value="save" name="submit"></center>
                 </div>
               </div>
              </div>

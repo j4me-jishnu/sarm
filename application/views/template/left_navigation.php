@@ -182,6 +182,8 @@
         <li class="treeview <?php 
           if($this->uri->segment(1)=="Employee")
             {echo "active";}
+          else if($this->uri->segment(1)=="addPieceEmployee")
+            {echo "active";}  
           else if($this->uri->segment(1)=="Attendance")
             {echo "active";}
           else if($this->uri->segment(1)=="PayAdvance")
@@ -198,6 +200,7 @@
           </a>
           <ul class="treeview-menu ">
             <li class="<?php if($this->uri->segment(1)=="Employee"){echo "active";}?>" ><a href="<?php echo base_url();?>Employee"><i class="glyphicon glyphicon-share-alt"></i> <span>HR details</span></a></li>
+            <li class="<?php if($this->uri->segment(1)=="PieceRateEmployee"){echo "active";}?>" ><a href="<?php echo base_url();?>PieceRateEmployee"><i class="glyphicon glyphicon-share-alt"></i> <span>Peice Rate Details</span></a></li>
             <li class="<?php if($this->uri->segment(1)=="Attendance"){echo "active";}?>" ><a href="<?php echo base_url();?>Attendance"><i class="glyphicon glyphicon-share-alt"></i> <span>Attendance</span></a></li>
             <li class="<?php if($this->uri->segment(1)=="PayAdvance"){echo "active";}?>" ><a href="<?php echo base_url();?>PayAdvance"><i class="glyphicon glyphicon-share-alt"></i> <span>Advance Payment</span></a></li>
             <li class="<?php if($this->uri->segment(1)=="Overtime"){echo "active";}?>" ><a href="<?php echo base_url();?>Overtime"><i class="glyphicon glyphicon-share-alt"></i> <span>Overtime</span></a></li>
@@ -309,7 +312,7 @@
         </li>  
     <?php } ?>
 
-
+<!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
     <!-- COMPANY -->
     <?php if($this->session->userdata['user_type']=='C')
     { ?>
@@ -328,6 +331,32 @@
         <li class="<?php if($this->uri->segment(1)=="ChangePassword"){echo "active";}?>" ><a  href="<?php echo base_url();?>ChangePassword"><i class="glyphicon glyphicon-share-alt"></i> <span>Change Password</span></a></li>
       </ul>
       </li> -->
+
+              <!-- Settings -->
+              <li class="treeview <?php 
+        if($this->uri->segment(1)=="Company")
+        {echo "active";}
+        else if($this->uri->segment(1)=="FinYear")
+        {echo "active";}
+        else if($this->uri->segment(1)=="ChangePassword")
+        {echo "active";}
+        ?>">
+        <a><i class="fa fa-gear"></i><span>Settings</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu ">
+          <li class="<?php if($this->uri->segment(1)=="Company"){echo "active";}?>" >
+
+            <a href="<?php echo base_url();?>Company"><i class="glyphicon glyphicon-share-alt"></i><span>Company</span></a>
+
+          </li>
+          <li class="<?php if($this->uri->segment(1)=="FinYear"){echo "active";}?>" ><a  href="<?php echo base_url();?>FinYear"><i class="glyphicon glyphicon-share-alt"></i> <span>Financial Year</span></a></li>
+          <li class="<?php if($this->uri->segment(1)=="ChangePassword"){echo "active";}?>" ><a  href="<?php echo base_url();?>ChangePassword"><i class="glyphicon glyphicon-share-alt"></i> <span>Change Password</span></a></li>
+        </ul>
+        </li>
+
       <!-- Administration -->
         <li class="treeview 
         <?php 
@@ -432,6 +461,104 @@
             <li class="<?php if($this->uri->segment(1)=="Stock"){echo "active";}?>" ><a  href="<?php echo base_url();?>Stock"><i class="glyphicon glyphicon-share-alt"></i> <span>Stock</span></a></li>
           </ul>
         </li>
+
+        <!-- Manufacturing -->
+        <li class="treeview <?php 
+          if($this->uri->segment(1)=="ManufacturingProducts")
+            {echo "active";}
+          else if($this->uri->segment(1)=="Production")
+            {echo "active";}
+          else if($this->uri->segment(1)=="Productionstatus")
+            {echo "active";}
+          ?>">
+          <a><i class="glyphicon glyphicon-hourglass"></i><span>Manufacturing</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu ">
+            <!-- <li class="<?php if($this->uri->segment(1)=="ManufacturingProducts"){echo "active";}?>" ><a href="<?php echo base_url();?>ManufacturingProducts"><i class="glyphicon glyphicon-share-alt"></i><span>Products</span></a></li> -->
+            <li class="<?php if($this->uri->segment(1)=="Production"){echo "active";}?>" ><a  href="<?php echo base_url();?>Production"><i class="glyphicon glyphicon-share-alt"></i> <span>Production</span></a></li>
+            <!-- <li class="<?php if($this->uri->segment(1)=="Productionstatus"){echo "active";}?>" ><a  href="<?php echo base_url();?>Productionstatus"><i class="glyphicon glyphicon-share-alt"></i> <span>Production Status</span></a></li> -->
+            <!-- <li class="<?php if($this->uri->segment(1)=="Stock"){echo "active";}?>" ><a  href="<?php echo base_url();?>Stock"><i class="glyphicon glyphicon-share-alt"></i> <span>Stock</span></a></li> -->
+          </ul>
+        </li>
+        <!-- Sale -->
+
+        <li class="<?php if($this->uri->segment(1)=="Sale"){echo "active";}?>" ><a  href="<?php echo base_url();?>Sale"><i class="glyphicon glyphicon-shopping-cart"></i> <span>Sale</span></a></li>
+
+        <!-- Accounts -->
+        <li class="treeview 
+        <?php   
+                if($this->uri->segment(1)=='Voucherhead')
+                  {echo "active";}
+                else if($this->uri->segment(1)=='Receipthead')
+                  {echo "active";}
+                else if($this->uri->segment(1)=='Voucher')
+                          {echo "active";}
+                else if($this->uri->segment(1)=='Receipt')
+                          {echo "active";}
+                else if($this->uri->segment(1)=="Daybook")
+                          {echo "active";}
+                else if($this->uri->segment(1)=="Ledger")
+                  {echo "active";}
+                else if($this->uri->segment(1)=="Ledgerhead")
+                  {echo "active";}
+                else if($this->uri->segment(1)=="Groups")
+                  {echo "active";}
+                else if($this->uri->segment(1)=="Journal")
+                  {echo "active";}
+                else if($this->uri->segment(1)=="Types")
+                  {echo "active";}
+                else if($this->uri->segment(1)=="Subgroups")
+                  {echo "active";}
+                else if($this->uri->segment(1)=="Profitloss")
+                  {echo "active";}
+                else if($this->uri->segment(1)=="Trialbalance")
+                  {echo "active";}
+                else if($this->uri->segment(1)=="Balancesheet")
+                  {echo "active";}            
+        ?>">
+          <a><i class="fa fa-money"></i><span>Accounts</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu ">
+            <li class="treeview 
+              <?php 
+                if($this->uri->segment(1)=='Voucherhead')
+                  {echo "active";}
+                else if($this->uri->segment(1)=='Receipthead')
+                  {echo "active";}
+              ?>">
+              <!-- <a href="#"><i class="glyphicon glyphicon-pencil"></i> Create account heads
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <li class="<?php if($this->uri->segment(1)=='Voucherhead'){echo "active";}?>" ><a href="<?php echo base_url();?>Voucherhead"><i class="glyphicon glyphicon-share-alt"></i>Voucher</a></li>
+                <li class="<?php if($this->uri->segment(1)=='Receipthead'){echo "active";}?>" ><a href="<?php echo base_url();?>Receipthead"><i class="glyphicon glyphicon-share-alt"></i>Receipt</a></li>
+              </ul>
+            </li> 
+            <li class="<?php if($this->uri->segment(1)=='Voucher'){echo "active";}?>" ><a href="<?php echo base_url();?>Voucher"><i class="glyphicon glyphicon-share-alt"></i>Voucher Entry</a></li>
+            <li class="<?php if($this->uri->segment(1)=='Receipt'){echo "active";}?>" ><a href="<?php echo base_url();?>Receipt"><i class="glyphicon glyphicon-share-alt"></i>Receipt Entry</a></li> -->  
+
+            <li class="<?php if($this->uri->segment(1)=="Types"){echo "active";}?>" ><a  href="<?php echo base_url();?>Types"><i class="glyphicon glyphicon-share-alt"></i> <span>Types</span></a></li>
+            <li class="<?php if($this->uri->segment(1)=="Groups"){echo "active";}?>" ><a  href="<?php echo base_url();?>Groups"><i class="glyphicon glyphicon-share-alt"></i> <span>Groups</span></a></li>
+            <li class="<?php if($this->uri->segment(1)=="Subgroups"){echo "active";}?>" ><a  href="<?php echo base_url();?>Subgroups"><i class="glyphicon glyphicon-share-alt"></i> <span>Sub Groups</span></a></li>
+            <li class="<?php if($this->uri->segment(1)=="Ledgerhead"){echo "active";}?>" ><a  href="<?php echo base_url();?>Ledgerhead"><i class="glyphicon glyphicon-share-alt"></i> <span>Ledger Head</span></a></li>
+
+            <li class="<?php if($this->uri->segment(1)=="Journal"){echo "active";}?>" ><a  href="<?php echo base_url();?>Journal"><i class="glyphicon glyphicon-share-alt"></i><span>Journal Entry</span></a></li>
+            <li class="<?php if($this->uri->segment(1)=="Ledger"){echo "active";}?>" ><a  href="<?php echo base_url();?>Ledger"><i class="glyphicon glyphicon-share-alt"></i> <span>Ledger</span></a></li>
+            <li class="<?php if($this->uri->segment(1)=="Daybook"){echo "active";}?>" ><a  href="<?php echo base_url();?>Daybook"><i class="glyphicon glyphicon-share-alt"></i> <span>Daybook</span></a></li>
+            <li class="<?php if($this->uri->segment(1)=="Trialbalance"){echo "active";}?>" ><a  href="<?php echo base_url();?>Trialbalance"><i class="glyphicon glyphicon-share-alt"></i> <span>Trial Balance</span></a></li>
+            <li class="<?php if($this->uri->segment(1)=="Profitloss"){echo "active";}?>" ><a  href="<?php echo base_url();?>Profitloss"><i class="glyphicon glyphicon-share-alt"></i> <span>Profit and loss account</span></a></li>
+            <li class="<?php if($this->uri->segment(1)=="Balancesheet"){echo "active";}?>" ><a  href="<?php echo base_url();?>Balancesheet"><i class="glyphicon glyphicon-share-alt"></i> <span>Balancesheet</span></a></li></li>
+          </ul>
+        </li>
+
         <!-- Admin panel -->
         <li class="treeview <?php 
           if($this->uri->segment(1)=="ChangeColor")

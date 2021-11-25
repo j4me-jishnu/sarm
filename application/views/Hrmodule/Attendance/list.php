@@ -1,15 +1,12 @@
 <style>
-  td.highlight {
-  border: none !important;
-  padding: 1px 0 1px 1px !important;
-  background: none !important;
-  overflow: hidden;
-}
-
-td.highlight a {
-  background: #ad3f29 url(bg.png) 50% 50% repeat-x !important;
-  border: 1px #88a276 solid !important;
-}
+  .highlight{
+    background-color: green;
+    color:seashell;
+  }
+  .highlight2{
+    background-color: red;
+    color: seashell;
+  }
 </style>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -146,7 +143,7 @@ td.highlight a {
         <div id="datepicker45"></div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default"  data-dismiss="modal">Close</button>
       </div>
     </div>
 

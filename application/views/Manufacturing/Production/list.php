@@ -42,13 +42,14 @@
                   </select>
                 </div><!-- /input-group -->
             </div>
+            <?php if($this->session->userdata['user_type']!='C')
+                  { ?>
             <div class="col-md-3">
                 <div class="input-group margin">
                   <div class="input-group-btn">
                     <button type="button" class="btn btn-primary nohover">Company</button>
                   </div><!-- /btn-group -->
-                  <?php if($this->session->userdata['user_type']!='C')
-                  { ?>
+                  
                         <select name="company" id="company" class="form-control" onchange="tableFilter();">
                           <option></option>
                           <?php
@@ -61,8 +62,8 @@
                           ?>
                         </select>
                       </div>
-                  <?php } ?>
                 </div>
+                <?php } ?>
           </div>
         </div>
         <div class="box-body">

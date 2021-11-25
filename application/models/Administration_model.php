@@ -166,6 +166,10 @@ Class Administration_model extends CI_Model
         $arOrder = array('','product_name');
         $searchValue =($param['searchValue'])?$param['searchValue']:'';
         $product_code =($param['product_code'])?$param['product_code']:'';
+        $type_company = ($param['type_company'])?$param['type_company']:'';
+        if($type_company){
+            $this->db->where('company_id',$type_company);
+        }
         if($searchValue){
             $this->db->like('product_name', $searchValue); 
         }
@@ -270,6 +274,10 @@ Class Administration_model extends CI_Model
         //     $this->db->where('shop_id_fk', 0);
         // }
         $searchValue =($param['searchValue'])?$param['searchValue']:'';
+        $type_company =($param['type_company'])?$param['type_company']:'';
+        if($type_company){
+            $this->db->where('tbl_openingstock.company_id',$type_company);
+        }
         if($searchValue){
             $this->db->like('product_name', $searchValue); 
         }

@@ -155,7 +155,7 @@ class Manufacturing extends MY_Controller {
 			$param['company'] =$company;
 		}
 		$param['area'] = (isset($_REQUEST['area']))?$_REQUEST['area']:'';
-        $param['company'] = (isset($_REQUEST['company']))?$_REQUEST['company']:'';
+        // $param['company'] = (isset($_REQUEST['company']))?$_REQUEST['company']:'';
 			
 		$data = $this->Manufacturing_model->getProductionReport($param);
 		$json_data = json_encode($data);

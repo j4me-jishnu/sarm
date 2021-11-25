@@ -283,6 +283,15 @@ Class Hr_model extends CI_Model
 
     }
 
+    public function getItemTable($emp_id)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_emp_piece_rate');
+        $this->db->where('emp_pr_fk',$emp_id);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
     public function getPieceEmployee($param)
     {
         $searchValue =($param['searchValue'])?$param['searchValue']:'';
@@ -290,15 +299,14 @@ Class Hr_model extends CI_Model
             $this->db->like('emp_pr_name', $searchValue);
         }
 
-        $this->db->where("emp_pr_status",1);
-
         if ($param['start'] != 'false' and $param['length'] != 'false') {
             $this->db->limit($param['length'],$param['start']);
         }
         $this->db->select('*');
-        $this->db->from('tbl_emp_piece_rate');
-        $this->db->join('tbl_companyinfo','tbl_companyinfo.cmp_id = tbl_emp_piece_rate.emp_pr_cmp_id');
-        $this->db->order_by('emp_pr_id','DESC');
+        $this->db->from('tbl_employee');
+        $this->db->join('tbl_emp_peice_rate_pay','tbl_emp_peice_rate_pay.emp_fk = tbl_employee.emp_id');
+        $this->db->order_by('emp_id','DESC');
+        $this->db->where("emp_status",1);
         $query = $this->db->get();
 
         $data['data'] = $query->result();
@@ -313,22 +321,61 @@ Class Hr_model extends CI_Model
         if($searchValue){
             $this->db->like('emp_pr_name', $searchValue);
         }
-        $this->db->where("emp_pr_status",1);
+        
         $this->db->select('*');
-        $this->db->from('tbl_emp_piece_rate');
-        $this->db->join('tbl_companyinfo','tbl_companyinfo.cmp_id = tbl_emp_piece_rate.emp_pr_cmp_id');
-        $this->db->order_by('emp_pr_id','DESC');
+        $this->db->from('tbl_employee');
+        $this->db->join('tbl_emp_peice_rate_pay','tbl_emp_peice_rate_pay.emp_fk = tbl_employee.emp_id');
+        $this->db->order_by('emp_id','DESC');
+        $this->db->where("emp_status",1);
         $query = $this->db->get();
         return $query->num_rows();
     }
 
-    public function getPieceEmployees($id)
+    public function getPieceEmployees($emp_id)
     {
-       $this->db->select('*');
+        $this->db->select('*');
+        $this->db->from('tbl_employee');
+        $this->db->join('tbl_emp_peice_rate_pay','tbl_emp_peice_rate_pay.emp_fk = tbl_employee.emp_id');
+        $this->db->where('emp_id',$emp_id);
+        $this->db->where("emp_status",1);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function getItemListTable($emp_id)
+    {
+        $this->db->select('*');
         $this->db->from('tbl_emp_piece_rate');
-        $this->db->join('tbl_companyinfo','tbl_companyinfo.cmp_id = tbl_emp_piece_rate.emp_pr_cmp_id');
-        $this->db->where('emp_pr_id',$id);
-        $this->db->where("emp_pr_status",1);
+        $this->db->where('emp_pr_fk',$emp_id);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function peiceRateajaxTable()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_employee');
+        $this->db->where('emp_mode',2);
+        $this->db->where('emp_status',1);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function rateajaxTable($emp_id)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_emp_piece_rate');
+        $this->db->where('emp_pr_fk',$emp_id);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function getPeicerateEmp()
+    {
+        $this->db->select('emp_id,emp_name');
+        $this->db->from('tbl_employee');
+        $this->db->where('emp_mode',2);
+        $this->db->where('emp_status',1);
         $query = $this->db->get();
         return $query->result();
     }

@@ -122,8 +122,9 @@ class Inventory extends MY_Controller {
 			$total_price = $this->input->post('total');
 			$counter = $this->input->post('counter');
 			$draft = $this->input->post('draft');
-			if ($draft != 1) 
-			{
+			if ($draft != 1 && $draft != 2) 
+			{	
+				
 				$invc_no = $this->input->post('invoice_number_edit');
 				if (isset($invc_no)) 
 				{
@@ -195,12 +196,77 @@ class Inventory extends MY_Controller {
 	  					'payment_status'=>1 
 	  					);
 				$result = $this->General_model->add('tbl_purchasepayments',$datap);
+				if($invc_no)
+				{
+					$this->db->where('purchase_fk_id',$invc_no)->delete('tbl_ledgerhead');
+				}
 				$upData = array('supplier_oldbal' =>$this->input->post('net_bal'));
 				$stk = $this->General_model->update('tbl_supplier',$upData,'supplier_id',$supp_id);
 				$response_text = 'Purchase added successfully';
+
+				if($this->input->post('round_off_diff') > 0){
+
+						$ledger_head_data = array(
+							'group_id_fk' => 27,
+							'ledger_head' => 'Round_off@Purchase',
+							'ledgerhead_desc' => 'Round Off Purchase',
+							'opening_bal' => $this->input->post('round_off_diff'),
+							'debit_or_credit' => 1,
+							'ledgerhead_status' =>1,
+							'company_id_fk' => $company,
+							'purchase_fk_id' => $this->input->post('invoice_number'),
+							'ledger_default' => 0
+						);
+						$result34 = $this->General_model->add('tbl_ledgerhead',$ledger_head_data);	
+					
+				}
 			}
 			else
 			{
+				$pur_table_id = $this->input->post('pur_table_id');
+				$total_pay_id = $this->input->post('total_payments_id');
+				if($draft == 2){
+					$j=1;
+				for ($i=0; $i < $counter; $i++) 
+				{ 
+					$data=array(
+					  'product_id_fk' =>$product_id[$i],
+					  'supp_id' =>$supp_id,
+					  'cmp_id' =>$cmp_id,
+					  'finyear' => $fyr,
+					  'price_category'=>$this->input->post('optradio'),
+					  'invoice_number' =>$this->input->post('invoice_number'),
+					  'purchase_quantity' =>$purchase_quantity[$i],
+					  'purchase_price' =>$purchase_price[$i],
+					  'discount_price' =>$discount_price[$i],
+					  'discount_type' =>$this->input->post('disradio_'.$j.''),
+					  'total_price' =>$total_price[$i],
+					  'purchase_date' =>$purchase_date,
+					  'stockstatus' =>0,
+					  'purchase_status' =>2 //draft
+					);
+					$result = $this->General_model->update('tbl_purchase',$data,'purchase_id',$pur_table_id[$i]);
+					//$insert_id = $this->db->insert_id();
+				$j++;	
+				}
+				$datap = array(
+						'invoice_number' =>$this->input->post('invoice_number'),
+						'tax_amount'=>$this->input->post('tax_sum'),
+						'bill_discount'=>$this->input->post('bill_discount'),
+						'bill_discount_type'=>$this->input->post('bill_dis'),
+						'frieght'=>$this->input->post('frieght'),
+						'packing_charge'=>$this->input->post('pack_chrg'),
+	  					'net_total' =>$this->input->post('sum'),
+	  					'cash_paid' =>$this->input->post('cash'),
+	  					'bank_paid' =>$this->input->post('bank'),
+	  					'old_balance'=>$this->input->post('old_bal'),
+	  					'net_balance'=>$this->input->post('net_bal'),
+	  					'payment_status'=>1 
+	  					);
+				$result = $this->General_model->update('tbl_purchasepayments',$datap,'purchase_payment_id',$total_pay_id);
+				$response_text = 'Draft added successfully';
+				}
+				else{
 				$j=1;
 				for ($i=0; $i < $counter; $i++) 
 				{ 
@@ -240,6 +306,8 @@ class Inventory extends MY_Controller {
 	  					);
 				$result = $this->General_model->add('tbl_purchasepayments',$datap);
 				$response_text = 'Draft added successfully';
+					}
+				
 			}
 			
 			if($result)
