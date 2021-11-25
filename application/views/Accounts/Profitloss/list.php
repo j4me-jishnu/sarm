@@ -48,6 +48,30 @@
                     </div>
                 <?php } ?>
               </div>
+              <div class="col-md-3">
+                <div class="input-group margin">
+                  <div class="input-group-btn">
+                    <button class="btn btn-primary nohover">Date From</button>
+                  </div>
+                    <input type="date" class="form-control" name="dates">
+                </div>
+              </div>
+              
+              <div class="col-md-3" style="margin-left: 50px;">
+                <div class="input-group margin">
+                  <div class="input-group-btn">
+                    <button class="btn btn-primary nohover">Date To</button>
+                  </div>
+                    <input type="date" class="form-control" name="dates">
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="input-group margin">
+                  <div class="input-group-btn">
+                    <input type="submit" class="form-control btn btn-primary" name="submit" value="SUBMIT">
+                  </div>
+                </div>
+              </div>
             </div>
           </form>
           <table id="area_table" align="center" width="800" class="table-bordered table-condensed">
@@ -200,14 +224,14 @@
                   { 
                   ?>
                   <tr>
-                    <td>To <?php if(isset($direct_exp[$i]['ledger_head'])) echo $direct_exp[$i]['ledger_head']; ?></td>
-                    <td><?php if(isset($direct_exp[$i]['debit_amt'])) echo $direct_exp[$i]['debit_amt']; ?></td>
-                    <td>By <?php if(isset($direct_income[$i]['ledger_head'])) echo $direct_income[$i]['ledger_head'];?></td>
-                    <td><?php if(isset($direct_income[$i]['credit_amt'])) echo $direct_income[$i]['credit_amt']; ?></td>
+                    <td>To <?php if(isset($direct_exp[$i]->ledger_head)) echo $direct_exp[$i]->ledger_head; ?></td>
+                    <td><?php if(isset($direct_exp[$i]->debit)) echo round($direct_exp[$i]->debit,2); ?></td>
+                    <td>By <?php if(isset($direct_income[$i]->ledger_head)) echo $direct_income[$i]->ledger_head;?></td>
+                    <td><?php if(isset($direct_income[$i]->credit)) echo round($direct_income[$i]->credit,2); ?></td>
                   </tr>
                   <?php
-                  if(isset($direct_exp[$i]['debit_amt'])){$total_pur = $total_pur + $direct_exp[$i]['debit_amt'];}
-                  if(isset($direct_income[$i]['credit_amt'])){$total_sale = $total_sale + $direct_income[$i]['credit_amt'];} 
+                  if(isset($direct_exp[$i]->debit)){$total_pur = $total_pur + $direct_exp[$i]->debit;}
+                  if(isset($direct_income[$i]->credit)){$total_sale = $total_sale + $direct_income[$i]->credit;} 
                   }
                 }
                 ?>
@@ -308,16 +332,16 @@
                   { 
                   ?>
                   <tr>
-                    <td>To <?php if(isset($indirect_exp[$i]['ledger_head'])) echo $indirect_exp[$i]['ledger_head']; ?></td>
-                    <td><?php if(isset($indirect_exp[$i]['debit_amt'])) echo $indirect_exp[$i]['debit_amt']; ?></td>
-                    <td>By <?php if(isset($indirect_income[$i]['ledger_head'])) echo $indirect_income[$i]['ledger_head'];?></td>
-                    <td><?php if(isset($indirect_income[$i]['credit_amt'])) echo $indirect_income[$i]['credit_amt']; ?></td>
+                    <td>To <?php if(isset($indirect_exp[$i]->ledger_head)) echo $indirect_exp[$i]->ledger_head; ?></td>
+                    <td><?php if(isset($indirect_exp[$i]->debit)) echo round($indirect_exp[$i]->debit,2); ?></td>
+                    <td>By <?php if(isset($indirect_income[$i]->ledger_head)) echo $indirect_income[$i]->ledger_head;?></td>
+                    <td><?php if(isset($indirect_income[$i]->credit)) echo round($indirect_income[$i]->credit,2); ?></td>
                   </tr>
                   <?php
                   // if(isset($indirect_exp[$i]['debit_amt'])){$profit = $profit + $direct_exp[$i]['debit_amt'];}
                   // if(isset($indirect_income[$i]['credit_amt'])){$loss = $loss + $direct_income[$i]['credit_amt'];}
-                  if(isset($indirect_exp[$i]['debit_amt'])){$netloss = $netloss + $indirect_exp[$i]['debit_amt'];}
-                  if(isset($indirect_income[$i]['credit_amt'])){$netprofit = $netprofit  + $indirect_income[$i]['credit_amt'];}
+                  if(isset($indirect_exp[$i]->debit)){$netloss = $netloss + $indirect_exp[$i]->debit;}
+                  if(isset($indirect_income[$i]->credit)){$netprofit = $netprofit  + $indirect_income[$i]->credit;}
 
                   }
                 }
