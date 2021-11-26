@@ -68,7 +68,9 @@ var response = $("#response").val();
             "url": "<?php echo base_url();?>getStockReport",
             "type": "POST",
             "data" : function (d) {
-            d.item_name = $('#item_name').val();
+            	d.item_name = $('#item_name').val();
+				d.start_date = $("#pmsDateStart").val();
+            	d.end_date = $("#pmsDateEnd").val();
            }
         },
         "createdRow": function ( row, data, index ) {

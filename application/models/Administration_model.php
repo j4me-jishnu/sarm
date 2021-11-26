@@ -164,9 +164,9 @@ Class Administration_model extends CI_Model
     public function getProductTable($param)
     {
         $arOrder = array('','product_name');
-        $searchValue =($param['searchValue'])?$param['searchValue']:'';
-        $product_code =($param['product_code'])?$param['product_code']:'';
-        $type_company = ($param['type_company'])?$param['type_company']:'';
+        $searchValue =(isset($param['searchValue']))?$param['searchValue']:'';
+        $product_code =(isset($param['product_code']))?$param['product_code']:'';
+        $type_company = (isset($param['type_company']))?$param['type_company']:'';
         if($type_company){
             $this->db->where('company_id',$type_company);
         }

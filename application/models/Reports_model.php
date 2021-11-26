@@ -164,11 +164,19 @@ Class Reports_model extends CI_Model{
 			$arOrder = array('','searchValue','start_date','end_date','cust_name');
 			$searchValue =($param['searchValue'])?$param['searchValue']:'';
 			$item_name =(isset($param['item_name']))?$param['item_name']:'';
+			$start_date =(isset($param['start_date']))?$param['start_date']:'';
+			$end_date =(isset($param['end_date']))?$param['end_date']:'';
 			if($searchValue){
 				$this->db->like('stock_id', $searchValue); 
 			}
 			if($item_name){
 				$this->db->where('product_name >=', $item_name); 
+			}
+			if($start_date){
+				$this->db->where('absent_date >=', $start_date); 
+			}
+			if($end_date){
+				$this->db->where('absent_date <=', $end_date); 
 			}
 			$this->db->where("stock_status",1);
 			$this->db->select('*');

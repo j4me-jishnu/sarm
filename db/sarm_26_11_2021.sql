@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 25, 2021 at 04:16 AM
+-- Generation Time: Nov 26, 2021 at 08:30 AM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.9
 
@@ -1096,14 +1096,15 @@ CREATE TABLE IF NOT EXISTS `tbl_profit` (
   `profit_loss` int(11) NOT NULL COMMENT '1=profit,2=loss',
   `fin_year` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_profit`
 --
 
 INSERT INTO `tbl_profit` (`id`, `cmp_id_fk`, `amount`, `profit_loss`, `fin_year`) VALUES
-(1, 5, 3300, 1, 3);
+(1, 5, 40583, 1, 3),
+(2, 6, 46478, 1, 3);
 
 -- --------------------------------------------------------
 
