@@ -134,7 +134,13 @@ class Accountsreports extends MY_Controller
 		}
 		public function getProfitloss()
 		{
-			$cmp=$this->input->post('company');
+			if($this->session->userdata('user_type')=='A'){
+				$cmp=$this->input->post('company');
+			}
+			else
+			{
+				$cmp=$this->session->userdata('cmp_id');
+			}
 			$template['fin_year']  = $this->General_model->fin_year();
 			$template['company']=$this->General_model->getCompanies();
 			$template['company_id'] = $this->input->post('company');
@@ -195,6 +201,10 @@ class Accountsreports extends MY_Controller
 				$id = $this->session->userdata('id');
 				$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
 				}
+			if($this->session->userdata('user_type')=='C'){
+				$comp_id = $this->session->userdata('cmp_id');
+				$template['company1'] = $this->General_model->get_row('tbl_companyinfo','cmp_id',$comp_id);
+			}	
 			$template['fin_year']  = $this->General_model->fin_year();
 			$template['company']=$this->General_model->getCompanies();
 			$template['body'] = 'Accounts/Trialbalance/list';
@@ -203,11 +213,19 @@ class Accountsreports extends MY_Controller
 		}
 		public function getTrialbalance()
 		{
+			if($this->session->userdata('user_type')=='C'){
+				$comp_id = $this->session->userdata('cmp_id');
+				$template['company1'] = $this->General_model->get_row('tbl_companyinfo','cmp_id',$comp_id);
+			}	
 			$template['fin_year']  = $this->General_model->fin_year();
 			$template['company']=$this->General_model->getCompanies();
-			$cmp=5;
-			$template['company_id'] = $this->input->post('company');
-
+			if($this->session->userdata('user_type')=='A'){
+				$cmp=$this->input->post('company');	
+			}
+			else
+			{
+				$cmp=$this->session->userdata('cmp_id');
+			}
 			$fnyr = $this->General_model->fin_year();
 			if(isset($fnyr->finyear_id)){ $fyr = $fnyr->finyear_id; } else{ $fyr = 0;}
 
@@ -257,6 +275,10 @@ class Accountsreports extends MY_Controller
 				$id = $this->session->userdata('id');
 				$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
 				}
+			if($this->session->userdata('user_type')=='C'){
+				$cmp_ide = $this->session->userdata('cmp_id');
+				$template['comapny1'] = $this->General_model->get_row('tbl_companyinfo','cmp_id',$cmp_ide);
+			}	
 			$template['fin_year']  = $this->General_model->fin_year();
 			$template['company']=$this->General_model->getCompanies();
 			$template['body'] = 'Accounts/Balancesheet/list';
@@ -265,7 +287,14 @@ class Accountsreports extends MY_Controller
 		}
 		public function getBalancesheet()
 		{
-			$cmp=$this->input->post('company');
+			if($this->session->userdata('user_type')=='C'){
+				$cmp = $this->session->userdata('cmp_id');
+				$template['comapny1'] = $this->General_model->get_row('tbl_companyinfo','cmp_id',$cmp);
+			}
+			else{
+				$cmp=$this->input->post('company');	
+			}	
+			
 			$template['company_id'] = $this->input->post('company');
 			$fnyr = $this->General_model->fin_year();
 			if(isset($fnyr->finyear_id)){ $fyr = $fnyr->finyear_id; } else{ $fyr = 0;}
@@ -283,7 +312,8 @@ class Accountsreports extends MY_Controller
 			//current liability
 			$template['currentliabilty'] = $this->Accountsreports_model->getCurrentLiabilty($cmp,$fyr);
 
-			$template['capital'] = $this->Accountsreports_model->getCapital($cmp);
+			@$template['capital'] = $this->Accountsreports_model->getCapital($cmp);
+			 //print_r($template['capital']);die();
 			
 			$template['profitloss'] = $this->Accountsreports_model->getProfitloss($cmp,$fyr);
 

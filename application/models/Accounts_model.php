@@ -343,7 +343,11 @@ Class Accounts_model extends CI_Model
     {
         $arOrder = array('','class');
         $searchValue =($param['searchValue'])?$param['searchValue']:'';
-            if($searchValue){
+        $cmp_id =($param['company'])?$param['company']:'';
+        if($cmp_id){
+            $this->db->where('company_id_fk',$cmp_id);
+        }
+        if($searchValue){
             $this->db->like('ledger_head', $searchValue); 
         }
         $this->db->where("ledgerhead_status",1);

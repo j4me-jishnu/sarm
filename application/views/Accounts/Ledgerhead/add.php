@@ -20,7 +20,7 @@
               <input type="hidden" name="ledgerhead_id" value="<?php if(isset($records[0]->ledgerhead_id)) echo $records[0]->ledgerhead_id ?>" >
               <div class="form-group">
                 <label for="size_name" class="col-sm-4 control-label">Company<span style="color:red">*</span></label>
-
+                <?php if($this->session->userdata('user_type')!='C'){ ?>
                 <div class="col-sm-5">
                   <select name="company" id="company" class="form-control" required>
                     <option></option>
@@ -34,6 +34,13 @@
                         ?>
                   </select>
                 </div>
+                <?php } else { ?>
+                 <div class="col-md-5">
+                   <input type="hidden" class="form-control" name=company value="<?php echo $this->session->userdata('cmp_id'); ?>">
+                   <input type="text" class="form-control" name=company value="<?php echo $company1->cmp_name ?>" readonly>
+
+                 </div> 
+                 <?php } ?>
               </div>
               <div class="form-group">
                 <label for="size_name" class="col-sm-4 control-label">Sub Group<span style="color:red">*</span></label>
@@ -73,7 +80,7 @@
                     
                   </div>
               </div>
-              <div class="form-group" style="margin-left:520px;">
+              <div class="form-group" style="margin-left:450px;">
               <label class="radio-inline">
                       <input type="radio" name="optradio" value="1">Debit
                     </label>
@@ -81,7 +88,7 @@
                       <input type="radio" name="optradio" value="2">Credit
                     </label>
               </div>
-              <div class="form-group" style="margin-left:540px;">
+              <div class="form-group" style="margin-left:470px;">
                 <input type="checkbox"  name="default_id" value="1" <?php echo(@$records[0]->ledger_default == 1)? 'checked':''  ?>>
                 <label >Set Default</label><br>
               </div>

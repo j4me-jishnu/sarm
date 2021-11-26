@@ -120,5 +120,62 @@ class Companyreport extends MY_Controller {
 			$json_data = json_encode($data);
 			echo $json_data;
 				}	
+
+			public function productionReport()
+			{
+				if($this->session->userdata('user_type')=='C'){
+					$id = $this->session->userdata('id');
+					$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+					}
+				$template['body'] = 'Companyreport/Production/list';
+				$template['script'] = 'Companyreport/Production/script';
+				$this->load->view('template', $template);
+			}
+		
+		
+			public function getProductionReportRM(){
+				$param['cmp'] = $this->session->userdata('cmp_id');
+				$param['searchValue'] =(isset($_REQUEST['search']['value']))?$_REQUEST['search']['value']:'';
+				$start_date =(isset($_REQUEST['start_date']))?$_REQUEST['start_date']:'';
+				$end_date =(isset($_REQUEST['end_date']))?$_REQUEST['end_date']:'';
+				
+				if($start_date){
+					$start_date = str_replace('/', '-', $start_date);
+					$param['start_date'] =  date("Y-m-d",strtotime($start_date));
+				}
+				   
+				if($end_date){
+					$end_date = str_replace('/', '-', $end_date);
+					$param['end_date'] =  date("Y-m-d",strtotime($end_date));
+				}
+				$data = $this->Companyreport_model->getProductionTable1($param);
+				  
+				$json_data = json_encode($data);
+				echo $json_data;
+			}
+		
+			public function getProductionReportOP(){
+				$param['cmp'] = $this->session->userdata('cmp_id');
+				$param['searchValue'] =(isset($_REQUEST['search']['value']))?$_REQUEST['search']['value']:'';
+				$start_date =(isset($_REQUEST['start_date']))?$_REQUEST['start_date']:'';
+				$end_date =(isset($_REQUEST['end_date']))?$_REQUEST['end_date']:'';
+					
+				if($start_date){
+					$start_date = str_replace('/', '-', $start_date);
+					$param['start_date'] =  date("Y-m-d",strtotime($start_date));
+				}
+					   
+				if($end_date){
+					$end_date = str_replace('/', '-', $end_date);
+					$param['end_date'] =  date("Y-m-d",strtotime($end_date));
+				}
+				$data = $this->Companyreport_model->getProductionTable2($param);
+					  
+				$json_data = json_encode($data);
+				echo $json_data;
+			}	
+		
+					
+
 	}
 	?>

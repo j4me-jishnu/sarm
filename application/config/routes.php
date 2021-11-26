@@ -341,3 +341,8 @@ $route['GetcmpSaleReport'] = 'Companyreport/getSaleTable';
 //Stock Reports
 $route['cmpStockReport'] = 'Companyreport/stockReport';
 $route['GetcmpStockReport'] = 'Companyreport/getStockReport';
+
+//Production Reports
+$route['cmpProductionReport'] = 'Companyreport/productionReport';
+$route['GetcmpProductionReportRM'] = 'Companyreport/getProductionReportRM';
+$route['GetcmpProductionReportOP'] = 'Companyreport/getProductionReportOP';

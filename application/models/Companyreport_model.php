@@ -202,6 +202,73 @@ Class Companyreport_model extends CI_Model{
 			$query = $this->db->get();
 			return $query->num_rows();
 		}
+
+
+		public function getProductionTable1($param){
+			$cmp = (isset($param['cmp']))?$param['cmp']:'';
+			$arOrder = array('','searchValue','start_date','end_date','cust_name');
+			$searchValue =($param['searchValue'])?$param['searchValue']:'';
+			$start_date =(isset($param['start_date']))?$param['start_date']:'';
+			$end_date =(isset($param['end_date']))?$param['end_date']:'';
+			if($searchValue){
+				$this->db->like('production_id', $searchValue); 
+			}
+			if($start_date){
+				$this->db->where('date >=', $start_date); 
+			}
+			if($end_date){
+				$this->db->where('date <=', $end_date); 
+			}
+			if($cmp){
+				$this->db->where('tbl_production.company_id_fk', $cmp); 
+			}
+			$this->db->where("production_status",1);
+			$this->db->select('*');
+			$this->db->from('tbl_production');
+			$this->db->join('tbl_companyinfo','tbl_companyinfo.cmp_id = tbl_production.company_id_fk');
+			$this->db->join('tbl_area','tbl_area.area_id = tbl_production.area_id_fk');
+			$this->db->join('tbl_productioninput','tbl_productioninput.production_id_fk = tbl_production.production_id');
+			$this->db->join('tbl_product','tbl_product.product_id = tbl_productioninput.product_id');
+			$this->db->order_by('production_id', 'DESC');
+			$query = $this->db->get();
+			
+			$data['data'] = $query->result();
+			return $data;
+	
+		}
+	
+		public function getProductionTable2($param){
+			$cmp = (isset($param['cmp']))?$param['cmp']:'';
+			$arOrder = array('','searchValue','start_date','end_date','cust_name');
+			$searchValue =($param['searchValue'])?$param['searchValue']:'';
+			$start_date =(isset($param['start_date']))?$param['start_date']:'';
+			$end_date =(isset($param['end_date']))?$param['end_date']:'';
+			if($searchValue){
+				$this->db->like('production_id', $searchValue); 
+			}
+			if($start_date){
+				$this->db->where('date >=', $start_date); 
+			}
+			if($end_date){
+				$this->db->where('date <=', $end_date); 
+			}
+			if($cmp){
+				$this->db->where('tbl_production.company_id_fk', $cmp); 
+			}
+			$this->db->where("production_status",1);
+			$this->db->select('*');
+			$this->db->from('tbl_production');
+			$this->db->join('tbl_companyinfo','tbl_companyinfo.cmp_id = tbl_production.company_id_fk');
+			$this->db->join('tbl_area','tbl_area.area_id = tbl_production.area_id_fk');
+			$this->db->join('tbl_productionoutput','tbl_productionoutput.production_id_fk = tbl_production.production_id');
+			$this->db->join('tbl_product','tbl_product.product_id = tbl_productionoutput.product_id');
+			$this->db->order_by('production_id', 'DESC');
+			$query = $this->db->get();
+			
+			$data['data'] = $query->result();
+			return $data;
+	
+		}
 }
 
 ?>

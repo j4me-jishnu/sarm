@@ -51,6 +51,11 @@
                     <input type="text" name="journal_inv" id="journal_inv" value="<?php if(isset($invno)) echo $invno; ?>" class="form-control">
                   </div>
                 </div>    
+              <?php }else{  ?>
+                <div class="col-md-2">
+                  <input type="hidden" class="form-control" name="company" value="<?php echo $this->session->userdata('cmp_id'); ?>">
+                  <input type="text" class="form-control" name="justname" value="<?php echo $company1->cmp_name ?>">
+                </div>
               <?php } ?>
               <br>
               <div class="row">
