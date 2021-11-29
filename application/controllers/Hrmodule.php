@@ -270,13 +270,13 @@ class Hrmodule extends MY_Controller {
 	{
 		$emp_id = $this->input->post('id');
 		$at_date = str_replace('/', '-', $this->input->post('dates'));
-		$at_date = date("Y-m-d",strtotime($at_date));
+		$at_date2 = date("Y-m-d",strtotime($at_date));
 		$month = date("m",strtotime($at_date));
 		$date = $at_date;
 		if($this->Hr_model->check_attendance($emp_id,$date) == 0)
 		{
 			$data = array(
-						'att_date'=> $at_date,
+						'att_date'=> $at_date2,
 						'month' => $month,
 						'emp_id'=> $emp_id,
 						'att_status'=> 1

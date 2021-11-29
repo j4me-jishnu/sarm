@@ -159,8 +159,9 @@ function multidat(employee_details){
 function multi_submit(){
   var id = $('#emp_ide').val();
   var date = $('#date2').val();
+  // console.log(date);
   var array = date.split(',');
-  for(var i=0;i<=array.length;i++){
+  for(var i=0;i<=array.length-1;i++){
     var dates = array[i];
       if(id!='' && date!='')
       {
