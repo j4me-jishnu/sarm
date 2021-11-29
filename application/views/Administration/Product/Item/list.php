@@ -16,14 +16,16 @@
       <div class="box">
         <div class="box-header">
           <div class="row">
-            <div class="col-sm-10">
+            <div class="col-sm-9">
               <h3>Item List</h3>  
             </div>
-            <div class="col-sm-2">
-              <a href="<?php echo base_url();?>addItem" class="btn btn-sm common-btn" data-inline="true"><i class="fa fa-plus-square"></i>Add New</a>
-              <a href="<?php echo base_url();?>importItem" class="btn btn-sm common-btn" data-inline="true"><i class="fa fa-plus-square"></i>Import</a>
-            </div>
-            <div class="col-sm-2">
+            <div class="row">
+                <div class="col-md-1">
+                  <a href="<?php echo base_url();?>addItem" class="btn btn-sm common-btn" data-inline="true"><i class="fa fa-plus-square"></i>Add New</a>
+                </div>
+                <div class="col-md-1">
+                  <a href="<?php echo base_url();?>importItem" class="btn btn-sm common-btn" data-inline="true"><i class="fa fa-plus-square"></i>Import</a>
+                </div>  
             </div>
           </div>
           <div class="row">

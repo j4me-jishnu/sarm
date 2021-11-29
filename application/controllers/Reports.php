@@ -112,7 +112,9 @@ class Reports extends MY_Controller {
 		
 		$param['searchValue'] =(isset($_REQUEST['search']['value']))?$_REQUEST['search']['value']:'';
 		$param['item_name'] =(isset($_REQUEST['item_name']))?$_REQUEST['item_name']:'';
-	
+		$param['start_date'] =(isset($_REQUEST['start_date']))?$_REQUEST['start_date']:'';
+		$param['end_date'] =(isset($_REQUEST['end_date']))?$_REQUEST['end_date']:'';
+
         $data = $this->Reports_model->getStockrepo($param);
       
     	$json_data = json_encode($data);

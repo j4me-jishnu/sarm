@@ -79,10 +79,10 @@ var response = $("#response").val();
             "url": "<?php echo base_url();?>getPurchaseTable",
             "type": "POST",
             "data" : function (d) {
-                    d.invoice_no = $("#purchase_invoice_no").val();
-					d.product_num1 = $("#product").val();
-					d.start_date = $("#pmsDateStart").val();
-                    d.end_date = $("#pmsDateEnd").val();
+                d.invoice_no = $("#purchase_invoice_no").val();
+					      d.product_num1 = $("#product").val();
+					      d.start_date = $("#pmsDateStart").val();
+                d.end_date = $("#pmsDateEnd").val();
 					//alert(d.product_num);
 				}
         },

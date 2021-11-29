@@ -46,7 +46,17 @@
                         ?>
                       </select>
                     </div>
-                <?php } ?>
+                <?php } else{ ?>
+                  <div class="row" style="margin-left: 90px;">
+                 <div class="col-md-8">
+                   <input type="text" name="justname" id="" class="form-control" value="<?php echo @$company1->cmp_name ?>" readonly>
+                   <input type="hidden" name="company" id="" class="form-control" value="<?php echo $this->session->userdata('cmp_id') ?>">
+                 </div>
+                 <div class="col-md-2">
+                   <input type="submit" name="submit" class="btn btn-primary " value="SUBMIT">
+                 </div>
+                 </div>
+                 <?php } ?>
               </div>
             </div>
           </form>
@@ -83,10 +93,10 @@
                     { 
                     ?>
                         <tr>
-                          <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $fixed[$i]['ledger_head'] ?></td>
+                          <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $fixed[$i]->ledger_head ?></td>
                           <td></td>
-                          <td><?php echo $fixed[$i]['debit_amt']; $deb_total=$deb_total+$fixed[$i]['debit_amt']; ?></td>
-                          <td><?php echo $fixed[$i]['credit_amt']; $cred_total=$cred_total+$fixed[$i]['credit_amt']; ?></td>
+                          <td><?php echo $fixed[$i]->debit; $deb_total=$deb_total+$fixed[$i]->debit; ?></td>
+                          <td><?php echo $fixed[$i]->credit; $cred_total=$cred_total+$fixed[$i]->credit; ?></td>
                         </tr>
                     <?php  
                     } 
@@ -102,10 +112,10 @@
                   { 
                     ?>
                         <tr>
-                          <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $current[$i]['ledger_head'] ?></td>
+                          <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $current[$i]->ledger_head ?></td>
                           <td></td>
-                          <td><?php echo $current[$i]['debit_amt'];$deb_total=$deb_total+$current[$i]['debit_amt']; ?></td>
-                          <td><?php echo $current[$i]['credit_amt'];$cred_total=$cred_total+$current[$i]['credit_amt']; ?></td>
+                          <td><?php echo $current[$i]->debit;$deb_total=$deb_total+$current[$i]->debit ?></td>
+                          <td><?php echo $current[$i]->credit;$cred_total=$cred_total+$current[$i]->credit ?></td>
                         </tr>
                     <?php  
                   } 
@@ -121,10 +131,10 @@
                   { 
                     ?>
                       <tr>
-                        <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $liabilty[$i]['ledger_head'] ?></td>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $liabilty[$i]->ledger_head ?></td>
                         <td></td>
-                        <td><?php echo $liabilty[$i]['debit_amt'];$deb_total=$deb_total+$liabilty[$i]['debit_amt']; ?></td>
-                        <td><?php echo $liabilty[$i]['credit_amt'];$cred_total=$cred_total+$liabilty[$i]['credit_amt']; ?></td>
+                        <td><?php echo $liabilty[$i]->debit;$deb_total=$deb_total+$liabilty[$i]->debit; ?></td>
+                        <td><?php echo $liabilty[$i]->credit;$cred_total=$cred_total+$liabilty[$i]->credit; ?></td>
                       </tr>
                     <?php  
                   } 
@@ -140,10 +150,10 @@
                   { 
                     ?>
                         <tr>
-                          <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $currentliabilty[$i]['ledger_head'] ?></td>
+                          <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $currentliabilty[$i]->ledger_head ?></td>
                           <td></td>
-                          <td><?php echo $currentliabilty[$i]['debit_amt'];$deb_total=$deb_total+$currentliabilty[$i]['debit_amt']; ?></td>
-                          <td><?php echo $currentliabilty[$i]['credit_amt'];$cred_total=$cred_total+$currentliabilty[$i]['credit_amt']; ?></td>
+                          <td><?php echo $currentliabilty[$i]->debit;$deb_total=$deb_total+$currentliabilty[$i]->debit; ?></td>
+                          <td><?php echo $currentliabilty[$i]->credit;$cred_total=$cred_total+$currentliabilty[$i]->credit; ?></td>
                         </tr>
                     <?php  
                   } 
@@ -159,10 +169,10 @@
                   { 
                     ?>
                         <tr>
-                          <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $direct_income[$i]['ledger_head'] ?></td>
+                          <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $direct_income[$i]->ledger_head ?></td>
                           <td></td>
-                          <td><?php echo $direct_income[$i]['debit_amt'];$deb_total=$deb_total+$direct_income[$i]['debit_amt']; ?></td>
-                          <td><?php echo $direct_income[$i]['credit_amt'];$cred_total=$cred_total+$direct_income[$i]['credit_amt']; ?></td>
+                          <td><?php echo $direct_income[$i]->debit;$deb_total=$deb_total+$direct_income[$i]->debit; ?></td>
+                          <td><?php echo $direct_income[$i]->credit;$cred_total=$cred_total+$direct_income[$i]->credit; ?></td>
                         </tr>
                     <?php  
                   } 
@@ -178,10 +188,10 @@
                   { 
                     ?>
                         <tr>
-                          <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $indirect_income[$i]['ledger_head'] ?></td>
+                          <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $indirect_income[$i]->ledger_head ?></td>
                           <td></td>
-                          <td><?php echo $indirect_income[$i]['debit_amt'];$deb_total=$deb_total+$indirect_income[$i]['debit_amt']; ?></td>
-                          <td><?php echo $indirect_income[$i]['credit_amt'];$cred_total=$cred_total+$indirect_income[$i]['credit_amt']; ?></td>
+                          <td><?php echo $indirect_income[$i]->debit;$deb_total=$deb_total+$indirect_income[$i]->debit; ?></td>
+                          <td><?php echo $indirect_income[$i]->credit;$cred_total=$cred_total+$indirect_income[$i]->credit; ?></td>
                         </tr>
                     <?php  
                   } 
@@ -197,10 +207,10 @@
                   { 
                     ?>
                         <tr>
-                          <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $direct_exp[$i]['ledger_head'] ?></td>
+                          <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $direct_exp[$i]->ledger_head ?></td>
                           <td></td>
-                          <td><?php echo $direct_exp[$i]['debit_amt'];$deb_total=$deb_total+$direct_exp[$i]['debit_amt']; ?></td>
-                          <td><?php echo $direct_exp[$i]['credit_amt'];$cred_total=$cred_total+$direct_exp[$i]['credit_amt']; ?></td>
+                          <td><?php echo $direct_exp[$i]->debit;$deb_total=$deb_total+$direct_exp[$i]->debit; ?></td>
+                          <td><?php echo $direct_exp[$i]->credit;$cred_total=$cred_total+$direct_exp[$i]->credit; ?></td>
                         </tr>
                     <?php  
                   }
@@ -216,10 +226,10 @@
                   { 
                     ?>
                         <tr>
-                          <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $indirect_exp[$i]['ledger_head'] ?></td>
+                          <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $indirect_exp[$i]->ledger_head ?></td>
                           <td></td>
-                          <td><?php echo $indirect_exp[$i]['debit_amt'];$deb_total=$deb_total+$indirect_exp[$i]['debit_amt']; ?></td>
-                          <td><?php echo $indirect_exp[$i]['credit_amt'];$cred_total=$cred_total+$indirect_exp[$i]['credit_amt']; ?></td>
+                          <td><?php echo $indirect_exp[$i]->debit;$deb_total=$deb_total+$indirect_exp[$i]->debit; ?></td>
+                          <td><?php echo $indirect_exp[$i]->credit;$cred_total=$cred_total+$indirect_exp[$i]->credit; ?></td>
                         </tr>
                     <?php  
                   }

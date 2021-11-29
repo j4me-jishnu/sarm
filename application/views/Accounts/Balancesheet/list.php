@@ -46,6 +46,16 @@
                         ?>
                       </select>
                     </div>
+                <?php } else { ?>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <input type="text" class="form-control" name="justname" value="<?php echo $comapny1->cmp_name ?>">
+                      <input type="hidden" class="form-control" name="company" value="<?php echo $this->session->userdata('cmp_id') ?>">  
+                    </div>
+                    <div class="col-md-3">
+                      <input type="submit" class="btn btn-primary" value="SUBMIT">  
+                    </div>                    
+                  </div>
                 <?php } ?>
               </div>
             </div>

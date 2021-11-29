@@ -80,7 +80,7 @@ var response = $("#response").val();
             "type": "POST",
             "data" : function (d) {
                     d.invoice_no = $("#purchase_invoice_no").val();
-					d.start_date = $("#pmsDateStart").val();
+					          d.start_date = $("#pmsDateStart").val();
                     d.end_date = $("#pmsDateEnd").val();
 					//alert(d.product_num);
 				}
