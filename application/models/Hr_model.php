@@ -292,6 +292,16 @@ Class Hr_model extends CI_Model
         return $query->result();
     }
 
+    public function getInvoiceTable($emp_id)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_employee');
+        $this->db->join('tbl_emp_peice_rate_pay','tbl_emp_peice_rate_pay.emp_fk = tbl_employee.emp_id');
+        $this->db->where('tbl_employee.emp_id',$emp_id);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
     public function getPieceEmployee($param)
     {
         $searchValue =($param['searchValue'])?$param['searchValue']:'';

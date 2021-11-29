@@ -630,6 +630,14 @@ class Hrmodule extends MY_Controller {
 		echo $json_data;
 	}
 
+	public function InvoiceList($emp_id)
+	{
+		$peice_emp = $this->Hr_model->getall('');
+		$template['body'] = 'Hrmodule/PieceEmployee/list';
+		$template['script'] = 'Hrmodule/PieceEmployee/script';
+		$this->load->view('template', $template);
+	}
+
 	public function addPieceEmployee()
 	{
 		$this->form_validation->set_rules('emp_pr_id', 'Employee', 'required');
