@@ -37,6 +37,7 @@
                   <th>NET BALANCE</th>
                   <th>PAID AMOUNT</th>
                   <th>PAYMENT BALANCE</th>
+                  <th>INVOICE</th>
                   <th>DATE</th>
                   <th>EDIT/DELETE</th>
                 </tr>
@@ -70,6 +71,102 @@
             </thead>
             <tbody id="lists1">
     
+            </tbody>
+          </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+<!-- End Modal -->
+
+
+<!-- Pop Up Modal -->
+<div class="modal fade" id="myInvoice" role="dialog">
+      <div class="modal-dialog">
+      
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Peice Employee Invoice</h4>
+          </div>
+          <div class="modal-body">
+            <table class="table table-bordered">
+            <thead>
+              <tr id="head">
+                <th colspan="2">NAME:&nbsp;&nbsp;&nbsp;RAJEEV</th>
+                <th>DATE:&nbsp;&nbsp;&nbsp;26/12/2021</th>
+              </tr>
+              <tr>
+                <th scope="col">ITEM</th>
+                <th scope="col">PCS/KG</th>
+                <th scope="col">RATE</th>
+                <th scope="col">TOTAL</th>
+              </tr>
+            </thead>
+            <tbody id="lists2">
+              <tr>
+                <td>Steel</td>
+                <td>50</td>
+                <td>20</td>
+                <td>1000</td>
+              </tr>
+              <tr>
+                <td>Steel</td>
+                <td>50</td>
+                <td>20</td>
+                <td>1000</td>
+              </tr>
+              <tr>
+                <td>Steel</td>
+                <td>50</td>
+                <td>20</td>
+                <td>1000</td>
+              </tr>
+              <tr>
+                <td>Steel</td>
+                <td>50</td>
+                <td>20</td>
+                <td>1000</td>
+              </tr>
+              <tr>
+                <td colspan="3"><b>TOTAL</b></td>
+                <td><b>4000</b></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>200</td>
+                <td>3</td>
+                <td>240</td>
+              </tr>
+              <tr>
+                <td colspan="3"></td>
+                <td>4240</td>
+              </tr>
+              <tr>
+                <td colspan="2"></td>
+                <td><b>ADV</b></td>
+                <td>0</td>
+              </tr>
+              <tr>
+                <td colspan="2"></td>
+                <td><b>NET TOTAL</b></td>
+                <td><b>4240<b></td>
+              </tr>
+              <tr>
+                <td colspan="2"></td>
+                <td><b>PAID</b></td>
+                <td><b>4300</b></td>
+              </tr>
+              <tr>
+                <td colspan="2"></td>
+                <td><b>BAL</b></td>
+                <td>60</td>
+              </tr>
             </tbody>
           </table>
           </div>
