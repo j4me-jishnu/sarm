@@ -147,7 +147,7 @@ class Inventory extends MY_Controller {
 					}
 					//remark checkbox
 					$remark_checkbox = $this->input->post('remark_chk');
-					if($remark_checkbox[$i] == 1){
+					if(@$remark_checkbox[$i] == 1){
 						$remark_text = $this->input->post('remarks_text');
 					}
 					else
@@ -229,6 +229,8 @@ class Inventory extends MY_Controller {
 					$j=1;
 				for ($i=0; $i < $counter; $i++) 
 				{ 
+					//new changes to delete exesting table
+					$returns = $this->General_model->delete('tbl_purchase','purchase_id',$pur_table_id[$i]);
 					$data=array(
 					  'product_id_fk' =>$product_id[$i],
 					  'supp_id' =>$supp_id,
@@ -236,6 +238,7 @@ class Inventory extends MY_Controller {
 					  'finyear' => $fyr,
 					  'price_category'=>$this->input->post('optradio'),
 					  'invoice_number' =>$this->input->post('invoice_number'),
+					  'reference_bill_id'=>$this->input->post('ref_bill_id'),
 					  'purchase_quantity' =>$purchase_quantity[$i],
 					  'purchase_price' =>$purchase_price[$i],
 					  'discount_price' =>$discount_price[$i],
@@ -245,10 +248,12 @@ class Inventory extends MY_Controller {
 					  'stockstatus' =>0,
 					  'purchase_status' =>2 //draft
 					);
-					$result = $this->General_model->update('tbl_purchase',$data,'purchase_id',$pur_table_id[$i]);
+					//$result = $this->General_model->update('tbl_purchase',$data,'purchase_id',$pur_table_id[$i]);
+					$result = $this->General_model->add('tbl_purchase',$data);
 					//$insert_id = $this->db->insert_id();
 				$j++;	
 				}
+				$returns = $this->General_model->delete('tbl_purchasepayments','purchase_payment_id',$total_pay_id);
 				$datap = array(
 						'invoice_number' =>$this->input->post('invoice_number'),
 						'tax_amount'=>$this->input->post('tax_sum'),
@@ -263,7 +268,8 @@ class Inventory extends MY_Controller {
 	  					'net_balance'=>$this->input->post('net_bal'),
 	  					'payment_status'=>1 
 	  					);
-				$result = $this->General_model->update('tbl_purchasepayments',$datap,'purchase_payment_id',$total_pay_id);
+				//$result = $this->General_model->update('tbl_purchasepayments',$datap,'purchase_payment_id',$total_pay_id);
+				$result = $this->General_model->add('tbl_purchasepayments',$datap);
 				$response_text = 'Draft added successfully';
 				}
 				else{
@@ -277,6 +283,7 @@ class Inventory extends MY_Controller {
 					  'finyear' => $fyr,
 					  'price_category'=>$this->input->post('optradio'),
 					  'invoice_number' =>$this->input->post('invoice_number'),
+					  'reference_bill_id'=>$this->input->post('ref_bill_id'),
 					  'purchase_quantity' =>$purchase_quantity[$i],
 					  'purchase_price' =>$purchase_price[$i],
 					  'discount_price' =>$discount_price[$i],

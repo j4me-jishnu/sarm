@@ -12,7 +12,7 @@
 
   <!-- Main content -->
   <section class="content">
-    <form method="post" id="purchase_form" action="<?php echo base_url(); ?>addPurchase">
+    <form method="post" name="myForm" id="purchase_form" action="<?php echo base_url(); ?>addPurchase">
     <div class="row">
       <div class="col-md-12">
         <div class="box">

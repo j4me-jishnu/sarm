@@ -315,7 +315,7 @@
               <div class="col-md-8"></div>
               <div class="col-md-2">
                 <label>Net Total</label>
-                <input class="form-control" type="text" name="sum" id="sum" value="<?php if(isset($records[0]->net_total)) echo  $records[0]->net_total?>">
+                <input class="form-control" type="text" name="sum" id="sum" value="">
                 <label>Cash Payment</label>
                 <input class="form-control" type="text" name="cash" id="cash" value="<?php if(isset($records[0]->cash_paid)) echo  $records[0]->cash_paid?>" onkeyup="getNet();" required>
                 <label>Bank Payment</label>
@@ -325,7 +325,7 @@
                 <label>Net Balance</label>
                 <input type="text" name="net_bal" id="net_bal" class="form-control" style="height: 50px;" value="<?php if(isset($records[0]->net_balance)) echo  $records[0]->net_balance?>">
                 <label>Round Off Amount</label>
-                <input type="text" name="round_off" id="round_off" class="form-control"  value="<?php if(isset($records[0]->round_off_amt)) echo  $records[0]->round_off_amt?>">
+                <input type="text" name="round_off" id="round_off" class="form-control"  value="">
                 <input type="hidden" name="round_off_diff" id="round_off_diff" class="form-control"  value="0">
                 <br>
                 <!-- <input type="submit" name="Submit" value="Save" class="btn btn-success btn-lg"> -->

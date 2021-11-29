@@ -218,6 +218,7 @@ class Sale extends MY_Controller {
 					$j=1;
 					for ($i=0; $i < $counter; $i++) 
 					{ 
+						$returns = $this->General_model->delete('tbl_sale','sale_id',$prod_table_id[$i]);
 						$data=array(
 						'product_id_fk' =>$product_id[$i],
 						'cust_id' =>$cust_id,
@@ -234,10 +235,13 @@ class Sale extends MY_Controller {
 						'stockstatus' =>0,
 						'sale_status' =>2 //draft
 						);
-						$result = $this->General_model->update('tbl_sale',$data,'sale_id',$prod_table_id[$i]);
+						//$result = $this->General_model->update('tbl_sale',$data,'sale_id',$prod_table_id[$i]);
+						$result = $this->General_model->add('tbl_sale',$data);
 						// $insert_id = $this->db->insert_id();
 					$j++;	
 					}
+					$returns = $this->General_model->delete('tbl_salepayments','sale_payment_id',$prod_pay_id);
+
 					$datap = array(
 							'invoice_number' =>$this->input->post('invoice_number'),
 							'tax_amount'=>$this->input->post('tax_sum'),
@@ -253,7 +257,8 @@ class Sale extends MY_Controller {
 							'net_balance'=>$this->input->post('net_bal'),
 							'payment_status'=>1 
 							);
-					$result = $this->General_model->update('tbl_salepayments',$datap,'sale_payment_id',$prod_pay_id);
+					//$result = $this->General_model->update('tbl_salepayments',$datap,'sale_payment_id',$prod_pay_id);
+					$result = $this->General_model->add('tbl_salepayments',$datap);
 					$response_text = 'Draft added successfully';
 				}
 				else{
