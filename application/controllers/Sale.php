@@ -113,7 +113,7 @@ class Sale extends MY_Controller {
 					}
 					//remark checkbox
 					$remark_checkbox = $this->input->post('remark_chk');
-					if($remark_checkbox[$i] == 1){
+					if(@$remark_checkbox[$i] == 1){
 						$remark_text = $this->input->post('remarks_text');
 					}
 					else
