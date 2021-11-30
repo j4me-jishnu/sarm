@@ -29,7 +29,7 @@
             });
 			$('td', row).eq(10).html('<center><a href="<?php echo base_url();?>editPieceRateEmployee/'+data['emp_id']+'"><i class="fa fa-edit iconFontSize-medium" ></i></a>&nbsp;&nbsp;&nbsp;<a onclick="return confirmDelete('+data['emp_id']+')"><i class="fa fa-trash-o iconFontSize-medium" ></i></a></center>');
             $('td', row).eq(2).html('<button class="btn btn-primary btn-sm" data-toggle="modal" onclick="Itemlistfun('+data['emp_id']+')" data-target="#myModal"><i class="fa fa-sitemap"></i></button>');
-            $('td', row).eq(8).html('<center><a href="<?php echo base_url();?>editPieceRateEmployee/'+data['emp_id']+'"><i class="fa fa-clipboard iconFontSize-medium" ></i></a></center>');
+            $('td', row).eq(8).html('<center><a href="<?php echo base_url();?>PeiceRateInvoice/'+data['emp_id']+'"><i class="fa fa-clipboard iconFontSize-medium" ></i></a></center>');
             
         },
 
@@ -164,6 +164,20 @@ function Itemlistfun(emp_id)
         });
 }
 
+function showPDFSheet(){
+    var pdf = new jsPDF('p', 'pt', 'letter');
 
+pdf.cellInitialize();
+pdf.setFontSize(8);
+$.each( $('table tr'), function (i, row){
+    $.each( $(row).find("td, th"), function(j, cell){
+        var txt = $(cell).text().trim() || " ";
+         //var width = (j==4) ? 40 : 70; //make 4th column smaller
+        pdf.cell(10, 10, 83, 20, txt, i);
+    });
+});
+
+pdf.save('sample-file.pdf');
+}
 
 </script>

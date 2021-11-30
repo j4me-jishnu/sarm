@@ -608,6 +608,21 @@ class Hrmodule extends MY_Controller {
 		$this->load->view('template', $template);
 	}
 
+	public function PeiceRateInvoice($emp_id)
+	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
+		$template['records'] = $this->Hr_model->getInvoiceTable($emp_id);
+		$template['records2'] = $this->Hr_model->getItemTable($emp_id);
+		//$data = $this->Hr_model->getInvoiceTable($emp_id);
+		//var_dump($template['records']); die;
+		$template['body'] = 'Hrmodule/PieceEmployee/invoice';
+		$template['script'] = 'Hrmodule/PieceEmployee/script';
+		$this->load->view('template', $template);
+	}
+
 	public function getPieceEmployee()
 	{
 		$param['draw'] = (isset($_REQUEST['draw']))?$_REQUEST['draw']:'';
@@ -630,13 +645,6 @@ class Hrmodule extends MY_Controller {
 		echo $json_data;
 	}
 
-	public function InvoiceList($emp_id)
-	{
-		$peice_emp = $this->Hr_model->getall('');
-		$template['body'] = 'Hrmodule/PieceEmployee/list';
-		$template['script'] = 'Hrmodule/PieceEmployee/script';
-		$this->load->view('template', $template);
-	}
 
 	public function addPieceEmployee()
 	{
@@ -672,21 +680,23 @@ class Hrmodule extends MY_Controller {
 						);
 						$result2 = $this->General_model->update('tbl_emp_piece_rate',$item,'emp_pr_id',$sorts[3]);
 					}
+					$date1 = str_replace('/', '-', $this->input->post('emp_pr_date'));
+					$date_1 =  date("Y-m-d",strtotime($date1));
 					$emp_pay = array(
 						'emp_fk' => $this->input->post('emp_pr_id'),
 						'emp_pr_pay_total' => $this->input->post('emp_pr_total'),
 						'emp_pr_pay_advance' => $this->input->post('emp_pr_advance'),
 						'emp_pr_net_bal' => $this->input->post('emp_pr_net_bal'),
 						'emp_pr_paid_amt' => $this->input->post('emp_pr_paid_amt'),
-						'emp_pr_pay_date' => $this->input->post('emp_pr_date'),
+						'emp_pr_pay_date' => $date_1,
 						'emp_pr_pay_balance' => $this->input->post('emp_pr_balance'),
 						'emp_pr_pay_status' => 1,
 					);	
 					$employee23 = $this->General_model->get_row('tbl_employee','emp_id',$emp_pr_edit_id);
 					$lederhead = array(
 						'group_id_fk' => 27,
-						'ledger_head' => $employee23[0]->emp_name,
-						'emp_name' => 'Peice Rate Employee',
+						'ledger_head' => $employee23->emp_name,
+						'ledgerhead_desc' => 'Peice Rate Employee',
 						'opening_bal' => $this->input->post('emp_pr_balance'),
 						'debit_or_credit' => 2,
 						'ledgerhead_status' => 1,
@@ -695,7 +705,7 @@ class Hrmodule extends MY_Controller {
 					);
 				$emp_name = $this->General_model->get_row('tbl_employee','emp_id',$emp_pr_edit_id);		
 				$result = $this->General_model->update('tbl_emp_peice_rate_pay',$emp_pay,'emp_pr_pay_id ',$emp_pr_pay_id);
-				$result47 = $this->General_model->update('tbl_ledgerhead',$lederhead,'ledger_head ',$emp_name[0]->emp_name);
+				$result47 = $this->General_model->update('tbl_ledgerhead',$lederhead,'ledger_head ',$emp_name->emp_name);
 				$response_text = 'Employee Piece Rate details updated';
 			}
 			else{
@@ -716,14 +726,15 @@ class Hrmodule extends MY_Controller {
 					$result = $this->General_model->add('tbl_emp_piece_rate',$emp_pr);
 					}
 					$response_text = 'Employee Piece Rate details Added';
-
+					$date1 = str_replace('/', '-', $this->input->post('emp_pr_date'));
+					$date_1 =  date("Y-m-d",strtotime($date1));
 						$datap = array(
 							'emp_fk' => $this->input->post('emp_pr_id'),
 							'emp_pr_pay_total' => $this->input->post('emp_pr_total'),
 							'emp_pr_pay_advance' => $this->input->post('emp_pr_advance'),
 							'emp_pr_net_bal' => $this->input->post('emp_pr_net_bal'),
 							'emp_pr_paid_amt' => $this->input->post('emp_pr_paid_amt'),
-							'emp_pr_pay_date' => $this->input->post('emp_pr_date'),
+							'emp_pr_pay_date' => $date_1,
 							'emp_pr_pay_balance' => $this->input->post('emp_pr_balance'),
 							'emp_pr_pay_status' => 1,
 						);
@@ -786,16 +797,4 @@ class Hrmodule extends MY_Controller {
         echo $data_json;
 	}
 
-	// public function peiceRateajax()
-	// {
-	// 	$data = $this->Hr_model->peiceRateajaxTable();
-	// 	echo json_encode($data);
-	// }
-
-	// public function itemsTableAjax()
-	// {
-	// 	$emp_id = $this->input->post('emp_id');
-	// 	$data = $this->Hr_model->rateajaxTable($emp_id);
-	// 	echo json_encode($data);
-	// }
 }
