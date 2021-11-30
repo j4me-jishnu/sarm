@@ -236,12 +236,12 @@
                 <label>Packing Charge</label>
                 <input class="form-control" type="text" name="pack_chrg" id="pack_chrg" value="0" onkeyup="getNetTotal()">
                 <label>Net Total</label>
-                <input class="form-control" type="text" name="sum" id="sum">
+                <input class="form-control" style="height:50px; background-color: paleturquoise;" autofocus type="text" name="sum" id="sum" value="0">
 
               </div>
               <div class="col-md-8"></div>
               <div class="col-md-2">
-                <label>Item Total</label>
+                <label>Total</label>
                 <input class="form-control" type="text" name="sum" id="item_total" value="0">
 
 

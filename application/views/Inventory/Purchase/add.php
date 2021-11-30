@@ -160,7 +160,7 @@
                 <label>Packing Charge</label>
                 <input class="form-control" type="text" name="pack_chrg" id="pack_chrg" value="0" onkeyup="getNetTotal()">
                 <label>Net Total</label>
-                <input class="form-control" type="text" name="net_total" id="net_total" value="0" >
+                <input class="form-control" type="text" style="height:50px; background-color: paleturquoise;" autofocus name="net_total" id="net_total" value="0" >
                 <br>
                 <!-- Dynamic Radio Button for Cash Or Bank -->
                 <!-- Added By Rajeev -->

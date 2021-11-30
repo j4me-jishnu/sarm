@@ -329,6 +329,15 @@ function getNetTotal()
         net_bal = parseFloat(net_bal) - parseFloat(cash);
     }
 
+    /* Simple total amount calculated_______________*/
+    let total=[];
+    for (let i = 1; i <= counter; i++) {
+      total.push(parseFloat($('#total_'+i).val()));
+    }
+    const sum_final = total.reduce((a, b) => a + b, 0);
+    if(isNaN(sum_final)){ sum_final = 0; }
+    $('#item_total').val(sum_final);
+
     //if value is NaN show zero (0)
     if(isNaN(net_bal)){ net_bal = 0; } 
     
@@ -408,6 +417,15 @@ window.onload = function getNetTotal2()
         net_bal = parseFloat(net_bal) - parseFloat(cash);
     }
 
+    /* Simple total amount calculated_______________*/
+    let total=[];
+    for (let i = 1; i <= counter; i++) {
+      total.push(parseFloat($('#total_'+i).val()));
+    }
+    const sum_final = total.reduce((a, b) => a + b, 0);
+    if(isNaN(sum_final)){ sum_final = 0; }
+    $('#item_total').val(sum_final);
+    
     //if value is NaN show zero (0)
     if(isNaN(net_bal)){ net_bal = 0; } 
     

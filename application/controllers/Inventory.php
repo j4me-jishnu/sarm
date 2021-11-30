@@ -207,7 +207,7 @@ class Inventory extends MY_Controller {
 				if($this->input->post('round_off_diff') > 0){
 
 						$ledger_head_data = array(
-							'group_id_fk' => 27,
+							'group_id_fk' => 29,
 							'ledger_head' => 'Round_off@Purchase',
 							'ledgerhead_desc' => 'Round Off Purchase',
 							'opening_bal' => $this->input->post('round_off_diff'),

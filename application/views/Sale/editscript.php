@@ -280,6 +280,13 @@ function getSum(row_id)
     if(isNaN(net_bal)){ net_bal = 0; }
     $('#net_bal').val(net_bal);    
 
+    let total=[];
+    for (let i = 1; i <= counter; i++) {
+      total.push(parseFloat($('#total_'+i).val()));
+    }
+    const sum_final = total.reduce((a, b) => a + b, 0);
+    if(isNaN(sum_final)){ sum_final = 0; }
+    $('#item_total').val(sum_final);
     //trigger roundoff diff
     roundOffDiff(sum,round_off);
 }
@@ -355,6 +362,14 @@ window.onload = function getNetTotal2()
     if(isNaN(net_bal)){ net_bal = 0; }
     $('#net_bal').val(net_bal);    
 
+    let total=[];
+    for (let i = 1; i <= counter; i++) {
+      total.push(parseFloat($('#total_'+i).val()));
+    }
+    const sum_final = total.reduce((a, b) => a + b, 0);
+    if(isNaN(sum_final)){ sum_final = 0; }
+    $('#item_total').val(sum_final);
+    
     //trigger roundoff diff
     roundOffDiff(sum,round_off);
 }

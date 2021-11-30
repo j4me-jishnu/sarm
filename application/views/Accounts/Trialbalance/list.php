@@ -86,7 +86,7 @@
                 {
                     ?>
                     <tr>
-                      <td colspan="4"><span style="font-style: italic;font-size: 15px;">Fixed Assets</span></td>
+                      <td colspan="4" style="background: #e6ecf5;"><span style="font-style: italic;font-size: 16px;"><b>Fixed Assets<b></span></td>
                     </tr>
                     <?php
                     for ($i=0; $i < count($fixed); $i++) 
@@ -105,7 +105,7 @@
                 {
                  ?>
                   <tr>
-                    <td colspan="4"><span style="font-style: italic;font-size: 15px;">Current Assets</span></td>
+                    <td colspan="4" style="background: #e6ecf5;"><span style="font-style: italic;font-size: 16px;"><b>Current Assets</b></span></td>
                   </tr>
                   <?php 
                   for ($i=0; $i < count($current); $i++) 
@@ -124,7 +124,7 @@
                 {
                  ?>
                   <tr>
-                    <td colspan="4"><span style="font-style: italic;font-size: 15px;">Fixed Liability</span></td>
+                    <td colspan="4" style="background: #e6ecf5;"><span style="font-style: italic;font-size: 16px;"><b>Fixed Liability</b></span></td>
                   </tr>
                   <?php 
                   for ($i=0; $i < count($liabilty); $i++) 
@@ -143,7 +143,7 @@
                 {
                  ?>
                   <tr>
-                    <td colspan="4"><span style="font-style: italic;font-size: 15px;">Current Liability</span></td>
+                    <td colspan="4" style="background: #e6ecf5;"><span style="font-style: italic;font-size: 16px;"><b>Current Liability</b></span></td>
                   </tr>
                   <?php 
                   for ($i=0; $i < count($currentliabilty); $i++) 
@@ -162,7 +162,7 @@
                 {
                  ?>
                   <tr>
-                    <td colspan="4"><span style="font-style: italic;font-size: 15px;">Direct Income</span></td>
+                    <td colspan="4" style="background: #e6ecf5;"><span style="font-style: italic;font-size: 16px;"><b>Direct Income</b></span></td>
                   </tr>
                   <?php 
                   for ($i=0; $i < count($direct_income); $i++) 
@@ -181,7 +181,7 @@
                 {
                  ?>
                   <tr>
-                    <td colspan="4"><span style="font-style: italic;font-size: 15px;">Indirect Income</span></td>
+                    <td colspan="4" style="background: #e6ecf5;"><span style="font-style: italic;font-size: 16px;"><b>Indirect Income</b></span></td>
                   </tr>
                   <?php 
                   for ($i=0; $i < count($indirect_income); $i++) 
@@ -200,7 +200,7 @@
                 {
                  ?>
                   <tr>
-                    <td colspan="4"><span style="font-style: italic;font-size: 15px;">Direct Expenses</span></td>
+                    <td colspan="4" style="background: #e6ecf5;"><span style="font-style: italic;font-size: 16px;"><b>Direct Expenses</b></span></td>
                   </tr>
                   <?php 
                   for ($i=0; $i < count($direct_exp); $i++) 
@@ -219,7 +219,7 @@
                 {
                  ?>
                   <tr>
-                    <td colspan="4"><span style="font-style: italic;font-size: 15px;">Indirect Expenses</span></td>
+                    <td colspan="4" style="background: #e6ecf5;"><span style="font-style: italic;font-size: 16px;"><b>Indirect Expenses</b></span></td>
                   </tr>
                   <?php 
                   for ($i=0; $i < count($indirect_exp); $i++) 

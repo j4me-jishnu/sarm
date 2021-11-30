@@ -310,12 +310,14 @@
                     <?php } ?>
                   </select>
                 </div>
+                <label>Net Total</label>
+                <input class="form-control" type="text" style="height:50px; background-color: paleturquoise;" autofocus name="sum" id="sum" value="">
                 <!-- end of radio button field -->
               </div>
               <div class="col-md-8"></div>
               <div class="col-md-2">
-                <label>Net Total</label>
-                <input class="form-control" type="text" name="sum" id="sum" value="">
+              <label>Total</label>
+                <input class="form-control" type="text" name="sum" id="item_total" value="0">
                 <label>Cash Payment</label>
                 <input class="form-control" type="text" name="cash" id="cash" value="<?php if(isset($records[0]->cash_paid)) echo  $records[0]->cash_paid?>" onkeyup="getNet();" required>
                 <label>Bank Payment</label>
