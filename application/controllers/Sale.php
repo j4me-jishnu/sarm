@@ -428,6 +428,8 @@ class Sale extends MY_Controller {
 
 		$update = array('payment_status' => 0);
 		$data = $this->General_model->update('tbl_salepayments',$update,'invoice_number',$invoice);
+		$update_data_ledger = array('ledgerhead_status' => 0);
+		$ledger = $this->General_model->update('tbl_ledgerhead',$update_data_ledger,'sale_id_fk',$invoice);
 
         if($data) {
             $response['text'] = 'Deleted successfully';
