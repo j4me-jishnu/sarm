@@ -203,15 +203,15 @@ class Inventory extends MY_Controller {
 				$upData = array('supplier_oldbal' =>$this->input->post('net_bal'));
 				$stk = $this->General_model->update('tbl_supplier',$upData,'supplier_id',$supp_id);
 				$response_text = 'Purchase added successfully';
-
-				if($this->input->post('round_off_diff') > 0){
+				//If round of value less than and equal to 49 paise enter to ledger head as roundoff value in credit
+				if($this->input->post('round_off_diff') > 0 && $this->input->post('round_off_diff') <= 0.49){
 
 						$ledger_head_data = array(
 							'group_id_fk' => 29,
 							'ledger_head' => 'Round_off@Purchase',
 							'ledgerhead_desc' => 'Round Off Purchase',
 							'opening_bal' => $this->input->post('round_off_diff'),
-							'debit_or_credit' => 1,
+							'debit_or_credit' => 2,
 							'ledgerhead_status' =>1,
 							'company_id_fk' => $company,
 							'purchase_fk_id' => $this->input->post('invoice_number'),
@@ -219,6 +219,22 @@ class Inventory extends MY_Controller {
 						);
 						$result34 = $this->General_model->add('tbl_ledgerhead',$ledger_head_data);	
 					
+				}
+				//If round of value greater than and equal to 50 paise enter to ledger head as roundoff value in debit
+				else if($this->input->post('round_off_diff') > 0 && $this->input->post('round_off_diff') >=0.50)
+				{
+					$ledger_head_data = array(
+						'group_id_fk' => 29,
+						'ledger_head' => 'Round_off@Purchase',
+						'ledgerhead_desc' => 'Round Off Purchase',
+						'opening_bal' => $this->input->post('round_off_diff'),
+						'debit_or_credit' => 1,
+						'ledgerhead_status' =>1,
+						'company_id_fk' => $company,
+						'purchase_fk_id' => $this->input->post('invoice_number'),
+						'ledger_default' => 0
+					);
+					$result34 = $this->General_model->add('tbl_ledgerhead',$ledger_head_data);	
 				}
 			}
 			else
@@ -357,6 +373,9 @@ class Inventory extends MY_Controller {
 
 		$update = array('payment_status' => 0);
 		$data = $this->General_model->update('tbl_purchasepayments',$update,'invoice_number',$invoice);
+		
+		$update_data_ledger = array('ledgerhead_status' => 0);
+		$ledger = $this->General_model->update('tbl_ledgerhead',$update_data_ledger,'purchase_fk_id',$invoice);
 
         if($data) {
             $response['text'] = 'Deleted successfully';
