@@ -278,7 +278,7 @@
                 <input type="text" name="net_bal" id="net_bal" class="form-control"  value="0">
                 <label>Round Off Amount</label>
                 <input type="text" name="round_off" id="round_off" class="form-control"  value="0">
-                <input type="hidden" name="round_off_diff" id="round_off_diff" class="form-control"  value="0">
+                <input type="text" name="round_off_diff" id="round_off_diff" class="form-control"  value="0">
                 <br>
                 <!-- <input type="submit" name="Submit" value="Save" class="btn btn-success btn-lg"> -->
                 <div class="dropdown">

@@ -303,7 +303,7 @@ function roundOffDiff()
     var sum2 = $('#sum').val();
     var round_off2 = $('#round_off').val();
     var diff = sum2 - round_off2;
-    if(isNaN){ diff = 0; }
+    if(isNaN(diff)){ diff = 0; }
     $('#round_off_diff').val(diff);
 }
 

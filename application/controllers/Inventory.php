@@ -152,7 +152,7 @@ class Inventory extends MY_Controller {
 					}
 					else
 					{
-						$remark_text = "";
+						$remark_text[] = "";
 					}
 					$data=array(
 					  'product_id_fk' =>$product_id[$i],
@@ -203,6 +203,7 @@ class Inventory extends MY_Controller {
 				$upData = array('supplier_oldbal' =>$this->input->post('net_bal'));
 				$stk = $this->General_model->update('tbl_supplier',$upData,'supplier_id',$supp_id);
 				$response_text = 'Purchase added successfully';
+				$round_off_variable = round($this->input->post('round_off_diff'));
 				//If round of value less than and equal to 49 paise enter to ledger head as roundoff value in credit
 				if($this->input->post('round_off_diff') > 0 && $this->input->post('round_off_diff') <= 0.49){
 
@@ -223,11 +224,12 @@ class Inventory extends MY_Controller {
 				//If round of value greater than and equal to 50 paise enter to ledger head as roundoff value in debit
 				else if($this->input->post('round_off_diff') > 0 && $this->input->post('round_off_diff') >=0.50)
 				{
+					$differnce = $round_off_variable - $this->input->post('round_off_diff');
 					$ledger_head_data = array(
 						'group_id_fk' => 29,
 						'ledger_head' => 'Round_off@Purchase',
 						'ledgerhead_desc' => 'Round Off Purchase',
-						'opening_bal' => $this->input->post('round_off_diff'),
+						'opening_bal' => $differnce,
 						'debit_or_credit' => 1,
 						'ledgerhead_status' =>1,
 						'company_id_fk' => $company,

@@ -118,7 +118,7 @@ class Sale extends MY_Controller {
 					}
 					else
 					{
-						$remark_text = "";
+						$remark_text[] = "";
 					}
 					$data=array(
 					  'product_id_fk' =>$product_id[$i],
@@ -187,8 +187,9 @@ class Sale extends MY_Controller {
 				$upData = array('old_balance' =>$this->input->post('net_bal'));
 				$stk = $this->General_model->update('tbl_customer',$upData,'cust_id',$cust_id);
 				$response_text = 'Sale added successfully';
-
-				if($this->input->post('round_off_diff') > 0){		  
+				$round_off_variable = round($this->input->post('round_off_diff'));
+				//if round off value is less than equal to 49 paise enter into ledger as rounoff credit
+				if($this->input->post('round_off_diff') > 0 && $this->input->post('round_off_diff') <= 0.49){		  
 				//Insert Round Off Difference in ledgerHead
 				
 					$round_off_diff = array(
@@ -196,7 +197,7 @@ class Sale extends MY_Controller {
 						'ledger_head' => 'Round_off@Sale',
 						'ledgerhead_desc' => 'Round off Sale',
 						'opening_bal' => $this->input->post('round_off_diff'),
-						'debit_or_credit' => 1,
+						'debit_or_credit' => 2,
 						'ledgerhead_status' => 1,
 						'company_id_fk' => $company,
 						'sale_id_fk' => $this->input->post('invoice_number'),
@@ -204,6 +205,22 @@ class Sale extends MY_Controller {
 					);
 				$result45 = $this->General_model->add('tbl_ledgerhead',$round_off_diff); 	 
 				
+			}
+			else if($this->input->post('round_off_diff') > 0 && $this->input->post('round_off_diff') >= 0.50)
+			{
+				$differnce = $round_off_variable - $this->input->post('round_off_diff');
+					$round_off_diff = array(
+						'group_id_fk' => 29,
+						'ledger_head' => 'Round_off@Sale',
+						'ledgerhead_desc' => 'Round off Sale',
+						'opening_bal' => $differnce,
+						'debit_or_credit' => 1,
+						'ledgerhead_status' => 1,
+						'company_id_fk' => $company,
+						'sale_id_fk' => $this->input->post('invoice_number'),
+						'ledger_default' => 0
+					);
+				$result45 = $this->General_model->add('tbl_ledgerhead',$round_off_diff); 	
 			}
 		}
 			
