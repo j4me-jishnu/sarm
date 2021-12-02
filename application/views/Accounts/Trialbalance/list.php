@@ -62,11 +62,11 @@
           </form>
           <table id="area_table" align="center" width="800" class="table-bordered table-condensed">
             <thead>
-              <tr>
-                <th>Particulars</th>
+              <tr style="font-family: Arial Narrow;">
+                <th>PARTICULARS</th>
                 <th>LF</th>
-                <th>Amount Dr</th>
-                <th>Amount Cr</th>
+                <th>AMOUNT Dr</th>
+                <th>AMOUNT Cr</th>
               </tr>
             </thead>
             <tbody>
@@ -86,56 +86,77 @@
                 {
                     ?>
                     <tr>
-                      <td colspan="4" style="background: #e6ecf5;"><span style="font-style: italic;font-size: 16px;"><b>Fixed Assets<b></span></td>
+                      <td colspan="4" style="background: #e6ecf5;"><span style="font-family: Arial Narrow;font-size: 14px;"><b>FIXED ASSETS<b></span></td>
                     </tr>
+                    
                     <?php
                     for ($i=0; $i < count($fixed); $i++) 
                     { 
+                      foreach($addition_data as $group_heads) { 
+                      if($group_heads->group_id == $fixed[$i]->group_id_fk){
                     ?>
-                        <tr>
-                          <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $fixed[$i]->ledger_head ?></td>
+                         
+                    <tr>
+                          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" style="color: green;">+</a>&nbsp;&nbsp;&nbsp;&nbsp;FIXED ASSETS</td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                    </tr>
+                        <tr class="collapse" id="collapseExample">
+                          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;<?php echo strtoupper($fixed[$i]->ledger_head) ?></td>
                           <td></td>
                           <td><?php echo $fixed[$i]->debit; $deb_total=$deb_total+$fixed[$i]->debit; ?></td>
                           <td><?php echo $fixed[$i]->credit; $cred_total=$cred_total+$fixed[$i]->credit; ?></td>
                         </tr>
+                       
                     <?php  
-                    } 
+                     } } }
                 }
                 if(! empty($current))
                 {
                  ?>
                   <tr>
-                    <td colspan="4" style="background: #e6ecf5;"><span style="font-style: italic;font-size: 16px;"><b>Current Assets</b></span></td>
+                    <td colspan="4" style="background: #e6ecf5;"><span style="font-family: Arial Narrow;font-size: 14px;"><b>CURRENT ASSETS</b></span></td>
                   </tr>
                   <?php 
                   for ($i=0; $i < count($current); $i++) 
                   { 
+                    foreach($addition_data as $group_heads) { 
+                      if($group_heads->group_id == $current[$i]->group_id_fk){
                     ?>
-                        <tr>
-                          <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $current[$i]->ledger_head ?></td>
+                      <tr >
+                          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a data-toggle="collapse" href="#collapseExample1".$i."" role="button" aria-expanded="false" aria-controls="collapseExample1".$i."" style="color: green;">+</a>&nbsp;&nbsp;&nbsp;&nbsp;FIXED ASSETS</td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                      </tr>
+                        <tr class="collapse" id="collapseExample1".$i.">
+                          <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo strtoupper($current[$i]->ledger_head) ?></td>
                           <td></td>
                           <td><?php echo $current[$i]->debit;$deb_total=$deb_total+$current[$i]->debit ?></td>
                           <td><?php echo $current[$i]->credit;$cred_total=$cred_total+$current[$i]->credit ?></td>
                         </tr>
+                
                     <?php  
-                  } 
+                  } } }
                 }
                 if(! empty($liabilty))
                 {
                  ?>
                   <tr>
-                    <td colspan="4" style="background: #e6ecf5;"><span style="font-style: italic;font-size: 16px;"><b>Fixed Liability</b></span></td>
+                    <td colspan="4" style="background: #e6ecf5;"><span style="font-family: Arial Narrow;font-size: 14px;"><b>FIXED LIABILITY</b></span></td>
                   </tr>
                   <?php 
                   for ($i=0; $i < count($liabilty); $i++) 
                   { 
                     ?>
                       <tr>
-                        <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $liabilty[$i]->ledger_head ?></td>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo strtoupper($liabilty[$i]->ledger_head) ?></td>
                         <td></td>
                         <td><?php echo $liabilty[$i]->debit;$deb_total=$deb_total+$liabilty[$i]->debit; ?></td>
                         <td><?php echo $liabilty[$i]->credit;$cred_total=$cred_total+$liabilty[$i]->credit; ?></td>
                       </tr>
+                    
                     <?php  
                   } 
                 }
@@ -143,18 +164,19 @@
                 {
                  ?>
                   <tr>
-                    <td colspan="4" style="background: #e6ecf5;"><span style="font-style: italic;font-size: 16px;"><b>Current Liability</b></span></td>
+                    <td colspan="4" style="background: #e6ecf5;"><span style="font-family: Arial Narrow;font-size: 14px;"><b>CURRENT LIABILITY</b></span></td>
                   </tr>
                   <?php 
                   for ($i=0; $i < count($currentliabilty); $i++) 
                   { 
                     ?>
                         <tr>
-                          <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $currentliabilty[$i]->ledger_head ?></td>
+                          <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo strtoupper($currentliabilty[$i]->ledger_head) ?></td>
                           <td></td>
                           <td><?php echo $currentliabilty[$i]->debit;$deb_total=$deb_total+$currentliabilty[$i]->debit; ?></td>
                           <td><?php echo $currentliabilty[$i]->credit;$cred_total=$cred_total+$currentliabilty[$i]->credit; ?></td>
                         </tr>
+                        
                     <?php  
                   } 
                 }
@@ -162,18 +184,19 @@
                 {
                  ?>
                   <tr>
-                    <td colspan="4" style="background: #e6ecf5;"><span style="font-style: italic;font-size: 16px;"><b>Direct Income</b></span></td>
+                    <td colspan="4" style="background: #e6ecf5;"><span style="font-family: Arial Narrow;font-size: 14px;"><b>DIRECT INCOME</b></span></td>
                   </tr>
                   <?php 
                   for ($i=0; $i < count($direct_income); $i++) 
                   { 
                     ?>
                         <tr>
-                          <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $direct_income[$i]->ledger_head ?></td>
+                          <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo strtoupper($direct_income[$i]->ledger_head) ?></td>
                           <td></td>
                           <td><?php echo $direct_income[$i]->debit;$deb_total=$deb_total+$direct_income[$i]->debit; ?></td>
                           <td><?php echo $direct_income[$i]->credit;$cred_total=$cred_total+$direct_income[$i]->credit; ?></td>
                         </tr>
+                        
                     <?php  
                   } 
                 }
@@ -181,14 +204,14 @@
                 {
                  ?>
                   <tr>
-                    <td colspan="4" style="background: #e6ecf5;"><span style="font-style: italic;font-size: 16px;"><b>Indirect Income</b></span></td>
+                    <td colspan="4" style="background: #e6ecf5;"><span style="font-family: Arial Narrow;font-size: 14px;"><b>INDIRECT INCOME</b></span></td>
                   </tr>
                   <?php 
                   for ($i=0; $i < count($indirect_income); $i++) 
                   { 
                     ?>
                         <tr>
-                          <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $indirect_income[$i]->ledger_head ?></td>
+                          <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo strtoupper($indirect_income[$i]->ledger_head) ?></td>
                           <td></td>
                           <td><?php echo $indirect_income[$i]->debit;$deb_total=$deb_total+$indirect_income[$i]->debit; ?></td>
                           <td><?php echo $indirect_income[$i]->credit;$cred_total=$cred_total+$indirect_income[$i]->credit; ?></td>
@@ -200,14 +223,15 @@
                 {
                  ?>
                   <tr>
-                    <td colspan="4" style="background: #e6ecf5;"><span style="font-style: italic;font-size: 16px;"><b>Direct Expenses</b></span></td>
+                    <td colspan="4" style="background: #e6ecf5;"><span style="font-family: Arial Narrow;font-size: 14px;"><b>DIRECT EXPENSES</b></span></td>
                   </tr>
                   <?php 
                   for ($i=0; $i < count($direct_exp); $i++) 
                   { 
+                   
                     ?>
                         <tr>
-                          <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $direct_exp[$i]->ledger_head ?></td>
+                          <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo strtoupper($direct_exp[$i]->ledger_head) ?></td>
                           <td></td>
                           <td><?php echo $direct_exp[$i]->debit;$deb_total=$deb_total+$direct_exp[$i]->debit; ?></td>
                           <td><?php echo $direct_exp[$i]->credit;$cred_total=$cred_total+$direct_exp[$i]->credit; ?></td>
@@ -219,28 +243,23 @@
                 {
                  ?>
                   <tr>
-                    <td colspan="4" style="background: #e6ecf5;"><span style="font-style: italic;font-size: 16px;"><b>Indirect Expenses</b></span></td>
+                    <td colspan="4" style="background: #e6ecf5;"><span style="font-family: Arial Narrow;font-size: 14px;"><b>INDIRECT EXPENSES</b></span></td>
                   </tr>
                   <?php 
                   for ($i=0; $i < count($indirect_exp); $i++) 
                   { 
+                    
                     ?>
                         <tr>
-                          <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $indirect_exp[$i]->ledger_head ?></td>
+                          <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo strtoupper($indirect_exp[$i]->ledger_head) ?></td>
                           <td></td>
-                          <td><?php echo $indirect_exp[$i]->debit;$deb_total=$deb_total+$indirect_exp[$i]->debit; ?></td>
-                          <td><?php echo $indirect_exp[$i]->credit;$cred_total=$cred_total+$indirect_exp[$i]->credit; ?></td>
+                          <td><?php echo round($indirect_exp[$i]->debit,2);$deb_total=$deb_total+$indirect_exp[$i]->debit; ?></td>
+                          <td><?php echo round($indirect_exp[$i]->credit,2);$cred_total=$cred_total+$indirect_exp[$i]->credit; ?></td>
                         </tr>
                     <?php  
                   }
                 }
                 ?>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
                 <tr>
                   <td></td>
                   <td></td>

@@ -217,6 +217,7 @@ class Accountsreports extends MY_Controller
 				$comp_id = $this->session->userdata('cmp_id');
 				$template['company1'] = $this->General_model->get_row('tbl_companyinfo','cmp_id',$comp_id);
 			}	
+			
 			$template['fin_year']  = $this->General_model->fin_year();
 			$template['company']=$this->General_model->getCompanies();
 			if($this->session->userdata('user_type')=='A'){
@@ -265,6 +266,8 @@ class Accountsreports extends MY_Controller
 				$id = $this->session->userdata('id');
 				$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
 				}
+			$template['addition_data'] = $this->Accountsreports_model->getGroupsList();
+			//var_dump($template['addition_data']);die();
 			$template['body'] = 'Accounts/Trialbalance/list';
 			$template['script'] = 'Accounts/Trialbalance/script';
 			$this->load->view('template', $template);
