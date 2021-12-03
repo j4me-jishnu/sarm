@@ -671,7 +671,7 @@ class Accounts extends MY_Controller {
 				$id = $this->session->userdata('id');
 				$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
 				}
-			$cmpa_id = $this->session->userdata('cmp_id');	
+			$cmpa_id = $this->session->userdata('cmp_id');
 			$template['company1']=$this->General_model->get_row('tbl_companyinfo','cmp_id',$cmpa_id);
 			$template['company']=$this->General_model->getCompanies();
 			$template['groups']=$this->Accounts_model->getsubsGroupslist();
@@ -790,8 +790,8 @@ class Accounts extends MY_Controller {
 			$id = $this->session->userdata('id');
 			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
 			}
-		$cmpa_id = $this->session->userdata('cmp_id');	
-		$template['company1']=$this->General_model->get_row('tbl_companyinfo','cmp_id',$cmpa_id);	
+		$cmpa_id = $this->session->userdata('cmp_id');
+		$template['company1']=$this->General_model->get_row('tbl_companyinfo','cmp_id',$cmpa_id);
 		$template['company']=$this->General_model->getCompanies();
 		$template['groups']=$this->Accounts_model->getGroupslist();
 		$template['records'] = $this->Accounts_model->getLedgerhead($ledgerhead_id);
@@ -848,8 +848,8 @@ class Accounts extends MY_Controller {
 				$id = $this->session->userdata('id');
 				$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
 				}
-			$cmpa_id = $this->session->userdata('cmp_id');	
-			$template['company1']=$this->General_model->get_row('tbl_companyinfo','cmp_id',$cmpa_id);	
+			$cmpa_id = $this->session->userdata('cmp_id');
+			$template['company1']=$this->General_model->get_row('tbl_companyinfo','cmp_id',$cmpa_id);
 			$template['ledgerhead']=$this->Accounts_model->getLedgerheadlist();
 			$template['company']=$this->General_model->getCompanies();
 			$template['body'] = 'Accounts/Journal/add';
@@ -970,8 +970,8 @@ class Accounts extends MY_Controller {
 			$id = $this->session->userdata('id');
 			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
 			}
-		$cmpa_id = $this->session->userdata('cmp_id');	
-		$template['company1']=$this->General_model->get_row('tbl_companyinfo','cmp_id',$cmpa_id);		
+		$cmpa_id = $this->session->userdata('cmp_id');
+		$template['company1']=$this->General_model->get_row('tbl_companyinfo','cmp_id',$cmpa_id);
 		$template['ledgerhead']=$this->Accounts_model->getLedgerheadlist();
 		$template['company']=$this->General_model->getCompanies();
 		$template['records'] = $this->Accounts_model->getJournals($unique_id);

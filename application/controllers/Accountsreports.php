@@ -1,8 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Accountsreports extends MY_Controller 
+class Accountsreports extends MY_Controller
 {
-		public function __construct() 
+		public function __construct()
 		{
 				parent::__construct();
 	      if(! $this->is_logged_in())
@@ -14,7 +14,7 @@ class Accountsreports extends MY_Controller
 				$this->load->model('Administration_model');
 				$this->load->model('Accounts_model');
 				$this->load->model('Accountsreports_model');
-				$this->load->model('Sale_model');    
+				$this->load->model('Sale_model');
 		}
 		public function getLedgerHead()
 		{
@@ -54,7 +54,7 @@ class Accountsreports extends MY_Controller
 		    	$date_to =  date("Y-m-d",strtotime($date_to));
 
 		    	// $ledger_date=date("2021-06-29");
-		    	// $date_from=date("2021-06-29");	
+		    	// $date_from=date("2021-06-29");
 
 				// $template['debit'] = $this->Accountsreports_model->getDebitSide($this->input->post('company'),$this->input->post('ledgerhead'),$ledger_date);
 				// $template['credit'] = $this->Accountsreports_model->getCreditSide($this->input->post('company'),$this->input->post('ledgerhead'),$ledger_date);
@@ -193,7 +193,7 @@ class Accountsreports extends MY_Controller
 			$template['body'] = 'Accounts/Profitloss/list';
 			$template['script'] = 'Accounts/Profitloss/script';
 			$this->load->view('template', $template);
-		
+
 		}
 		public function Trialbalance()
 		{
@@ -204,7 +204,7 @@ class Accountsreports extends MY_Controller
 			if($this->session->userdata('user_type')=='C'){
 				$comp_id = $this->session->userdata('cmp_id');
 				$template['company1'] = $this->General_model->get_row('tbl_companyinfo','cmp_id',$comp_id);
-			}	
+			}
 			$template['fin_year']  = $this->General_model->fin_year();
 			$template['company']=$this->General_model->getCompanies();
 			$template['body'] = 'Accounts/Trialbalance/list';
@@ -216,11 +216,11 @@ class Accountsreports extends MY_Controller
 			if($this->session->userdata('user_type')=='C'){
 				$comp_id = $this->session->userdata('cmp_id');
 				$template['company1'] = $this->General_model->get_row('tbl_companyinfo','cmp_id',$comp_id);
-			}	
+			}
 			$template['fin_year']  = $this->General_model->fin_year();
 			$template['company']=$this->General_model->getCompanies();
 			if($this->session->userdata('user_type')=='A'){
-				$cmp=$this->input->post('company');	
+				$cmp=$this->input->post('company');
 			}
 			else
 			{
@@ -260,7 +260,7 @@ class Accountsreports extends MY_Controller
 			//all indirect expense
 			$template['indirect_exp'] = $this->Accountsreports_model->getAllinDirectexpenses($cmp,$fyr);
 			//var_dump($template['indirect_exp']); die;
-			
+
 			if($this->session->userdata('user_type')=='C'){
 				$id = $this->session->userdata('id');
 				$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
@@ -278,7 +278,7 @@ class Accountsreports extends MY_Controller
 			if($this->session->userdata('user_type')=='C'){
 				$cmp_ide = $this->session->userdata('cmp_id');
 				$template['comapny1'] = $this->General_model->get_row('tbl_companyinfo','cmp_id',$cmp_ide);
-			}	
+			}
 			$template['fin_year']  = $this->General_model->fin_year();
 			$template['company']=$this->General_model->getCompanies();
 			$template['body'] = 'Accounts/Balancesheet/list';
@@ -292,14 +292,14 @@ class Accountsreports extends MY_Controller
 				$template['comapny1'] = $this->General_model->get_row('tbl_companyinfo','cmp_id',$cmp);
 			}
 			else{
-				$cmp=$this->input->post('company');	
-			}	
-			
+				$cmp=$this->input->post('company');
+			}
+
 			$template['company_id'] = $this->input->post('company');
 			$fnyr = $this->General_model->fin_year();
 			if(isset($fnyr->finyear_id)){ $fyr = $fnyr->finyear_id; } else{ $fyr = 0;}
 
-			//long term assets or fixed 
+			//long term assets or fixed
 			$template['fixed'] = $this->Accountsreports_model->getFixedAssets($cmp,$fyr);
 
 			//short term assets or current assetsasset
@@ -314,7 +314,7 @@ class Accountsreports extends MY_Controller
 
 			@$template['capital'] = $this->Accountsreports_model->getCapital($cmp);
 			 //print_r($template['capital']);die();
-			
+
 			$template['profitloss'] = $this->Accountsreports_model->getProfitloss($cmp,$fyr);
 
 			if($this->session->userdata('user_type')=='C'){
@@ -346,7 +346,7 @@ class Accountsreports extends MY_Controller
 						'profit_loss' => 1,
 						'fin_year' => $fyr
 					);
-					if ($check == 0) 
+					if ($check == 0)
 					{
 						$this->General_model->add('tbl_profit',$data);
 					}
@@ -364,7 +364,7 @@ class Accountsreports extends MY_Controller
 						'profit_loss' => 2,
 						'fin_year' => $fyr
 					);
-					if ($check == 0) 
+					if ($check == 0)
 					{
 						$this->General_model->add('tbl_profit',$data);
 					}

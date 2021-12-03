@@ -15,7 +15,7 @@ Class Accounts_model extends CI_Model
         $data['data'] = $query->result();
         $data['recordsTotal'] = $query->num_rows();
         $data['recordsFiltered'] = $query->num_rows();
-        return $data; 
+        return $data;
     }
     public function getTypesList()
     {
@@ -23,13 +23,13 @@ Class Accounts_model extends CI_Model
         $this->db->from('tbl_type');
         $this->db->where("type_status",1);
         $query = $this->db->get();
-        return $query->result(); 
+        return $query->result();
     }
 	public function getVoucherheadTable($param)
     {
         $arOrder = array('','pcategory_name');
         $searchValue =($param['searchValue'])?$param['searchValue']:'';
-        
+
         $this->db->where("vouch_status",1);
 
         if ($param['start'] != 'false' and $param['length'] != 'false') {
@@ -48,7 +48,7 @@ Class Accounts_model extends CI_Model
     {
         $arOrder = array('','pcategory_name');
         $searchValue =($param['searchValue'])?$param['searchValue']:'';
-        
+
         $this->db->where("vouch_status",1);
         $this->db->select('*');
         $this->db->from('tbl_vouchhead');
@@ -68,7 +68,7 @@ Class Accounts_model extends CI_Model
     {
         $arOrder = array('','pcategory_name');
         $searchValue =($param['searchValue'])?$param['searchValue']:'';
-        
+
         $this->db->where("receipt_status",1);
 
         if ($param['start'] != 'false' and $param['length'] != 'false') {
@@ -87,7 +87,7 @@ Class Accounts_model extends CI_Model
     {
         $arOrder = array('','pcategory_name');
         $searchValue =($param['searchValue'])?$param['searchValue']:'';
-        
+
         $this->db->where("receipt_status",1);
         $this->db->select('*');
         $this->db->from('tbl_receipthead');
@@ -121,7 +121,7 @@ Class Accounts_model extends CI_Model
     	$arOrder = array('','class');
 		$searchValue =($param['searchValue'])?$param['searchValue']:'';
          if($searchValue){
-            $this->db->like('receipt_head', $searchValue); 
+            $this->db->like('receipt_head', $searchValue);
         }
         if ($param['start'] != 'false' and $param['length'] != 'false') {
         	$this->db->limit($param['length'],$param['start']);
@@ -133,7 +133,7 @@ Class Accounts_model extends CI_Model
 		$this->db->order_by('tbl_receipt.receipt_id', 'DESC');
         $query = $this->db->get();
         // echo $this->db->last_query();
-		
+
         $data['data'] = $query->result();
         $data['recordsTotal'] = $this->getRecieptTableCount($param);
         $data['recordsFiltered'] = $this->getRecieptTableCount($param);
@@ -143,7 +143,7 @@ Class Accounts_model extends CI_Model
     {
     	$searchValue =($param['searchValue'])?$param['searchValue']:'';
          if($searchValue){
-            $this->db->like('receipt_head', $searchValue); 
+            $this->db->like('receipt_head', $searchValue);
         }
     	$this->db->select('*,DATE_FORMAT(rept_date,\'%d/%m/%Y\')as rept_date');
 		$this->db->from('tbl_receipt');
@@ -168,10 +168,10 @@ Class Accounts_model extends CI_Model
     	$arOrder = array('','class');
 		$searchValue =($param['searchValue'])?$param['searchValue']:'';
         	if($searchValue){
-            $this->db->like('vouch_head', $searchValue); 
+            $this->db->like('vouch_head', $searchValue);
         }
         $this->db->where("vouch_status",1);
-        
+
         if ($param['start'] != 'false' and $param['length'] != 'false') {
         	$this->db->limit($param['length'],$param['start']);
         }
@@ -181,7 +181,7 @@ Class Accounts_model extends CI_Model
 		$this->db->where("voucher_status",1);
 		$this->db->order_by('voucher_id', 'DESC');
         $query = $this->db->get();
-		
+
         $data['data'] = $query->result();
         $data['recordsTotal'] = $this->getVoucherTotalCount($param);
         $data['recordsFiltered'] = $this->getVoucherTotalCount($param);
@@ -191,7 +191,7 @@ Class Accounts_model extends CI_Model
     {
     	$searchValue =($param['searchValue'])?$param['searchValue']:'';
         	if($searchValue){
-            $this->db->like('vouch_head', $searchValue); 
+            $this->db->like('vouch_head', $searchValue);
         }
         $this->db->select('*,DATE_FORMAT(voucher_date,\'%d/%m/%Y\')as voucher_date');
 		$this->db->from('tbl_voucher');
@@ -199,7 +199,7 @@ Class Accounts_model extends CI_Model
 		$this->db->order_by('voucher_id', 'ASC');
 		$this->db->where("voucher_status",1);
         $query = $this->db->get();
-        return $query->num_rows();	
+        return $query->num_rows();
     }
     public function voucherheads()
     {
@@ -222,11 +222,11 @@ Class Accounts_model extends CI_Model
         $arOrder = array('','class');
         $searchValue =($param['searchValue'])?$param['searchValue']:'';
             if($searchValue){
-            $this->db->like('group_name', $searchValue); 
+            $this->db->like('group_name', $searchValue);
         }
         $this->db->where("group_status",1);
         $this->db->where("group_parent_id",0);
-        
+
         if ($param['start'] != 'false' and $param['length'] != 'false') {
             $this->db->limit($param['length'],$param['start']);
         }
@@ -235,7 +235,7 @@ Class Accounts_model extends CI_Model
         $this->db->join('tbl_type','type_id = type_id_fk');
         $this->db->order_by('group_id', 'DESC');
         $query = $this->db->get();
-        
+
         $data['data'] = $query->result();
         $data['recordsTotal'] = $this->getGroupsTotalCount($param);
         $data['recordsFiltered'] = $this->getGroupsTotalCount($param);
@@ -246,28 +246,28 @@ Class Accounts_model extends CI_Model
         $arOrder = array('','class');
         $searchValue =($param['searchValue'])?$param['searchValue']:'';
             if($searchValue){
-            $this->db->like('group_name', $searchValue); 
+            $this->db->like('group_name', $searchValue);
         }
         $this->db->where("group_status",1);
         $this->db->where("group_parent_id",0);
-    
+
         $this->db->select('*');
         $this->db->from('tbl_groups');
         $this->db->order_by('group_id', 'DESC');
         $query = $this->db->get();
         return $query->num_rows();
-        
+
     }
     public function getsubGroupsTable($param)
     {
         $arOrder = array('','class');
         $searchValue =($param['searchValue'])?$param['searchValue']:'';
             if($searchValue){
-            $this->db->like('group_name', $searchValue); 
+            $this->db->like('group_name', $searchValue);
         }
         $this->db->where("group_status",1);
         $this->db->where("group_parent_id !=",0);
-        
+
         if ($param['start'] != 'false' and $param['length'] != 'false') {
             $this->db->limit($param['length'],$param['start']);
         }
@@ -276,7 +276,7 @@ Class Accounts_model extends CI_Model
         $this->db->join('tbl_type','type_id = type_id_fk');
         $this->db->order_by('group_id', 'DESC');
         $query = $this->db->get();
-        
+
         $data['data'] = $query->result();
         $data['recordsTotal'] = $this->getsubGroupsTotalCount($param);
         $data['recordsFiltered'] = $this->getsubGroupsTotalCount($param);
@@ -287,18 +287,18 @@ Class Accounts_model extends CI_Model
         $arOrder = array('','class');
         $searchValue =($param['searchValue'])?$param['searchValue']:'';
             if($searchValue){
-            $this->db->like('group_name', $searchValue); 
+            $this->db->like('group_name', $searchValue);
         }
         $this->db->where("group_status",1);
         $this->db->where("group_parent_id !=",0);
-        
+
         $this->db->select('*');
         $this->db->from('tbl_groups');
         $this->db->join('tbl_type','type_id = type_id_fk');
         $this->db->order_by('group_id', 'DESC');
         $query = $this->db->get();
         return $query->num_rows();
-        
+
     }
     public function getGroups($group_id)
     {
@@ -351,7 +351,7 @@ Class Accounts_model extends CI_Model
             $this->db->like('ledger_head', $searchValue); 
         }
         $this->db->where("ledgerhead_status",1);
-        
+
         if ($param['start'] != 'false' and $param['length'] != 'false') {
             $this->db->limit($param['length'],$param['start']);
         }
@@ -361,7 +361,7 @@ Class Accounts_model extends CI_Model
         $this->db->join('tbl_type','tbl_type.type_id = tbl_groups.type_id_fk');
         $this->db->order_by('ledgerhead_id', 'DESC');
         $query = $this->db->get();
-        
+
         $data['data'] = $query->result();
         $data['recordsTotal'] = $this->getLedgerheadTotalCount($param);
         $data['recordsFiltered'] = $this->getLedgerheadTotalCount($param);
@@ -376,10 +376,10 @@ Class Accounts_model extends CI_Model
             $this->db->where('company_id_fk',$cmp_id);
         }
         if($searchValue){
-            $this->db->like('ledger_head', $searchValue); 
+            $this->db->like('ledger_head', $searchValue);
         }
         $this->db->where("ledgerhead_status",1);
-        
+
         $this->db->select('*');
         $this->db->from('tbl_ledgerhead');
         $this->db->join('tbl_groups','group_id = group_id_fk');
@@ -400,7 +400,7 @@ Class Accounts_model extends CI_Model
         $this->db->select('*');
         $this->db->from('tbl_ledgerhead');
         $this->db->where("ledgerhead_status",1);
-        return $query = $this->db->get()->result(); 
+        return $query = $this->db->get()->result();
     }
     public function getLedgerheadlistcompany($cmp)
     {
@@ -408,7 +408,7 @@ Class Accounts_model extends CI_Model
         $this->db->from('tbl_ledgerhead');
         $this->db->where('company_id_fk',$cmp);
         $this->db->where("ledgerhead_status",1);
-        return $query = $this->db->get()->result(); 
+        return $query = $this->db->get()->result();
     }
     public function getJournalUnique()
     {
@@ -427,14 +427,14 @@ Class Accounts_model extends CI_Model
         $arOrder = array('','class');
         // $searchValue =($param['searchValue'])?$param['searchValue']:'';
         //     if($searchValue){
-        //     $this->db->like('ledger_head', $searchValue); 
+        //     $this->db->like('ledger_head', $searchValue);
         // }
-        if ($this->session->userdata['user_type'] =='C') 
+        if ($this->session->userdata['user_type'] =='C')
         {
             $company =  $this->session->userdata['cmp_id'];
             $this->db->where('company_id_fk',$company);
         }
-        
+
         if ($param['start'] != 'false' and $param['length'] != 'false') {
             $this->db->limit($param['length'],$param['start']);
         }
@@ -445,7 +445,7 @@ Class Accounts_model extends CI_Model
         $this->db->group_by('journal_inv');
         $this->db->order_by('journal_inv', 'DESC');
         $query = $this->db->get();
-        
+
         $data['data'] = $query->result();
         $data['recordsTotal'] = $this->getJournalTotalCount($param);
         $data['recordsFiltered'] = $this->getJournalTotalCount($param);
@@ -457,7 +457,7 @@ Class Accounts_model extends CI_Model
         $this->db->from('tbl_journal');
         $this->db->join('tbl_ledgerhead','ledgerhead_id = ledger_head_id');
         $this->db->where("journal_status",1);
-        if ($this->session->userdata['user_type'] =='C') 
+        if ($this->session->userdata['user_type'] =='C')
         {
             $company =  $this->session->userdata['cmp_id'];
             $this->db->where('company_id_fk',$company);
