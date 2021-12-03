@@ -189,8 +189,10 @@ class Reports extends MY_Controller {
 				$param['dir'] = (isset($_REQUEST['order'][0]['dir']))?$_REQUEST['order'][0]['dir']:'';
 				$param['searchValue'] =(isset($_REQUEST['search']['value']))?$_REQUEST['search']['value']:'';
 					
-				$start_date =(isset($_REQUEST['start_date']))?$_REQUEST['start_date']:'';
-				$end_date =(isset($_REQUEST['end_date']))?$_REQUEST['end_date']:'';
+				//$start_date =(isset($_REQUEST['start_date']))?$_REQUEST['start_date']:'';
+				//$end_date =(isset($_REQUEST['end_date']))?$_REQUEST['end_date']:'';
+				$start_date = '2021/11/01';
+				$end_date = '2021/11/30';
 				$param['invoice_no'] = (isset($_REQUEST['invoice_no']))?$_REQUEST['invoice_no']:'';
 				$param['product_num1'] = (isset($_REQUEST['product_num1']))?$_REQUEST['product_num1']:'';
 					

@@ -531,11 +531,22 @@ class Accountsreports_model extends CI_Model
 			}
 		}
 	}
-	public function getFixedAssetsDetails($cmp,$fyr)
+	public function getFixedAssetsDetails($cmp,$fyr,$start_date,$end_date)
 	{
-		$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN SUM(opening_bal) ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN SUM(opening_bal) ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk = 17 AND company_id_fk = '.$cmp.' GROUP BY ledger_head';
-		$query = $this->db->query($sql);
-		return $data = $query->result();
+		$start_date1 = (isset($start_date))?$start_date:'';
+		$end_date1 = (isset($end_date))?$end_date:'';
+		if($start_date1 || $end_date1){
+			$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN SUM(opening_bal) ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN SUM(opening_bal) ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk = 17 AND company_id_fk = '.$cmp.' AND created_at BETWEEN "'.$start_date1.'" AND "'.$end_date1.'" GROUP BY ledger_head';
+			$query = $this->db->query($sql);
+			return $data = $query->result();
+		}
+		else
+		{
+			$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN SUM(opening_bal) ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN SUM(opening_bal) ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk = 17 AND company_id_fk = '.$cmp.' GROUP BY ledger_head';
+			$query = $this->db->query($sql);
+			return $data = $query->result();
+		}		
+		
 		// $this->db->select('*');
 		// $this->db->from('tbl_ledgerhead');
 		// $this->db->where('company_id_fk',$cmp);
@@ -571,11 +582,23 @@ class Accountsreports_model extends CI_Model
 		// }
 		// return $data;
 	}
-	public function getCurrentAssetsDetails($cmp,$fyr)
+	public function getCurrentAssetsDetails($cmp,$fyr,$start_date,$end_date)
 	{
-		$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN SUM(opening_bal) ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN SUM(opening_bal) ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk IN (12,13,14,15,16) AND company_id_fk = '.$cmp.' GROUP BY ledger_head';
-		$query = $this->db->query($sql);
-		return $data = $query->result();
+
+		$start_date1 = (isset($start_date))?$start_date:'';
+		$end_date1 = (isset($end_date))?$end_date:'';
+		if($start_date1 || $end_date1){
+			$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN SUM(opening_bal) ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN SUM(opening_bal) ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk IN (12,13,14,15,16) AND company_id_fk = '.$cmp.' AND created_at BETWEEN "'.$start_date1.'" AND "'.$end_date1.'" GROUP BY ledger_head';
+			$query = $this->db->query($sql);
+			return $data = $query->result();
+		}
+		else
+		{
+			$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN SUM(opening_bal) ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN SUM(opening_bal) ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk IN (12,13,14,15,16) AND company_id_fk = '.$cmp.' GROUP BY ledger_head';
+			$query = $this->db->query($sql);
+			return $data = $query->result();
+		}		
+		
 		// $array = array(12,13,14,15,16);
 		// $this->db->select('*');
 		// $this->db->from('tbl_ledgerhead');
@@ -613,11 +636,22 @@ class Accountsreports_model extends CI_Model
 		// }
 		// return $data;
 	}
-	public function getCurrentLiabiltyDetails($cmp,$fyr)
+	public function getCurrentLiabiltyDetails($cmp,$fyr,$start_date,$end_date)
 	{
-		$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN SUM(opening_bal) ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN SUM(opening_bal) ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk IN (20,21) AND company_id_fk = '.$cmp.' GROUP BY ledger_head';
-		$query = $this->db->query($sql);
-		return $data = $query->result();
+		$start_date1 = (isset($start_date))?$start_date:'';
+		$end_date1 = (isset($end_date))?$end_date:'';
+		if($start_date1 || $end_date1){
+			$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN SUM(opening_bal) ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN SUM(opening_bal) ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk IN (20,21) AND company_id_fk = '.$cmp.' AND created_at BETWEEN "'.$start_date1.'" AND "'.$end_date1.'" GROUP BY ledger_head';
+			$query = $this->db->query($sql);
+			return $data = $query->result();
+		}
+		else
+		{
+			$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN SUM(opening_bal) ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN SUM(opening_bal) ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk IN (20,21) AND company_id_fk = '.$cmp.' GROUP BY ledger_head';
+			$query = $this->db->query($sql);
+			return $data = $query->result();
+		}
+		
 		// $array = array(20,21);
 		// $this->db->select('*');
 		// $this->db->from('tbl_ledgerhead');
@@ -654,12 +688,23 @@ class Accountsreports_model extends CI_Model
 		// }
 		// return $data;
 	}
-	public function getFixedLiabiltyDetails($cmp,$fyr)
+	public function getFixedLiabiltyDetails($cmp,$fyr,$start_date,$end_date)
 	{
 		
-		$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN SUM(opening_bal) ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN SUM(opening_bal) ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk = 19 AND company_id_fk = '.$cmp.' GROUP BY ledger_head';
-		$query = $this->db->query($sql);
-		return $data = $query->result();
+		$start_date1 = (isset($start_date))?$start_date:'';
+		$end_date1 = (isset($end_date))?$end_date:'';
+		if($start_date1 || $end_date1){
+			$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN SUM(opening_bal) ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN SUM(opening_bal) ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk = 19 AND company_id_fk = '.$cmp.' AND created_at BETWEEN "'.$start_date1.'" AND "'.$end_date1.'" GROUP BY ledger_head';
+			$query = $this->db->query($sql);
+			return $data = $query->result();
+		}
+		else
+		{
+			$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN SUM(opening_bal) ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN SUM(opening_bal) ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk = 19 AND company_id_fk = '.$cmp.' GROUP BY ledger_head';
+			$query = $this->db->query($sql);
+			return $data = $query->result();
+		}
+
 		// $array = array(19);
 		// $this->db->select('*');
 		// $this->db->from('tbl_ledgerhead');
@@ -696,11 +741,22 @@ class Accountsreports_model extends CI_Model
 		// }
 		// return $data;
 	}
-	public function getAllDirectincomes($cmp,$fyr)
+	public function getAllDirectincomes($cmp,$fyr,$start_date,$end_date)
 	{
-		$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN SUM(opening_bal) ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN SUM(opening_bal) ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk IN (24,25) AND company_id_fk = '.$cmp.' GROUP BY ledger_head';
-		$query = $this->db->query($sql);
-		return $data = $query->result();
+		$start_date1 = (isset($start_date))?$start_date:'';
+		$end_date1 = (isset($end_date))?$end_date:'';
+		if($start_date1 || $end_date1){
+			$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN SUM(opening_bal) ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN SUM(opening_bal) ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk IN (24,25) AND company_id_fk = '.$cmp.' AND created_at BETWEEN "'.$start_date1.'" AND "'.$end_date1.'" GROUP BY ledger_head';
+			$query = $this->db->query($sql);
+			return $data = $query->result();
+		}
+		else
+		{
+			$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN SUM(opening_bal) ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN SUM(opening_bal) ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk IN (24,25) AND company_id_fk = '.$cmp.' GROUP BY ledger_head';
+			$query = $this->db->query($sql);
+			return $data = $query->result();
+		}
+		
 		// $array = array(24,25);
 		// $this->db->select('*');
 		// $this->db->from('tbl_ledgerhead');
@@ -737,11 +793,22 @@ class Accountsreports_model extends CI_Model
 		// }
 		// return $data;
 	}
-	public function getAllinDirectincomes($cmp,$fyr)
+	public function getAllinDirectincomes($cmp,$fyr,$start_date,$end_date)
 	{
-		$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN SUM(opening_bal) ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN SUM(opening_bal) ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk = 26 AND company_id_fk = '.$cmp.' GROUP BY ledger_head';
-		$query = $this->db->query($sql);
-		return $data = $query->result();
+		$start_date1 = (isset($start_date))?$start_date:'';
+		$end_date1 = (isset($end_date))?$end_date:'';
+		if($start_date1 || $end_date1){
+			$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN SUM(opening_bal) ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN SUM(opening_bal) ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk = 26 AND company_id_fk = '.$cmp.' AND created_at BETWEEN "'.$start_date1.'" AND "'.$end_date1.'" GROUP BY ledger_head';
+			$query = $this->db->query($sql);
+			return $data = $query->result();
+		}
+		else
+		{
+			$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN SUM(opening_bal) ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN SUM(opening_bal) ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk = 26 AND company_id_fk = '.$cmp.' GROUP BY ledger_head';
+			$query = $this->db->query($sql);
+			return $data = $query->result();
+		}
+		
 		// $array = array(26);
 		// $this->db->select('*');
 		// $this->db->from('tbl_ledgerhead');
@@ -778,24 +845,47 @@ class Accountsreports_model extends CI_Model
 		// }
 		// return $data;	
 	}
-	public function getAllDirectexpenses($cmp,$fyr)
+	public function getAllDirectexpenses($cmp,$fyr,$start_date,$end_date)
 	{
-		// $array = array(27,28);
-		$array=array();
-		$this->db->select('group_id');
-		$this->db->where('group_parent_id',10);//direcr exp
-		$group_by=$this->db->get('tbl_groups')->result();
-		if($group_by)
-		{
-			for ($p=0; $p < count($group_by) ; $p++) 
-			{ 
-				$array[$p]=$group_by[$p]->group_id;
-				$directexpense = implode(',',$array);	
+		$start_date1 = (isset($start_date))?$start_date:'';
+		$end_date1 = (isset($end_date))?$end_date:'';
+		if($start_date1 || $end_date1){
+			$array=array();
+			$this->db->select('group_id');
+			$this->db->where('group_parent_id',10);//direcr exp
+			$group_by=$this->db->get('tbl_groups')->result();
+			if($group_by)
+			{
+				for ($p=0; $p < count($group_by) ; $p++) 
+				{ 
+					$array[$p]=$group_by[$p]->group_id;
+					$directexpense = implode(',',$array);	
+				}
 			}
+			$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN SUM(opening_bal) ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN SUM(opening_bal) ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND company_id_fk = '.$cmp.' AND group_id_fk IN('.$directexpense.') AND created_at BETWEEN "'.$start_date1.'" AND "'.$end_date1.'" GROUP BY ledger_head';
+			$query = $this->db->query($sql);
+			return $data = $query->result();
 		}
-		$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN SUM(opening_bal) ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN SUM(opening_bal) ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND company_id_fk = '.$cmp.' AND group_id_fk IN('.$directexpense.') GROUP BY ledger_head';
-		$query = $this->db->query($sql);
-		return $data = $query->result();
+		else
+		{
+			$array=array();
+			$this->db->select('group_id');
+			$this->db->where('group_parent_id',10);//direcr exp
+			$group_by=$this->db->get('tbl_groups')->result();
+			if($group_by)
+			{
+				for ($p=0; $p < count($group_by) ; $p++) 
+				{ 
+					$array[$p]=$group_by[$p]->group_id;
+					$directexpense = implode(',',$array);	
+				}
+			}
+			$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN SUM(opening_bal) ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN SUM(opening_bal) ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND company_id_fk = '.$cmp.' AND group_id_fk IN('.$directexpense.') GROUP BY ledger_head';
+			$query = $this->db->query($sql);
+			return $data = $query->result();
+		}
+		// $array = array(27,28);
+		
 		// // print_r($array);die;
 
 		// $this->db->select('*');
@@ -857,11 +947,23 @@ class Accountsreports_model extends CI_Model
 		// }
 		// return $data;
 	}
-	public function getAllinDirectexpenses($cmp,$fyr)
+	public function getAllinDirectexpenses($cmp,$fyr,$start_date,$end_date)
 	{
-		$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN SUM(opening_bal) ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN SUM(opening_bal) ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk = 29 AND company_id_fk = '.$cmp.' GROUP BY ledger_head';
-		$query = $this->db->query($sql);
-		return $data = $query->result();
+		
+		$start_date1 = (isset($start_date))?$start_date:'';
+		$end_date1 = (isset($end_date))?$end_date:'';
+		if($start_date1 || $end_date1){
+			$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN SUM(opening_bal) ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN SUM(opening_bal) ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk = 29 AND company_id_fk = '.$cmp.' AND created_at BETWEEN "'.$start_date1.'" AND "'.$end_date1.'" GROUP BY ledger_head';
+			$query = $this->db->query($sql);
+			return $data = $query->result();
+		}
+		else
+		{
+			$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN SUM(opening_bal) ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN SUM(opening_bal) ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk = 29 AND company_id_fk = '.$cmp.' GROUP BY ledger_head';
+			$query = $this->db->query($sql);
+			return $data = $query->result();
+		}
+		
 		// $array = array(29);
 		// $this->db->select('*');
 		// $this->db->from('tbl_ledgerhead');
@@ -904,83 +1006,110 @@ class Accountsreports_model extends CI_Model
 		$query = $this->db->query($sql);
 		return $data = $query->result();
 	}
-	public function getFixedAssets($cmp,$fyr)
+	//balance sheet
+	public function getFixedAssets($cmp,$fyr,$start_date,$end_date)
 	{
-		$result=array();
-
-		$this->db->select('ledgerhead_id');
-		$this->db->from('tbl_ledgerhead');
-		$this->db->where('group_id_fk',17);//17 fixed assest
-		$this->db->where('ledgerhead_status',1);
-		$ledgerhead_id = $this->db->get()->result();
-		if ($ledgerhead_id) 
-		{
-			$k=0;
-			for ($i=0; $i < count($ledgerhead_id); $i++) 
-			{ 
-				$this->db->select_max('date');
-				$this->db->from('tbl_ledgerbalance');
-				$this->db->where('company_id_fk',$cmp);
-				$this->db->where('ledgerhead_id_fk',$ledgerhead_id[$i]->ledgerhead_id);
-				$date=$this->db->get()->row()->date;
-				if ($date) 
-				{
-					$this->db->select('tbl_ledgerhead.ledger_head,tbl_ledgerbalance.balance');
-					$this->db->from('tbl_ledgerbalance');
-					$this->db->join('tbl_ledgerhead','tbl_ledgerhead.ledgerhead_id=tbl_ledgerbalance.ledgerhead_id_fk','left');
-					$this->db->where('tbl_ledgerbalance.company_id_fk',$cmp);
-					$this->db->where('date',$date);
-					$this->db->where('ledgerhead_id_fk',$ledgerhead_id[$i]->ledgerhead_id);
-					$response = $this->db->get()->row();
-					if($response)
-					{
-						$result[$k]=$response;
-					}
-				}
-				$k=$k+1;
-			}
+		$start_date1 = (isset($start_date))?$start_date:'';
+		$end_date1 = (isset($end_date))?$end_date:'';
+		if($start_date1 || $end_date1){
+			$sql = 'SELECT * ,SUM(opening_bal) AS opening_bal2 FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk = 29 AND company_id_fk = '.$cmp.' AND created_at BETWEEN "'.$start_date1.'" AND "'.$end_date1.'" GROUP BY ledger_head';	
+			$query = $this->db->query($sql);
+			return $data = $query->result();
 		}
+		else
+		{
+		$sql = 'SELECT * ,SUM(opening_bal) AS opening_bal2 FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk = 29 AND company_id_fk = '.$cmp.' GROUP BY ledger_head';
+		$query = $this->db->query($sql);
+		return $data = $query->result();
+		}
+		// $result=array();
+
+		// $this->db->select('ledgerhead_id');
+		// $this->db->from('tbl_ledgerhead');
+		// $this->db->where('group_id_fk',17);//17 fixed assest
+		// $this->db->where('ledgerhead_status',1);
+		// $ledgerhead_id = $this->db->get()->result();
+		// if ($ledgerhead_id) 
+		// {
+		// 	$k=0;
+		// 	for ($i=0; $i < count($ledgerhead_id); $i++) 
+		// 	{ 
+		// 		$this->db->select_max('date');
+		// 		$this->db->from('tbl_ledgerbalance');
+		// 		$this->db->where('company_id_fk',$cmp);
+		// 		$this->db->where('ledgerhead_id_fk',$ledgerhead_id[$i]->ledgerhead_id);
+		// 		$date=$this->db->get()->row()->date;
+		// 		if ($date) 
+		// 		{
+		// 			$this->db->select('tbl_ledgerhead.ledger_head,tbl_ledgerbalance.balance');
+		// 			$this->db->from('tbl_ledgerbalance');
+		// 			$this->db->join('tbl_ledgerhead','tbl_ledgerhead.ledgerhead_id=tbl_ledgerbalance.ledgerhead_id_fk','left');
+		// 			$this->db->where('tbl_ledgerbalance.company_id_fk',$cmp);
+		// 			$this->db->where('date',$date);
+		// 			$this->db->where('ledgerhead_id_fk',$ledgerhead_id[$i]->ledgerhead_id);
+		// 			$response = $this->db->get()->row();
+		// 			if($response)
+		// 			{
+		// 				$result[$k]=$response;
+		// 			}
+		// 		}
+		// 		$k=$k+1;
+		// 	}
+		// }
 		
-		return $result;
+		// return $result;
 	}
-	public function getCurrentAssets($cmp,$fyr)
+	public function getCurrentAssets($cmp,$fyr,$start_date,$end_date)
 	{
-		$result=array();
-		$array = array(12,13,14,15,16);
-
-		$this->db->select('ledgerhead_id');
-		$this->db->from('tbl_ledgerhead');
-		$this->db->where_in('group_id_fk',$array);
-		$this->db->where('ledgerhead_status',1);
-		$ledgerhead_id = $this->db->get()->result();
-		if ($ledgerhead_id) 
-		{
-			$k=0;
-			for ($i=0; $i < count($ledgerhead_id); $i++) 
-			{ 
-				$this->db->select_max('date');
-				$this->db->from('tbl_ledgerbalance');
-				$this->db->where('company_id_fk',$cmp);
-				$this->db->where('ledgerhead_id_fk',$ledgerhead_id[$i]->ledgerhead_id);
-				$date=$this->db->get()->row()->date;
-				if ($date) 
-				{
-					$this->db->select('tbl_ledgerhead.ledger_head,tbl_ledgerbalance.balance');
-					$this->db->from('tbl_ledgerbalance');
-					$this->db->join('tbl_ledgerhead','tbl_ledgerhead.ledgerhead_id=tbl_ledgerbalance.ledgerhead_id_fk','left');
-					$this->db->where('tbl_ledgerbalance.company_id_fk',$cmp);
-					$this->db->where('date',$date);
-					$this->db->where('ledgerhead_id_fk',$ledgerhead_id[$i]->ledgerhead_id);
-					$response = $this->db->get()->row();
-					if($response)
-					{
-						$result[$k]=$response;
-					}
-				}
-				$k=$k+1;
-			}
+		$start_date1 = (isset($start_date))?$start_date:'';
+		$end_date1 = (isset($end_date))?$end_date:'';
+		if($start_date1 || $end_date1){
+			$sql = 'SELECT * ,SUM(opening_bal) AS opening_bal2 FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk IN (12,13,14,15,16) AND company_id_fk = '.$cmp.' AND created_at BETWEEN "'.$start_date1.'" AND "'.$end_date1.'" GROUP BY ledger_head';
+			$query = $this->db->query($sql);
+			return $data = $query->result();
 		}
-		return $result;
+		else
+		{
+			$sql = 'SELECT * ,SUM(opening_bal) AS opening_bal2 FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk IN (12,13,14,15,16) AND company_id_fk = '.$cmp.' GROUP BY ledger_head';
+			$query = $this->db->query($sql);
+			return $data = $query->result();
+		}
+		// $result=array();
+		// $array = array(12,13,14,15,16);
+
+		// $this->db->select('ledgerhead_id');
+		// $this->db->from('tbl_ledgerhead');
+		// $this->db->where_in('group_id_fk',$array);
+		// $this->db->where('ledgerhead_status',1);
+		// $ledgerhead_id = $this->db->get()->result();
+		// if ($ledgerhead_id) 
+		// {
+		// 	$k=0;
+		// 	for ($i=0; $i < count($ledgerhead_id); $i++) 
+		// 	{ 
+		// 		$this->db->select_max('date');
+		// 		$this->db->from('tbl_ledgerbalance');
+		// 		$this->db->where('company_id_fk',$cmp);
+		// 		$this->db->where('ledgerhead_id_fk',$ledgerhead_id[$i]->ledgerhead_id);
+		// 		$date=$this->db->get()->row()->date;
+		// 		if ($date) 
+		// 		{
+		// 			$this->db->select('tbl_ledgerhead.ledger_head,tbl_ledgerbalance.balance');
+		// 			$this->db->from('tbl_ledgerbalance');
+		// 			$this->db->join('tbl_ledgerhead','tbl_ledgerhead.ledgerhead_id=tbl_ledgerbalance.ledgerhead_id_fk','left');
+		// 			$this->db->where('tbl_ledgerbalance.company_id_fk',$cmp);
+		// 			$this->db->where('date',$date);
+		// 			$this->db->where('ledgerhead_id_fk',$ledgerhead_id[$i]->ledgerhead_id);
+		// 			$response = $this->db->get()->row();
+		// 			if($response)
+		// 			{
+		// 				$result[$k]=$response;
+		// 			}
+		// 		}
+		// 		$k=$k+1;
+		// 	}
+		// }
+		// return $result;
 		
 	}
 	public function getFixedLiabilty($cmp,$fyr)
@@ -1023,44 +1152,59 @@ class Accountsreports_model extends CI_Model
 		return $result;
 		
 	}
-	public function getCurrentLiabilty($cmp,$fyr)
+	public function getCurrentLiabilty($cmp,$fyr,$start_date,$end_date)
 	{
-		$result=array();
-		$array = array(20,21);
+		$start_date1 = (isset($start_date))?$start_date:'';
+		$end_date1 = (isset($end_date))?$end_date:'';
+		if($start_date1 || $end_date1){
 
-		$this->db->select('ledgerhead_id');
-		$this->db->from('tbl_ledgerhead');
-		$this->db->where_in('group_id_fk',$array);
-		$this->db->where('ledgerhead_status',1);
-		$ledgerhead_id = $this->db->get()->result();
-		if ($ledgerhead_id) 
-		{
-			$k=0;
-			for ($i=0; $i < count($ledgerhead_id); $i++) 
-			{ 
-				$this->db->select_max('date');
-				$this->db->from('tbl_ledgerbalance');
-				$this->db->where('company_id_fk',$cmp);
-				$this->db->where('ledgerhead_id_fk',$ledgerhead_id[$i]->ledgerhead_id);
-				$date=$this->db->get()->row()->date;
-				if ($date) 
-				{
-					$this->db->select('tbl_ledgerhead.ledger_head,tbl_ledgerbalance.balance');
-					$this->db->from('tbl_ledgerbalance');
-					$this->db->join('tbl_ledgerhead','tbl_ledgerhead.ledgerhead_id=tbl_ledgerbalance.ledgerhead_id_fk','left');
-					$this->db->where('tbl_ledgerbalance.company_id_fk',$cmp);
-					$this->db->where('date',$date);
-					$this->db->where('ledgerhead_id_fk',$ledgerhead_id[$i]->ledgerhead_id);
-					$response = $this->db->get()->row();
-					if($response)
-					{
-						$result[$k]=$response;
-					}
-				}
-				$k=$k+1;
-			}
+			$sql = 'SELECT * ,SUM(opening_bal) AS opening_bal2 FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk IN (20,21) AND company_id_fk = '.$cmp.' AND created_at BETWEEN "'.$start_date1.'" AND "'.$end_date1.'" GROUP BY ledger_head';
+			$query = $this->db->query($sql);
+			return $data = $query->result();
 		}
-		return $result;
+		else
+		{
+			$sql = 'SELECT * ,SUM(opening_bal) AS opening_bal2 FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk IN (20,21) AND company_id_fk = '.$cmp.' GROUP BY ledger_head';
+			$query = $this->db->query($sql);
+			return $data = $query->result();			
+		}		
+		
+		// $result=array();
+		// $array = array(20,21);
+
+		// $this->db->select('ledgerhead_id');
+		// $this->db->from('tbl_ledgerhead');
+		// $this->db->where_in('group_id_fk',$array);
+		// $this->db->where('ledgerhead_status',1);
+		// $ledgerhead_id = $this->db->get()->result();
+		// if ($ledgerhead_id) 
+		// {
+		// 	$k=0;
+		// 	for ($i=0; $i < count($ledgerhead_id); $i++) 
+		// 	{ 
+		// 		$this->db->select_max('date');
+		// 		$this->db->from('tbl_ledgerbalance');
+		// 		$this->db->where('company_id_fk',$cmp);
+		// 		$this->db->where('ledgerhead_id_fk',$ledgerhead_id[$i]->ledgerhead_id);
+		// 		$date=$this->db->get()->row()->date;
+		// 		if ($date) 
+		// 		{
+		// 			$this->db->select('tbl_ledgerhead.ledger_head,tbl_ledgerbalance.balance');
+		// 			$this->db->from('tbl_ledgerbalance');
+		// 			$this->db->join('tbl_ledgerhead','tbl_ledgerhead.ledgerhead_id=tbl_ledgerbalance.ledgerhead_id_fk','left');
+		// 			$this->db->where('tbl_ledgerbalance.company_id_fk',$cmp);
+		// 			$this->db->where('date',$date);
+		// 			$this->db->where('ledgerhead_id_fk',$ledgerhead_id[$i]->ledgerhead_id);
+		// 			$response = $this->db->get()->row();
+		// 			if($response)
+		// 			{
+		// 				$result[$k]=$response;
+		// 			}
+		// 		}
+		// 		$k=$k+1;
+		// 	}
+		// }
+		// return $result;
 	}
 	public function checkProfitexist($cmp,$fyr)
 	{
@@ -1069,11 +1213,13 @@ class Accountsreports_model extends CI_Model
 		$this->db->where('fin_year',$fyr);
 		return $this->db->get('tbl_profit')->num_rows();
 	}
-	public function getCapital($cmp)
+	public function getCapital($cmp,$start_date,$end_date)
 	{
 		$this->db->select('opening_bal');
 		$this->db->where('group_id_fk',19);//capital
 		$this->db->where('company_id_fk',$cmp);
+		$this->db->where('created_at >=',$start_date);
+		$this->db->where('created_at <=',$end_date);
 		return $this->db->get('tbl_ledgerhead')->row()->opening_bal;
 	}
 	public function getProfitloss($cmp,$fyr)

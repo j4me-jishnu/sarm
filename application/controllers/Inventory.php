@@ -216,7 +216,9 @@ class Inventory extends MY_Controller {
 							'ledgerhead_status' =>1,
 							'company_id_fk' => $company,
 							'purchase_fk_id' => $this->input->post('invoice_number'),
-							'ledger_default' => 0
+							'ledger_default' => 0,
+							'created_date' => date('Y-m-d H:i:s'),
+							'updated_at' => date('Y-m-d H:i:s'),
 						);
 						$result34 = $this->General_model->add('tbl_ledgerhead',$ledger_head_data);	
 					
@@ -234,7 +236,9 @@ class Inventory extends MY_Controller {
 						'ledgerhead_status' =>1,
 						'company_id_fk' => $company,
 						'purchase_fk_id' => $this->input->post('invoice_number'),
-						'ledger_default' => 0
+						'ledger_default' => 0,
+						'created_date' => date('Y-m-d H:i:s'),
+						'updated_at' => date('Y-m-d H:i:s'),
 					);
 					$result34 = $this->General_model->add('tbl_ledgerhead',$ledger_head_data);	
 				}

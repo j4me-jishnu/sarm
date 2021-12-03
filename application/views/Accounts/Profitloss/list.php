@@ -35,7 +35,7 @@
                       <button type="button" class="btn btn-primary nohover">Company</button>
                     </div><!-- /btn-group -->
                       <select name="company" id="company" class="form-control" onchange="this.form.submit()">
-                        <option></option>
+                        <!-- <option></option> -->
                         <?php
                         foreach ($company as $row) 
                         {
@@ -53,7 +53,7 @@
                   <div class="input-group-btn">
                     <button class="btn btn-primary nohover">Date From</button>
                   </div>
-                    <input type="date" class="form-control" name="dates">
+                    <input type="date" class="form-control" name="start_date">
                 </div>
               </div>
               
@@ -62,7 +62,7 @@
                   <div class="input-group-btn">
                     <button class="btn btn-primary nohover">Date To</button>
                   </div>
-                    <input type="date" class="form-control" name="dates">
+                    <input type="date" class="form-control" name="end_date">
                 </div>
               </div>
               <div class="col-md-2">
@@ -159,9 +159,9 @@
                       <td>
                       <div class="row">
                         <div class="col-sm-6">
-                          By <?php if(isset($sales[0]->ledger_head)) echo $sales[0]->ledger_head ?>
+                           <?php if(isset($sales[0]->ledger_head)) echo $sales[0]->ledger_head ?>
                           <br>
-                          By <?php if(isset($salesret[0]->ledger_head)) echo $salesret[0]->ledger_head ?>
+                           <?php if(isset($salesret[0]->ledger_head)) echo $salesret[0]->ledger_head ?>
                         </div>
                         <div class="col-sm-6" align="right">
                           <?php if(isset($sales[0]->sum_cr)) echo $sales[0]->sum_cr; ?>
@@ -183,7 +183,7 @@
                     <td>
                       <div class="row">
                         <div class="col-sm-6">
-                          By <?php if(isset($sales[0]->ledger_head)) echo $sales[0]->ledger_head ?>
+                           <?php if(isset($sales[0]->ledger_head)) echo $sales[0]->ledger_head ?>
                           <br>
                         </div>
                         <div class="col-sm-6" align="right">
@@ -226,7 +226,7 @@
                   <tr>
                     <td>To <?php if(isset($direct_exp[$i]->ledger_head)) echo $direct_exp[$i]->ledger_head; ?></td>
                     <td><?php if(isset($direct_exp[$i]->debit)) echo round($direct_exp[$i]->debit,2); ?></td>
-                    <td>By <?php if(isset($direct_income[$i]->ledger_head)) echo $direct_income[$i]->ledger_head;?></td>
+                    <td> <?php if(isset($direct_income[$i]->ledger_head)) echo $direct_income[$i]->ledger_head;?></td>
                     <td><?php if(isset($direct_income[$i]->credit)) echo round($direct_income[$i]->credit,2); ?></td>
                   </tr>
                   <?php
@@ -238,7 +238,7 @@
                 <tr>
                   <td></td>
                   <td></td>
-                  <td>By <?php echo $closing['ledgerhead'] ?></td>
+                  <td> <?php echo $closing['ledgerhead'] ?></td>
                   <td><?php echo $closing['amount'];$total_sale = $total_sale + $closing['amount']; ?></td>
                 </tr>
                 <?php
@@ -265,7 +265,7 @@
                   <tr>
                     <td></td>
                     <td></td>
-                    <td><label>By Gross loss</label></td>
+                    <td><label> Gross loss</label></td>
                     <td><?php echo $loss=$total_pur-$total_sale ?></td>
                   </tr>
                   <tr>
@@ -288,7 +288,7 @@
                   <tr>
                     <td></td>
                     <td></td>
-                    <td>By Gross profit b/d</td>
+                    <td> Gross profit b/d</td>
                     <td><?php echo $profit;$loss=0; ?></td>
                   </tr>
                 <?php
@@ -334,7 +334,7 @@
                   <tr>
                     <td>To <?php if(isset($indirect_exp[$i]->ledger_head)) echo $indirect_exp[$i]->ledger_head; ?></td>
                     <td><?php if(isset($indirect_exp[$i]->debit)) echo round($indirect_exp[$i]->debit,2); ?></td>
-                    <td>By <?php if(isset($indirect_income[$i]->ledger_head)) echo $indirect_income[$i]->ledger_head;?></td>
+                    <td> <?php if(isset($indirect_income[$i]->ledger_head)) echo $indirect_income[$i]->ledger_head;?></td>
                     <td><?php if(isset($indirect_income[$i]->credit)) echo round($indirect_income[$i]->credit,2); ?></td>
                   </tr>
                   <?php
@@ -352,7 +352,7 @@
                   <tr>
                     <td></td>
                     <td></td>
-                    <td><label>By Net loss c/d</label></td>
+                    <td><label> Net loss c/d</label></td>
                     <td><?php echo $netloss-$netprofit; ?><input type="hidden" name="loss" id="loss" value="<?php echo $netloss-$netprofit; ?>"></td>
                   </tr>
                   <tr>

@@ -35,6 +35,8 @@ class Ledger extends MY_Controller {
       'debit_or_credit'=>1,
       'ledgerhead_status'=>1,
       'company_id_fk'=>5,
+      'created_date' => date('Y-m-d H:i:s'),
+      'updated_at' => date('Y-m-d H:i:s'),
     );
     $result=$this->Ledger_model->add_new_ledger($table_name,$field_name,$value,$insertArray);
     if($result){

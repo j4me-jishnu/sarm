@@ -201,7 +201,9 @@ class Sale extends MY_Controller {
 						'ledgerhead_status' => 1,
 						'company_id_fk' => $company,
 						'sale_id_fk' => $this->input->post('invoice_number'),
-						'ledger_default' => 0
+						'ledger_default' => 0,
+						'created_date' => date('Y-m-d H:i:s'),
+						'updated_at' => date('Y-m-d H:i:s'),
 					);
 				$result45 = $this->General_model->add('tbl_ledgerhead',$round_off_diff); 	 
 				
@@ -218,7 +220,9 @@ class Sale extends MY_Controller {
 						'ledgerhead_status' => 1,
 						'company_id_fk' => $company,
 						'sale_id_fk' => $this->input->post('invoice_number'),
-						'ledger_default' => 0
+						'ledger_default' => 0,
+						'created_date' => date('Y-m-d H:i:s'),
+						'updated_at' => date('Y-m-d H:i:s'),
 					);
 				$result45 = $this->General_model->add('tbl_ledgerhead',$round_off_diff); 	
 			}

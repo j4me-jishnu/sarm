@@ -79,7 +79,7 @@ class Administration extends MY_Controller {
 				// ledgerhead debit value is 2
 				$ledger_head_status = 2;
 			}
-			if($this->input->post('cust_is_salary') == '1')
+			if($this->input->post('cust_is_supplier') == '1')
 			{
 				$isSalary = 1;
 			}
@@ -87,6 +87,17 @@ class Administration extends MY_Controller {
 			{
 				$isSalary = 0;
 			}
+			if($this->input->post('cust_act_status') == "")
+			{
+				$cust_stat = 0;
+			}
+			else
+			{
+				$cust_stat = $this->input->post('cust_act_status');
+			}
+			$day= date('d') - 1;
+			$monthyear=date('Y-m');
+			$dates2=$monthyear.-$day;
 			$datas = array(
 						// 'customer_type'=>$this->input->post('optradio'),
 						'custname' => $this->input->post('cust_name'),
@@ -98,8 +109,8 @@ class Administration extends MY_Controller {
 						'cust_pcategory'=>$this->input->post('category'),
 						'custstatus' => 1,
 						'debit_credit' =>$this->input->post('radio_val'),
-						'cust_act_status' =>$this->input->post('cust_act_status'),
-						'cust_is_salary' =>$this->input->post('cust_is_salary'),
+						'cust_act_status' =>$cust_stat,
+						'cust_is_supplier' =>$isSalary,
 						);
 
 			$data2 = array(
@@ -110,12 +121,15 @@ class Administration extends MY_Controller {
 				'debit_or_credit' => $ledger_head_status,
 				'ledgerhead_status'	=> 1,
 				'company_id_fk'	=>	$company,
+				'created_at' => date('Y-m-d H:i:s'),
+				'updated_at' => date('Y-m-d H:i:s'),
 			);
 			$data3 =array(
 				'ledger_head' =>$this->input->post('cust_name'),
 				'opening_bal'	=> $this->input->post('old_balance'),
 				'debit_or_credit' => $ledger_head_status,
 				'company_id_fk'	=>	$company,
+				'updated_at' => date('Y-m-d H:i:s'),
 			);
 
 			$cust_id = $this->input->post('cust_id');
@@ -128,11 +142,31 @@ class Administration extends MY_Controller {
 				//in leger head customer name is used to find ledger entry and toupdate that field
 				//data3 is used because data2 array is mostly static and changes made in ledger head would be changes if data2 array put
 				$result2 = $this->General_model->update('tbl_ledgerhead',$data3,'ledger_head',$cust_name[0]->custname);
+				$data_ledger_balance = array(
+					'company_id_fk' => $company,
+					'balance' => $this->input->post('old_balance'),
+					'debit_credit' => $ledger_head_status,
+					'ledgerbalance_status' => 1,
+
+				);
+				$find = $this->General_model->get_data('tbl_ledgerhead','ledger_head','ledgerhead_id',$cust_name[0]->custname);
+
+				$result2 = $this->General_model->update('tbl_ledgerbalance',$data_ledger_balance,'ledgerhead_id_fk',$find[0]->ledgerhead_id);
 				$response_text = 'Customer details updated';
 			}
 			else{
 				$result = $this->General_model->add($this->customer,$datas);
-				$result2 = $this->General_model->add('tbl_ledgerhead',$data2);
+				$result2 = $this->General_model->add_returnID('tbl_ledgerhead',$data2);
+				$data_ledger_balance = array(
+					'company_id_fk' => $company,
+					'ledgerhead_id_fk' => $result2,
+					'date' => $dates2,
+					'balance' => $this->input->post('old_balance'),
+					'debit_credit' => $ledger_head_status,
+					'ledgerbalance_status' => 1,
+
+				);
+				$result3 = $this->General_model->add('tbl_ledgerbalance',$data_ledger_balance);
 				$response_text = 'Customer details Added';
 			}
 			if($result){
@@ -162,11 +196,15 @@ class Administration extends MY_Controller {
 		$cust_id = $this->input->post('cust_id');
         $updateData = array('custstatus' => 0);
 		$updateData2 = array('ledgerhead_status' => 0);
+		$updateData3 = array('ledgerbalance_status' => 0);
 		//get name of customer from customer table to pass and delete data in ledger head
 		$cust_name = $this->General_model->get_data('tbl_customer','cust_id','custname',$cust_id);
         $data = $this->General_model->update($this->customer,$updateData,'cust_id',$cust_id);
 		//this function updates values of ledgerhead table to correspondind customer name to 0
 		$data2 = $this->General_model->update('tbl_ledgerhead',$updateData2,'ledger_head',$cust_name[0]->custname);
+		$find = $this->General_model->get_data('tbl_ledgerhead','ledger_head','ledgerhead_id',$cust_name[0]->custname);
+		$data2 = $this->General_model->update('tbl_ledgerbalance',$updateData3,'ledgerhead_id_fk',$find[0]->ledgerhead_id);
+
         if($data) {
             $response['text'] = 'Deleted successfully';
             $response['type'] = 'success';
@@ -240,7 +278,9 @@ class Administration extends MY_Controller {
 			{
 				$is_customer = 0;
 			}
-
+			$day= date('d') - 1;
+			$monthyear=date('Y-m');
+			$dates2=$monthyear.-$day;
 			$data = array(
 						'supplier_name' => $this->input->post('supplier_name'),
 						'supplier_address' => $this->input->post('supplier_address'),
@@ -264,12 +304,15 @@ class Administration extends MY_Controller {
 				'debit_or_credit'	=> $suppelier_types,
 				'ledgerhead_status'	=> 1,
 				'company_id_fk'	=>	$company,
+				'created_date' => date('Y-m-d H:i:s'),
+				'updated_at' => date('Y-m-d H:i:s'),
 			);
 
 			$data3	=	array(
 				'ledger_head'	=>	$this->input->post('supplier_name'),
 				'debit_or_credit'	=> $suppelier_types,
 				'company_id_fk'	=>	$company,
+				'updated_at' => date('Y-m-d H:i:s'),
 
 			);
 			$supplier_id = $this->input->post('supplier_id');
@@ -281,11 +324,31 @@ class Administration extends MY_Controller {
 				 $result = $this->General_model->update($this->suppliers,$data,'supplier_id',$supplier_id);
 				 //pass the supplier name and update ledger head
 				 $result2 = $this->General_model->update('tbl_ledgerhead',$data3,'ledger_head',$supplier_name2[0]->supplier_name);
+				 $data_ledger_balance = array(
+					'company_id_fk' => $company,
+					'balance' => $this->input->post('supplier_oldbal'),
+					'debit_credit' => $suppelier_types,
+					'ledgerbalance_status' => 1,
+
+				);
+				 $find = $this->General_model->get_data('tbl_ledgerhead','ledger_head','ledgerhead_id',$supplier_name2[0]->supplier_name);
+
+				$result2 = $this->General_model->update('tbl_ledgerbalance',$data_ledger_balance,'ledgerhead_id_fk',$find[0]->ledgerhead_id);
 				 $response_text = 'Supplier details  updated';
 			}
 			else{
 				$result = $this->General_model->add($this->suppliers,$data);
-				$result2 = $this->General_model->add('tbl_ledgerhead',$data2);
+				$result2 = $this->General_model->add_returnID('tbl_ledgerhead',$data2);
+				$data_ledger_balance = array(
+					'company_id_fk' => $company,
+					'ledgerhead_id_fk' => $result2,
+					'date' => $dates2,
+					'balance' => $this->input->post('supplier_oldbal'),
+					'debit_credit' => $suppelier_types,
+					'ledgerbalance_status' => 1,
+
+				);
+				$result = $this->General_model->add('tbl_ledgerbalance',$data);
 				$response_text = 'Supplier details Added';
 			}
 			if($result){
@@ -328,9 +391,12 @@ class Administration extends MY_Controller {
 		$supplier_id = $this->input->post('supplier_id');
         $updateData = array('supplier_status' => 0);
 		$updateData2 = array('ledgerhead_status' => 0);
+		$updateData3 = array('ledgerbalance_status' => 0);
 		$supplier_name2 = $this->General_model->get_data('tbl_supplier','supplier_id','supplier_name',$supplier_id);
         $data = $this->General_model->update($this->suppliers,$updateData,'supplier_id',$supplier_id);
 		$data2 = $this->General_model->update('tbl_ledgerhead',$updateData2,'ledger_head',$supplier_name2[0]->supplier_name);
+		$find = $this->General_model->get_data('tbl_ledgerhead','ledger_head','ledgerhead_id',$supplier_name2[0]->supplier_name);
+		$data2 = $this->General_model->update('tbl_ledgerbalance',$updateData3,'ledgerhead_id_fk',$find[0]->ledgerhead_id);
         if($data) {
             $response['text'] = 'Deleted successfully';
             $response['type'] = 'success';
@@ -605,13 +671,16 @@ class Administration extends MY_Controller {
 						'opening_bal'=> $this->input->post('opening_bal'),
 						'debit_or_credit'=>$debit_credit,
 						'ledgerhead_status'=>1,
-						'company_id_fk'=>$company			
+						'company_id_fk'=>$company,
+						'created_date' => date('Y-m-d H:i:s'),
+						'updated_at' => date('Y-m-d H:i:s'),	
 			);
 			$data3 = array(
 						'ledger_head' => $this->input->post('bank_name'),
 						'debit_or_credit'=>$debit_credit,
 						'company_id_fk'=>$company,
 						'opening_bal'=> $this->input->post('opening_bal'),
+						'updated_at' => date('Y-m-d H:i:s'),
 			);			
 			$bank_id = $this->input->post('bank_id');
 			if($bank_id){

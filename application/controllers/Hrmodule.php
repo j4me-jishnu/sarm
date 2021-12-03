@@ -103,6 +103,7 @@ class Hrmodule extends MY_Controller {
 						'company_id_fk' => $this->input->post('company'),
 						'ledgerhead_status' => 1,
 						'debit_or_credit' => $debit_credit,
+						'created_date' => date('Y-m-d H:i:s'),
 			);
 			$data3 = array(
 				'ledger_head' => $this->input->post('employname'),
@@ -702,6 +703,7 @@ class Hrmodule extends MY_Controller {
 						'ledgerhead_status' => 1,
 						'company_id_fk' => $this->session->userdata('cmp_id'),
 						'ledger_default' => 0,
+						'created_date' => date('Y-m-d H:i:s'),
 					);
 				$emp_name = $this->General_model->get_row('tbl_employee','emp_id',$emp_pr_edit_id);		
 				$result = $this->General_model->update('tbl_emp_peice_rate_pay',$emp_pay,'emp_pr_pay_id ',$emp_pr_pay_id);
@@ -749,6 +751,7 @@ class Hrmodule extends MY_Controller {
 						'ledgerhead_status' => 1,
 						'company_id_fk' => $this->session->userdata('cmp_id'),
 						'ledger_default' => 0,
+						'created_date' => date('Y-m-d H:i:s'),
 					);
 					$result2 = $this->General_model->add('tbl_emp_peice_rate_pay',$datap);
 					$result56 = $this->General_model->add('tbl_ledgerhead',$lederhead);

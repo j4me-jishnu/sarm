@@ -702,6 +702,7 @@ class Accounts extends MY_Controller {
 						'debit_or_credit' => $this->input->post('optradio'),
 						'company_id_fk' => $this->input->post('company'),
 						'ledger_default' => $setDefault,
+						'created_date' => date('Y-m-d H:i:s'),
 						);
 			$day= date('d') - 1;
 			$monthyear=date('Y-m');
@@ -739,7 +740,7 @@ class Accounts extends MY_Controller {
 						'date'=>$date,
 						'balance'=>$this->input->post('opening_bal'),
 						'debit_credit'=>$debit_credit,
-						'ledgerbalance_status'=>1
+						'ledgerbalance_status'=>1,
 					);
 					$this->General_model->add('tbl_ledgerbalance',$array);
                 $response_text = 'Added  successfully';

@@ -148,6 +148,17 @@ class Accountsreports extends MY_Controller
 			$fnyr = $this->General_model->fin_year();
 			if(isset($fnyr->finyear_id)){ $fyr = $fnyr->finyear_id; } else{ $fyr = 0;}
 
+			$start_date =(isset($_REQUEST['start_date']))?$_REQUEST['start_date']:'';
+        	$end_date =(isset($_REQUEST['end_date']))?$_REQUEST['end_date']:'';
+			if($start_date){
+				$start_date = str_replace('/', '-', $start_date);
+				$start_date =  date("Y-m-d",strtotime($start_date));
+			}
+		   
+			if($end_date){
+				$end_date = str_replace('/', '-', $end_date);
+				$end_date =  date("Y-m-d",strtotime($end_date));
+			}
 			//purchase
 			// $template['purchase'] = $this->Accountsreports_model->getTotalPurchases($cmp,$fyr);
 			// print_r($template['purchase']);die;
@@ -171,20 +182,20 @@ class Accountsreports extends MY_Controller
 			// $template['indirect_income'] = $this->Accountsreports_model->getAllinDirectincome($cmp);
 
 			//all direct income
-			$template['direct_income'] = $this->Accountsreports_model->getAllDirectincomes($cmp,$fyr);
+			$template['direct_income'] = $this->Accountsreports_model->getAllDirectincomes($cmp,$fyr,$start_date,$end_date);
 			// print_r($template['direct_income']);die();
 
 			//all indirect income
-			$template['indirect_income'] = $this->Accountsreports_model->getAllinDirectincomes($cmp,$fyr);
+			$template['indirect_income'] = $this->Accountsreports_model->getAllinDirectincomes($cmp,$fyr,$start_date,$end_date);
 
 			//all direct expense
-			$template['direct_exp'] = $this->Accountsreports_model->getAllDirectexpenses($cmp,$fyr);
+			$template['direct_exp'] = $this->Accountsreports_model->getAllDirectexpenses($cmp,$fyr,$start_date,$end_date);
 
 			//all indirect expense
-			$template['indirect_exp'] = $this->Accountsreports_model->getAllinDirectexpenses($cmp,$fyr);
+			$template['indirect_exp'] = $this->Accountsreports_model->getAllinDirectexpenses($cmp,$fyr,$start_date,$end_date);
 
 			// $template['opening'] = $this->Accountsreports_model->get_opening($cmp,$fyr);
-			$template['closing'] = $this->Accountsreports_model->get_closingstock($cmp,$fyr);
+			$template['closing'] = $this->Accountsreports_model->get_closingstock($cmp,$fyr,$start_date,$end_date);
 			// print_r($template['direct_income']);die;
 			if($this->session->userdata('user_type')=='C'){
 				$id = $this->session->userdata('id');
@@ -230,36 +241,48 @@ class Accountsreports extends MY_Controller
 			$fnyr = $this->General_model->fin_year();
 			if(isset($fnyr->finyear_id)){ $fyr = $fnyr->finyear_id; } else{ $fyr = 0;}
 
+			$start_date =(isset($_REQUEST['start_date']))?$_REQUEST['start_date']:'';
+        	$end_date =(isset($_REQUEST['end_date']))?$_REQUEST['end_date']:'';
+			if($start_date){
+				$start_date = str_replace('/', '-', $start_date);
+				$start_date =  date("Y-m-d",strtotime($start_date));
+			}
+		   
+			if($end_date){
+				$end_date = str_replace('/', '-', $end_date);
+				$end_date =  date("Y-m-d",strtotime($end_date));
+			}
+
 			//long term assets or fixed asset
-			$template['fixed'] = $this->Accountsreports_model->getFixedAssetsDetails($cmp,$fyr);
+			$template['fixed'] = $this->Accountsreports_model->getFixedAssetsDetails($cmp,$fyr,$start_date,$end_date);
 			//var_dump($template['fixed']); die;
 
 			//short term assets or current assets
-			$template['current'] = $this->Accountsreports_model->getCurrentAssetsDetails($cmp,$fyr);
+			$template['current'] = $this->Accountsreports_model->getCurrentAssetsDetails($cmp,$fyr,$start_date,$end_date);
 			//var_dump($template['current']); die;
 
 			//longterm liability
-			$template['liabilty'] = $this->Accountsreports_model->getFixedLiabiltyDetails($cmp,$fyr);
+			$template['liabilty'] = $this->Accountsreports_model->getFixedLiabiltyDetails($cmp,$fyr,$start_date,$end_date);
 			//var_dump($template['liabilty']); die;
 
 			//current liability
-			$template['currentliabilty'] = $this->Accountsreports_model->getCurrentLiabiltyDetails($cmp,$fyr);
+			$template['currentliabilty'] = $this->Accountsreports_model->getCurrentLiabiltyDetails($cmp,$fyr,$start_date,$end_date);
 			//var_dump($template['currentliabilty']); die;
 
 			//all direct income
-			$template['direct_income'] = $this->Accountsreports_model->getAllDirectincomes($cmp,$fyr);
+			$template['direct_income'] = $this->Accountsreports_model->getAllDirectincomes($cmp,$fyr,$start_date,$end_date);
 			//var_dump($template['direct_income']); die;
 
 			//all indirect income
-			$template['indirect_income'] = $this->Accountsreports_model->getAllinDirectincomes($cmp,$fyr);
+			$template['indirect_income'] = $this->Accountsreports_model->getAllinDirectincomes($cmp,$fyr,$start_date,$end_date);
 			//var_dump($template['indirect_income']); die;
 
 			//all direct expense
-			$template['direct_exp'] = $this->Accountsreports_model->getAllDirectexpenses($cmp,$fyr);
+			$template['direct_exp'] = $this->Accountsreports_model->getAllDirectexpenses($cmp,$fyr,$start_date,$end_date);
 			//var_dump($template['direct_exp']); die;
 
 			//all indirect expense
-			$template['indirect_exp'] = $this->Accountsreports_model->getAllinDirectexpenses($cmp,$fyr);
+			$template['indirect_exp'] = $this->Accountsreports_model->getAllinDirectexpenses($cmp,$fyr,$start_date,$end_date);
 			//var_dump($template['indirect_exp']); die;
 			
 			if($this->session->userdata('user_type')=='C'){
@@ -301,25 +324,39 @@ class Accountsreports extends MY_Controller
 			$template['company_id'] = $this->input->post('company');
 			$fnyr = $this->General_model->fin_year();
 			if(isset($fnyr->finyear_id)){ $fyr = $fnyr->finyear_id; } else{ $fyr = 0;}
+			$start_date =(isset($_REQUEST['start_date']))?$_REQUEST['start_date']:'';
+        	$end_date =(isset($_REQUEST['end_date']))?$_REQUEST['end_date']:'';
+			if($start_date){
+				$start_date = str_replace('/', '-', $start_date);
+				$start_date =  date("Y-m-d",strtotime($start_date));
+			}
+		   
+			if($end_date){
+				$end_date = str_replace('/', '-', $end_date);
+				$end_date =  date("Y-m-d",strtotime($end_date));
+			}
 
 			//long term assets or fixed 
-			$template['fixed'] = $this->Accountsreports_model->getFixedAssets($cmp,$fyr);
-
+			$template['fixed'] = $this->Accountsreports_model->getFixedAssets($cmp,$fyr,$start_date,$end_date);
+			//var_dump($template['fixed']);die;
+			$hello = $this->db->last_query();
 			//short term assets or current assetsasset
-			$template['current'] = $this->Accountsreports_model->getCurrentAssets($cmp,$fyr);
+			$template['current'] = $this->Accountsreports_model->getCurrentAssets($cmp,$fyr,$start_date,$end_date);
+			//var_dump($template['fixed']);die;
 			// print_r($template['current']);die();
 
 			//longterm liability
-			$template['liabilty'] = $this->Accountsreports_model->getFixedLiabilty($cmp,$fyr);
-
+			$template['liabilty'] = $this->Accountsreports_model->getFixedLiabilty($cmp,$fyr,$start_date,$end_date);
+			//var_dump($template['fixed']);die;
 			//current liability
-			$template['currentliabilty'] = $this->Accountsreports_model->getCurrentLiabilty($cmp,$fyr);
-
-			@$template['capital'] = $this->Accountsreports_model->getCapital($cmp);
-			 //print_r($template['capital']);die();
+			$template['currentliabilty'] = $this->Accountsreports_model->getCurrentLiabilty($cmp,$fyr,$start_date,$end_date);
+			//var_dump($template['fixed']);die;
+			@$template['capital'] = $this->Accountsreports_model->getCapital($cmp,$start_date,$end_date);
+			//var_dump($template['fixed']);die; 
+			//print_r($template['capital']);die();
 			
-			$template['profitloss'] = $this->Accountsreports_model->getProfitloss($cmp,$fyr);
-
+			$template['profitloss'] = $this->Accountsreports_model->getProfitloss($cmp,$fyr,$start_date,$end_date);
+			//var_dump($template['fixed']);die;
 			if($this->session->userdata('user_type')=='C'){
 				$id = $this->session->userdata('id');
 				$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
