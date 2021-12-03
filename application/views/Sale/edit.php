@@ -278,12 +278,15 @@
                 <input class="form-control" type="text" name="frieght" id="frieght" value="<?php if(isset($records[0]->frieght)) echo  $records[0]->frieght?>" onkeyup="getNetTotal()" required>
                 <label>Packing Charge</label>
                 <input class="form-control" type="text" name="pack_chrg" id="pack_chrg" value="<?php if(isset($records[0]->packing_charge)) echo  $records[0]->packing_charge?>" onkeyup="getNetTotal()">
+                <label>Net Total</label>
+                <input class="form-control" type="text" style="height:50px; background-color: paleturquoise;" autofocus name="sum" id="sum" value="<?php if(isset($records[0]->net_total)) echo  $records[0]->net_total?>">
               </div>
               <div class="col-md-8"></div>
               <div class="col-md-2">
-                <label>Net Total</label>
-                <input class="form-control" type="text" name="sum" id="sum" value="<?php if(isset($records[0]->net_total)) echo  $records[0]->net_total?>">
-                
+               
+              <label>Total</label>
+                <input class="form-control" type="text" name="sum" id="item_total" value="0">
+
                     <!-- Dynamic Radio Button for Cash Or Bank -->
                 <!-- Added By Rajeev -->
                 <br>

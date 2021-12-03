@@ -147,12 +147,12 @@ class Inventory extends MY_Controller {
 					}
 					//remark checkbox
 					$remark_checkbox = $this->input->post('remark_chk');
-					if($remark_checkbox[$i] == 1){
+					if(@$remark_checkbox[$i] == 1){
 						$remark_text = $this->input->post('remarks_text');
 					}
 					else
 					{
-						$remark_text = "";
+						$remark_text[] = "";
 					}
 					$data=array(
 					  'product_id_fk' =>$product_id[$i],
@@ -203,15 +203,16 @@ class Inventory extends MY_Controller {
 				$upData = array('supplier_oldbal' =>$this->input->post('net_bal'));
 				$stk = $this->General_model->update('tbl_supplier',$upData,'supplier_id',$supp_id);
 				$response_text = 'Purchase added successfully';
-
-				if($this->input->post('round_off_diff') > 0){
+				$round_off_variable = round($this->input->post('round_off_diff'));
+				//If round of value less than and equal to 49 paise enter to ledger head as roundoff value in credit
+				if($this->input->post('round_off_diff') > 0 && $this->input->post('round_off_diff') <= 0.49){
 
 						$ledger_head_data = array(
-							'group_id_fk' => 27,
+							'group_id_fk' => 29,
 							'ledger_head' => 'Round_off@Purchase',
 							'ledgerhead_desc' => 'Round Off Purchase',
 							'opening_bal' => $this->input->post('round_off_diff'),
-							'debit_or_credit' => 1,
+							'debit_or_credit' => 2,
 							'ledgerhead_status' =>1,
 							'company_id_fk' => $company,
 							'purchase_fk_id' => $this->input->post('invoice_number'),
@@ -219,6 +220,23 @@ class Inventory extends MY_Controller {
 						);
 						$result34 = $this->General_model->add('tbl_ledgerhead',$ledger_head_data);	
 					
+				}
+				//If round of value greater than and equal to 50 paise enter to ledger head as roundoff value in debit
+				else if($this->input->post('round_off_diff') > 0 && $this->input->post('round_off_diff') >=0.50)
+				{
+					$differnce = $round_off_variable - $this->input->post('round_off_diff');
+					$ledger_head_data = array(
+						'group_id_fk' => 29,
+						'ledger_head' => 'Round_off@Purchase',
+						'ledgerhead_desc' => 'Round Off Purchase',
+						'opening_bal' => $differnce,
+						'debit_or_credit' => 1,
+						'ledgerhead_status' =>1,
+						'company_id_fk' => $company,
+						'purchase_fk_id' => $this->input->post('invoice_number'),
+						'ledger_default' => 0
+					);
+					$result34 = $this->General_model->add('tbl_ledgerhead',$ledger_head_data);	
 				}
 			}
 			else
@@ -229,6 +247,8 @@ class Inventory extends MY_Controller {
 					$j=1;
 				for ($i=0; $i < $counter; $i++) 
 				{ 
+					//new changes to delete exesting table
+					$returns = $this->General_model->delete('tbl_purchase','purchase_id',$pur_table_id[$i]);
 					$data=array(
 					  'product_id_fk' =>$product_id[$i],
 					  'supp_id' =>$supp_id,
@@ -236,6 +256,7 @@ class Inventory extends MY_Controller {
 					  'finyear' => $fyr,
 					  'price_category'=>$this->input->post('optradio'),
 					  'invoice_number' =>$this->input->post('invoice_number'),
+					  'reference_bill_id'=>$this->input->post('ref_bill_id'),
 					  'purchase_quantity' =>$purchase_quantity[$i],
 					  'purchase_price' =>$purchase_price[$i],
 					  'discount_price' =>$discount_price[$i],
@@ -245,10 +266,12 @@ class Inventory extends MY_Controller {
 					  'stockstatus' =>0,
 					  'purchase_status' =>2 //draft
 					);
-					$result = $this->General_model->update('tbl_purchase',$data,'purchase_id',$pur_table_id[$i]);
+					//$result = $this->General_model->update('tbl_purchase',$data,'purchase_id',$pur_table_id[$i]);
+					$result = $this->General_model->add('tbl_purchase',$data);
 					//$insert_id = $this->db->insert_id();
 				$j++;	
 				}
+				$returns = $this->General_model->delete('tbl_purchasepayments','purchase_payment_id',$total_pay_id);
 				$datap = array(
 						'invoice_number' =>$this->input->post('invoice_number'),
 						'tax_amount'=>$this->input->post('tax_sum'),
@@ -263,7 +286,8 @@ class Inventory extends MY_Controller {
 	  					'net_balance'=>$this->input->post('net_bal'),
 	  					'payment_status'=>1 
 	  					);
-				$result = $this->General_model->update('tbl_purchasepayments',$datap,'purchase_payment_id',$total_pay_id);
+				//$result = $this->General_model->update('tbl_purchasepayments',$datap,'purchase_payment_id',$total_pay_id);
+				$result = $this->General_model->add('tbl_purchasepayments',$datap);
 				$response_text = 'Draft added successfully';
 				}
 				else{
@@ -277,6 +301,7 @@ class Inventory extends MY_Controller {
 					  'finyear' => $fyr,
 					  'price_category'=>$this->input->post('optradio'),
 					  'invoice_number' =>$this->input->post('invoice_number'),
+					  'reference_bill_id'=>$this->input->post('ref_bill_id'),
 					  'purchase_quantity' =>$purchase_quantity[$i],
 					  'purchase_price' =>$purchase_price[$i],
 					  'discount_price' =>$discount_price[$i],
@@ -350,6 +375,9 @@ class Inventory extends MY_Controller {
 
 		$update = array('payment_status' => 0);
 		$data = $this->General_model->update('tbl_purchasepayments',$update,'invoice_number',$invoice);
+		
+		$update_data_ledger = array('ledgerhead_status' => 0);
+		$ledger = $this->General_model->update('tbl_ledgerhead',$update_data_ledger,'purchase_fk_id',$invoice);
 
         if($data) {
             $response['text'] = 'Deleted successfully';

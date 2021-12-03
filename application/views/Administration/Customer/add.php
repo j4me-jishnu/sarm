@@ -124,7 +124,7 @@
                 <?php } ?>
                 <div class="form-group text-center">
                     <input type="checkbox"  name="cust_is_salary" value="1" <?php if(@$records->cust_is_salary=='1') echo 'Checked' ?>>
-                    <label for="vehicle1"> is Salary</label>
+                    <label for="vehicle1"> is Supplier</label>
                 </div>
 
                 <div class="form-group">

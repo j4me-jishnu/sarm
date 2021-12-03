@@ -533,7 +533,7 @@ class Accountsreports_model extends CI_Model
 	}
 	public function getFixedAssetsDetails($cmp,$fyr)
 	{
-		$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN opening_bal ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN opening_bal ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk = 17 AND company_id_fk = '.$cmp.'';
+		$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN SUM(opening_bal) ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN SUM(opening_bal) ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk = 17 AND company_id_fk = '.$cmp.' GROUP BY ledger_head';
 		$query = $this->db->query($sql);
 		return $data = $query->result();
 		// $this->db->select('*');
@@ -573,7 +573,7 @@ class Accountsreports_model extends CI_Model
 	}
 	public function getCurrentAssetsDetails($cmp,$fyr)
 	{
-		$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN opening_bal ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN opening_bal ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk IN (12,13,14,15,16) AND company_id_fk = '.$cmp.'';
+		$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN SUM(opening_bal) ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN SUM(opening_bal) ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk IN (12,13,14,15,16) AND company_id_fk = '.$cmp.' GROUP BY ledger_head';
 		$query = $this->db->query($sql);
 		return $data = $query->result();
 		// $array = array(12,13,14,15,16);
@@ -615,7 +615,7 @@ class Accountsreports_model extends CI_Model
 	}
 	public function getCurrentLiabiltyDetails($cmp,$fyr)
 	{
-		$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN opening_bal ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN opening_bal ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk IN (20,21) AND company_id_fk = '.$cmp.'';
+		$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN SUM(opening_bal) ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN SUM(opening_bal) ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk IN (20,21) AND company_id_fk = '.$cmp.' GROUP BY ledger_head';
 		$query = $this->db->query($sql);
 		return $data = $query->result();
 		// $array = array(20,21);
@@ -657,7 +657,7 @@ class Accountsreports_model extends CI_Model
 	public function getFixedLiabiltyDetails($cmp,$fyr)
 	{
 		
-		$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN opening_bal ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN opening_bal ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk = 19 AND company_id_fk = '.$cmp.'';
+		$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN SUM(opening_bal) ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN SUM(opening_bal) ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk = 19 AND company_id_fk = '.$cmp.' GROUP BY ledger_head';
 		$query = $this->db->query($sql);
 		return $data = $query->result();
 		// $array = array(19);
@@ -698,7 +698,7 @@ class Accountsreports_model extends CI_Model
 	}
 	public function getAllDirectincomes($cmp,$fyr)
 	{
-		$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN opening_bal ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN opening_bal ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk IN (24,25) AND company_id_fk = '.$cmp.'';
+		$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN SUM(opening_bal) ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN SUM(opening_bal) ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk IN (24,25) AND company_id_fk = '.$cmp.' GROUP BY ledger_head';
 		$query = $this->db->query($sql);
 		return $data = $query->result();
 		// $array = array(24,25);
@@ -739,7 +739,7 @@ class Accountsreports_model extends CI_Model
 	}
 	public function getAllinDirectincomes($cmp,$fyr)
 	{
-		$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN opening_bal ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN opening_bal ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk = 26 AND company_id_fk = '.$cmp.'';
+		$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN SUM(opening_bal) ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN SUM(opening_bal) ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk = 26 AND company_id_fk = '.$cmp.' GROUP BY ledger_head';
 		$query = $this->db->query($sql);
 		return $data = $query->result();
 		// $array = array(26);
@@ -793,7 +793,7 @@ class Accountsreports_model extends CI_Model
 				$directexpense = implode(',',$array);	
 			}
 		}
-		$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN opening_bal ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN opening_bal ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND company_id_fk = '.$cmp.' AND group_id_fk IN('.$directexpense.')';
+		$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN SUM(opening_bal) ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN SUM(opening_bal) ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND company_id_fk = '.$cmp.' AND group_id_fk IN('.$directexpense.') GROUP BY ledger_head';
 		$query = $this->db->query($sql);
 		return $data = $query->result();
 		// // print_r($array);die;
@@ -859,7 +859,7 @@ class Accountsreports_model extends CI_Model
 	}
 	public function getAllinDirectexpenses($cmp,$fyr)
 	{
-		$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN opening_bal ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN opening_bal ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk = 29 AND company_id_fk = '.$cmp.'';
+		$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN SUM(opening_bal) ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN SUM(opening_bal) ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk = 29 AND company_id_fk = '.$cmp.' GROUP BY ledger_head';
 		$query = $this->db->query($sql);
 		return $data = $query->result();
 		// $array = array(29);
@@ -897,6 +897,12 @@ class Accountsreports_model extends CI_Model
 		// 	}
 		// }
 		// return $data;
+	}
+	public function getGroupsList()
+	{
+		$sql = 'SELECT * FROM tbl_groups';
+		$query = $this->db->query($sql);
+		return $data = $query->result();
 	}
 	public function getFixedAssets($cmp,$fyr)
 	{
