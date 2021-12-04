@@ -953,13 +953,13 @@ class Accountsreports_model extends CI_Model
 		$start_date1 = (isset($start_date))?$start_date:'';
 		$end_date1 = (isset($end_date))?$end_date:'';
 		if($start_date1 || $end_date1){
-			$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN SUM(opening_bal) ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN SUM(opening_bal) ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk = 29 AND company_id_fk = '.$cmp.' AND created_at BETWEEN "'.$start_date1.'" AND "'.$end_date1.'" GROUP BY ledger_head';
+			$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN SUM(opening_bal) ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN SUM(opening_bal) ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk IN (29,34) AND company_id_fk = '.$cmp.' AND created_at BETWEEN "'.$start_date1.'" AND "'.$end_date1.'" GROUP BY ledger_head';
 			$query = $this->db->query($sql);
 			return $data = $query->result();
 		}
 		else
 		{
-			$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN SUM(opening_bal) ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN SUM(opening_bal) ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk = 29 AND company_id_fk = '.$cmp.' GROUP BY ledger_head';
+			$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN SUM(opening_bal) ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN SUM(opening_bal) ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk IN (29,34) AND company_id_fk = '.$cmp.' GROUP BY ledger_head';
 			$query = $this->db->query($sql);
 			return $data = $query->result();
 		}
@@ -1306,30 +1306,61 @@ class Accountsreports_model extends CI_Model
 	// 	$this->db->where('company_id_fk',$cmp);
 	// 	$this->db->where()
 	// }
-	public function get_closingstock($cmp,$fyr)
+	public function get_closingstock($cmp,$fyr,$start_date,$end_date)
 	{
-		$this->db->select('ledgerhead_id');
-		$this->db->where('group_id_fk',14);
-		$this->db->where('ledgerhead_status',1);
-		$ledgerhead_id=$this->db->get('tbl_ledgerhead')->row()->ledgerhead_id;
-		// echo $ledgerhead_id;die();
-
-		$this->db->select('*');
-		$this->db->from('tbl_ledgerbalance');
-		$this->db->join('tbl_ledgerhead','ledgerhead_id_fk = ledgerhead_id');
-		$this->db->where('ledgerhead_id_fk',$ledgerhead_id);
-		$this->db->where('ledgerbalance_status',1);
-		$result = $this->db->get()->result();
-		if($result)
-		{
-			return $array=array('ledgerhead'=>$result[0]->ledger_head,'amount'=>$result[0]->balance);
+		$start_date1 = (isset($start_date))?$start_date:'';
+		$end_date1 = (isset($end_date))?$end_date:'';
+		if($start_date1 || $end_date1){
+			$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN SUM(opening_bal) ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN SUM(opening_bal) ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk = 14 AND company_id_fk = '.$cmp.' AND created_at BETWEEN "'.$start_date1.'" AND "'.$end_date1.'" GROUP BY ledger_head';
+			$query = $this->db->query($sql);
+			$data = $query->result();
+			 if($data){
+				return $array=array('ledgerhead'=>$data[0]->ledger_head,'amount'=>$data[0]->opening_bal);
+			 }
+			 else{
+				$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN SUM(opening_bal) ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN SUM(opening_bal) ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk = 14 AND company_id_fk = '.$cmp.' AND created_at BETWEEN "'.$start_date1.'" AND "'.$end_date1.'" GROUP BY ledger_head';
+				$query = $this->db->query($sql);
+			 	$data = $query->result();
+				return $array=array('ledgerhead'=>$data[0]->ledger_head,'amount'=>0);
+			 }
 		}
 		else
 		{
-			$this->db->select('ledger_head');
-			$this->db->where('group_id_fk',14);
-			$ledgerhead=$this->db->get('tbl_ledgerhead')->row()->ledger_head;
-			return $array=array('ledgerhead'=>$ledgerhead,'amount'=>0);
+			$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN SUM(opening_bal) ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN SUM(opening_bal) ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk = 14 AND company_id_fk = '.$cmp.' GROUP BY ledger_head';
+			$query = $this->db->query($sql);
+			$data = $query->result();
+			 if($data){
+				return $array=array('ledgerhead'=>$data[0]->ledger_head,'amount'=>$data[0]->opening_bal);
+			 }
+			 else{
+				$sql = 'SELECT * , CASE WHEN debit_or_credit = 1 THEN SUM(opening_bal) ELSE 0 END AS debit , CASE WHEN debit_or_credit = 2 THEN SUM(opening_bal) ELSE 0 END AS credit FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk = 14 AND company_id_fk = '.$cmp.' GROUP BY ledger_head';
+				$query = $this->db->query($sql);
+			 	$data = $query->result();
+				return $array=array('ledgerhead'=>$data[0]->ledger_head,'amount'=>0);
+			 }
 		}
+		// $this->db->select('ledgerhead_id');
+		// $this->db->where('group_id_fk',14);
+		// $this->db->where('ledgerhead_status',1);
+		// $ledgerhead_id=$this->db->get('tbl_ledgerhead')->row()->ledgerhead_id;
+		// // echo $ledgerhead_id;die();
+
+		// $this->db->select('*');
+		// $this->db->from('tbl_ledgerbalance');
+		// $this->db->join('tbl_ledgerhead','ledgerhead_id_fk = ledgerhead_id');
+		// $this->db->where('ledgerhead_id_fk',$ledgerhead_id);
+		// $this->db->where('ledgerbalance_status',1);
+		// $result = $this->db->get()->result();
+		// if($result)
+		// {
+		// 	return $array=array('ledgerhead'=>$result[0]->ledger_head,'amount'=>$result[0]->balance);
+		// }
+		// else
+		// {
+		// 	$this->db->select('ledger_head');
+		// 	$this->db->where('group_id_fk',14);
+		// 	$ledgerhead=$this->db->get('tbl_ledgerhead')->row()->ledger_head;
+		// 	return $array=array('ledgerhead'=>$ledgerhead,'amount'=>0);
+		// }
 	}
 }

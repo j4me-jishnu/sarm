@@ -27,9 +27,10 @@
         <div class="box-body">
           <form method="post" action="<?php echo base_url(); ?>Profitloss/get">
             <div class="row">
-              <div class="col-md-3">
+              
                 <?php if($this->session->userdata['user_type']!='C')
                 { ?>
+                <div class="col-md-3">
                   <div class="input-group margin">
                     <div class="input-group-btn">
                       <button type="button" class="btn btn-primary nohover">Company</button>
@@ -46,25 +47,19 @@
                         ?>
                       </select>
                     </div>
-                <?php } ?>
-              </div>
-              <div class="col-md-3">
-                <div class="input-group margin">
-                  <div class="input-group-btn">
-                    <button class="btn btn-primary nohover">Date From</button>
+                    </div>
+                    <div class="col-md-6">
+                    <div class="input-group margin">
+                      <div class="input-group-btn">
+                        <button type="button" class="btn btn-primary nohover">Date </button>
+                      </div><!-- /btn-group -->
+                        <input id="pmsDateStart" type="text" data-validation-optional="true" data-pms-max-date="today" data-pms-type="date" name="start_date" data-pms-date-to="pmsDateEnd" class="col-md-5 form-control"  value="" >
+                        <span tabindex="-1" class="input-group-btn select-calendar date-range"><button type="button" tabindex="-1" class="btn btn-default"><i class=" fa fa-calendar"></i></button></span>
+                        
+                        <input id="pmsDateEnd" type="text" data-validation-optional="true" data-pms-type="date" name="end_date" data-pms-date-from="pmsDateStart" class="col-md-5 form-control"  value="" >
+                        <span tabindex="-1" class="input-group-btn select-calendar date-range"><button type="button" tabindex="-1" class="btn btn-default"><i class=" fa fa-calendar"></i></button></span>
+                    </div>
                   </div>
-                    <input type="date" class="form-control" name="start_date">
-                </div>
-              </div>
-              
-              <div class="col-md-3" style="margin-left: 50px;">
-                <div class="input-group margin">
-                  <div class="input-group-btn">
-                    <button class="btn btn-primary nohover">Date To</button>
-                  </div>
-                    <input type="date" class="form-control" name="end_date">
-                </div>
-              </div>
               <div class="col-md-2">
                 <div class="input-group margin">
                   <div class="input-group-btn">
@@ -72,15 +67,43 @@
                   </div>
                 </div>
               </div>
+                <?php } else { ?>
+              
+              <div class="col-md-3">
+                    <div class="input-group margin">
+                      <input type="text" class="form-control" name="justname" value="<?php echo @$company1->cmp_name ?>" readonly>
+                      <input type="hidden" class="form-control" name="company" value="<?php echo $this->session->userdata('cmp_id') ?>">  
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-group margin">
+                      <div class="input-group-btn">
+                        <button type="button" class="btn btn-primary nohover">Date </button>
+                      </div><!-- /btn-group -->
+                        <input id="pmsDateStart" type="text" data-validation-optional="true" data-pms-max-date="today" data-pms-type="date" name="start_date" data-pms-date-to="pmsDateEnd" class="col-md-5 form-control" placeholder="dd/mm/yyyy" >
+                        <span tabindex="-1" class="input-group-btn select-calendar date-range"><button type="button" tabindex="-1" class="btn btn-default"><i class=" fa fa-calendar"></i></button></span>
+                        
+                        <input id="pmsDateEnd" type="text" data-validation-optional="true" data-pms-type="date" name="end_date" data-pms-date-from="pmsDateStart" class="col-md-5 form-control" placeholder="dd/mm/yyyy" >
+                        <span tabindex="-1" class="input-group-btn select-calendar date-range"><button type="button" tabindex="-1" class="btn btn-default"><i class=" fa fa-calendar"></i></button></span>
+                    </div>
+                  </div>
+              <div class="col-md-2">
+                <div class="input-group margin">
+                  <div class="input-group-btn">
+                    <input type="submit" class="form-control btn btn-primary" name="submit" value="SUBMIT">
+                  </div>
+                </div>
+              </div>
+              <?php } ?>
             </div>
           </form>
           <table id="area_table" align="center" width="800" class="table-bordered table-condensed">
             <thead>
               <tr>
-                  <th>Particulars</th>
-                  <th>Amount</th>
-                  <th>Particulars</th>
-                  <th>Amount</th>
+                  <th>PARTICULARS</th>
+                  <th>AMOUNT</th>
+                  <th>PARTICULARS</th>
+                  <th>AMOUNT</th>
               </tr>
             </thead>
             <tbody>
@@ -89,7 +112,7 @@
               {
               ?>
                 <tr>
-                  <td colspan="4">Nodata found</td>
+                  <td colspan="4">NO DATA FOUND</td>
                 </tr>
               <?php
               }
@@ -97,8 +120,9 @@
               { $total_pur=0;$total_sale=0;
                 ?>
                 <tr>
-                  <td colspan="2"><span style="font-style: italic;font-size: 15px;">Direct expenses</span></td>
-                  <td><span style="font-style: italic;font-size: 15px;">Direct Income</span></td>
+                  <td colspan="2" style="background: #e6ecf5;"><span style="font-family: Arial Narrow;font-size: 14px;"><b>DIRECT EXPENSES</b></span></td>
+                  <td style="background: #e6ecf5;"><span style="font-family: Arial Narrow;font-size: 14px;"><b>DIRECT INCOME</b></span></td>
+                  <td style="background: #e6ecf5;"></td>
                 </tr>
                 <tr>
                 <?php
@@ -110,9 +134,9 @@
                       <td>
                         <div class="row">
                           <div class="col-sm-6">
-                            To <?php if(isset($purchase[0]->ledger_head)) echo $purchase[0]->ledger_head ?>
+                            To <?php if(isset($purchase[0]->ledger_head)) echo strtoupper($purchase[0]->ledger_head) ?>
                             <br>
-                            To <?php if(isset($purchaseret[0]->ledger_head)) echo $purchaseret[0]->ledger_head ?>
+                            To <?php if(isset($purchaseret[0]->ledger_head)) echo strtoupper($purchaseret[0]->ledger_head) ?>
                           </div>
                           <div class="col-sm-6" align="right">
                             <?php if(isset($purchase[0]->sum_deb)) echo $purchase[0]->sum_deb; ?>
@@ -134,7 +158,7 @@
                       <td>
                         <div class="row">
                           <div class="col-sm-6">
-                            To <?php if(isset($purchase[0]->ledger_head)) echo $purchase[0]->ledger_head ?>
+                            To <?php if(isset($purchase[0]->ledger_head)) echo strtoupper($purchase[0]->ledger_head) ?>
                             <br>
                           </div>
                           <div class="col-sm-6" align="right">
@@ -159,9 +183,9 @@
                       <td>
                       <div class="row">
                         <div class="col-sm-6">
-                           <?php if(isset($sales[0]->ledger_head)) echo $sales[0]->ledger_head ?>
+                           <?php if(isset($sales[0]->ledger_head)) echo strtoupper($sales[0]->ledger_head) ?>
                           <br>
-                           <?php if(isset($salesret[0]->ledger_head)) echo $salesret[0]->ledger_head ?>
+                           <?php if(isset($salesret[0]->ledger_head)) echo strtoupper($salesret[0]->ledger_head) ?>
                         </div>
                         <div class="col-sm-6" align="right">
                           <?php if(isset($sales[0]->sum_cr)) echo $sales[0]->sum_cr; ?>
@@ -183,7 +207,7 @@
                     <td>
                       <div class="row">
                         <div class="col-sm-6">
-                           <?php if(isset($sales[0]->ledger_head)) echo $sales[0]->ledger_head ?>
+                           <?php if(isset($sales[0]->ledger_head)) echo strtoupper($sales[0]->ledger_head) ?>
                           <br>
                         </div>
                         <div class="col-sm-6" align="right">
@@ -224,9 +248,9 @@
                   { 
                   ?>
                   <tr>
-                    <td>To <?php if(isset($direct_exp[$i]->ledger_head)) echo $direct_exp[$i]->ledger_head; ?></td>
+                    <td>To <?php if(isset($direct_exp[$i]->ledger_head)) echo strtoupper($direct_exp[$i]->ledger_head); ?></td>
                     <td><?php if(isset($direct_exp[$i]->debit)) echo round($direct_exp[$i]->debit,2); ?></td>
-                    <td> <?php if(isset($direct_income[$i]->ledger_head)) echo $direct_income[$i]->ledger_head;?></td>
+                    <td> <?php if(isset($direct_income[$i]->ledger_head)) echo strtoupper($direct_income[$i]->ledger_head);?></td>
                     <td><?php if(isset($direct_income[$i]->credit)) echo round($direct_income[$i]->credit,2); ?></td>
                   </tr>
                   <?php
@@ -246,7 +270,7 @@
                 {
                 ?>
                   <tr>
-                    <td><label>To Gross profit</label></td>
+                    <td><label>TO GROSS PROFIT</label></td>
                     <td><?php echo $profit=$total_sale-$total_pur ?></td>
                     <td></td>
                     <td></td>
@@ -306,8 +330,9 @@
                 }
                 ?>
                 <tr>
-                    <td colspan="2"><span style="font-style: italic;font-size: 15px;">Indirect expenses</span></td>
-                    <td><span style="font-style: italic;font-size: 15px;">Indirect Income</span></td>
+                    <td colspan="2" style="background: #e6ecf5;"><span style="font-family: Arial Narrow;font-size: 14px;"><b>INDIRECT EXPENSES</b></span></td>
+                    <td style="background: #e6ecf5;"><span style="font-family: Arial Narrow;font-size: 14px;"><b>INDIRECT INCOME</b></span></td>
+                    <td style="background: #e6ecf5;"></td>
                 </tr>
                 <?php
                 if (!empty($indirect_exp) || !empty($indirect_income)) 
@@ -332,9 +357,9 @@
                   { 
                   ?>
                   <tr>
-                    <td>To <?php if(isset($indirect_exp[$i]->ledger_head)) echo $indirect_exp[$i]->ledger_head; ?></td>
+                    <td>To <?php if(isset($indirect_exp[$i]->ledger_head)) echo strtoupper($indirect_exp[$i]->ledger_head); ?></td>
                     <td><?php if(isset($indirect_exp[$i]->debit)) echo round($indirect_exp[$i]->debit,2); ?></td>
-                    <td> <?php if(isset($indirect_income[$i]->ledger_head)) echo $indirect_income[$i]->ledger_head;?></td>
+                    <td> <?php if(isset($indirect_income[$i]->ledger_head)) echo strtoupper($indirect_income[$i]->ledger_head);?></td>
                     <td><?php if(isset($indirect_income[$i]->credit)) echo round($indirect_income[$i]->credit,2); ?></td>
                   </tr>
                   <?php
@@ -352,7 +377,7 @@
                   <tr>
                     <td></td>
                     <td></td>
-                    <td><label> Net loss c/d</label></td>
+                    <td><label> NET LOSS C/D</label></td>
                     <td><?php echo $netloss-$netprofit; ?><input type="hidden" name="loss" id="loss" value="<?php echo $netloss-$netprofit; ?>"></td>
                   </tr>
                   <tr>
@@ -367,7 +392,7 @@
                 {
                 ?>
                   <tr>
-                    <td><label>To Net Profit c/d</label></td>
+                    <td><label>TO NET PROFIT C/D</label></td>
                     <td><?php echo $netprofit-$netloss; ?><input type="hidden" name="profit" id="profit" value="<?php echo $netprofit-$netloss; ?>"></td>
                     <td></td>
                     <td></td>

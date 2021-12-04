@@ -81,12 +81,17 @@ class Hrmodule extends MY_Controller {
 					);
 
 			
-
+			// 35 for wages under direct expenses
 			if($this->input->post('salary_mode')==0){
-				$salary_mode = 27;
+				$salary_mode = 35;
 			}
+			// 36 for peice under direct expenses
+			else if($this->input->post('salary_mode')==1){
+				$salary_mode = 36;
+			}
+			// 34 for salary under indirect expenses
 			else{
-				$salary_mode = 29;
+				$salary_mode = 34;
 			}
 			if($this->input->post('debit_or_credit')==0){
 				$debit_credit = 1;

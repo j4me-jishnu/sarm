@@ -35,7 +35,6 @@
                       <button type="button" class="btn btn-primary nohover">Company</button>
                     </div><!-- /btn-group -->
                       <select name="company" id="company" class="form-control" onchange="this.form.submit()">
-                        <option></option>
                         <?php
                         foreach ($company as $row) 
                         {
@@ -69,7 +68,7 @@
                   
                     <div class="col-md-4">
                     <div class="input-group margin">
-                      <input type="text" class="form-control" name="justname" value="<?php echo $comapny1->cmp_name ?>">
+                      <input type="text" class="form-control" name="justname" value="<?php echo $comapny1->cmp_name ?>" readonly>
                       <input type="hidden" class="form-control" name="company" value="<?php echo $this->session->userdata('cmp_id') ?>">  
                     </div>
                     </div>
@@ -84,7 +83,7 @@
                         <input id="pmsDateEnd" type="text" data-validation-optional="true" data-pms-type="date" name="end_date" data-pms-date-from="pmsDateStart" class="col-md-5 form-control" placeholder="dd/mm/yyyy" >
                         <span tabindex="-1" class="input-group-btn select-calendar date-range"><button type="button" tabindex="-1" class="btn btn-default"><i class=" fa fa-calendar"></i></button></span>
                     </div>
-                  </div
+                  </div>
                     <div class="col-md-3">
                     <div class="input-group margin">
                       <input type="submit" class="btn btn-primary" value="SUBMIT">  
@@ -97,10 +96,10 @@
           <table id="area_table" align="center" width="1000" class="table-bordered table-condensed">
             <thead>
               <tr>
-                  <th>Liability</th>
-                  <th>Amount</th>
-                  <th>Assets</th>
-                  <th>Amount</th>
+                  <th>LIABILITY</th>
+                  <th>AMOUNT</th>
+                  <th>ASSETS</th>
+                  <th>AMOUNT</th>
               </tr>
             </thead>
             <tbody>
@@ -110,7 +109,7 @@
               {
               ?>
                 <tr>
-                  <td colspan="4">Nodata found</td>
+                  <td colspan="4">NO DATA FOUND</td>
                 </tr>
               <?php
               }
@@ -118,8 +117,8 @@
               {
                 ?>
                 <tr>
-                  <td colspan="2"><span style="font-style: italic;font-size: 15px;">Longterm Liability</span></td>
-                  <td colspan="2"><span style="font-style: italic;font-size: 15px;">Fixed Assets</span></td>
+                  <td colspan="2" style="background: #e6ecf5;"><span style="font-family: Arial Narrow;font-size: 14px;"><b>LONGTERM LIABILITY</b></span></td>
+                  <td colspan="2" style="background: #e6ecf5;"><span style="font-family: Arial Narrow;font-size: 14px;"><b>FIXED ASSETS</b></span></td>
                 </tr>
                 <tr>
                 <?php
@@ -139,9 +138,9 @@
                 { 
                 ?>
                      <tr>
-                       <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php if(isset($liabilty[$i]->ledger_head)) echo $liabilty[$i]->ledger_head; ?></td>
+                       <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php if(isset($liabilty[$i]->ledger_head)) echo strtoupper($liabilty[$i]->ledger_head); ?></td>
                        <td><?php if(isset($liabilty[$i]->balance)) echo $liabilty[$i]->balance; if(isset($liabilty[$i]->balance)) $total_liability=$total_liability+$liabilty[$i]->balance; ?></td>
-                       <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php if(isset($fixed[$i]->ledger_head)) echo $fixed[$i]->ledger_head; ?></td>
+                       <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php if(isset($fixed[$i]->ledger_head)) echo strtoupper($fixed[$i]->ledger_head); ?></td>
                        <td><?php if(isset($fixed[$i]->opening_bal2)) echo $fixed[$i]->opening_bal2; if(isset($fixed[$i]->opening_bal2)) $total_asset=$total_asset+$fixed[$i]->opening_bal2; ?></td>
                      </tr> 
                 <?php    
@@ -151,8 +150,8 @@
                   <td colspan="4"></td>
                 </tr>
                 <tr>
-                  <td colspan="2"><span style="font-style: italic;font-size: 15px;">Short Liability</span></td>
-                  <td colspan="2"><span style="font-style: italic;font-size: 15px;">Current Assets</span></td>
+                  <td colspan="2" style="background: #e6ecf5;"><span style="font-family: Arial Narrow;font-size: 14px;"><b>SHORT LIABILITY</b></span></td>
+                  <td colspan="2" style="background: #e6ecf5;"><span style="font-family: Arial Narrow;font-size: 14px;"><b>CURRENT ASSETS</b></span></td>
                 </tr>
                 <tr>
                 <?php
@@ -172,9 +171,9 @@
                 { 
                 ?>
                      <tr>
-                       <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php if(isset($currentliabilty[$i]->ledger_head)) echo $currentliabilty[$i]->ledger_head; ?></td>
+                       <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php if(isset($currentliabilty[$i]->ledger_head)) echo strtoupper($currentliabilty[$i]->ledger_head); ?></td>
                        <td><?php if(isset($currentliabilty[$i]->opening_bal2)) echo $currentliabilty[$i]->opening_bal2; if(isset($currentliabilty[$i]->opening_bal2)) $total_liability=$total_liability+$currentliabilty[$i]->opening_bal2; ?></td>
-                       <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php if(isset($current[$i]->ledger_head)) echo $current[$i]->ledger_head; ?></td>
+                       <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php if(isset($current[$i]->ledger_head)) echo strtoupper($current[$i]->ledger_head); ?></td>
                        <td><?php if(isset($current[$i]->opening_bal2)) echo $current[$i]->opening_bal2;if(isset($current[$i]->opening_bal2)) $total_asset=$total_asset+$current[$i]->opening_bal2; ?></td>
                      </tr> 
                 <?php    
@@ -187,19 +186,21 @@
                   <td>
                     <div class="row">
                       <div class="col-sm-6">
-                        Capital<br>
+                        <b>CAPITAL</b><br>
                         <?php
                         if(@$profitloss[0]->profit_loss == 1)
                         {
                           //profit
                         ?>
-                        Add Net profit
+                        <!-- Add Net profit -->
+                        <b>ADD NET PROFIT</b>
                         <?php  
                         }
                         else
                         {
                         ?>
-                        Less Netloss
+                        <!-- Less Netloss -->
+                        <b>LESS NETLOSS</b>
                         <?php
                         } 
                         ?>

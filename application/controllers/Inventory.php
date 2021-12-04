@@ -226,6 +226,7 @@ class Inventory extends MY_Controller {
 				//If round of value greater than and equal to 50 paise enter to ledger head as roundoff value in debit
 				else if($this->input->post('round_off_diff') > 0 && $this->input->post('round_off_diff') >=0.50)
 				{
+					
 					$differnce = $round_off_variable - $this->input->post('round_off_diff');
 					$ledger_head_data = array(
 						'group_id_fk' => 29,

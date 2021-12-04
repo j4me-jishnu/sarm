@@ -1,4 +1,20 @@
+<style>
+  .tree-table .parent-row:hover {
+  cursor: pointer;
+}
 
+.tree-table [data-parent] td:first-child {
+  padding-left: 10px;
+}
+
+.tree-table [data-parent] {
+  display: none;
+}
+
+.tree-table [data-parent].expanded {
+  display: table-row;
+}
+</style>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -48,22 +64,18 @@
                       </select>
                     </div>
                   </div>
-              <div class="col-md-3">
-                <div class="input-group margin">
-                  <div class="input-group-btn">
-                    <button class="btn btn-primary nohover">Date From</button>
+                  <div class="col-md-6">
+                    <div class="input-group margin">
+                      <div class="input-group-btn">
+                        <button type="button" class="btn btn-primary nohover">Date </button>
+                      </div><!-- /btn-group -->
+                        <input id="pmsDateStart" type="text" data-validation-optional="true" data-pms-max-date="today" data-pms-type="date" name="start_date" data-pms-date-to="pmsDateEnd" class="col-md-5 form-control" placeholder="dd/mm/yyyy" >
+                        <span tabindex="-1" class="input-group-btn select-calendar date-range"><button type="button" tabindex="-1" class="btn btn-default"><i class=" fa fa-calendar"></i></button></span>
+                        
+                        <input id="pmsDateEnd" type="text" data-validation-optional="true" data-pms-type="date" name="end_date" data-pms-date-from="pmsDateStart" class="col-md-5 form-control" placeholder="dd/mm/yyyy" >
+                        <span tabindex="-1" class="input-group-btn select-calendar date-range"><button type="button" tabindex="-1" class="btn btn-default"><i class=" fa fa-calendar"></i></button></span>
+                    </div>
                   </div>
-                    <input type="date" name="start_date" class="form-control">
-                </div>  
-              </div>
-              <div class="col-md-3">
-                <div class="input-group margin">
-                  <div class="input-group-btn">
-                    <button class="btn btn-primary nohover">Date To</button>
-                  </div>
-                    <input type="date" name="end_date" class="form-control">
-                </div>  
-              </div>
               <div class="col-md-2">
                 <div class="input-group margin">
                   <input type="submit" class="btn btn-primary" value="SUBMIT">
@@ -71,10 +83,22 @@
               </div>
                 <?php } else{ ?>
                   <div class="row" style="margin-left: 90px;">
-                 <div class="col-md-8">
+                 <div class="col-md-4">
                    <input type="text" name="justname" id="" class="form-control" value="<?php echo @$company1->cmp_name ?>" readonly>
                    <input type="hidden" name="company" id="" class="form-control" value="<?php echo $this->session->userdata('cmp_id') ?>">
                  </div>
+                 <div class="col-md-6">
+                    <div class="input-group margin">
+                      <div class="input-group-btn">
+                        <button type="button" class="btn btn-primary nohover">Date </button>
+                      </div><!-- /btn-group -->
+                        <input id="pmsDateStart" type="text" data-validation-optional="true" data-pms-max-date="today" data-pms-type="date" name="start_date" data-pms-date-to="pmsDateEnd" class="col-md-5 form-control" placeholder="dd/mm/yyyy" >
+                        <span tabindex="-1" class="input-group-btn select-calendar date-range"><button type="button" tabindex="-1" class="btn btn-default"><i class=" fa fa-calendar"></i></button></span>
+                        
+                        <input id="pmsDateEnd" type="text" data-validation-optional="true" data-pms-type="date" name="end_date" data-pms-date-from="pmsDateStart" class="col-md-5 form-control" placeholder="dd/mm/yyyy" >
+                        <span tabindex="-1" class="input-group-btn select-calendar date-range"><button type="button" tabindex="-1" class="btn btn-default"><i class=" fa fa-calendar"></i></button></span>
+                    </div>
+                  </div>
                  <div class="col-md-2">
                    <input type="submit" name="submit" class="btn btn-primary " value="SUBMIT">
                  </div>
@@ -82,7 +106,7 @@
                  <?php } ?>
             </div>
           </form>
-          <table id="area_table" align="center" width="800" class="table-bordered table-condensed">
+          <table id="area_table" align="center" width="800" class="tree-table table-bordered table-condensed">
             <thead>
               <tr style="font-family: Arial Narrow;">
                 <th>PARTICULARS</th>
@@ -112,19 +136,23 @@
                     </tr>
                     
                     <?php
-                    for ($i=0; $i < count($fixed); $i++) 
-                    { 
+                    $x = 17;
+                    $c = 17;
                       foreach($addition_data as $group_heads) { 
-                      if($group_heads->group_id == $fixed[$i]->group_id_fk){
+                        if($group_heads->group_id == 17 ){
                     ?>
                          
-                    <tr>
-                          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a data-toggle="collapse" href="#collapseFixedAsset<?php echo $i ?>" role="button" aria-expanded="false" aria-controls="collapseFixedAsset<?php echo $i ?>" style="color: green;">+</a>&nbsp;&nbsp;&nbsp;&nbsp;FIXED ASSETS</td>
+                    <tr id="row-1-<?php echo $x ?>" class="parent-row">
+                          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a ></a>&nbsp;&nbsp;&nbsp;&nbsp;<b><?php echo $group_heads->group_name ?></b></td>
                           <td></td>
                           <td></td>
                           <td></td>
                     </tr>
-                        <tr class="collapse" id="collapseFixedAsset<?php echo $i ?>">
+                   <?php for ($i=0; $i < count($fixed); $i++) 
+                    { 
+                      if($group_heads->group_id == $fixed[$i]->group_id_fk){
+                      ?>
+                        <tr data-parent="row-1-<?php echo $c ?>">
                           <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;<?php echo strtoupper($fixed[$i]->ledger_head) ?></td>
                           <td></td>
                           <td><?php echo $fixed[$i]->debit; $deb_total=$deb_total+$fixed[$i]->debit; ?></td>
@@ -132,7 +160,10 @@
                         </tr>
                        
                     <?php  
-                     } } }
+                     } } } 
+                    $x++;
+                    $c++;
+                    }
                 }
                 if(! empty($current))
                 {
@@ -141,20 +172,20 @@
                     <td colspan="4" style="background: #e6ecf5;"><span style="font-family: Arial Narrow;font-size: 14px;"><b>CURRENT ASSETS</b></span></td>
                   </tr>
                  <?php
-                  $x = 1;
-                  $c = 0;
+                  $x = 12;
+                  $c = 12;
                  foreach($addition_data as $group_heads) { 
                    if($group_heads->group_id == 12 || $group_heads->group_id == 13 || $group_heads->group_id == 14 || $group_heads->group_id == 15 || $group_heads->group_id == 12){
                    ?>
-                      <tr >
-                          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a ></a>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $group_heads->group_name ?></td>
+                      <tr id="row-2-<?php echo $x ?>" class="parent-row">
+                          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><?php echo $group_heads->group_name ?></b></td>
                           <td></td>
                           <td></td>
                           <td></td>
                       </tr>
                       <?php for($i=0;$i < count($current);$i++){ 
                         if($group_heads->group_id == $current[$i]->group_id_fk){ ?>
-                      <tr >
+                      <tr data-parent="row-2-<?php echo $c ?>">
                           <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;<?php echo strtoupper($current[$i]->ledger_head) ?></td>
                           <td></td>
                           <td><?php echo $current[$i]->debit; $deb_total=$deb_total+$current[$i]->debit; ?></td>
@@ -164,9 +195,11 @@
                         }
                       }
                    }
+                   $x++;
+                   $c++;
                  }
-                 $x++;
-                 $c++;
+                 
+                
                 }
                 if(! empty($liabilty))
                 {
@@ -175,18 +208,32 @@
                     <td colspan="4" style="background: #e6ecf5;"><span style="font-family: Arial Narrow;font-size: 14px;"><b>FIXED LIABILITY</b></span></td>
                   </tr>
                   <?php 
-                  for ($i=0; $i < count($liabilty); $i++) 
-                  { 
+                  $x = 19;
+                  $c = 19;
+                    foreach($addition_data as $group_heads) { 
+                      if($group_heads->group_id == 19 ){
                     ?>
-                      <tr>
-                        <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo strtoupper($liabilty[$i]->ledger_head) ?></td>
+                      <tr id="row-3-<?php echo $x ?>" class="parent-row">
+                          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a ></a>&nbsp;&nbsp;&nbsp;&nbsp;<b><?php echo $group_heads->group_name ?></b></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                      </tr>
+                      <?php for ($i=0; $i < count($liabilty); $i++) { 
+                          if($group_heads->group_id == $liabilty[$i]->group_id_fk){
+                    ?>
+                      <tr data-parent="row-3-<?php echo $c ?>">
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;<?php echo strtoupper($liabilty[$i]->ledger_head) ?></td>
                         <td></td>
                         <td><?php echo $liabilty[$i]->debit;$deb_total=$deb_total+$liabilty[$i]->debit; ?></td>
                         <td><?php echo $liabilty[$i]->credit;$cred_total=$cred_total+$liabilty[$i]->credit; ?></td>
                       </tr>
                     
                     <?php  
-                  } 
+                  } } }
+                  $x++;
+                  $c++;
+                }
                 }
                 if(! empty($currentliabilty))
                 {
@@ -195,18 +242,32 @@
                     <td colspan="4" style="background: #e6ecf5;"><span style="font-family: Arial Narrow;font-size: 14px;"><b>CURRENT LIABILITY</b></span></td>
                   </tr>
                   <?php 
-                  for ($i=0; $i < count($currentliabilty); $i++) 
-                  { 
+                   $x = 20;
+                   $c = 20;
+                    foreach($addition_data as $group_heads) { 
+                      if($group_heads->group_id == 20 || $group_heads->group_id == 21 ){
                     ?>
-                        <tr>
-                          <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo strtoupper($currentliabilty[$i]->ledger_head) ?></td>
+                        <tr id="row-4-<?php echo $x ?>" class="parent-row">
+                          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a ></a>&nbsp;&nbsp;&nbsp;&nbsp;<b><?php echo $group_heads->group_name ?></b></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                      </tr>
+                    <?php for ($i=0; $i < count($currentliabilty); $i++) {
+                      if($group_heads->group_id == $currentliabilty[$i]->group_id_fk){
+                        ?>
+                        <tr data-parent="row-4-<?php echo $c ?>">
+                          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;<?php echo strtoupper($currentliabilty[$i]->ledger_head) ?></td>
                           <td></td>
                           <td><?php echo $currentliabilty[$i]->debit;$deb_total=$deb_total+$currentliabilty[$i]->debit; ?></td>
                           <td><?php echo $currentliabilty[$i]->credit;$cred_total=$cred_total+$currentliabilty[$i]->credit; ?></td>
                         </tr>
                         
                     <?php  
-                  } 
+                  } } } 
+                  $x++;
+                  $c++;
+                }
                 }
                 if(! empty($direct_income))
                 {
@@ -215,18 +276,33 @@
                     <td colspan="4" style="background: #e6ecf5;"><span style="font-family: Arial Narrow;font-size: 14px;"><b>DIRECT INCOME</b></span></td>
                   </tr>
                   <?php 
-                  for ($i=0; $i < count($direct_income); $i++) 
-                  { 
+                   $x = 24;
+                   $c = 24;
+                     foreach($addition_data as $group_heads) { 
+                      if($group_heads->group_id == 24 || $group_heads->group_id == 25 ){
                     ?>
-                        <tr>
-                          <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo strtoupper($direct_income[$i]->ledger_head) ?></td>
+                        <tr id="row-5-<?php echo $x ?>" class="parent-row">
+                          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a ></a>&nbsp;&nbsp;&nbsp;&nbsp;<b><?php echo $group_heads->group_name ?></b></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                      </tr>
+                    <?php  for ($i=0; $i < count($direct_income); $i++) 
+                  { 
+                    if($group_heads->group_id == $direct_income[$i]->group_id_fk){
+                     ?>
+                        <tr data-parent="row-5-<?php echo $c ?>">
+                          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;<?php echo strtoupper($direct_income[$i]->ledger_head) ?></td>
                           <td></td>
                           <td><?php echo $direct_income[$i]->debit;$deb_total=$deb_total+$direct_income[$i]->debit; ?></td>
                           <td><?php echo $direct_income[$i]->credit;$cred_total=$cred_total+$direct_income[$i]->credit; ?></td>
                         </tr>
                         
                     <?php  
-                  } 
+                  } } } 
+                  $x++;
+                  $c++;
+                }
                 }
                 if(! empty($indirect_income))
                 {
@@ -235,17 +311,33 @@
                     <td colspan="4" style="background: #e6ecf5;"><span style="font-family: Arial Narrow;font-size: 14px;"><b>INDIRECT INCOME</b></span></td>
                   </tr>
                   <?php 
+                  $x = 26;
+                  $c = 26;
+                     foreach($addition_data as $group_heads) { 
+                      if($group_heads->group_id == 26 ){
+                    ?>
+                      <tr id="row-6-<?php echo $x ?>" class="parent-row">
+                          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a ></a>&nbsp;&nbsp;&nbsp;&nbsp;<b><?php echo $group_heads->group_name ?></b></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                      </tr>
+                  <?php 
                   for ($i=0; $i < count($indirect_income); $i++) 
                   { 
+                    if($group_heads->group_id == $indirect_income[$i]->group_id_fk){
                     ?>
-                        <tr>
-                          <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo strtoupper($indirect_income[$i]->ledger_head) ?></td>
+                        <tr data-parent="row-6-<?php echo $c ?>">
+                          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;<?php echo strtoupper($indirect_income[$i]->ledger_head) ?></td>
                           <td></td>
                           <td><?php echo $indirect_income[$i]->debit;$deb_total=$deb_total+$indirect_income[$i]->debit; ?></td>
                           <td><?php echo $indirect_income[$i]->credit;$cred_total=$cred_total+$indirect_income[$i]->credit; ?></td>
                         </tr>
                     <?php  
-                  } 
+                  } } } 
+                  $x++;
+                  $c++;
+                }
                 }
                 if(! empty($direct_exp))
                 {
@@ -254,18 +346,32 @@
                     <td colspan="4" style="background: #e6ecf5;"><span style="font-family: Arial Narrow;font-size: 14px;"><b>DIRECT EXPENSES</b></span></td>
                   </tr>
                   <?php 
-                  for ($i=0; $i < count($direct_exp); $i++) 
-                  { 
-                   
+                  $x = 27;
+                  $c = 27;
+                     foreach($addition_data as $group_heads) { 
+                      if($group_heads->group_id == 27 || $group_heads->group_id == 28 || $group_heads->group_id == 31 || $group_heads->group_id == 34 ){
                     ?>
-                        <tr>
-                          <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo strtoupper($direct_exp[$i]->ledger_head) ?></td>
+                      <tr id="row-7-<?php echo $x ?>" class="parent-row">
+                          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a ></a>&nbsp;&nbsp;&nbsp;&nbsp;<b><?php echo $group_heads->group_name ?></b></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                      </tr>
+                  <?php 
+                  for ($i=0; $i < count($direct_exp); $i++) {
+                    if($group_heads->group_id == $direct_exp[$i]->group_id_fk){
+                    ?>
+                        <tr data-parent="row-7-<?php echo $c ?>">
+                          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;<?php echo strtoupper($direct_exp[$i]->ledger_head) ?></td>
                           <td></td>
                           <td><?php echo $direct_exp[$i]->debit;$deb_total=$deb_total+$direct_exp[$i]->debit; ?></td>
                           <td><?php echo $direct_exp[$i]->credit;$cred_total=$cred_total+$direct_exp[$i]->credit; ?></td>
                         </tr>
                     <?php  
-                  }
+                  } } } 
+                  $x++;
+                  $c++;
+                }
                 }
                 if(! empty($indirect_exp))
                 {
@@ -274,28 +380,69 @@
                     <td colspan="4" style="background: #e6ecf5;"><span style="font-family: Arial Narrow;font-size: 14px;"><b>INDIRECT EXPENSES</b></span></td>
                   </tr>
                   <?php 
+                  $x = 29;
+                  $c = 29;
+                  foreach($addition_data as $group_heads) { 
+                      if($group_heads->group_id == 29 ){ ?>
+                      <tr id="row-8-<?php echo $x ?>" class="parent-row">
+                          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a ></a>&nbsp;&nbsp;&nbsp;&nbsp;<b><?php echo $group_heads->group_name ?></b></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                      </tr>
+                  <?php 
                   for ($i=0; $i < count($indirect_exp); $i++) 
                   { 
-                    
+                    if($group_heads->group_id == $indirect_exp[$i]->group_id_fk){
                     ?>
-                        <tr>
-                          <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo strtoupper($indirect_exp[$i]->ledger_head) ?></td>
+                        <tr data-parent="row-8-<?php echo $x ?>">
+                          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;<?php echo strtoupper($indirect_exp[$i]->ledger_head) ?></td>
                           <td></td>
                           <td><?php echo round($indirect_exp[$i]->debit,2);$deb_total=$deb_total+$indirect_exp[$i]->debit; ?></td>
                           <td><?php echo round($indirect_exp[$i]->credit,2);$cred_total=$cred_total+$indirect_exp[$i]->credit; ?></td>
                         </tr>
                     <?php  
-                  }
+                  } } } 
+                  $x++;
+                  $c++;
+                }
                 }
                 ?>
+                
+                <?php if($deb_total > $cred_total){ ?>
+                  <tr>
+                  <td colspan="4" style="background: #e6ecf5;"><span style="font-family: Arial Narrow;font-size: 14px;"><b>OPENING BALANCE DIFFERNCE <i class="fas fa-accessible-icon    "></i></b></span></td>
+                </tr>
+                <tr>
+                  <td>DIFFRENCE</td>
+                  <td></td>
+                  <td></td>
+                  <td><?php echo $differnce =$deb_total - $cred_total; ?></td>
+                </tr>
                 <tr>
                   <td></td>
                   <td></td>
                   <td><label><?php echo $deb_total; ?></label></td>
+                  <td><label><?php echo $deb_total; ?></label></td>
+                </tr>
+                <?php } else if($deb_total < $cred_total) { ?>
+                  <tr>
+                  <td colspan="4" style="background: #e6ecf5;"><span style="font-family: Arial Narrow;font-size: 14px;"><b>OPENING BALANCE DIFFERNCE <i class="fas fa-accessible-icon    "></i></b></span></td>
+                </tr>
+                <tr>
+                  <td>DIFFRENCE</td>
+                  <td></td>
+                  <td></td>
+                  <td><?php echo $differnce =$cred_total - $deb_total; ?></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td><label><?php echo $cred_total; ?></label></td>
                   <td><label><?php echo $cred_total; ?></label></td>
                 </tr>
                 <?php    
-              }
+              } }
               ?>
             </tbody>
           </table>
@@ -303,5 +450,22 @@
       </div>
     </section>
   </div>
+  <script>
+ function toggleRow(event) {
+  var rowId = event.currentTarget.id;
+  var children = document.querySelectorAll("[data-parent=" + rowId + "]")
+  children.forEach(function(row) {
+    if (row.classList.contains("expanded")) {
+      row.classList.remove("expanded");
+    } else {
+      row.classList.add("expanded");
+    }
+  });
+}
+
+var rows = document.querySelectorAll(".parent-row")
+rows.forEach(function(row) {
+  row.addEventListener("click", toggleRow);
+});
+  </script>
   
- 
