@@ -454,6 +454,7 @@ $(document).on("change",'#company',function()
             data:{cmp_id : cmp_id},
             success: function(data)
             {
+              console.log(data);
                 var response = '<option disabled="disabled" value="0" selected="selected">Select</option>';
                 for( var i = 0; i<data.length; i++)
                 {
