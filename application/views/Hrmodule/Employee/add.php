@@ -62,14 +62,14 @@
                   <div class="form-group">
                     <label for="size_name" class="col-sm-4 control-label">Phone</label>
                     <div class="col-sm-5">
-                      <input type="text"  required  class="form-control" name="employphone" id="custphone"  value="<?php if(isset($records->emp_phone)) echo $records->emp_phone ?>">
+                      <input type="tel"  required  class="form-control" name="employphone" id="custphone"  value="<?php if(isset($records->emp_phone)) echo $records->emp_phone ?>">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="size_name" class="col-sm-4 control-label">Email</label>
 
                     <div class="col-sm-5">
-                      <input type="text"  required  class="form-control" name="employemail" id="custemail"  value="<?php if(isset($records->emp_email)) echo $records->emp_email ?>">
+                      <input type="email"  required  class="form-control" name="employemail" id="custemail"  value="<?php if(isset($records->emp_email)) echo $records->emp_email ?>">
                     </div>
                   </div>
                   <div class="form-group">
@@ -98,7 +98,7 @@
                     <label for="size_name" class="col-sm-4 control-label">Basic Salary</label>
 
                     <div class="col-sm-5" >
-                      <input type="text"    class="form-control" name="employsalary" id="employsalary"  value="<?php if(isset($records->emp_salary)) echo $records->emp_salary ?>">
+                      <input type="number"    class="form-control" name="employsalary" id="employsalary"  value="<?php if(isset($records->emp_salary)) echo $records->emp_salary ?>">
                     </div>
                   </div>
                   
@@ -117,7 +117,7 @@
                     <label for="size_name" class="col-sm-4 control-label">Opening Balance</label>
 
                     <div class="col-sm-5">
-                      <input type="text"    class="form-control" name="old_balance2" id="old_balance2"  value="<?php if(isset($records->old_balance)) echo $records->old_balance ?>">
+                      <input type="number"    class="form-control" name="old_balance2" id="old_balance2"  value="<?php if(isset($records->old_balance)) echo $records->old_balance ?>">
                     </div>
                   </div>
 

@@ -74,21 +74,21 @@
                 <div class="form-group">
                   <label for="size_name" class="col-sm-4 control-label">Phone</label>
                   <div class="col-sm-5">
-                    <input type="text"  class="form-control" name="cust_phone" id="cust_phone"  value="<?php if(isset($records->custphone)) echo $records->custphone ?>">
+                    <input type="tel"  class="form-control" name="cust_phone" id="cust_phone"  value="<?php if(isset($records->custphone)) echo $records->custphone ?>">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="size_name" class="col-sm-4 control-label">Email</label>
 
                   <div class="col-sm-5">
-                    <input type="text" class="form-control" name="cust_email" id="cust_email"  value="<?php if(isset($records->custemail)) echo $records->custemail ?>">
+                    <input type="email" class="form-control" name="cust_email" id="cust_email"  value="<?php if(isset($records->custemail)) echo $records->custemail ?>">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="size_name" class="col-sm-4 control-label">Opening Balance</label>
 
                   <div class="col-sm-5">
-                    <input type="text"  class="form-control" name="old_balance" id="old_balance"  value="<?php if(isset($records->old_balance)) echo $records->old_balance ?>">
+                    <input type="number"  class="form-control" name="old_balance" id="old_balance"  value="<?php if(isset($records->old_balance)) echo $records->old_balance ?>">
                   </div>
                 </div>
                 <div class="form-group text-center">

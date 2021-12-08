@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 26, 2021 at 08:30 AM
+-- Generation Time: Dec 04, 2021 at 05:12 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.9
 
@@ -90,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `tbl_bank` (
   `bank_debit_credit` tinyint(10) NOT NULL,
   `bank_act_status` tinyint(4) NOT NULL COMMENT 'Active=0&InActive=1',
   PRIMARY KEY (`bank_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_bank`
@@ -102,7 +102,9 @@ INSERT INTO `tbl_bank` (`bank_id`, `bank_name`, `bank_accno`, `bank_branch`, `ba
 (4, 'A', '123', 'DSF', '123', 5, 1, 0, 1, 0, 0),
 (5, 'dsadas', '6546873123', 'waedasds', 'ADCV14412', 5, 1, 0, NULL, 1, 0),
 (7, 'ING Vysya Bank2323', '7894561230', 'Edapally', 'AQWL4758PQ', 6, 0, 0, NULL, 1, 0),
-(8, 'Bandhan Bank232', '7894561230', 'Kochi', 'CERT1234REW', 5, 1, 5000, NULL, 1, 0);
+(8, 'Bandhan Bank232', '7894561230', 'Kochi', 'CERT1234REW', 5, 1, 5000, NULL, 1, 0),
+(9, 'canara', '7865786786', 'kochin', 'CNRB0007852', 5, 1, 5000, NULL, 0, 0),
+(10, 'HRSF Bank', '7418529630', 'KER0934EL', 'HRSF1000SB', 5, 0, 20000, NULL, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -232,25 +234,29 @@ CREATE TABLE IF NOT EXISTS `tbl_customer` (
   `cust_pcategory` int(11) NOT NULL,
   `debit_credit` int(11) NOT NULL,
   `cust_act_status` tinyint(4) NOT NULL COMMENT 'Active=0&InActive=1',
-  `cust_is_salary` tinyint(4) NOT NULL,
+  `cust_is_supplier` tinyint(4) NOT NULL,
   PRIMARY KEY (`cust_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_customer`
 --
 
-INSERT INTO `tbl_customer` (`cust_id`, `company_id`, `custname`, `custaddress`, `custphone`, `custemail`, `old_balance`, `custstatus`, `cust_pcategory`, `debit_credit`, `cust_act_status`, `cust_is_salary`) VALUES
+INSERT INTO `tbl_customer` (`cust_id`, `company_id`, `custname`, `custaddress`, `custphone`, `custemail`, `old_balance`, `custstatus`, `cust_pcategory`, `debit_credit`, `cust_act_status`, `cust_is_supplier`) VALUES
 (5, 5, 'Sneha', 'gdgbd', 8484984, 'cust@gmail.com', -5615.5, 1, 1, 0, 0, 0),
 (6, 6, 'nicemon', 'dsgg', 84849, 'cust1@gmail.com', 10000, 1, 11, 0, 0, 0),
 (7, 5, 'preethi', 'gdfgh', 8484984, 'cust@gmail.com', 5000, 0, 10, 0, 0, 0),
 (8, 5, 'ashkar', 'dsagfdg', 8484984, 'cust@gmail.com', 2000, 0, 11, 0, 0, 0),
 (9, 6, 'preethi', 'asd dsafs', 84849844234, 'customer@gmail.com', 500, 1, 2, 0, 0, 0),
 (10, 6, 'Ajith', 'kkm', 8484984, 'cust@gmail.com', 1000, 1, 2, 0, 0, 0),
-(11, 5, 'Rajnikanth', 'Chenkottil, Kerala', 9876543210, 'repx@hexa.com', -120910.22, 1, 1, 0, 0, 0),
+(11, 5, 'Rajnikanth', 'Chenkottil, Kerala', 9876543210, 'repx@hexa.com', -128791.95899999999, 1, 1, 0, 0, 0),
 (12, 6, 'Mukesh456789', 'poverty', 7894561230, 'help2@help.com', 200000, 0, 1, 0, 0, 0),
 (13, 6, 'JISHNU', 'TESTADDRESS', 8089706022, 'TEST@GMAIL.COM', 120, 1, 1, 1, 0, 0),
-(14, 8, 'Jetin', 'aasdasdasd', 7845128956, 'ra@gh.com', 78945, 1, 1, 0, 0, 0);
+(14, 8, 'Jetin', 'aasdasdasd', 7845128956, 'ra@gh.com', 78945, 1, 1, 0, 0, 0),
+(15, 8, 'Nithin Jijo', 'asdasdd', 987654321, 'rajeev654@gamil.com', 2000, 1, 4, 0, 0, 0),
+(16, 8, 'NEETA', 'asdasd', 9874561230, 'rajeev654@gamil.com', 585, 0, 4, 1, 0, 0),
+(17, 6, 'Rajeesh Raghavan', 'kochi', 12345, 'rajeesh@her.com', 50002332, 1, 1, 0, 0, 1),
+(18, 5, 'loso', 'hello', 9874563210, 'rajeev@gr.com', 7000, 0, 1, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -266,7 +272,7 @@ CREATE TABLE IF NOT EXISTS `tbl_empabsent` (
   `emp_id` int(11) NOT NULL,
   `absent_status` int(11) NOT NULL,
   PRIMARY KEY (`absent_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=107 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=116 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_empabsent`
@@ -318,7 +324,16 @@ INSERT INTO `tbl_empabsent` (`absent_id`, `absent_date`, `month`, `emp_id`, `abs
 (103, '2021-11-09', 11, 7, 1),
 (104, '2021-11-09', 11, 3, 1),
 (105, '2021-11-09', 11, 8, 1),
-(106, '2021-11-09', 11, 2, 1);
+(106, '2021-11-09', 11, 2, 1),
+(107, '2021-12-04', 12, 28, 1),
+(108, '2021-12-04', 12, 26, 1),
+(109, '2021-12-04', 12, 24, 1),
+(110, '2021-12-04', 12, 25, 1),
+(111, '2021-12-04', 12, 27, 1),
+(112, '2021-12-04', 12, 13, 1),
+(113, '2021-12-04', 12, 12, 1),
+(114, '2021-12-04', 12, 11, 1),
+(115, '2021-12-04', 12, 10, 1);
 
 -- --------------------------------------------------------
 
@@ -334,30 +349,25 @@ CREATE TABLE IF NOT EXISTS `tbl_empattendance` (
   `emp_id` int(11) NOT NULL,
   `att_status` tinyint(1) NOT NULL,
   PRIMARY KEY (`att_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=117 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_empattendance`
 --
 
 INSERT INTO `tbl_empattendance` (`att_id`, `att_date`, `month`, `emp_id`, `att_status`) VALUES
-(58, '2021-11-03', 11, 11, 1),
-(59, '2021-11-04', 11, 11, 1),
-(60, '2021-11-05', 11, 11, 1),
-(61, '2021-11-02', 11, 11, 1),
-(62, '2021-11-10', 11, 11, 1),
-(63, '2021-11-08', 11, 11, 1),
-(64, '2021-11-01', 11, 11, 1),
-(65, '2021-11-11', 11, 11, 1),
-(66, '2021-10-06', 10, 12, 1),
-(67, '2021-10-11', 10, 12, 1),
-(68, '2021-10-08', 10, 12, 1),
-(69, '2021-10-12', 10, 12, 1),
-(70, '2021-10-13', 10, 12, 1),
-(71, '2021-10-09', 10, 12, 1),
-(72, '2021-10-15', 10, 12, 1),
-(73, '2021-10-14', 10, 12, 1),
-(74, '2021-10-07', 10, 12, 1);
+(105, '2021-11-05', 11, 25, 1),
+(106, '2021-11-15', 11, 25, 1),
+(107, '2021-11-11', 11, 25, 1),
+(108, '2021-11-03', 11, 25, 1),
+(109, '2021-11-09', 11, 25, 1),
+(110, '2021-11-01', 11, 25, 1),
+(111, '2021-11-17', 11, 25, 1),
+(112, '2021-11-19', 11, 25, 1),
+(113, '2021-12-04', 12, 29, 1),
+(114, '2021-11-25', 11, 29, 1),
+(115, '2021-11-01', 11, 29, 1),
+(116, '2021-11-10', 11, 29, 1);
 
 -- --------------------------------------------------------
 
@@ -381,7 +391,7 @@ CREATE TABLE IF NOT EXISTS `tbl_employee` (
   `emp_act_status` tinyint(4) NOT NULL,
   `emp_status` int(11) NOT NULL,
   PRIMARY KEY (`emp_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_employee`
@@ -403,7 +413,11 @@ INSERT INTO `tbl_employee` (`emp_id`, `company_id`, `emp_name`, `emp_address`, `
 (13, 6, 'Nithya', '  ernakulam    ', 77878854, 'r@e.com', '2021-01-10', 1, 10000, 0, 1000, 0, 1),
 (23, 8, 'Ricardo', '     Munich,Germany       ', 7894561230, 'lafamila@gmail.com', '2021-10-04', 2, 0, 0, 10, 0, 0),
 (24, 5, 'rdr', '  hjgfh', 8773542, 'ss@ss.com', '2021-10-11', 2, 0, 0, 4, 0, 1),
-(25, 5, 'asd', '  asdasd', 5465421, 'ds@sd.com', '2021-08-11', 2, 0, 0, 1212, 0, 1);
+(25, 5, 'asd', '  asdasd', 5465421, 'ds@sd.com', '2021-08-11', 2, 0, 0, 1212, 0, 1),
+(26, 5, 'Lashim', '  asddasdasd', 9639639631, 'rajeev654@gamil.com', '2021-07-10', 0, 500, 0, 2000, 0, 1),
+(27, 5, 'kailash', 'herbo', 7417418520, 'rajeev654@gamil.com', '2021-04-12', 0, 600, 0, 6000, 0, 1),
+(28, 5, 'xxxten', '  asds', 7897897890, 'rajeev654@gamil.com', '2021-04-12', 1, 1000, 0, 2000, 0, 1),
+(29, 5, 'Akhilesh', '    hermies  ', 7891234560, 'rajeev654@gamil.com', '2021-04-12', 2, 2000, 1, 5000, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -415,22 +429,23 @@ DROP TABLE IF EXISTS `tbl_emp_peice_rate_pay`;
 CREATE TABLE IF NOT EXISTS `tbl_emp_peice_rate_pay` (
   `emp_pr_pay_id` int(10) NOT NULL AUTO_INCREMENT,
   `emp_fk` int(10) NOT NULL,
-  `emp_pr_pay_total` double NOT NULL,
-  `emp_pr_pay_advance` double NOT NULL,
-  `emp_pr_net_bal` double NOT NULL,
-  `emp_pr_paid_amt` double NOT NULL,
-  `emp_pr_pay_balance` double NOT NULL,
-  `emp_pr_pay_date` date NOT NULL,
+  `emp_pr_pay_total` double DEFAULT NULL,
+  `emp_pr_pay_advance` double DEFAULT NULL,
+  `emp_pr_net_bal` double DEFAULT NULL,
+  `emp_pr_paid_amt` double DEFAULT NULL,
+  `emp_pr_pay_balance` double DEFAULT NULL,
+  `emp_pr_pay_date` date DEFAULT NULL,
   `emp_pr_pay_status` tinyint(4) NOT NULL,
   PRIMARY KEY (`emp_pr_pay_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_emp_peice_rate_pay`
 --
 
 INSERT INTO `tbl_emp_peice_rate_pay` (`emp_pr_pay_id`, `emp_fk`, `emp_pr_pay_total`, `emp_pr_pay_advance`, `emp_pr_net_bal`, `emp_pr_paid_amt`, `emp_pr_pay_balance`, `emp_pr_pay_date`, `emp_pr_pay_status`) VALUES
-(6, 24, 29000, 2000, 27000, 25000, 2000, '0000-00-00', 1);
+(21, 29, 7900, 200, 7700, 3000, 4700, '2021-12-04', 0),
+(20, 29, 6500, 3000, 3500, 500, 3000, '2021-12-04', 0);
 
 -- --------------------------------------------------------
 
@@ -447,15 +462,17 @@ CREATE TABLE IF NOT EXISTS `tbl_emp_piece_rate` (
   `emp_pr_rate` double DEFAULT NULL,
   `emp_pr_status` tinyint(4) NOT NULL,
   PRIMARY KEY (`emp_pr_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=50 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_emp_piece_rate`
 --
 
 INSERT INTO `tbl_emp_piece_rate` (`emp_pr_id`, `emp_pr_fk`, `emp_pr_item`, `emp_pr_kg_pcs`, `emp_pr_rate`, `emp_pr_status`) VALUES
-(24, 24, 'Aluminium', 50, 500, 1),
-(23, 24, 'Steel', 20, 200, 1);
+(49, 29, 'mason', 50, 90, 0),
+(48, 29, 'mason', 50, 68, 0),
+(47, 29, 'mason', 50, 62, 0),
+(46, 29, 'carpet', 50, 68, 0);
 
 -- --------------------------------------------------------
 
@@ -499,7 +516,7 @@ CREATE TABLE IF NOT EXISTS `tbl_groups` (
   `default` int(11) NOT NULL COMMENT '1=default',
   `group_parent_id` int(11) NOT NULL,
   PRIMARY KEY (`group_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_groups`
@@ -537,7 +554,10 @@ INSERT INTO `tbl_groups` (`group_id`, `group_name`, `group_desc`, `group_status`
 (30, 'OPENING STOCK', '', 1, 4, 0, 0),
 (31, 'OPENING STOCK', '', 1, 4, 0, 10),
 (32, 'CURRENT ASSET', 'CURRENT ASSET DESCRIPTION', 0, 1, 0, 0),
-(33, 'SUNDRY DEBTORS', 'SUNDRY DEBTORS DESCRIPTION', 1, 1, 1, 1);
+(33, 'SUNDRY DEBTORS', 'SUNDRY DEBTORS DESCRIPTION', 1, 1, 1, 1),
+(34, 'SALARY', 'SALARY OF EMPLOYESS', 1, 4, 1, 11),
+(35, 'WAGES', 'WAGES OF EMPLOYEE', 1, 4, 1, 10),
+(36, 'PIECE RATE', 'PIECE RATE EMPLOYEE', 1, 4, 1, 10);
 
 -- --------------------------------------------------------
 
@@ -596,7 +616,7 @@ CREATE TABLE IF NOT EXISTS `tbl_ledgerbalance` (
   `debit_credit` int(11) NOT NULL COMMENT '1=debit 2=credit',
   `ledgerbalance_status` int(11) NOT NULL,
   PRIMARY KEY (`led_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_ledgerbalance`
@@ -635,7 +655,11 @@ INSERT INTO `tbl_ledgerbalance` (`led_id`, `company_id_fk`, `ledgerhead_id_fk`, 
 (30, 5, 9, '2021-07-19', 2000, 1, 1),
 (31, 5, 16, '2021-10-20', 20000, 1, 0),
 (32, 5, 17, '2021-10-20', 3000000, 1, 1),
-(33, 5, 24, '2021-10-24', 200, 2, 1);
+(33, 5, 24, '2021-10-24', 200, 2, 1),
+(34, 5, 63, '2021-12-02', 800000, 1, 1),
+(35, 8, 65, '2021-12-02', 585, 2, 0),
+(36, 6, 66, '2021-12-03', 50002332, 1, 1),
+(37, 5, 67, '2021-12-03', 7000, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -655,59 +679,84 @@ CREATE TABLE IF NOT EXISTS `tbl_ledgerhead` (
   `company_id_fk` int(11) NOT NULL,
   `sale_id_fk` int(11) DEFAULT NULL,
   `purchase_fk_id` int(11) DEFAULT NULL,
-  `ledger_default` tinyint(4) NOT NULL,
+  `ledger_default` tinyint(4) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`ledgerhead_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_ledgerhead`
 --
 
-INSERT INTO `tbl_ledgerhead` (`ledgerhead_id`, `group_id_fk`, `ledger_head`, `ledgerhead_desc`, `opening_bal`, `debit_or_credit`, `ledgerhead_status`, `company_id_fk`, `sale_id_fk`, `purchase_fk_id`, `ledger_default`) VALUES
-(1, 31, 'OPENING STOCK', '', 50000, 2, 1, 5, NULL, NULL, 0),
-(2, 14, 'CLOSING STOCK', '', 60000, 1, 0, 5, NULL, NULL, 0),
-(3, 13, 'CASH IN HAND', '', 30000, 1, 1, 5, NULL, NULL, 0),
-(4, 12, 'FEDERAL BANK', '', 20000, 1, 1, 5, NULL, NULL, 0),
-(5, 15, 'ALIF', '', 3000, 1, 1, 5, NULL, NULL, 0),
-(6, 21, 'IDEAL', '', 5000, 2, 1, 5, NULL, NULL, 0),
-(7, 25, 'FRIGHT@SALES', '', 0, 1, 1, 5, NULL, NULL, 0),
-(8, 27, 'FRIEGHT@PUR', '', 0, 2, 1, 5, NULL, NULL, 0),
-(9, 26, 'COMMISSION', '', 0, 1, 1, 5, NULL, NULL, 0),
-(10, 29, 'SALARY', '', 0, 2, 1, 5, NULL, NULL, 0),
-(11, 27, 'WAGES', '', 0, 2, 1, 5, NULL, NULL, 0),
-(12, 17, 'COMPUTER', '', 10000, 1, 1, 5, NULL, NULL, 0),
-(13, 19, 'PARTNER1', '', 10000, 2, 1, 5, NULL, NULL, 0),
-(14, 14, 'CLOSING STOCK', '', 50000, 1, 1, 5, NULL, NULL, 0),
-(15, 29, 'ELECTRICITY CHARGES', '', 0, 2, 1, 5, NULL, NULL, 0),
-(16, 15, 'RAJEEV', 'BUSINESS PERSON', 20000, 2, 0, 5, NULL, NULL, 0),
-(17, 15, 'JISHNU', 'Business person', 3000000, 2, 1, 5, NULL, NULL, 0),
-(18, 15, 'Rajnikanth', 'Customer', 0, 2, 1, 5, NULL, NULL, 0),
-(19, 15, 'Mukesh456789', 'Customer', 0, 2, 0, 6, NULL, NULL, 0),
-(21, 21, 'Aroma Supplierswrtfwertwer', 'Supplier', 0, 0, 0, 6, NULL, NULL, 0),
-(22, 15, 'JISHNU', 'Customer', 0, 0, 1, 6, NULL, NULL, 0),
-(23, 21, 'ABHI', 'Supplier', 0, 1, 1, 5, NULL, NULL, 0),
-(24, 27, 'TAX @ PURCHASE', 'TEST', 200, 1, 1, 5, NULL, NULL, 0),
-(25, 12, '', 'Bank', 0, 0, 0, 6, NULL, NULL, 0),
-(26, 12, 'ING Vysya Bank2323', 'Bank', 0, 2, 0, 6, NULL, NULL, 0),
-(27, 27, 'Sachin Tendulkar 333', 'Employee', 6000, 1, 1, 5, NULL, NULL, 0),
-(28, 29, 'Viajy', 'Employee', 2000, 1, 1, 5, NULL, NULL, 0),
-(29, 27, 'innocent', 'Employee', 6000, 2, 1, 5, NULL, NULL, 0),
-(30, 12, 'Bandhan Bank232', 'Bank', 5000, 2, 1, 5, NULL, NULL, 0),
-(31, 29, 'Akhilesh', 'Employee', 2522, 1, 1, 6, NULL, NULL, 0),
-(32, 29, 'Aron Yates', 'Employee', 2000, 1, 1, 8, NULL, NULL, 0),
-(33, 27, 'Patrick Mahomes', 'Employee', 100, 1, 1, 8, NULL, NULL, 0),
-(34, 29, 'Nithya', 'Employee', 1000, 1, 1, 6, NULL, NULL, 0),
-(35, 29, 'Mr.Bean', 'Employee', 100, 1, 1, 8, NULL, NULL, 0),
-(36, 29, 'Carlos', 'Employee', 1000, 1, 1, 8, NULL, NULL, 0),
-(37, 29, 'Ricardo', 'Employee', 10, 1, 0, 8, NULL, NULL, 0),
-(38, 29, 'rdr', 'Employee', 4, 1, 1, 5, NULL, NULL, 0),
-(39, 21, 'Hello Mas', 'Supplier', 0, 1, 0, 8, NULL, NULL, 0),
-(40, 21, 'Hello Mas', 'Supplier', 7845, 1, 1, 8, NULL, NULL, 0),
-(41, 15, 'Jetin', 'Customer', 78945, 1, 1, 8, NULL, NULL, 1),
-(42, 29, 'asd', 'Employee', 1212, 1, 1, 5, NULL, NULL, 0),
-(49, 27, 'Round_off@Purchase', 'Round Off Purchase', 0.2000000000007276, 1, 1, 5, NULL, 1221, 0),
-(50, 27, 'Round_off@Sale', 'Round off Sale', 0.2000000000007276, 1, 1, 5, 3, NULL, 0),
-(52, 27, 'Round_off@Sale', 'Round off Sale', 0.4599999999991269, 1, 1, 5, 1, NULL, 0);
+INSERT INTO `tbl_ledgerhead` (`ledgerhead_id`, `group_id_fk`, `ledger_head`, `ledgerhead_desc`, `opening_bal`, `debit_or_credit`, `ledgerhead_status`, `company_id_fk`, `sale_id_fk`, `purchase_fk_id`, `ledger_default`, `created_at`, `updated_at`) VALUES
+(1, 31, 'OPENING STOCK', '', 50000, 2, 1, 5, NULL, NULL, 0, NULL, NULL),
+(2, 14, 'CLOSING STOCK', '', 60000, 1, 0, 5, NULL, NULL, 0, NULL, NULL),
+(3, 13, 'CASH IN HAND', '', 30000, 1, 1, 5, NULL, NULL, 0, NULL, NULL),
+(4, 12, 'FEDERAL BANK', '', 20000, 1, 1, 5, NULL, NULL, 0, NULL, NULL),
+(5, 15, 'ALIF', '', 3000, 1, 1, 5, NULL, NULL, 0, NULL, NULL),
+(6, 21, 'IDEAL', '', 5000, 2, 1, 5, NULL, NULL, 0, NULL, NULL),
+(7, 25, 'FRIGHT@SALES', '', 0, 1, 1, 5, NULL, NULL, 0, NULL, NULL),
+(8, 27, 'FRIEGHT@PUR', '', 0, 2, 1, 5, NULL, NULL, 0, NULL, NULL),
+(9, 26, 'COMMISSION', '', 0, 1, 1, 5, NULL, NULL, 0, NULL, NULL),
+(10, 29, 'SALARY', '', 0, 2, 1, 5, NULL, NULL, 0, NULL, NULL),
+(11, 27, 'WAGES', '', 0, 2, 1, 5, NULL, NULL, 0, NULL, NULL),
+(12, 17, 'COMPUTER', '', 10000, 1, 1, 5, NULL, NULL, 0, NULL, NULL),
+(13, 19, 'PARTNER1', '', 10000, 2, 1, 5, NULL, NULL, 0, NULL, NULL),
+(14, 14, 'CLOSING STOCK', '', 50000, 1, 1, 5, NULL, NULL, 0, NULL, NULL),
+(15, 29, 'ELECTRICITY CHARGES', '', 0, 2, 1, 5, NULL, NULL, 0, NULL, NULL),
+(16, 15, 'RAJEEV', 'BUSINESS PERSON', 20000, 2, 0, 5, NULL, NULL, 0, NULL, NULL),
+(17, 15, 'JISHNU', 'Business person', 3000000, 2, 1, 5, NULL, NULL, 0, NULL, NULL),
+(18, 15, 'Rajnikanth', 'Customer', -120910.22, 1, 1, 5, NULL, NULL, 0, NULL, NULL),
+(19, 15, 'Mukesh456789', 'Customer', 0, 2, 0, 6, NULL, NULL, 0, NULL, NULL),
+(21, 21, 'Aroma Supplierswrtfwertwer', 'Supplier', 0, 0, 0, 6, NULL, NULL, 0, NULL, NULL),
+(22, 15, 'JISHNU', 'Customer', 0, 0, 1, 6, NULL, NULL, 0, NULL, NULL),
+(23, 21, 'ABHI', 'Supplier', 0, 1, 1, 5, NULL, NULL, 0, NULL, NULL),
+(24, 27, 'TAX @ PURCHASE', 'TEST', 200, 1, 1, 5, NULL, NULL, 0, NULL, NULL),
+(25, 12, '', 'Bank', 0, 0, 0, 6, NULL, NULL, 0, NULL, NULL),
+(26, 12, 'ING Vysya Bank2323', 'Bank', 0, 2, 0, 6, NULL, NULL, 0, NULL, NULL),
+(27, 27, 'Sachin Tendulkar 333', 'Employee', 6000, 1, 1, 5, NULL, NULL, 0, NULL, NULL),
+(28, 29, 'Viajy', 'Employee', 2000, 1, 1, 5, NULL, NULL, 0, NULL, NULL),
+(29, 27, 'innocent', 'Employee', 6000, 2, 1, 5, NULL, NULL, 0, NULL, NULL),
+(30, 12, 'Bandhan Bank232', 'Bank', 5000, 2, 1, 5, NULL, NULL, 0, NULL, NULL),
+(31, 27, 'Akhilesh', 'Peice Rate Employee', 4700, 2, 0, 0, NULL, NULL, 0, '2021-12-04 15:03:50', '2021-12-04 15:25:07'),
+(32, 29, 'Aron Yates', 'Employee', 2000, 1, 1, 8, NULL, NULL, 0, NULL, NULL),
+(33, 27, 'Patrick Mahomes', 'Employee', 100, 1, 1, 8, NULL, NULL, 0, NULL, NULL),
+(34, 29, 'Nithya', 'Employee', 1000, 1, 1, 6, NULL, NULL, 0, NULL, NULL),
+(35, 29, 'Mr.Bean', 'Employee', 100, 1, 1, 8, NULL, NULL, 0, NULL, NULL),
+(36, 29, 'Carlos', 'Employee', 1000, 1, 1, 8, NULL, NULL, 0, NULL, NULL),
+(37, 29, 'Ricardo', 'Employee', 10, 1, 0, 8, NULL, NULL, 0, NULL, NULL),
+(38, 27, 'rdr', 'Peice Rate Employee', 2000, 2, 1, 0, NULL, NULL, 0, NULL, NULL),
+(39, 21, 'Hello Mas', 'Supplier', 0, 1, 0, 8, NULL, NULL, 0, NULL, NULL),
+(40, 21, 'Hello Mas', 'Supplier', 7845, 1, 1, 8, NULL, NULL, 0, NULL, NULL),
+(41, 15, 'Jetin', 'Customer', 78945, 1, 1, 8, NULL, NULL, 1, NULL, NULL),
+(42, 29, 'asd', 'Employee', 1212, 1, 1, 5, NULL, NULL, 0, NULL, NULL),
+(53, 29, 'Round_off@Purchase', 'Round Off Purchase', 0.3999999999996362, 1, 0, 5, NULL, 3, 0, NULL, NULL),
+(54, 29, 'Round_off@Purchase', 'Round Off Purchase', 0.19999999999708962, 2, 0, 5, NULL, 4, 0, NULL, NULL),
+(55, 29, 'Round_off@Purchase', 'Round Off Purchase', 0.8000000000029104, 1, 1, 5, NULL, 5, 0, NULL, NULL),
+(56, 29, 'Round_off@Sale', 'Round off Sale', 0.5999999999985448, 1, 0, 5, 2, NULL, 0, NULL, NULL),
+(57, 29, 'Round_off@Sale', 'Round off Sale', 0.3999999999996362, 2, 0, 5, 5, NULL, 0, NULL, NULL),
+(58, 29, 'Round_off@Sale', 'Round off Sale', 0.39999999999964, 1, 0, 5, 6, NULL, 0, NULL, NULL),
+(59, 29, 'Round_off@Sale', 'Round off Sale', 0.1999999999998181, 2, 0, 5, 7, NULL, 0, NULL, NULL),
+(60, 29, 'Round_off@Sale', 'Round off Sale', 0.20000000000073, 1, 0, 5, 8, NULL, 0, NULL, NULL),
+(61, 29, 'Round_off@Sale', 'Round off Sale', 0.079000000000001, 1, 1, 5, 9, NULL, 0, NULL, NULL),
+(62, 29, 'Round_off@Sale', 'Round off Sale', 0.19999999999982, 1, 1, 5, 10, NULL, 0, NULL, NULL),
+(63, 12, 'HDBC BANK NY', 'Business Account', 800000, 1, 1, 5, NULL, NULL, 0, '2021-12-03 06:22:18', NULL),
+(64, 15, 'Nithin Jijo', 'Customer', 2000, 1, 1, 8, NULL, NULL, NULL, '2021-12-03 06:35:48', NULL),
+(65, 15, 'NEETA', 'Customer', 585, 2, 0, 8, NULL, NULL, NULL, '2021-12-03 07:00:24', NULL),
+(66, 15, 'Rajeesh Raghavan', 'Customer', 50002332, 1, 1, 6, NULL, NULL, NULL, '2021-12-04 11:56:52', '2021-12-04 12:05:12'),
+(67, 15, 'loso', 'Customer', 7000, 1, 0, 5, NULL, NULL, NULL, '2021-12-04 12:01:24', '2021-12-04 12:01:24'),
+(68, 21, 'Karolin', 'Supplier', 5000, 1, 0, 5, NULL, NULL, 1, '2021-12-04 12:08:37', '2021-12-04 12:16:11'),
+(69, 21, 'Karolin', 'Supplier', 8500, 1, 0, 5, NULL, NULL, 1, '2021-12-04 12:09:17', '2021-12-04 12:16:11'),
+(70, 21, 'Karolin', 'Supplier', 6000, 1, 0, 5, NULL, NULL, 1, '2021-12-04 12:11:26', '2021-12-04 12:16:11'),
+(71, 21, 'Karolin', 'Supplier', 7410, 1, 0, 5, NULL, NULL, 1, '2021-12-04 12:12:57', '2021-12-04 12:16:11'),
+(72, 21, 'Joseph Stalin', 'Supplier', 78000, 2, 1, 5, NULL, NULL, 1, '2021-12-04 12:18:19', '2021-12-04 12:18:27'),
+(73, 12, 'HRSF Bank', 'Bank', 20000, 1, 0, 5, NULL, NULL, 0, '2021-12-04 12:22:42', '2021-12-04 12:24:12'),
+(74, 35, 'kailash', 'Employee', 6000, 1, 1, 5, NULL, NULL, NULL, '2021-12-04 12:47:01', '2021-12-04 12:47:01'),
+(75, 36, 'xxxten', 'Employee', 2000, 1, 1, 5, NULL, NULL, NULL, '2021-12-04 12:47:40', '2021-12-04 12:47:40'),
+(76, 27, 'Akhilesh', 'Peice Rate Employee', 4700, 2, 0, 0, NULL, NULL, 0, '2021-12-04 15:03:50', '2021-12-04 15:25:07'),
+(77, 27, 'Akhilesh', 'Peice Rate Employee', 4700, 2, 0, 0, NULL, NULL, 0, '2021-12-04 15:03:50', '2021-12-04 15:25:07'),
+(78, 27, 'Akhilesh', 'Peice Rate Employee', 4700, 2, 0, 0, NULL, NULL, 0, '2021-12-04 15:22:30', '2021-12-04 15:25:07');
 
 -- --------------------------------------------------------
 
@@ -755,14 +804,14 @@ CREATE TABLE IF NOT EXISTS `tbl_openingstock` (
   `opening_status` int(11) NOT NULL,
   `finyr` int(11) NOT NULL,
   PRIMARY KEY (`opening_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_openingstock`
 --
 
 INSERT INTO `tbl_openingstock` (`opening_id`, `company_id`, `item_id`, `stock`, `opening_status`, `finyr`) VALUES
-(1, 5, 1, 10, 1, 3),
+(1, 5, 1, 5000, 1, 3),
 (2, 5, 2, 10, 1, 3),
 (3, 5, 3, 10, 1, 3),
 (4, 5, 4, 1000, 1, 3),
@@ -773,7 +822,8 @@ INSERT INTO `tbl_openingstock` (`opening_id`, `company_id`, `item_id`, `stock`, 
 (55, 5, 65, 0, 1, 3),
 (56, 5, 66, 0, 1, 3),
 (57, 6, 67, 1000, 1, 3),
-(58, 5, 68, 100, 1, 3);
+(58, 5, 68, 100, 1, 3),
+(59, 5, 69, 100, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -878,7 +928,7 @@ CREATE TABLE IF NOT EXISTS `tbl_pricelist` (
   `company_id` int(11) NOT NULL,
   `price_status` int(11) NOT NULL,
   PRIMARY KEY (`price_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=129 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=133 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_pricelist`
@@ -888,7 +938,7 @@ INSERT INTO `tbl_pricelist` (`price_id`, `item_id`, `pcategory_id`, `item_price`
 (1, 1, 1, 100, 5, 1),
 (2, 1, 2, 200, 5, 1),
 (3, 1, 3, 300, 5, 1),
-(4, 1, 4, 400, 5, 1),
+(4, 1, 4, 4007, 5, 1),
 (5, 2, 1, 10, 5, 0),
 (6, 2, 2, 20, 5, 0),
 (7, 2, 3, 30, 5, 0),
@@ -948,7 +998,11 @@ INSERT INTO `tbl_pricelist` (`price_id`, `item_id`, `pcategory_id`, `item_price`
 (125, 68, 1, 200, 5, 1),
 (126, 68, 2, 200, 5, 1),
 (127, 68, 3, 300, 5, 1),
-(128, 68, 4, 500, 5, 1);
+(128, 68, 4, 500, 5, 1),
+(129, 69, 1, 100, 5, 1),
+(130, 69, 2, 200, 5, 1),
+(131, 69, 3, 300, 5, 1),
+(132, 69, 4, 400, 5, 1);
 
 -- --------------------------------------------------------
 
@@ -974,14 +1028,14 @@ CREATE TABLE IF NOT EXISTS `tbl_product` (
   `company_id` int(11) NOT NULL,
   `active_status` int(11) NOT NULL DEFAULT 1 COMMENT '(1=active,0=desabled)',
   PRIMARY KEY (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_product`
 --
 
 INSERT INTO `tbl_product` (`product_id`, `supplier_id`, `maincategory_id`, `subcategory_id`, `product_code`, `product_name`, `product_unit`, `product_description`, `min_stock`, `product_status`, `product_type`, `goods_or_service`, `product_remark`, `company_id`, `active_status`) VALUES
-(1, 1, 5, 1, 'code1', 'Acer Display', '2', 'ADFHDF', 5, 1, 'RM', 0, NULL, 5, 1),
+(1, 1, 5, 1, 'code1', 'Acer Display', '2', 'ADFHDF', 5, 1, 'RM', 0, '5', 5, 1),
 (2, 0, 5, 1, 'mp1', 'cover', '2', 'ghdfgh ggds', 10, 0, 'MP', 0, NULL, 5, 1),
 (3, 0, 5, 1, 'mp22', 'Galaxyy', '2', 'trhyfh ', 15, 1, 'MP', 0, NULL, 5, 1),
 (4, 1, 5, 1, 'code2', 'abc', '2', 'rehfeh', 1500, 1, 'RM', 0, NULL, 5, 1),
@@ -996,7 +1050,8 @@ INSERT INTO `tbl_product` (`product_id`, `supplier_id`, `maincategory_id`, `subc
 (65, 1, 6, 1, 'code23', 'Sonos Soundbar', '', 'Soundbar', 0, 1, 'RM', 0, NULL, 5, 1),
 (66, 1, 6, 1, 'code24', 'Levis Jeans', '', 'Mens Jeans', 0, 1, 'RM', 0, NULL, 5, 1),
 (67, 3, 5, 1, 'mp1', 'Acer Display', '3', 'adasd', 1500, 1, 'RM', 1, NULL, 6, 1),
-(68, 4, 5, 1, 'MARK45', 'Reno', '3', 'wdasdasdsad', 10, 1, 'RM', 1, 'helloasdasdasdasdsad', 5, 1);
+(68, 4, 5, 1, 'MARK45', 'Reno', '3', 'wdasdasdsad', 10, 1, 'RM', 1, 'helloasdasdasdasdsad', 5, 1),
+(69, 4, 5, 1, 'code1657', 'hamburger', '2', '12345', 10, 1, 'RM', 0, 'helloasdasdasdasdsad', 5, 1);
 
 -- --------------------------------------------------------
 
@@ -1103,7 +1158,7 @@ CREATE TABLE IF NOT EXISTS `tbl_profit` (
 --
 
 INSERT INTO `tbl_profit` (`id`, `cmp_id_fk`, `amount`, `profit_loss`, `fin_year`) VALUES
-(1, 5, 40583, 1, 3),
+(1, 5, 32587, 1, 3),
 (2, 6, 46478, 1, 3);
 
 -- --------------------------------------------------------
@@ -1134,56 +1189,25 @@ CREATE TABLE IF NOT EXISTS `tbl_purchase` (
   `stockstatus` int(11) NOT NULL,
   `purchase_status` int(11) NOT NULL,
   PRIMARY KEY (`purchase_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=110 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_purchase`
 --
 
 INSERT INTO `tbl_purchase` (`purchase_id`, `product_id_fk`, `supp_id`, `cmp_id`, `bank_id`, `price_category`, `finyear`, `invoice_number`, `reference_bill_id`, `purchase_quantity`, `purchase_price`, `discount_price`, `discount_type`, `tax_per`, `total_price`, `purchase_remarks`, `purchase_date`, `stockstatus`, `purchase_status`) VALUES
-(3, 1, 1, 5, NULL, 3, '3', '1234567890', NULL, 20, 300, 0, 1, 0, 6000, NULL, '2021-05-06', 1, 1),
-(4, 3, 1, 5, NULL, 3, '3', '1234567890', NULL, 10, 3, 0, 1, 0, 30, NULL, '2021-05-06', 1, 1),
-(5, 4, 1, 5, NULL, 3, '3', '1234567890', NULL, 5, 100, 0, 1, 0, 500, NULL, '2021-05-06', 1, 1),
-(6, 1, 1, 5, NULL, 1, '3', '123', NULL, 10, 100, 10, 0, 0, 990, NULL, '2021-05-07', 0, 0),
-(7, 3, 1, 5, NULL, 1, '3', '213124', NULL, 10, 1, 0, 1, 0, 10, NULL, '2021-05-06', 0, 0),
-(8, 3, 1, 5, NULL, 1, '3', '465', NULL, 10, 1, 0, 1, 0, 10, NULL, '2021-05-10', 1, 2),
-(9, 1, 1, 5, NULL, 1, '3', '365', NULL, 10, 100, 0, 1, 0, 1000, NULL, '2021-05-10', 0, 2),
-(10, 1, 1, 5, NULL, 1, '3', '456', NULL, 10, 100, 0, 1, 0, 1000, NULL, '2021-05-10', 0, 2),
-(11, 1, 1, 5, NULL, 4, '3', '852', NULL, 10, 400, 0, 1, 0, 4000, NULL, '2021-05-10', 0, 1),
-(12, 1, 1, 5, NULL, 1, '3', '2020', NULL, 10, 100, 0, 1, 0, 1000, NULL, '2021-05-11', 1, 1),
-(13, 4, 1, 5, NULL, 1, '3', '2020', NULL, 10, 100, 500, 1, 0, 500, NULL, '2021-05-11', 1, 1),
-(14, 1, 1, 5, NULL, 1, '3', '2021', NULL, 10, 100, 100, 0, 0, 900, NULL, '2021-05-11', 1, 1),
-(15, 5, 1, 5, NULL, 1, '3', '2021', NULL, 10, 100, 0, 1, 0, 1000, NULL, '2021-05-11', 1, 1),
-(16, 3, 1, 5, NULL, 1, '3', '2022', NULL, 10, 1, 5, 0, 0, 5, NULL, '2021-05-11', 1, 1),
-(17, 5, 1, 5, NULL, 1, '3', '2022', NULL, 10, 100, 0, 1, 0, 1000, NULL, '2021-05-11', 1, 1),
-(18, 1, 1, 5, NULL, 1, '3', '7', NULL, 10, 100, 0, 1, 0, 1000, NULL, '2021-05-10', 0, 0),
-(19, 3, 1, 5, NULL, 1, '3', '8', NULL, 10, 1, 0, 1, 0, 10, NULL, '2021-05-12', 0, 0),
-(20, 6, 1, 5, NULL, 1, '3', '44', NULL, 50, 125, 0, 1, 0, 6250, NULL, '2021-05-12', 1, 1),
-(21, 6, 1, 5, NULL, 1, '3', '99', NULL, -5, 125, 0, 1, 0, -625, NULL, '2021-05-12', 1, 1),
-(22, 66, 4, 5, NULL, 1, '3', '1', 'ARP321252', 10, 100, 12, 1, 0, 880, NULL, '2021-10-22', 0, 0),
-(23, 65, 4, 5, NULL, 1, '3', '1', 'ARP321252', 1, 100, 20, 1, 0, 80, NULL, '2021-10-22', 0, 0),
-(24, 66, 4, 5, NULL, 1, '3', '12', 'PBR1234C1', 20, 100, 10, 1, 0, 1800, NULL, '2021-10-22', 0, 0),
-(25, 65, 4, 5, NULL, 1, '3', '12', 'PBR1234C1', 20, 100, 10, 1, 0, 1800, NULL, '2021-10-22', 0, 0),
-(26, 3, 1, 5, 2, 1, '3', '14', '7845', 10, 1, 1, 0, 0, 9, NULL, '2021-10-25', 0, 0),
-(27, 62, 1, 5, 2, 1, '3', '14', '7845', 20, 100, 20, 0, 0, 1980, NULL, '2021-10-25', 0, 0),
-(28, 7, 4, 5, 4, 1, '3', '1212', 'ARP23DAS', 20, 100, 10, 1, 0, 1800, NULL, '2021-10-25', 1, 1),
-(31, 4, 1, 5, 8, 1, '3', '1213', '63546544', 250, 1, 10, 1, 0, 225, NULL, '2021-10-29', 0, 0),
-(32, 65, 1, 5, 8, 1, '3', '1213', '63546544', 50, 125, 15, 1, 0, 5312.5, NULL, '2021-10-29', 0, 0),
-(33, 1, 4, 5, NULL, 1, '3', '1214', 'AERT7854', 52, 100, 0, 1, 0, 5200, 'Hello Its ME', '2021-11-04', 0, 0),
-(34, 62, 4, 5, NULL, 2, '3', '1215', 'WER12344NB', 50, 200, 10, 1, 0, 9000, '', '2021-11-11', 0, 0),
-(35, 3, 4, 5, NULL, 2, '3', '1215', 'WER12344NB', 50, 2, 10, 1, 0, 90, '', '2021-11-11', 0, 0),
-(36, 67, 3, 6, NULL, 3, '3', '1216', 'UTER3243POE', 10, 30, 10, 1, 0, 270, '', '2021-11-11', 0, 0),
-(37, 67, 3, 6, NULL, 3, '3', '1216', 'UTER3243POE', 10, 30, 10, 1, 0, 270, '', '2021-11-11', 0, 0),
-(38, 3, 4, 5, NULL, 1, '3', '1217', 'PSERE1212312', 10, 100, 10, 1, 0, 900, '', '2021-11-11', 0, 0),
-(39, 6, 4, 5, NULL, 1, '3', '1217', 'PSERE1212312', 500, 1, 20, 1, 0, 400, '', '2021-11-11', 0, 0),
-(40, 63, 4, 5, NULL, 1, '3', '1218', 'BERT2323NEX', 20, 100, 10, 1, 0, 1800, '', '2021-11-10', 0, 0),
-(41, 3, 4, 5, NULL, 1, '3', '1218', 'BERT2323NEX', 50, 1, 0, 1, 0, 50, '', '2021-11-10', 0, 0),
-(42, 1, 4, 5, NULL, 1, '3', '1219', 'TER234OPE', 10, 100, 10, 1, 0, 900, '', '2021-11-11', 0, 0),
-(43, 3, 4, 5, NULL, 1, '3', '1219', 'TER234OPE', 20, 1, 1, 1, 0, 20, '', '2021-11-11', 0, 0),
-(44, 5, 4, 5, NULL, 1, '3', '1220', 'REW235FC', 60, 100, 10, 1, 0, 5400, 'Hello', '2021-11-15', 0, 1),
-(45, 7, 4, 5, NULL, 1, '3', '1220', 'REW235FC', 65, 100, 0, 1, 0, 6500, 'Its me', '2021-11-15', 0, 1),
-(64, 1, 7, 5, NULL, 2, '3', '1221', '78945', 69, 200, 7, 1, 0, 12861.6, '', '2021-11-23', 0, 1),
-(65, 62, 7, 5, NULL, 2, '3', '1221', '78945', 63, 200, 8, 1, 0, 11604.6, '', '2021-11-23', 0, 1);
+(88, 6, 4, 5, NULL, 1, '3', '1', '78945', 50, 100, 2, 1, 0, 4900, '', '2021-12-01', 0, 0),
+(89, 63, 4, 5, NULL, 1, '3', '1', '78945', 250, 100, 5, 1, 0, 23750, '', '2021-12-01', 0, 0),
+(90, 64, 4, 5, NULL, 1, '3', '1', '78945', 90, 100, 0, 1, 0, 9000, '', '2021-12-01', 0, 0),
+(97, 1, 4, 5, NULL, 1, '3', '2', '63546544', 50, 100, 6, 1, 0, 4700, '', '2021-12-01', 0, 0),
+(98, 64, 4, 5, NULL, 1, '3', '2', '63546544', 93, 100, 6, 1, 0, 8742, '', '2021-12-01', 0, 0),
+(99, 5, 4, 5, NULL, 1, '3', '2', '63546544', 50, 50, 6, 1, 0, 2342.5, '', '2021-12-01', 0, 0),
+(102, 1, 4, 5, NULL, 1, '3', '3', '78945', 23, 100, 7, 1, 0, 2145.9, '', '2021-12-01', 0, 0),
+(103, 6, 4, 5, NULL, 1, '3', '3', '78945', 93, 100, 4, 1, 0, 8974.5, '', '2021-12-01', 0, 0),
+(104, 1, 7, 5, NULL, 2, '3', '4', '985632', 87, 200, 3, 1, 0, 16947.6, '', '2021-12-01', 0, 0),
+(105, 62, 7, 5, NULL, 2, '3', '4', '985632', 29, 200, 6, 1, 0, 5434.6, '', '2021-12-01', 0, 0),
+(106, 1, 7, 5, NULL, 2, '3', '5', '775533', 637, 200, 2, 1, 0, 124469.8, '', '2021-12-01', 0, 1),
+(109, 67, 3, 6, NULL, 3, '3', '6', '4785', 68, 30, 5, 1, 0, 1938, '', '2021-12-01', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -1208,39 +1232,19 @@ CREATE TABLE IF NOT EXISTS `tbl_purchasepayments` (
   `round_off_amt` double DEFAULT NULL,
   `payment_status` int(11) NOT NULL,
   PRIMARY KEY (`purchase_payment_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_purchasepayments`
 --
 
 INSERT INTO `tbl_purchasepayments` (`purchase_payment_id`, `invoice_number`, `tax_amount`, `bill_discount`, `bill_discount_type`, `frieght`, `packing_charge`, `net_total`, `cash_paid`, `bank_paid`, `old_balance`, `net_balance`, `round_off_amt`, `payment_status`) VALUES
-(2, 1234567890, 50, 80, 0, 50, 50, 6600, 0, 0, 6190, 12790, NULL, 1),
-(3, 123, 20, 20, 0, 5, 5, 1000, 0, 0, 12790, 13790, NULL, 0),
-(4, 213124, 0, 0, 1, 0, 0, 10, 0, 0, 12790, 12800, NULL, 0),
-(5, 465, 0, 0, 1, 0, 0, 10, 0, 0, 12800, 12810, NULL, 1),
-(6, 365, 0, 0, 1, 0, 0, 1000, 0, 0, 12800, 13800, NULL, 1),
-(7, 456, 0, 0, 1, 0, 0, 1000, 0, 0, 12800, 13800, NULL, 1),
-(8, 2020, 0, 0, 1, 0, 0, 1500, 0, 0, 12800, 14300, NULL, 1),
-(9, 2021, 0, 0, 1, 0, 0, 1900, 0, 0, 14300, 16200, NULL, 1),
-(10, 2022, 0, 0, 1, 0, 0, 1005, 0, 0, 16200, 17205, NULL, 1),
-(11, 7, 0, 0, 1, 0, 0, 1000, 0, 0, 17195, 18195, NULL, 0),
-(12, 8, 0, 0, 1, 0, 0, 10, 0, 0, 17195, 17205, NULL, 0),
-(13, 44, 0, 0, 1, 0, 0, 6250, 0, 0, 17195, 23445, NULL, 1),
-(14, 99, 0, 0, 1, 0, 0, -625, 0, 0, 23445, 22820, NULL, 1),
-(15, 1, 0, 0, 1, 0, 0, 960, 0, 0, 100, 1060, NULL, 0),
-(16, 12, 0, 0, 1, 0, 0, 3600, 0, 0, 100, 3700, NULL, 0),
-(17, 14, 0, 0, 1, 0, 0, 1989, 0, 0, 22820, 24809, NULL, 0),
-(18, 1212, 0, 0, 1, 0, 0, 1800, 0, 0, 3700, 5500, NULL, 1),
-(20, 1213, 45, 10, 1, 50, 60, 5537.5, 0, 0, 0, 29943.25, NULL, 0),
-(21, 1214, 0, 0, 1, 0, 0, 5200, 5200, 0, 5500, 0, NULL, 0),
-(22, 1215, 0, 0, 1, 0, 0, 9090, 0, 0, 0, 9090, NULL, 0),
-(23, 1216, 0, 0, 1, 0, 0, 540, 0, 0, 1500, 2040, NULL, 0),
-(24, 1217, 0, 0, 1, 0, 0, 1300, 1300, 0, 0, 0, NULL, 0),
-(25, 1218, 0, 0, 1, 0, 0, 1850, 0, 0, 0, 1850, NULL, 0),
-(26, 1219, 0, 0, 1, 0, 0, 920, 0, 0, -6500, -5580, NULL, 0),
-(27, 1220, 20, 0, 1, 0, 0, 11900, 500, 0, -10100, 1320, NULL, 1),
-(37, 1221, 0, 0, 1, 0, 0, 24466.2, 0, 0, 0, 0, NULL, 1);
+(46, 1, 0, 0, 1, 0, 0, 37650, 28000, 0, 0, 0, NULL, 0),
+(49, 2, 50, 0, 1, 50, 50, 15784.5, 30000, 0, 0, 0, NULL, 0),
+(51, 3, 0, 0, 1, 0, 0, 11120.4, 11120, 0, 0, 0, NULL, 0),
+(52, 4, 0, 0, 1, 0, 0, 22382.199999999997, 0, 0, 0, 22382.199999999997, NULL, 0),
+(53, 5, 0, 0, 1, 0, 0, 124469.8, 0, 0, 22382.199999999997, 146852, NULL, 1),
+(56, 6, 250, 60, 1, 50, 60, 1938, 0, 1050, 0, 0, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -1347,15 +1351,27 @@ CREATE TABLE IF NOT EXISTS `tbl_sale` (
   `stockstatus` int(11) NOT NULL,
   `sale_status` int(11) NOT NULL,
   PRIMARY KEY (`sale_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_sale`
 --
 
 INSERT INTO `tbl_sale` (`sale_id`, `product_id_fk`, `cust_id`, `cmp_id`, `price_category`, `finyear`, `invoice_number`, `sale_quantity`, `sale_price`, `discount_price`, `discount_type`, `tax_per`, `total_price`, `sale_remark`, `sale_date`, `stockstatus`, `sale_status`) VALUES
-(65, 1, 11, 5, 1, '3', '1', 58, 100, 4, 1, 0, 5569.16, '', '2021-11-23', 0, 1),
-(66, 1, 11, 5, 1, '3', '1', 86, 100, 6, 1, 0, 8045.3, '', '2021-11-23', 0, 1);
+(65, 1, 11, 5, 1, '3', '1', 58, 100, 4, 1, 0, 5569.16, '', '2021-11-23', 0, 0),
+(66, 1, 11, 5, 1, '3', '1', 86, 100, 6, 1, 0, 8045.3, '', '2021-11-23', 0, 0),
+(70, 1, 11, 5, 1, '3', '2', 89, 100, 2, 1, 0, 8695.3, '', '2021-12-01', 0, 0),
+(71, 1, 11, 5, 1, '3', '2', 89, 100, 6, 1, 0, 8339.3, '', '2021-12-01', 0, 0),
+(72, 1, 5, 5, 1, '3', '3', 63, 100, 8, 1, 0, 5777.1, '', '2021-12-24', 0, 0),
+(73, 1, 11, 5, 1, '3', '4', 99, 100, 4, 1, 0, 9553.5, '', '2021-11-22', 0, 0),
+(74, 3, 5, 5, 1, '3', '5', 52, 100, 2, 1, 0, 5080.4, '', '2021-09-30', 0, 0),
+(75, 1, 11, 5, 1, '3', '6', 63, 100, 6, 1, 0, 5903.1, '', '2021-11-23', 0, 0),
+(76, 65, 11, 5, 1, '3', '6', 91, 100, 4, 1, 0, 8781.5, '', '2021-11-23', 0, 0),
+(77, 1, 5, 5, 1, '3', '7', 87, 100, 6, 1, 0, 8143.2, '', '2021-10-29', 0, 0),
+(78, 62, 11, 5, 1, '3', '8', 121, 100, 3, 1, 0, 11712.8, '', '2021-11-22', 0, 0),
+(79, 1, 11, 5, 1, '3', '9', 63, 1, 3, 1, 0, 60.921, '', '2021-10-07', 0, 1),
+(80, 1, 11, 5, 1, '3', '10', 61, 100, 6, 1, 0, 5721.8, '', '2021-11-23', 0, 1),
+(82, 9, 11, 5, 1, '3', '11', 87, 100, 0, 1, 0, 8700, '', '2021-12-04', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -1382,14 +1398,24 @@ CREATE TABLE IF NOT EXISTS `tbl_salepayments` (
   `round_off_amt` double NOT NULL,
   `payment_status` int(11) NOT NULL,
   PRIMARY KEY (`sale_payment_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_salepayments`
 --
 
 INSERT INTO `tbl_salepayments` (`sale_payment_id`, `invoice_number`, `tax_amount`, `bill_discount`, `bill_discount_type`, `frieght`, `packing_charge`, `net_total`, `sale_round_off_amt`, `cash_paid`, `bank_paid`, `bank_id`, `old_balance`, `net_balance`, `round_off_amt`, `payment_status`) VALUES
-(41, 1, 0, 0, 1, 0, 0, 13614.46, NULL, 0, 0, NULL, -134524.68, -120910.22, 13614, 1);
+(41, 1, 0, 0, 1, 0, 0, 13614.46, NULL, 0, 0, NULL, -134524.68, -120910.22, 13614, 0),
+(44, 2, 0, 0, 1, 0, 0, 17034.6, NULL, 0, 0, NULL, -120910.22, -103875.62, 17034, 0),
+(45, 3, 0, 0, 1, 0, 0, 5777.1, NULL, 0, 0, NULL, -5615.5, 161.60000000000036, 5777, 0),
+(46, 4, 0, 0, 1, 0, 0, 9553.5, NULL, 0, 0, NULL, -103875.62, -94322.12, 9553, 0),
+(47, 5, 0, 0, 1, 0, 0, 5080.4, NULL, 0, 0, NULL, -5615.5, -535.1000000000004, 5080, 0),
+(48, 6, 0, 0, 1, 0, 0, 14684.6, NULL, 0, 0, NULL, -134524.68, -119840.07999999999, 14684, 0),
+(49, 7, 0, 0, 1, 0, 0, 8143.2, NULL, 0, 0, NULL, -535.1000000000004, 7608.099999999999, 8143, 0),
+(50, 8, 0, 0, 1, 0, 0, 11712.8, NULL, 0, 0, NULL, -119840.07999999999, -108127.27999999998, 11712, 0),
+(51, 9, 0, 0, 1, 0, 0, 60.921, NULL, 0, 0, NULL, -134524.68, -134463.759, 60, 1),
+(52, 10, 0, 0, 1, 0, 0, 5721.8, NULL, 0, 0, NULL, -134463.759, -128741.95899999999, 5721, 1),
+(54, 11, 45, 60, 1, 23, 50, 8700, NULL, 3621, 0, NULL, -128741.95899999999, -128791.95899999999, 3621, 1);
 
 -- --------------------------------------------------------
 
@@ -1406,14 +1432,14 @@ CREATE TABLE IF NOT EXISTS `tbl_stock` (
   `company_id` int(11) NOT NULL,
   `stock_status` int(11) NOT NULL,
   PRIMARY KEY (`stock_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_stock`
 --
 
 INSERT INTO `tbl_stock` (`stock_id`, `finyear`, `item_id`, `stock`, `company_id`, `stock_status`) VALUES
-(1, 3, 1, 269, 5, 1),
+(1, 3, 1, 517, 5, 1),
 (2, 3, 2, 0, 5, 0),
 (3, 3, 3, 30, 5, 1),
 (4, 3, 4, 218, 5, 1),
@@ -1423,7 +1449,8 @@ INSERT INTO `tbl_stock` (`stock_id`, `finyear`, `item_id`, `stock`, `company_id`
 (8, 3, 8, 32, 5, 1),
 (9, 3, 9, 106, 5, 1),
 (10, 3, 67, 1700, 6, 1),
-(11, 3, 68, 0, 5, 1);
+(11, 3, 68, 0, 5, 1),
+(12, 3, 69, 0, 5, 1);
 
 -- --------------------------------------------------------
 
@@ -1472,7 +1499,7 @@ CREATE TABLE IF NOT EXISTS `tbl_supplier` (
   `supplier_type` enum('0','1') NOT NULL COMMENT 'debitor=0&Creditor=1',
   `supplier_is_cust` tinyint(4) NOT NULL,
   PRIMARY KEY (`supplier_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_supplier`
@@ -1481,12 +1508,18 @@ CREATE TABLE IF NOT EXISTS `tbl_supplier` (
 INSERT INTO `tbl_supplier` (`supplier_id`, `supplier_name`, `supplier_address`, `supplier_phone`, `supplier_email`, `supplier_oldbal`, `company_id`, `supplier_pcategory`, `supplier_status`, `supplier_act_status`, `debit_credit`, `supplier_type`, `supplier_is_cust`) VALUES
 (1, 'new supplier', 'abc', '123', 'abc@gmail.com', 0, 5, 1, 1, 0, 0, '1', 0),
 (2, 'new supplier2', 'abcd', '4948949', 'abcd@gmail.com', 20000, 6, 2, 0, 0, 0, '1', 0),
-(3, 'ashkar asr', 'calicut', '999999999', 'ashkarasr@gmail.com', 1500, 6, 3, 1, 0, 0, '1', 0),
-(4, 'Rajeev R', 'adetrfwefvcadftwf', '9876543210', 'hello@edge.com', 0, 5, 1, 1, 0, 0, '0', 0),
+(3, 'ashkar asr', 'calicut', '999999999', 'ashkarasr@gmail.com', 0, 6, 3, 1, 0, 0, '1', 0),
+(4, 'Rajeev R', 'adetrfwefvcadftwf', '9876543210', 'hello@edge.com', -11120.4, 5, 1, 1, 0, 0, '0', 0),
 (6, 'Aroma Supplierswrtfwertwer', 'adasdsdasd', '9876543210', 'hello@edge.com', 100, 6, 1, 0, 0, 0, '0', 0),
-(7, 'ABHI', 'TEST', '9895626232', 'TEST@GMAIL.COM', 0, 5, 2, 1, 0, 0, '1', 0),
+(7, 'ABHI', 'TEST', '9895626232', 'TEST@GMAIL.COM', 124469.8, 5, 2, 1, 0, 0, '1', 0),
 (8, 'Hello Mas', 'eradf', '7845128956', 'yty@gggv.com', 78454, 5, 1, 0, 0, 0, '0', 0),
-(9, 'Hello Mas', 'aswdsadsa', '7845122365', 'yty@gggv.com', 7845, 8, 4, 1, 0, 0, '0', 0);
+(9, 'Hello Mas', 'aswdsadsa', '7845122365', 'yty@gggv.com', 7845, 8, 4, 1, 0, 0, '0', 0),
+(10, 'Karolin', 'techno', '7894561230', 'rajeev@dfd.com', 5000, 5, 1, 0, 0, 0, '0', 0),
+(11, 'Karolin', 'techno', '7894561230', 'rajeev@dfd.com', 5000, 5, 1, 0, 0, 0, '0', 0),
+(12, 'KArolin', 'eex', '7418529630', 'loso@gap.com', 8500, 5, 1, 0, 0, 0, '0', 0),
+(13, 'Karolin', 'jeeed', '8527419630', 'rajeev654@gamil.com', 6000, 5, 1, 0, 0, 0, '0', 0),
+(14, 'Karolin', 'kerlld', '7418529630', 'das@dor.com', 7410, 5, 1, 0, 0, 0, '0', 0),
+(15, 'Joseph Stalin', 'sdudacfdaf', '8529637410', 'rajeev654@gamil.com', 78000, 5, 1, 1, 0, 0, '1', 0);
 
 -- --------------------------------------------------------
 

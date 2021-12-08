@@ -71,7 +71,7 @@
                 <div class="form-group">
                   <label for="size_name" class="col-sm-4 control-label">Phone</label>
                   <div class="col-sm-5">
-                    <input type="text"  class="form-control" name="supplier_phone" id="supplier_phone"  value="<?php if(isset($records->supplier_phone)) echo $records->supplier_phone ?>">
+                    <input type="tel"  class="form-control" name="supplier_phone" id="supplier_phone"  value="<?php if(isset($records->supplier_phone)) echo $records->supplier_phone ?>">
                   </div>
                 </div>
                 <div class="form-group">
@@ -85,7 +85,7 @@
                   <label for="size_name" class="col-sm-4 control-label">Opening Balance</label>
 
                   <div class="col-sm-5">
-                    <input type="text"  class="form-control" name="supplier_oldbal" id="supplier_oldbal"  value="<?php if(isset($records->supplier_oldbal)) echo $records->supplier_oldbal ?>">
+                    <input type="number"  class="form-control" name="supplier_oldbal" id="supplier_oldbal"  value="<?php if(isset($records->supplier_oldbal)) echo $records->supplier_oldbal ?>">
                   </div>
                 </div>
                 <div class="form-group">

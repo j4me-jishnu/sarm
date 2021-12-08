@@ -35,7 +35,7 @@
                         foreach ($employee as $row) 
                         {
                           ?>
-                          <option value="<?php echo $row->emp_id; ?>" <?php echo ($records[0]->emp_id == $row->emp_id ) ? 'selected':'' ?>><?php echo $row->emp_name; ?></option>
+                          <option value="<?php echo $row->emp_id; ?>" <?php echo (@$records[0]->emp_id == $row->emp_id ) ? 'selected':'' ?>><?php echo $row->emp_name; ?></option>
                           <?php
                         }
                         ?>
@@ -88,34 +88,34 @@
                     <label for="size_name" class="col-sm-4 control-label">Total <span style="color:red">*</span></label>
 
                     <div class="col-sm-5">
-                      <input type="text" class="form-control" name="emp_pr_total" id="emp_pr_total"  value="<?php if(isset($records[0]->emp_pr_pay_total)) echo $records[0]->emp_pr_pay_total ?>">
+                      <input type="number" class="form-control" name="emp_pr_total" id="emp_pr_total"  value="<?php if(isset($records[0]->emp_pr_pay_total)) echo $records[0]->emp_pr_pay_total ?>">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="size_name" class="col-sm-4 control-label">Advance</label>
                         
                     <div class="col-sm-5">
-                    <input type="text"  class="form-control" onchange="advanceFun()" name="emp_pr_advance" id="emp_pr_adv"  value="<?php if(isset($records[0]->emp_pr_pay_advance)) echo $records[0]->emp_pr_pay_advance ?>">
+                    <input type="number"  class="form-control" onchange="advanceFun()" name="emp_pr_advance" id="emp_pr_adv"  value="<?php if(isset($records[0]->emp_pr_pay_advance)) echo $records[0]->emp_pr_pay_advance ?>">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="size_name" class="col-sm-4 control-label">Net Balance</label>
                     <div class="col-sm-5">
-                      <input type="text"  class="form-control"  name="emp_pr_net_bal" id="emp_pr_net_bal"  value="<?php if(isset($records[0]->emp_pr_net_bal)) echo $records[0]->emp_pr_net_bal ?>">
+                      <input type="number"  class="form-control"  name="emp_pr_net_bal" id="emp_pr_net_bal"  value="<?php if(isset($records[0]->emp_pr_net_bal)) echo $records[0]->emp_pr_net_bal ?>">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="size_name" class="col-sm-4 control-label">Paid Amount</label>
 
                     <div class="col-sm-5">
-                      <input type="text"  class="form-control" onchange="paidFun()" name="emp_pr_paid_amt" id="emp_pr_pay_amt"  value="<?php if(isset($records[0]->emp_pr_paid_amt)) echo $records[0]->emp_pr_paid_amt ?>">
+                      <input type="number"  class="form-control" onchange="paidFun()" name="emp_pr_paid_amt" id="emp_pr_pay_amt"  value="<?php if(isset($records[0]->emp_pr_paid_amt)) echo $records[0]->emp_pr_paid_amt ?>">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="size_name" class="col-sm-4 control-label">Balance</label>
 
                     <div class="col-sm-5">
-                      <input type="text" class="form-control" name="emp_pr_balance" id="emp_pr_balance"  value="<?php if(isset($records[0]->emp_pr_pay_balance)) echo $records[0]->emp_pr_pay_balance ?>">
+                      <input type="number" class="form-control" name="emp_pr_balance" id="emp_pr_balance"  value="<?php if(isset($records[0]->emp_pr_pay_balance)) echo $records[0]->emp_pr_pay_balance ?>">
                     </div>
                   </div>
 

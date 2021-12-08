@@ -1012,13 +1012,13 @@ class Accountsreports_model extends CI_Model
 		$start_date1 = (isset($start_date))?$start_date:'';
 		$end_date1 = (isset($end_date))?$end_date:'';
 		if($start_date1 || $end_date1){
-			$sql = 'SELECT * ,SUM(opening_bal) AS opening_bal2 FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk = 29 AND company_id_fk = '.$cmp.' AND created_at BETWEEN "'.$start_date1.'" AND "'.$end_date1.'" GROUP BY ledger_head';	
+			$sql = 'SELECT * ,SUM(opening_bal) AS opening_bal2 FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk = 17 AND company_id_fk = '.$cmp.' AND created_at BETWEEN "'.$start_date1.'" AND "'.$end_date1.'" GROUP BY ledger_head';	
 			$query = $this->db->query($sql);
 			return $data = $query->result();
 		}
 		else
 		{
-		$sql = 'SELECT * ,SUM(opening_bal) AS opening_bal2 FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk = 29 AND company_id_fk = '.$cmp.' GROUP BY ledger_head';
+		$sql = 'SELECT * ,SUM(opening_bal) AS opening_bal2 FROM tbl_ledgerhead WHERE ledgerhead_status = 1 AND group_id_fk = 17 AND company_id_fk = '.$cmp.' GROUP BY ledger_head';
 		$query = $this->db->query($sql);
 		return $data = $query->result();
 		}

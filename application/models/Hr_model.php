@@ -316,7 +316,7 @@ Class Hr_model extends CI_Model
         $this->db->from('tbl_employee');
         $this->db->join('tbl_emp_peice_rate_pay','tbl_emp_peice_rate_pay.emp_fk = tbl_employee.emp_id');
         $this->db->order_by('emp_id','DESC');
-        $this->db->where("emp_status",1);
+        $this->db->where("emp_pr_pay_status",1);
         $query = $this->db->get();
 
         $data['data'] = $query->result();
@@ -357,6 +357,7 @@ Class Hr_model extends CI_Model
         $this->db->select('*');
         $this->db->from('tbl_emp_piece_rate');
         $this->db->where('emp_pr_fk',$emp_id);
+        $this->db->where('emp_pr_status',1);
         $query = $this->db->get();
         return $query->result();
     }

@@ -107,8 +107,10 @@ class Hrmodule extends MY_Controller {
 						'opening_bal' => $this->input->post('old_balance2'),
 						'company_id_fk' => $this->input->post('company'),
 						'ledgerhead_status' => 1,
+						'ledger_default' => 0,
 						'debit_or_credit' => $debit_credit,
-						'created_date' => date('Y-m-d H:i:s'),
+						'created_at' => date('Y-m-d H:i:s'),
+						'updated_at' => date('Y-m-d H:i:s'),
 			);
 			$data3 = array(
 				'ledger_head' => $this->input->post('employname'),
@@ -655,6 +657,9 @@ class Hrmodule extends MY_Controller {
 	public function addPieceEmployee()
 	{
 		$this->form_validation->set_rules('emp_pr_id', 'Employee', 'required');
+		$this->form_validation->set_rules('emp_pr_total', 'Total', 'required');
+		$this->form_validation->set_rules('emp_pr_advance', '', 'required');
+		$this->form_validation->set_rules('emp_pr_paid_amt', 'Paid Amount', 'required');
 		if ($this->form_validation->run() == FALSE)
 		{
 			if($this->session->userdata('user_type')=='C'){
@@ -708,7 +713,7 @@ class Hrmodule extends MY_Controller {
 						'ledgerhead_status' => 1,
 						'company_id_fk' => $this->session->userdata('cmp_id'),
 						'ledger_default' => 0,
-						'created_date' => date('Y-m-d H:i:s'),
+						'updated_at' => date('Y-m-d H:i:s'),
 					);
 				$emp_name = $this->General_model->get_row('tbl_employee','emp_id',$emp_pr_edit_id);		
 				$result = $this->General_model->update('tbl_emp_peice_rate_pay',$emp_pay,'emp_pr_pay_id ',$emp_pr_pay_id);
@@ -745,20 +750,21 @@ class Hrmodule extends MY_Controller {
 							'emp_pr_pay_balance' => $this->input->post('emp_pr_balance'),
 							'emp_pr_pay_status' => 1,
 						);
-
-						$employee23 = $this->General_model->get_row('tbl_employee','emp_id',$emp_pr_edit_id);
+						$emp_ide_r = $this->input->post('emp_pr_id');
+						$employee23 = $this->General_model->get_row('tbl_employee','emp_id',$emp_ide_r);
 					$lederhead = array(
 						'group_id_fk' => 27,
-						'ledger_head' => $employee23[0]->emp_name,
-						'emp_name' => 'Peice Rate Employee',
+						'ledger_head' => $employee23->emp_name,
+						'ledgerhead_desc' => 'Peice Rate Employee',
 						'opening_bal' => $this->input->post('emp_pr_balance'),
 						'debit_or_credit' => 2,
 						'ledgerhead_status' => 1,
 						'company_id_fk' => $this->session->userdata('cmp_id'),
 						'ledger_default' => 0,
-						'created_date' => date('Y-m-d H:i:s'),
+						'created_at' => date('Y-m-d H:i:s'),
+						'updated_at' =>	date('Y-m-d H:i:s'),
 					);
-					$result2 = $this->General_model->add('tbl_emp_peice_rate_pay',$datap);
+					$result34 = $this->General_model->add_returnID('tbl_emp_peice_rate_pay',$datap);
 					$result56 = $this->General_model->add('tbl_ledgerhead',$lederhead);
 			}
 			
@@ -772,7 +778,7 @@ class Hrmodule extends MY_Controller {
 		}
 	}
 
-	public function editPieceRateEmployee($emp_id=24)
+	public function editPieceRateEmployee($emp_id)
 	{
 		if($this->session->userdata('user_type')=='C'){
 			$id = $this->session->userdata('id');
@@ -790,8 +796,13 @@ class Hrmodule extends MY_Controller {
 	public function deletePeiceRateEmployee()
 	{
 		$emp_pr_id = $this->input->post('emp_pr_id');
+		$emp_name = $this->General_model->get_row('tbl_employee','emp_id',$emp_pr_id);
         $updateData = array('emp_pr_status' => 0);
-        $data = $this->General_model->update('tbl_emp_piece_rate',$updateData,'emp_pr_id',$emp_pr_id);
+		$updateData2 = array('emp_pr_pay_status' => 0);
+		$updateData3 = array('ledgerhead_status' => 0);
+        $data = $this->General_model->update('tbl_emp_piece_rate',$updateData,'emp_pr_fk',$emp_pr_id);
+		$data2 = $this->General_model->update('tbl_emp_peice_rate_pay',$updateData2,'emp_fk',$emp_pr_id);
+		$data2 = $this->General_model->update('tbl_ledgerhead',$updateData3,'ledger_head',$emp_name->emp_name);
         if($data) {
             $response['text'] = 'Deleted successfully';
             $response['type'] = 'success';

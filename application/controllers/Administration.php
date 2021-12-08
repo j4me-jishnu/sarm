@@ -120,6 +120,7 @@ class Administration extends MY_Controller {
 				'opening_bal'	=> $this->input->post('old_balance'),
 				'debit_or_credit' => $ledger_head_status,
 				'ledgerhead_status'	=> 1,
+				'ledger_default' => 0,
 				'company_id_fk'	=>	$company,
 				'created_at' => date('Y-m-d H:i:s'),
 				'updated_at' => date('Y-m-d H:i:s'),
@@ -303,8 +304,9 @@ class Administration extends MY_Controller {
 				'opening_bal'	=>	$this->input->post('supplier_oldbal'),
 				'debit_or_credit'	=> $suppelier_types,
 				'ledgerhead_status'	=> 1,
+				'ledger_default' => 0,
 				'company_id_fk'	=>	$company,
-				'created_date' => date('Y-m-d H:i:s'),
+				'created_at' => date('Y-m-d H:i:s'),
 				'updated_at' => date('Y-m-d H:i:s'),
 			);
 
@@ -324,31 +326,31 @@ class Administration extends MY_Controller {
 				 $result = $this->General_model->update($this->suppliers,$data,'supplier_id',$supplier_id);
 				 //pass the supplier name and update ledger head
 				 $result2 = $this->General_model->update('tbl_ledgerhead',$data3,'ledger_head',$supplier_name2[0]->supplier_name);
-				 $data_ledger_balance = array(
-					'company_id_fk' => $company,
-					'balance' => $this->input->post('supplier_oldbal'),
-					'debit_credit' => $suppelier_types,
-					'ledgerbalance_status' => 1,
+				//  $data_ledger_balance = array(
+				// 	'company_id_fk' => $company,
+				// 	'balance' => $this->input->post('supplier_oldbal'),
+				// 	'debit_credit' => $suppelier_types,
+				// 	'ledgerbalance_status' => 1,
 
-				);
-				 $find = $this->General_model->get_data('tbl_ledgerhead','ledger_head','ledgerhead_id',$supplier_name2[0]->supplier_name);
+				// );
+				//  $find = $this->General_model->get_data('tbl_ledgerhead','ledger_head','ledgerhead_id',$supplier_name2[0]->supplier_name);
 
-				$result2 = $this->General_model->update('tbl_ledgerbalance',$data_ledger_balance,'ledgerhead_id_fk',$find[0]->ledgerhead_id);
-				 $response_text = 'Supplier details  updated';
+				// $result2 = $this->General_model->update('tbl_ledgerbalance',$data_ledger_balance,'ledgerhead_id_fk',$find[0]->ledgerhead_id);
+				  $response_text = 'Supplier details  updated';
 			}
 			else{
 				$result = $this->General_model->add($this->suppliers,$data);
 				$result2 = $this->General_model->add_returnID('tbl_ledgerhead',$data2);
-				$data_ledger_balance = array(
-					'company_id_fk' => $company,
-					'ledgerhead_id_fk' => $result2,
-					'date' => $dates2,
-					'balance' => $this->input->post('supplier_oldbal'),
-					'debit_credit' => $suppelier_types,
-					'ledgerbalance_status' => 1,
+				// $data_ledger_balance = array(
+				// 	'company_id_fk' => $company,
+				// 	'ledgerhead_id_fk' => $result2,
+				// 	'date' => $dates2,
+				// 	'balance' => $this->input->post('supplier_oldbal'),
+				// 	'debit_credit' => $suppelier_types,
+				// 	'ledgerbalance_status' => 1,
 
-				);
-				$result = $this->General_model->add('tbl_ledgerbalance',$data);
+				// );
+				// $result = $this->General_model->add('tbl_ledgerbalance',$data);
 				$response_text = 'Supplier details Added';
 			}
 			if($result){
@@ -671,8 +673,9 @@ class Administration extends MY_Controller {
 						'opening_bal'=> $this->input->post('opening_bal'),
 						'debit_or_credit'=>$debit_credit,
 						'ledgerhead_status'=>1,
+						'ledger_default'=>0,
 						'company_id_fk'=>$company,
-						'created_date' => date('Y-m-d H:i:s'),
+						'created_at' => date('Y-m-d H:i:s'),
 						'updated_at' => date('Y-m-d H:i:s'),	
 			);
 			$data3 = array(

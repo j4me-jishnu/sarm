@@ -158,6 +158,14 @@ class Accountsreports extends MY_Controller
 
 			$start_date =(isset($_REQUEST['start_date']))?$_REQUEST['start_date']:'';
         	$end_date =(isset($_REQUEST['end_date']))?$_REQUEST['end_date']:'';
+			if($start_date == 'dd/mm/yyyy')
+			{
+				$start_date = "";
+			}
+			if($end_date == 'dd/mm/yyyy')
+			{
+				$end_date = "";
+			}
 			if($start_date){
 				$start_date = str_replace('/', '-', $start_date);
 				$start_date =  date("Y-m-d",strtotime($start_date));
@@ -209,6 +217,7 @@ class Accountsreports extends MY_Controller
 				$id = $this->session->userdata('id');
 				$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
 				}
+			$template['addition_data'] = $this->Accountsreports_model->getGroupsList();
 			$template['body'] = 'Accounts/Profitloss/list';
 			$template['script'] = 'Accounts/Profitloss/script';
 			$this->load->view('template', $template);
@@ -251,6 +260,14 @@ class Accountsreports extends MY_Controller
 
 			$start_date =(isset($_REQUEST['start_date']))?$_REQUEST['start_date']:'';
         	$end_date =(isset($_REQUEST['end_date']))?$_REQUEST['end_date']:'';
+			if($start_date == 'dd/mm/yyyy')
+			{
+				$start_date = "";
+			}
+			if($end_date == 'dd/mm/yyyy')
+			{
+				$end_date = "";
+			}
 			if($start_date){
 				$start_date = str_replace('/', '-', $start_date);
 				$start_date =  date("Y-m-d",strtotime($start_date));
@@ -334,6 +351,14 @@ class Accountsreports extends MY_Controller
 			if(isset($fnyr->finyear_id)){ $fyr = $fnyr->finyear_id; } else{ $fyr = 0;}
 			$start_date =(isset($_REQUEST['start_date']))?$_REQUEST['start_date']:'';
         	$end_date =(isset($_REQUEST['end_date']))?$_REQUEST['end_date']:'';
+			if($start_date == 'dd/mm/yyyy')
+			{
+				$start_date = "";
+			}
+			if($end_date == 'dd/mm/yyyy')
+			{
+				$end_date = "";
+			}
 			if($start_date){
 				$start_date = str_replace('/', '-', $start_date);
 				$start_date =  date("Y-m-d",strtotime($start_date));
@@ -369,6 +394,7 @@ class Accountsreports extends MY_Controller
 				$id = $this->session->userdata('id');
 				$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
 				}
+			$template['addition_data'] = $this->Accountsreports_model->getGroupsList();
 			$template['fin_year']  = $this->General_model->fin_year();
 			$template['company']=$this->General_model->getCompanies();
 			$template['body'] = 'Accounts/Balancesheet/list';

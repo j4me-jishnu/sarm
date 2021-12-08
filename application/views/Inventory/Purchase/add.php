@@ -148,7 +148,7 @@
             <br>
             <hr>
             <div class="row" style="background-color: #a3a8a5 ">
-              <div class="col-md-2">
+              <div class="col-md-4">
                 <label>Tax Amount</label>
                 <input class="form-control" type="text" name="tax_sum" id="tax_sum" value="0" onkeyup="getNetTotal()">
                 <label>Bill Discount</label><br>
@@ -159,8 +159,8 @@
                 <input class="form-control" type="text" name="frieght" id="frieght" value="0" onkeyup="getNetTotal()" required>
                 <label>Packing Charge</label>
                 <input class="form-control" type="text" name="pack_chrg" id="pack_chrg" value="0" onkeyup="getNetTotal()">
-                <label>Net Total</label>
-                <input class="form-control" type="text" style="height:50px; background-color: paleturquoise;" autofocus name="net_total" id="net_total" value="0" >
+                <!-- <label>Net Total</label>
+                <input class="form-control" type="text" style="height:50px; background-color: paleturquoise;" autofocus name="net_total" id="net_total" value="0" > -->
                 <br>
                 <!-- Dynamic Radio Button for Cash Or Bank -->
                 <!-- Added By Rajeev -->
@@ -182,8 +182,15 @@
                 </div>
                 <!-- end of radio button field -->
               </div>
-              <div class="col-md-8"></div>
-              <div class="col-md-2">
+              <div class="col-md-4">
+              <label>Net Total</label>
+                <input class="form-control" type="text" style="height:50px; background-color: paleturquoise;" autofocus name="net_total" id="net_total" value="0" >
+              <label>Round Off Amount</label>
+                <input type="text" name="round_off" id="round_off" class="form-control"  value="0">
+                <input type="hidden" name="round_off_diff" id="round_off_diff" class="form-control"  value="0">
+              </div>
+              <!-- <div class="col-md-6"></div> -->
+              <div class="col-md-4">
                 <label>Total</label>
                 <input class="form-control" type="text" name="sum" id="item_total" value="0">
                 <label>Cash Payment</label>
@@ -194,9 +201,7 @@
                 <input class="form-control" type="text" name="old_bal" id="old_bal" value="0">
                 <label>Net Balance</label>
                 <input type="text" name="net_bal" id="net_bal" class="form-control" style="height: 50px;" value="0">
-                <label>Round Off Amount</label>
-                <input type="text" name="round_off" id="round_off" class="form-control"  value="0">
-                <input type="hidden" name="round_off_diff" id="round_off_diff" class="form-control"  value="0">
+                
                 <br>
                 <!-- <input type="submit" name="Submit" value="Save" class="btn btn-success btn-lg"> -->
                 <div class="dropdown">

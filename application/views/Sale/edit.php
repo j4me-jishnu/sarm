@@ -266,7 +266,7 @@
             <br>
             <hr>
             <div class="row" style="background-color: #a3a8a5 ">
-              <div class="col-md-2">
+              <div class="col-md-4">
                 <input type="hidden" name="sale_pay_id" value="<?php if(isset($records[0]->sale_payment_id)) echo  $records[0]->sale_payment_id?>">
                 <label>Tax Amount</label>
                 <input class="form-control" type="text" name="tax_sum" id="tax_sum" value="<?php if(isset($records[0]->tax_amount)) echo  $records[0]->tax_amount?>" onkeyup="getNetTotal()">
@@ -281,16 +281,19 @@
                 <label>Net Total</label>
                 <input class="form-control" type="text" style="height:50px; background-color: paleturquoise;" autofocus name="sum" id="sum" value="<?php if(isset($records[0]->net_total)) echo  $records[0]->net_total?>">
               </div>
-              <div class="col-md-8"></div>
-              <div class="col-md-2">
+              <div class="col-md-4">
+               
+                <label>Round Off Amount</label>
+                <input type="text" name="round_off" id="round_off" class="form-control"  value="<?php if(isset($records[0]->sale_round_off_amt)) echo  $records[0]->sale_round_off_amt?>">
+                <input type="hidden" name="round_off_diff" id="round_off_diff" class="form-control"  value="0">
+              </div>
+              <div class="col-md-4">
                
               <label>Total</label>
                 <input class="form-control" type="text" name="sum" id="item_total" value="0">
 
                     <!-- Dynamic Radio Button for Cash Or Bank -->
-                <!-- Added By Rajeev -->
-                <br>
-                <label for="chkYes">
+                    <label for="chkYes">
                     <input type="radio" id="chkYes" name="bank_or_cash" <?php echo($records[0]->bank_id == NULL) ? 'checked':'' ?> value="0" onclick="ShowHideDiv()"/>
                     Cash
                 </label>
@@ -298,6 +301,7 @@
                     <input type="radio" id="chkNo" name="bank_or_cash" <?php echo($records[0]->bank_id != NULL) ? 'checked':'' ?> value="1" onclick="ShowHideDiv()" />
                     Bank
                 </label>
+                <br>
                 <label>Cash Payment</label>
                 <input class="form-control" type="text" name="cash" id="cash" value="<?php echo($records[0]->bank_id == NULL) ? $records[0]->cash_paid:$records[0]->bank_paid ?>" onkeyup="getNet();" required> 
                 <div id="bank_select" style="display: none">
@@ -316,16 +320,15 @@
                     }
                     ?>
                   </select>
-                </div>    
-                <br>
+                </div>   
+                <!-- Added By Rajeev -->
+               
 
                 <label>Old Balance</label>
                 <input class="form-control" type="text" name="old_bal" id="old_bal" value="<?php if(isset($records[0]->old_balance)) echo  $records[0]->old_balance?>">
                 <label>Net Balance</label>
                 <input type="text" name="net_bal" id="net_bal" class="form-control" style="height: 50px;" value="<?php if(isset($records[0]->net_balance)) echo  $records[0]->net_balance?>">
-                <label>Round Off Amount</label>
-                <input type="text" name="round_off" id="round_off" class="form-control"  value="<?php if(isset($records[0]->sale_round_off_amt)) echo  $records[0]->sale_round_off_amt?>">
-                <input type="hidden" name="round_off_diff" id="round_off_diff" class="form-control"  value="0">
+                
                 <br>
                 <!-- <input type="submit" name="Submit" value="Save" class="btn btn-success btn-lg"> -->
                 <div class="dropdown">

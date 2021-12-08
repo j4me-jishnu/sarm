@@ -274,7 +274,7 @@ Class Administration_model extends CI_Model
         //     $this->db->where('shop_id_fk', 0);
         // }
         $searchValue =($param['searchValue'])?$param['searchValue']:'';
-        $type_company =($param['type_company'])?$param['type_company']:'';
+        @$type_company =($param['type_company'])?$param['type_company']:'';
         if($type_company){
             $this->db->where('tbl_openingstock.company_id',$type_company);
         }

@@ -51,7 +51,7 @@
                     <div class="input-group-btn">
                       <button type="button" class="btn btn-primary nohover">Company</button>
                     </div><!-- /btn-group -->
-                      <select name="company" id="company" class="form-control" onchange="this.form.submit()">
+                      <select name="company" id="company" class="form-control" >
                         <option></option>
                         <?php
                         foreach ($company as $row) 
@@ -67,13 +67,13 @@
                   <div class="col-md-6">
                     <div class="input-group margin">
                       <div class="input-group-btn">
-                        <button type="button" class="btn btn-primary nohover">Date </button>
+                      <button type="button" class="btn btn-primary nohover">Date </button>
                       </div><!-- /btn-group -->
-                        <input id="pmsDateStart" type="text" data-validation-optional="true" data-pms-max-date="today" data-pms-type="date" name="start_date" data-pms-date-to="pmsDateEnd" class="col-md-5 form-control" placeholder="dd/mm/yyyy" >
-                        <span tabindex="-1" class="input-group-btn select-calendar date-range"><button type="button" tabindex="-1" class="btn btn-default"><i class=" fa fa-calendar"></i></button></span>
+                      <input id="pmsDateStart" type="text" data-validation-optional="true" data-pms-max-date="today" data-pms-type="date" name="start_date" data-pms-date-to="pmsDateEnd" class="col-md-5 form-control" placeholder="dd/mm/yyyy" >
+                      <span tabindex="-1" class="input-group-btn select-calendar date-range"><button type="button" tabindex="-1" class="btn btn-default"><i class=" fa fa-calendar"></i></button></span>
                         
-                        <input id="pmsDateEnd" type="text" data-validation-optional="true" data-pms-type="date" name="end_date" data-pms-date-from="pmsDateStart" class="col-md-5 form-control" placeholder="dd/mm/yyyy" >
-                        <span tabindex="-1" class="input-group-btn select-calendar date-range"><button type="button" tabindex="-1" class="btn btn-default"><i class=" fa fa-calendar"></i></button></span>
+                      <input id="pmsDateEnd" type="text" data-validation-optional="true" data-pms-type="date" name="end_date" data-pms-date-from="pmsDateStart" class="col-md-5 form-control" placeholder="dd/mm/yyyy" >
+                      <span tabindex="-1" class="input-group-btn select-calendar date-range"><button type="button" tabindex="-1" class="btn btn-default"><i class=" fa fa-calendar"></i></button></span>
                     </div>
                   </div>
               <div class="col-md-2">

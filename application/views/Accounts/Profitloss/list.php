@@ -1,3 +1,20 @@
+<style>
+  .tree-table .parent-row:hover {
+  cursor: pointer;
+}
+
+.tree-table [data-parent] td:first-child {
+  padding-left: 10px;
+}
+
+.tree-table [data-parent] {
+  display: none;
+}
+
+.tree-table [data-parent].expanded {
+  display: table-row;
+}
+</style>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -76,17 +93,17 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="input-group margin">
-                      <div class="input-group-btn">
-                        <button type="button" class="btn btn-primary nohover">Date </button>
-                      </div><!-- /btn-group -->
-                        <input id="pmsDateStart" type="text" data-validation-optional="true" data-pms-max-date="today" data-pms-type="date" name="start_date" data-pms-date-to="pmsDateEnd" class="col-md-5 form-control" placeholder="dd/mm/yyyy" >
-                        <span tabindex="-1" class="input-group-btn select-calendar date-range"><button type="button" tabindex="-1" class="btn btn-default"><i class=" fa fa-calendar"></i></button></span>
-                        
-                        <input id="pmsDateEnd" type="text" data-validation-optional="true" data-pms-type="date" name="end_date" data-pms-date-from="pmsDateStart" class="col-md-5 form-control" placeholder="dd/mm/yyyy" >
-                        <span tabindex="-1" class="input-group-btn select-calendar date-range"><button type="button" tabindex="-1" class="btn btn-default"><i class=" fa fa-calendar"></i></button></span>
-                    </div>
+                  <div class="input-group margin">
+                    <div class="input-group-btn">
+                    <button type="button" class="btn btn-primary nohover">Date </button>
+                    </div><!-- /btn-group -->
+                    <input id="pmsDateStart" type="text" data-validation-optional="true" data-pms-max-date="today" data-pms-type="date" name="start_date" data-pms-date-to="pmsDateEnd" class="col-md-5 form-control" placeholder="dd/mm/yyyy" >
+                    <span tabindex="-1" class="input-group-btn select-calendar date-range"><button type="button" tabindex="-1" class="btn btn-default"><i class=" fa fa-calendar"></i></button></span>
+                      
+                    <input id="pmsDateEnd" type="text" data-validation-optional="true" data-pms-type="date" name="end_date" data-pms-date-from="pmsDateStart" class="col-md-5 form-control" placeholder="dd/mm/yyyy" >
+                    <span tabindex="-1" class="input-group-btn select-calendar date-range"><button type="button" tabindex="-1" class="btn btn-default"><i class=" fa fa-calendar"></i></button></span>
                   </div>
+                </div>
               <div class="col-md-2">
                 <div class="input-group margin">
                   <div class="input-group-btn">
@@ -97,18 +114,16 @@
               <?php } ?>
             </div>
           </form>
-          <table id="area_table" align="center" width="800" class="table-bordered table-condensed">
-            <thead>
+          <table id="area_table" width="450" class="tree-table table-bordered table-condensed" style="float: left;"> 
+             <head>
               <tr>
-                  <th>PARTICULARS</th>
-                  <th>AMOUNT</th>
-                  <th>PARTICULARS</th>
-                  <th>AMOUNT</th>
+                <th colspan="2">PARTICULARS</th>
+                <TH>AMOUNT</TH>
               </tr>
-            </thead>
-            <tbody>
-              <?php
-              if (empty($purchase) && empty($sales) && empty($direct_income) && empty($indirect_income) && empty($direct_exp) && empty($indirect_exp)) 
+             </head> 
+             <body>
+             <?php
+              if (empty($direct_exp) && empty($indirect_exp)) 
               {
               ?>
                 <tr>
@@ -117,300 +132,322 @@
               <?php
               }
               else
-              { $total_pur=0;$total_sale=0;
-                ?>
-                <tr>
+              { 
+                $total_pur = 0; $total_sale = 0;  $netprofit = 0; $netloss = 0;
+              ?>
+               <tr>
                   <td colspan="2" style="background: #e6ecf5;"><span style="font-family: Arial Narrow;font-size: 14px;"><b>DIRECT EXPENSES</b></span></td>
-                  <td style="background: #e6ecf5;"><span style="font-family: Arial Narrow;font-size: 14px;"><b>DIRECT INCOME</b></span></td>
                   <td style="background: #e6ecf5;"></td>
                 </tr>
-                <tr>
                 <?php
-                if(! empty($purchase))
-                {
-                  if (! empty($purchaseret)) 
-                  {
-                   ?>
-                      <td>
-                        <div class="row">
-                          <div class="col-sm-6">
-                            To <?php if(isset($purchase[0]->ledger_head)) echo strtoupper($purchase[0]->ledger_head) ?>
-                            <br>
-                            To <?php if(isset($purchaseret[0]->ledger_head)) echo strtoupper($purchaseret[0]->ledger_head) ?>
-                          </div>
-                          <div class="col-sm-6" align="right">
-                            <?php if(isset($purchase[0]->sum_deb)) echo $purchase[0]->sum_deb; ?>
-                            <br>
-                            <?php if(isset($purchaseret[0]->sum_cr)) echo $purchaseret[0]->sum_cr; ?>
-                            <hr>
-                          </div>
-                        </div>   
-                      </td>
-                      <td>
-                        <br><br>
-                        <?php echo $total_pur=$purchase[0]->sum_deb-$purchaseret[0]->sum_cr; ?>
-                      </td>
-                   <?php 
-                  }
-                  else
-                  {
-                    ?>
-                      <td>
-                        <div class="row">
-                          <div class="col-sm-6">
-                            To <?php if(isset($purchase[0]->ledger_head)) echo strtoupper($purchase[0]->ledger_head) ?>
-                            <br>
-                          </div>
-                          <div class="col-sm-6" align="right">
-                            <?php if(isset($purchase[0]->sum_deb)) echo $purchase[0]->sum_deb; ?>
-                            <br>
-                            <hr>
-                          </div>
-                        </div>   
-                      </td>
-                      <td>
-                        <br><br>
-                        <?php echo $total_pur=$purchase[0]->sum_deb; ?>
-                      </td>
-                   <?php
-                  }
-                }
-                if(! empty($sales))
-                {
-                  if(! empty($salesret))
-                  {
-                    ?>
-                      <td>
-                      <div class="row">
-                        <div class="col-sm-6">
-                           <?php if(isset($sales[0]->ledger_head)) echo strtoupper($sales[0]->ledger_head) ?>
-                          <br>
-                           <?php if(isset($salesret[0]->ledger_head)) echo strtoupper($salesret[0]->ledger_head) ?>
-                        </div>
-                        <div class="col-sm-6" align="right">
-                          <?php if(isset($sales[0]->sum_cr)) echo $sales[0]->sum_cr; ?>
-                          <br>
-                          <?php if(isset($salesret[0]->sum_deb)) echo $salesret[0]->sum_deb; ?>
-                          <hr>
-                        </div>
-                      </div>
-                      </td>
-                      <td>
-                        <br><br>
-                        <?php if(isset($salesret[0]->sum_deb) && isset($sales[0]->sum_cr)) echo $total_sale=$sales[0]->sum_cr-$salesret[0]->sum_deb; ?>
-                      </td>
-                   <?php
-                  }
-                  else
-                  {
-                    ?>
-                    <td>
-                      <div class="row">
-                        <div class="col-sm-6">
-                           <?php if(isset($sales[0]->ledger_head)) echo strtoupper($sales[0]->ledger_head) ?>
-                          <br>
-                        </div>
-                        <div class="col-sm-6" align="right">
-                          <?php if(isset($sales[0]->sum_cr)) echo $sales[0]->sum_cr; ?>
-                          <br>
-                          <hr>
-                        </div>
-                      </div>
-                      </td>
-                      <td>
-                        <br><br>
-                        <?php echo $total_sale=$sales[0]->sum_cr; ?>
-                      </td>
-                   <?php
-                  }
-                }
-                ?>
-                </tr>
-                <?php
-                if (!empty($direct_exp) || !empty($direct_income)) 
-                {
-                  $direct_exp_count = count($direct_exp);
-                  $direct_income_count = count($direct_income);
-                  if ($direct_exp_count > $direct_income_count) 
-                  {
-                    $count = $direct_exp_count;
-                  }
-                  else if($direct_income_count > $direct_exp_count)
-                  {
-                    $count = $direct_income_count;
-                  }
-                  else
-                  {
-                    $count=$direct_exp_count;
-                  }
-
-                  for ($i=0; $i < $count; $i++) 
-                  { 
-                  ?>
-                  <tr>
-                    <td>To <?php if(isset($direct_exp[$i]->ledger_head)) echo strtoupper($direct_exp[$i]->ledger_head); ?></td>
-                    <td><?php if(isset($direct_exp[$i]->debit)) echo round($direct_exp[$i]->debit,2); ?></td>
-                    <td> <?php if(isset($direct_income[$i]->ledger_head)) echo strtoupper($direct_income[$i]->ledger_head);?></td>
-                    <td><?php if(isset($direct_income[$i]->credit)) echo round($direct_income[$i]->credit,2); ?></td>
-                  </tr>
-                  <?php
-                  if(isset($direct_exp[$i]->debit)){$total_pur = $total_pur + $direct_exp[$i]->debit;}
-                  if(isset($direct_income[$i]->credit)){$total_sale = $total_sale + $direct_income[$i]->credit;} 
-                  }
-                }
+                $x = 1;
+                $c = 1;
+                foreach($addition_data as $group_heads){
+                  if($group_heads->group_id == 27 || $group_heads->group_id == 28 || $group_heads->group_id == 31 || $group_heads->group_id == 35 || $group_heads->group_id == 36){
+                 
                 ?>
                 <tr>
+                  <td colspan="2" id="row-1-<?php echo $x ?>" class="parent-row">&nbsp;&nbsp;&nbsp;&nbsp;<b><?php echo($group_heads->group_name)?$group_heads->group_name:'' ?></b></td>
                   <td></td>
-                  <td></td>
-                  <td> <?php echo $closing['ledgerhead'] ?></td>
-                  <td><?php echo $closing['amount'];$total_sale = $total_sale + $closing['amount']; ?></td>
                 </tr>
-                <?php
-                if($total_sale > $total_pur)
-                {
-                ?>
-                  <tr>
-                    <td><label>TO GROSS PROFIT</label></td>
-                    <td><?php echo $profit=$total_sale-$total_pur ?></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td><?php echo $total_sale; ?></td>
-                    <td></td>
-                    <td><?php echo $total_sale; ?></td>
-                  </tr>
-                <?php
-                }
-                else if($total_pur > $total_sale)
-                {
-                ?>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td><label> Gross loss</label></td>
-                    <td><?php echo $loss=$total_pur-$total_sale ?></td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td><?php echo $total_pur; ?></td>
-                    <td></td>
-                    <td><?php echo $total_pur; ?></td>
-                  </tr>
                 <?php 
-                }
+                 for ($i=0; $i < count($direct_exp); $i++) 
+                 {   
+                    if($direct_exp[$i]->group_id_fk == $group_heads->group_id)
+                    {
                 ?>
-                  <tr>
-                    <td colspan="4" style="height: 50px;"></td>
-                  </tr>
-
-                <?php
-                if(isset($profit))
-                {
-                ?>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td> Gross profit b/d</td>
-                    <td><?php echo $profit;$loss=0; ?></td>
-                  </tr>
-                <?php
-                }
-                else if(isset($loss))
-                {
-                ?>
-                  <tr>
-                    <td>To Gross loss b/d</td>
-                    <td><?php echo $loss;$profit=0; ?></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                <?php
-                }
-                ?>
-                <tr>
-                    <td colspan="2" style="background: #e6ecf5;"><span style="font-family: Arial Narrow;font-size: 14px;"><b>INDIRECT EXPENSES</b></span></td>
-                    <td style="background: #e6ecf5;"><span style="font-family: Arial Narrow;font-size: 14px;"><b>INDIRECT INCOME</b></span></td>
-                    <td style="background: #e6ecf5;"></td>
+                <tr data-parent="row-1-<?php echo $c ?>">
+                  <td colspan="2"> &nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;To <?php if(isset($direct_exp[$i]->ledger_head)) echo strtoupper($direct_exp[$i]->ledger_head); ?></td>
+                  <td><?php if(isset($direct_exp[$i]->debit)) echo round($direct_exp[$i]->debit,2); ?></td>
                 </tr>
                 <?php
-                if (!empty($indirect_exp) || !empty($indirect_income)) 
-                {
-                  $indirect_exp_count = count($indirect_exp);
-                  $indirect_income_count = count($indirect_income);
-                  if ($indirect_exp_count > $indirect_income_count) 
-                  {
-                    $count = $indirect_exp_count;
-                  }
-                  else if($indirect_income_count > $indirect_exp_count)
-                  {
-                    $count = $indirect_income_count;
-                  }
-                  else
-                  {
-                    $count = $indirect_income_count;
-                  }
-                  $netprofit=$profit;
-                  $netloss=$loss;
-                  for ($i=0; $i < $count; $i++) 
-                  { 
-                  ?>
-                  <tr>
-                    <td>To <?php if(isset($indirect_exp[$i]->ledger_head)) echo strtoupper($indirect_exp[$i]->ledger_head); ?></td>
-                    <td><?php if(isset($indirect_exp[$i]->debit)) echo round($indirect_exp[$i]->debit,2); ?></td>
-                    <td> <?php if(isset($indirect_income[$i]->ledger_head)) echo strtoupper($indirect_income[$i]->ledger_head);?></td>
-                    <td><?php if(isset($indirect_income[$i]->credit)) echo round($indirect_income[$i]->credit,2); ?></td>
-                  </tr>
-                  <?php
-                  // if(isset($indirect_exp[$i]['debit_amt'])){$profit = $profit + $direct_exp[$i]['debit_amt'];}
-                  // if(isset($indirect_income[$i]['credit_amt'])){$loss = $loss + $direct_income[$i]['credit_amt'];}
-                  if(isset($indirect_exp[$i]->debit)){$netloss = $netloss + $indirect_exp[$i]->debit;}
-                  if(isset($indirect_income[$i]->credit)){$netprofit = $netprofit  + $indirect_income[$i]->credit;}
-
-                  }
+                  } } }
+                  $x++;
+                  $c++;
                 }
-                // echo $netprofit;echo "-";echo $netloss;
-                if($netprofit < $netloss)
-                {
-                ?>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td><label> NET LOSS C/D</label></td>
-                    <td><?php echo $netloss-$netprofit; ?><input type="hidden" name="loss" id="loss" value="<?php echo $netloss-$netprofit; ?>"></td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td><?php echo $netloss; ?></td>
-                    <td></td>
-                    <td><?php echo $netloss; ?></td>
-                  </tr>
-                <?php  
+                for($i=0; $i < count($direct_exp); $i++){
+                  if(isset($direct_exp[$i]->debit)){$total_pur = $total_pur + $direct_exp[$i]->debit;}
+                }   
+                for($i=0; $i < count($direct_income); $i++){
+                  if(isset($direct_income[$i]->credit)){$total_sale = $total_sale + $direct_income[$i]->credit;} 
                 }
-                else
-                {
+                $total_sale = $total_sale + $closing['amount'];
                 ?>
+                <tr>
+                  <td style="opacity:0;">hello</td>
+                </tr>
+                <?php if($total_sale > $total_pur){ ?>
+                <tr>
+                  <td colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;<b>TO GROSS PROFIT</b></td>
+                  <td><?php echo $profit=$total_sale-$total_pur ?></td>
+                </tr>
+                <tr>
+                  <td colspan="2"></td>
+                  <td><?php echo $total_sale; ?></td>
+                </tr>
+                <?php } else { ?>
                   <tr>
-                    <td><label>TO NET PROFIT C/D</label></td>
-                    <td><?php echo $netprofit-$netloss; ?><input type="hidden" name="profit" id="profit" value="<?php echo $netprofit-$netloss; ?>"></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td><?php echo $netprofit; ?></td>
-                    <td></td>
-                    <td><?php echo $netprofit; ?></td>
-                  </tr>
+                  <td colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;<b>TO GROSS LOSS</b></td>
+                  <td><?php echo $loss=$total_pur-$total_sale ?></td>
+                </tr>
+                <?php } ?>  
+                <tr>
+                  <td colspan="2" style="background: #e6ecf5;"><span style="font-family: Arial Narrow;font-size: 14px;"><b>INDIRECT EXPENSES</b></span></td>
+                  <td style="background: #e6ecf5;"></td>
+                </tr>
                 <?php
+                $x=29;
+                $c=29;
+                  foreach($addition_data as $group_heads){
+                    if($group_heads->group_id == 29 || $group_heads->group_id == 34 ){
+                ?>
+                <tr>
+                  <td colspan="2" id="row-2-<?php echo $x ?>" class="parent-row">&nbsp;&nbsp;&nbsp;&nbsp;<b><?php echo $group_heads->group_name ?></b></td>
+                  <td></td>
+                </tr>
+                <?php
+                  for($i=0; $i< count($indirect_exp); $i++ )
+                  {
+                    if($indirect_exp[$i]->group_id_fk == $group_heads->group_id)
+                    {
+                ?>
+                <tr data-parent="row-2-<?php echo $c ?>">
+                  <td colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;To <?php if(isset($indirect_exp[$i]->ledger_head)) echo strtoupper($indirect_exp[$i]->ledger_head); ?></td>
+                  <td><?php if(isset($indirect_exp[$i]->debit)) echo round($indirect_exp[$i]->debit,2); ?></td>
+                </tr>
+            <?php
+                  } } } 
+                  $x++;
+                  $c++;
                 }
-              
-              } 
+                  $total_pur5 = 0;
+                  $total_sale5 = 0;
+                  $profit5 = 0;
+                  $loss5 = 0;
+                  for($i=0; $i < count($direct_exp); $i++){
+                    if(isset($direct_exp[$i]->debit)){$total_pur5 = $total_pur5 + $direct_exp[$i]->debit;}
+                  }   
+                  for($i=0; $i < count($direct_income); $i++){
+                    if(isset($direct_income[$i]->credit)){$total_sale5 = $total_sale5 + $direct_income[$i]->credit;} 
+                  }
+                  $total_sale5 = $total_sale5 + $closing['amount'];
+                  $profit5=$total_sale5-$total_pur5;
+                  $loss5=$total_pur5-$total_sale5;
+                  if($profit5 > $loss5){
+                  $profit5=$total_sale5-$total_pur5;
+                  $loss5 = 0;
+                  }
+                  else{
+                  $loss5=$total_pur5-$total_sale5;
+                  $profit = 0;
+                  }
+
+                  $netprofit = $profit5;
+                  $netloss = $loss5;
+                  for($i=0;$i<count($indirect_exp);$i++){
+                    if(isset($indirect_exp[$i]->debit)){$netloss = $netloss + $indirect_exp[$i]->debit;}
+                  }
+                  for($i=0;$i<count($indirect_income);$i++){
+                    if(isset($indirect_income[$i]->credit)){$netprofit = $netprofit  + $indirect_income[$i]->credit;}
+                  }
+                  if($netprofit > $netloss)
+                {
+            ?>      
+                  <tr>
+                    <td colspan="2"><label>TO NET PROFIT C/D</label></td>
+                    <td><?php echo $netprofit-$netloss; ?><input type="hidden" name="profit" id="profit" value="<?php echo $netprofit-$netloss; ?>"></td>
+                  </tr>
+                  <tr>
+                    <td colspan="2"></td>
+                    <td><?php echo $netprofit; ?></td>
+                  </tr>
+            <?php        
+                }
+                else {
+           ?>   
+                <tr>
+                  <td colspan="2"></td>
+                  <td><?php echo $netloss; ?></td>
+                </tr>    
+           <?php       
+               } }     
+            ?>
+             </body>
+          </table>
+          <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+          <table id="area_table"  width="450" class="tree-table table-bordered table-condensed" style="float: left;">
+              <head>
+                <tr>
+                  <th colspan="2">PARTICULARS</th>
+                  <TH>AMOUNT</TH>
+                </tr>
+              </head>
+              <body>
+              <?php
+              if (empty($direct_income) && empty($indirect_income)) 
+              {
               ?>
-            </tbody>
+                <tr>
+                  <td colspan="4">NO DATA FOUND</td>
+                </tr>
+              <?php
+              }
+              else
+              { 
+                $total_pur2 = 0; $total_sale2 = 0; $total_sale3 = 0; $netloss2 = 0
+              ?>
+                <tr>
+                  <td colspan="2" style="background: #e6ecf5;"><span style="font-family: Arial Narrow;font-size: 14px;"><b>DIRECT INCOME</b></span></td>
+                  <td style="background: #e6ecf5;"><span style="font-family: Arial Narrow;font-size: 14px;"><b>AMOUNT</b></span></td>
+                </tr>
+                <?php
+                $x=1;
+                $c=1;
+                  foreach($addition_data as $group_heads){
+                    if($group_heads->group_id == 24 || $group_heads->group_id == 25){
+                ?>
+                <tr>
+                  <td colspan="2" id="row-3-<?php echo $x ?>" class="parent-row">&nbsp;&nbsp;&nbsp;&nbsp;<b><?php echo $group_heads->group_name ?></b></td>
+                  <td></td>
+                </tr>
+                <?php 
+                  for($i=0; $i < count($direct_income); $i++)
+                  {
+                    if($group_heads->group_id == $direct_income[$i]->group_id_fk){
+                ?>
+                <tr data-parent="row-3-<?php echo $c ?>">
+                  <td colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;<?php if(isset($direct_income[$i]->ledger_head)) echo strtoupper($direct_income[$i]->ledger_head); ?></td>
+                  <td><?php if(isset($direct_income[$i]->debit)) echo round($direct_income[$i]->debit,2); ?></td>
+                </tr>
+                <?php
+                  } } } 
+                  $x++;
+                  $c++;
+                }
+                  for($i=0; $i < count($direct_exp); $i++){
+                    if(isset($direct_exp[$i]->debit)){$total_pur2 = $total_pur2 + $direct_exp[$i]->debit;}
+                  }   
+                  for($i=0; $i < count($direct_income); $i++){
+                    if(isset($direct_income[$i]->credit)){$total_sale3 = $total_sale3 + $direct_income[$i]->credit;} 
+                  }
+                ?>
+                <tr>
+                  <td colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;<b><?php echo $closing['ledgerhead'] ?></b></td>
+                  <td><?php echo $closing['amount'];$total_sale3 = $total_sale3 + $closing['amount']; ?></td>
+                </tr>
+                <tr>
+                  <td style="opacity:0;">hello</td>
+                </tr>
+               <?php if($total_pur2 > $total_sale3) { ?>
+                <tr>
+                  <td colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;<b>TO GROSS LOSS</b></td>
+                  <td><?php echo $loss=$total_pur2-$total_sale3 ?></td>
+                </tr>
+                <tr>
+                  <td colspan="2"></td>
+                  <td><?php echo $total_pur2; ?></td>
+                </tr>
+                <?php } else{ ?>
+                <tr>
+                  <td colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;<b>TO GROSS LOSS</b></td>
+                  <td><?php echo $profit2=$total_sale3-$total_pur2 ?></td>
+                </tr>  
+                <?php } ?>
+                <tr>
+                  <td colspan="2" style="background: #e6ecf5;"><span style="font-family: Arial Narrow;font-size: 14px;"><b>INDIRECT INCOME</b></span></td>
+                  <td style="background: #e6ecf5;"></td>
+                </tr>
+                <?php
+                $x=40;
+                $c=40;
+                  foreach($addition_data as $group_heads){
+                    if($group_heads->group_id == 26){
+                ?>
+                <tr>
+                  <td colspan="2" id="row-4-<?php echo $x ?>" class="parent-row">&nbsp;&nbsp;&nbsp;&nbsp;<b><?php echo $group_heads->group_name ?></b></td>
+                  <td></td>
+                </tr>
+                <?php
+                  for($i=0; $i < count($indirect_income); $i++){
+                    if($group_heads->group_id == $indirect_income[$i]->group_id_fk){
+                ?>
+                <tr data-parent="row-4-<?php echo $c ?>">
+                  <td colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;<?php if(isset($indirect_income[$i]->ledger_head)) echo strtoupper($indirect_income[$i]->ledger_head); ?></td>
+                  <td><?php if(isset($indirect_income[$i]->debit)) echo round($indirect_income[$i]->debit,2); ?></td>
+                </tr>
+              <?php
+                  } } } 
+                  $x++;
+                  $c++;
+                }
+                  $total_pur6 = 0;
+                  $total_sale6 = 0;
+                  $profit6 = 0;
+                  $loss6 = 0;
+                  for($i=0; $i < count($direct_exp); $i++){
+                    if(isset($direct_exp[$i]->debit)){$total_pur6 = $total_pur6 + $direct_exp[$i]->debit;}
+                  }   
+                  for($i=0; $i < count($direct_income); $i++){
+                    if(isset($direct_income[$i]->credit)){$total_sale6 = $total_sale6 + $direct_income[$i]->credit;} 
+                  }
+                  $total_sale6 = $total_sale6 + $closing['amount'];
+                  $profit6=$total_sale6-$total_pur6;
+                  $loss6=$total_pur6-$total_sale6;
+                  if($profit6 > $loss6){
+                  $profit6=$total_sale6-$total_pur6;
+                  $loss6 = 0;
+                  }
+                  else{
+                  $loss6=$total_pur6-$total_sale6;
+                  $profit6 = 0;
+                  }
+
+                  $netprofit2 = $profit6;
+                  $netloss2 = $loss6;
+                  for($i=0;$i<count($indirect_exp);$i++){
+                   if(isset($indirect_exp[$i]->debit)){$netloss2 = $netloss2 + $indirect_exp[$i]->debit;}
+                  }
+                  for($i=0;$i<count($indirect_income);$i++){
+                    if(isset($indirect_income[$i]->credit)){$netprofit2 = $netprofit2  + $indirect_income[$i]->credit;}
+                  }
+                  if($netprofit2 < $netloss2)
+                  {
+              ?>
+                  <tr>
+                    <td><label><b>NET LOSS C/D <b></label></td>
+                    <td><?php echo $netloss2-$netprofit2; ?><input type="hidden" name="loss" id="loss" value="<?php echo $netloss2-$netprofit2; ?>"></td>
+                  </tr>
+              <?php
+                  } else {
+              ?>    
+                  <tr>
+                    <td colspan="2"></td>
+                    <td><?php echo $netprofit2 ?></td>
+                  </tr>
+              <?php    
+              }  }
+              ?>
+              </body>    
           </table>
         </div>
       </div>
     </section>
 </div>
+<script>
+ function toggleRow(event) {
+  var rowId = event.currentTarget.id;
+  var children = document.querySelectorAll("[data-parent=" + rowId + "]")
+  children.forEach(function(row) {
+    if (row.classList.contains("expanded")) {
+      row.classList.remove("expanded");
+    } else {
+      row.classList.add("expanded");
+    }
+  });
+}
+
+var rows = document.querySelectorAll(".parent-row")
+rows.forEach(function(row) {
+  row.addEventListener("click", toggleRow);
+});
+  </script>
