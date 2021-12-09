@@ -816,4 +816,12 @@ class Hrmodule extends MY_Controller {
         echo $data_json;
 	}
 
+	public function getPeiceRateAdvance()
+	{
+		$emp_id = $this->input->post('emp_id');
+		$month = $this->input->post('month');
+		$data = $this->Hr_model->getPeiceRateAdvance($emp_id,$month);
+		echo json_encode($data);
+	}
+
 }

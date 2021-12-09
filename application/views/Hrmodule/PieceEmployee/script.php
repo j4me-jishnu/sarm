@@ -123,7 +123,7 @@ function totalFun(row)
   total_calculation.push(parseFloat($('#tot_'+row+'').val()));
   const sum_final =total_calculation.reduce((a,b) => a + b, 0);
   $('#emp_pr_total').val(sum_final);
-  
+    advanceFun();
 }
 
 function advanceFun()
@@ -178,6 +178,30 @@ $.each( $('table tr'), function (i, row){
 });
 
 pdf.save('sample-file.pdf');
+}
+
+function getAdvanceamt()
+{
+    var emp_id = $('#emp_id_adv').val();
+    var month = $('#payroll_salmonth').val(); 
+
+    $.ajax({
+            url:"<?php echo base_url();?>getPeiceRateAdvance",
+            data:{emp_id:emp_id,month:month},
+            method:"POST",
+            datatype:"json",
+            success:function(data){
+                var list = $.parseJSON(data);
+                if(list != ''){    
+                $('#emp_pr_adv').val(list[0].adv_amount);
+                }
+                else
+                {
+                var list = 0;
+                $('#emp_pr_adv').val(list);   
+                }
+            }
+        });
 }
 
 </script>

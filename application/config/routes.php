@@ -146,6 +146,7 @@ $route['getOpenstock'] = 'Product/getOpenstock';
 $route['deleteOpenstock'] = 'Product/deleteOpenstock';
 $route['Openstock/edit/(:num)'] = 'Product/editOpening/$1';
 
+
 $route['Employee'] = 'Hrmodule/Employee';
 $route['getEmployee'] = 'Hrmodule/getEmployee';
 $route['addEmployee'] = 'Hrmodule/addEmployee';
@@ -156,6 +157,7 @@ $route['Employee/edit/(:num)'] = 'Hrmodule/editEmployee/$1';
 $route['PieceRateEmployee'] = 'Hrmodule/PieceRateEmployee';
 $route['getPieceEmployee'] = 'Hrmodule/getPieceEmployee';
 $route['getItemLists'] = 'Hrmodule/getItemLists';
+$route['getPeiceRateAdvance'] = 'Hrmodule/getPeiceRateAdvance';
 $route['PeiceRateInvoice/(:any)'] = 'Hrmodule/PeiceRateInvoice/$1';
 $route['addPieceEmployee'] = 'Hrmodule/addPieceEmployee';
 $route['editPieceRateEmployee/(:num)'] = 'Hrmodule/editPieceRateEmployee/$1';
@@ -204,6 +206,8 @@ $route['stockUpdate'] = 'Inventory/stockUpdate';
 $route['Purchase/edit/(:num)'] = 'Inventory/PurchaseEdit/$1';
 $route['checkInvoice']='Inventory/checkInvoice';
 $route['deletePurchase'] = 'Inventory/deletePurchase';
+$route['StockUpdateList/(:num)'] = 'Inventory/StockUpdateList/$1';
+$route['StockUpdateEdit'] = 'Inventory/StockUpdateEdit';
 
 $route['Stock'] = 'Inventory/Stock';
 $route['getStockdetails'] = 'Inventory/getStockdetails';

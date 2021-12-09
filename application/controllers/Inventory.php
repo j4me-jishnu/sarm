@@ -535,4 +535,52 @@ class Inventory extends MY_Controller {
     	echo $json_data;
 	}
 
+	public function StockUpdateList($product_id)
+	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+		}
+		$template['stocks'] = $this->Inventory_model->UpdateStockList($product_id);
+		$template['total_stock'] = $template['stocks'][0]->opening_stock + $template['stocks'][0]->stock_qty; 
+		$template['body'] = 'Inventory/Stock/edit';
+		$template['script'] = 'Inventory/Stock/script';
+		$this->load->view('template', $template);
+		
+
+	}
+	
+	public function StockUpdateEdit()
+	{
+		$product_id = $this->input->post('product_ide');
+			if($product_id)
+			{
+				
+				if($remarks = $this->input->post('remarks') != ""){
+					$remarks = $this->input->post('remarks');
+				}
+				else
+				{
+					$remarks = "";
+				}
+				$data = array(
+					'stock' => $this->input->post('avail_stock'),
+					'remark' => $remarks,
+				);
+
+				$result = $this->General_model->update('tbl_stock',$data,'item_id',$product_id);
+			}
+
+			if($result)
+			{
+				$this->session->set_flashdata('response', "{&quot;text&quot;:&quot;Stock Details Updated successfully&quot;,&quot;layout&quot;:&quot;topRight&quot;,&quot;type&quot;:&quot;success&quot;}");
+			}
+			else
+			{
+				$this->session->set_flashdata('response', '{&quot;text&quot;:&quot;Something went wrong,please try again later&quot;,&quot;layout&quot;:&quot;bottomRight&quot;,&quot;type&quot;:&quot;error&quot;}');
+			}
+
+			redirect('/Stock/', 'refresh');
+	}
+
 }

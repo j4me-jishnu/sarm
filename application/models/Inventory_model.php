@@ -154,6 +154,24 @@ Class Inventory_model extends CI_Model
         $data['recordsFiltered'] = $query->num_rows();
         return $data;
 	}
+
+	public function UpdateStockList($product_id)
+	{
+		
+		$this->db->select('*,tbl_openingstock.stock as opening_stock,tbl_stock.stock as stock_qty');
+		$this->db->from('tbl_product');
+		$this->db->join('tbl_stock','item_id = product_id');
+		$this->db->join('tbl_companyinfo','cmp_id = tbl_product.company_id');
+		$this->db->join('tbl_openingstock','tbl_openingstock.item_id = tbl_product.product_id','left');
+		$this->db->where('product_id',$product_id);
+		$this->db->where('product_status',1);
+		// $this->db->where('tbl_product.product_type','RM');
+		$this->db->order_by('product_id','DESC');
+        $query = $this->db->get();
+		 return $data = $query->result();
+
+	}
+
 	public function getOldbalance($supp_id)
 	{
 		$this->db->select('supplier_oldbal');

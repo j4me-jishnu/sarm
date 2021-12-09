@@ -448,14 +448,14 @@ function getNet()
 {
     var cash = $('#cash').val();
     var bank = $('#bank').val();
-    var sum = $('#sum').val();
+    var sum = $('#net_total').val();
     var old_bal=$('#old_bal').val();
     var net_bal = parseFloat(old_bal) + parseFloat (sum);
-    if (! cash) 
+    if (cash) 
     {
         net_bal = parseFloat(net_bal) - parseFloat(cash);
     }
-    else if (! bank) 
+    else if (bank) 
     {
         net_bal = parseFloat(net_bal) - parseFloat(bank);
     }

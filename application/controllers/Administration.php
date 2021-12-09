@@ -82,6 +82,7 @@ class Administration extends MY_Controller {
 			if($this->input->post('cust_is_supplier') == '1')
 			{
 				$isSalary = 1;
+
 			}
 			else
 			{
@@ -113,6 +114,21 @@ class Administration extends MY_Controller {
 						'cust_is_supplier' =>$isSalary,
 						);
 
+			$data_is_supplier = array(
+					'supplier_name' => $this->input->post('cust_name'),
+					'supplier_address' => $this->input->post('cust_address'),
+					'supplier_phone' => $this->input->post('cust_phone'),
+					'supplier_email' => $this->input->post('cust_email'),
+					'supplier_oldbal' => $this->input->post('old_balance'),
+					'company_id' => $company,
+					'supplier_pcategory' => $this->input->post('category'),
+					'supplier_status' => 1,
+					'supplier_act_status' => 0,
+					'debit_credit' => 0,
+					'supplier_type' => $this->input->post('radio_val'),
+					'supplier_is_cust' => $isSalary = 1,
+				);			
+
 			$data2 = array(
 				'group_id_fk'	=> 15,
 				'ledger_head' =>$this->input->post('cust_name'),
@@ -125,6 +141,20 @@ class Administration extends MY_Controller {
 				'created_at' => date('Y-m-d H:i:s'),
 				'updated_at' => date('Y-m-d H:i:s'),
 			);
+
+			$leger_head_supplier1 = array(
+				'group_id_fk'	=> 21,
+				'ledger_head' =>$this->input->post('cust_name'),
+				'ledgerhead_desc' => 'Supplier',
+				'opening_bal'	=> $this->input->post('old_balance'),
+				'debit_or_credit' => $ledger_head_status,
+				'ledgerhead_status'	=> 1,
+				'ledger_default' => 0,
+				'company_id_fk'	=>	$company,
+				'created_at' => date('Y-m-d H:i:s'),
+				'updated_at' => date('Y-m-d H:i:s'),
+			);
+
 			$data3 =array(
 				'ledger_head' =>$this->input->post('cust_name'),
 				'opening_bal'	=> $this->input->post('old_balance'),
@@ -157,6 +187,10 @@ class Administration extends MY_Controller {
 			}
 			else{
 				$result = $this->General_model->add($this->customer,$datas);
+				if($isSalary == 1){
+					$result3 = $this->General_model->add('tbl_supplier',$data_is_supplier);
+					$result5 = $this->General_model->add('tbl_ledgerhead',$leger_head_supplier1);
+				}
 				$result2 = $this->General_model->add_returnID('tbl_ledgerhead',$data2);
 				$data_ledger_balance = array(
 					'company_id_fk' => $company,
@@ -296,6 +330,19 @@ class Administration extends MY_Controller {
 						'supplier_act_status' =>$suppelier_active_status,
 						'supplier_is_cust' =>$is_customer,
 						);
+			$data_is_customer = array(
+				'company_id' => $company,
+				'custname' => $this->input->post('supplier_name'),
+				'custaddress' => $this->input->post('supplier_address'),
+				'custphone' => $this->input->post('supplier_phone'),
+				'custemail' => $this->input->post('supplier_email'),
+				'old_balance' => $this->input->post('supplier_oldbal'),
+				'custstatus' => 1,
+				'cust_pcategory' => $this->input->post('category'),
+				'debit_credit' => $this->input->post('supplier_type'),
+				'cust_act_status' => 0,
+				'cust_is_supplier' => 1,
+			);			
 
 			$data2 = array(
 				'group_id_fk'	=>	21,
@@ -310,6 +357,18 @@ class Administration extends MY_Controller {
 				'updated_at' => date('Y-m-d H:i:s'),
 			);
 
+			$ledger_head_customer = array(
+				'group_id_fk'	=>	15,
+				'ledger_head'	=>	$this->input->post('supplier_name'),
+				'ledgerhead_desc'	=>	'Customer',
+				'opening_bal'	=>	$this->input->post('supplier_oldbal'),
+				'debit_or_credit'	=> $suppelier_types,
+				'ledgerhead_status'	=> 1,
+				'ledger_default' => 0,
+				'company_id_fk'	=>	$company,
+				'created_at' => date('Y-m-d H:i:s'),
+				'updated_at' => date('Y-m-d H:i:s'),
+			);
 			$data3	=	array(
 				'ledger_head'	=>	$this->input->post('supplier_name'),
 				'debit_or_credit'	=> $suppelier_types,
@@ -340,6 +399,10 @@ class Administration extends MY_Controller {
 			}
 			else{
 				$result = $this->General_model->add($this->suppliers,$data);
+				if($is_customer == 1){
+					$result3 = $this->General_model->add('tbl_customer',$data_is_customer);
+					$result5 = $this->General_model->add('tbl_ledgerhead',$ledger_head_customer);
+				}
 				$result2 = $this->General_model->add_returnID('tbl_ledgerhead',$data2);
 				// $data_ledger_balance = array(
 				// 	'company_id_fk' => $company,

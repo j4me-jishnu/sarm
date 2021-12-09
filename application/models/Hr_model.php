@@ -390,4 +390,15 @@ Class Hr_model extends CI_Model
         $query = $this->db->get();
         return $query->result();
     }
+
+    public function getPeiceRateAdvance($emp_id,$month)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_advance');
+        $this->db->where('emp_id',$emp_id);
+        $this->db->where('adv_month',$month);
+        $this->db->where('adv_status',1);
+        $query = $this->db->get();
+        return $query->result();
+    }
 }

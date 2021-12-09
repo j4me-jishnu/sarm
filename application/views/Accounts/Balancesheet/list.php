@@ -191,15 +191,6 @@
             </tr>
             <?php 
                 }
-                else
-                {
-            ?>
-            <tr>
-                <td colspan="1">LESS NETLOSS</td>
-                <td><?php echo @$profitloss[0]->amount;@$total=$capital - $profitloss[0]->amount ?></td>
-            </tr>
-            <?php
-                }
             ?>
             </body>        
             <?php
@@ -290,6 +281,14 @@
                 } } } 
                 $c++;
                 $x++;
+            }
+            if(@$profitloss[0]->profit_loss == 1){
+            ?>
+             <tr>
+                <td colspan="1">LESS NETLOSS</td>
+                <td><?php echo @$profitloss[0]->amount;@$total=$capital - $profitloss[0]->amount ?></td>
+            </tr>
+            <?php 
             }
             ?>
             <tr>

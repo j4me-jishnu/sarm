@@ -29,7 +29,7 @@
                     <label for="size_name" class="col-sm-4 control-label">Select Employee</label>
 
                     <div class="col-sm-5">
-                      <select name="emp_pr_id" class="form-control" required>
+                      <select name="emp_pr_id"  id="emp_id_adv" class="form-control" required>
                         <option>SELECT</option>
                         <?php
                         foreach ($employee as $row) 
@@ -42,7 +42,30 @@
                       </select>
                     </div>
                   </div>
+                  <div class="form-group">
 
+                <div class="control-label col-md-4">
+                  <label for="exampleInputEmail1">Month</label>
+                </div>
+
+                <div class="col-md-5">
+                  <select class="form-control" onchange="getAdvanceamt()" name="payroll_salmonth" id="payroll_salmonth">
+                    <option>----Please Select----</option>
+                    <option value="1">January</option>
+                    <option value="2">February</option>
+                    <option value="3">March</option>
+                    <option value="4">April</option>
+                    <option value="5">May</option>
+                    <option value="6">June</option>
+                    <option value="7">July</option>
+                    <option value="8">August</option>
+                    <option value="9">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                  </select>
+                </div>
+              </div>
                   <!-- Dynamic Table -->
                   <div class="container" style="margin-left: 10px;">
                   <button type="button" class='delete btn btn-danger'>- Delete</button>
@@ -88,14 +111,14 @@
                     <label for="size_name" class="col-sm-4 control-label">Total <span style="color:red">*</span></label>
 
                     <div class="col-sm-5">
-                      <input type="number" class="form-control" name="emp_pr_total" id="emp_pr_total"  value="<?php if(isset($records[0]->emp_pr_pay_total)) echo $records[0]->emp_pr_pay_total ?>">
+                      <input type="number" class="form-control" onkeyup="advanceFun()" name="emp_pr_total" id="emp_pr_total"  value="<?php if(isset($records[0]->emp_pr_pay_total)) echo $records[0]->emp_pr_pay_total ?>">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="size_name" class="col-sm-4 control-label">Advance</label>
                         
                     <div class="col-sm-5">
-                    <input type="number"  class="form-control" onchange="advanceFun()" name="emp_pr_advance" id="emp_pr_adv"  value="<?php if(isset($records[0]->emp_pr_pay_advance)) echo $records[0]->emp_pr_pay_advance ?>">
+                    <input type="number"  class="form-control" onkeyup="advanceFun()" name="emp_pr_advance" id="emp_pr_adv"  value="<?php if(isset($records[0]->emp_pr_pay_advance)) echo $records[0]->emp_pr_pay_advance ?>">
                     </div>
                   </div>
                   <div class="form-group">
