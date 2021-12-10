@@ -164,18 +164,29 @@
                   </div>
                 </div>      
                 <div class="form-group">
-                  <center><label class="col-sm-2 control-label">Enter Price Details Here.</label></center><hr>
+                  <center><label class="col-sm-2">Enter Price Details Here.</label></center><hr>
                 </div>
 
-                <?php for ($i=0;$i < count($price_category);$i++ ){ ?>
+                <!-- <?php for ($i=0;$i < count($price_category);$i++ ){ ?>
                 <div class="form-group">
                   <label for="size_name" class="col-sm-4 control-label"><?php echo $price_category[$i]->pcategory_name  ?><span style="color:red">*</span></label>
                   <input type="hidden" name="pcat_id[]" value="<?php echo $price_category[$i]->pcategory_id ?>">
-                  <div class="col-sm-5">
-                    <input type="text" name="price[]" class="form-control" value="<?php if(isset($prices)) if($price_category[$i]->pcategory_id == $prices[$i]->pcategory_id) echo $prices[$i]->item_price ?>">
-                  </div>  
+                    <div class="col-sm-5">
+                      <input type="text" name="price[]" class="form-control" value="<?php if(isset($prices)) if($price_category[$i]->pcategory_id == $prices[$i]->pcategory_id) echo $prices[$i]->item_price ?>">
+                    </div>
+    
                 </div>
-              <?php }?>
+              <?php }?> -->
+                  <div class="row">
+                  <?php for ($i=0;$i < count($price_category);$i++ ){ ?>
+                    <div class="col-sm-3">
+                      <label for="size_name" class="control-label"><?php echo $price_category[$i]->pcategory_name  ?><span style="color:red">*</span></label>
+                      <input type="hidden" name="pcat_id[]" value="<?php echo $price_category[$i]->pcategory_id ?>">
+                      <input type="text" name="price[]" class="form-control" value="<?php if(isset($prices)) if($price_category[$i]->pcategory_id == $prices[$i]->pcategory_id) echo $prices[$i]->item_price ?>">
+                    </div>
+                  <?php } ?>  
+                  </div>
+                  <br>
                 <div class="form-group">
                   <center> <button type="submit" class="btn btn-primary">Save</button></center>
                 </div>

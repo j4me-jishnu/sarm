@@ -27,6 +27,7 @@ var response = $("#response").val();
            $table.column(0).nodes().each(function(node,index,dt){
             $table.cell(node).data(index+1);
             });
+            $('td', row).eq(1).html('<input type="checkbox" value="'+data['product_id']+'" name="product_idx[]" id="product_checkbox" class="chkdata">');
             $('td', row).eq(7).html('<center><a href="<?php echo base_url();?>editProduct/'+data['product_id']+'"><i class="fa fa-edit iconFontSize-medium" ></i></a> &nbsp;&nbsp;&nbsp;<a onclick="return confirmDelete('+data['product_id']+')"><i class="fa fa-trash-o iconFontSize-medium" ></i></a></center>');
             if (data['active_status'] == 1) 
             {
@@ -39,6 +40,7 @@ var response = $("#response").val();
         },
 
         "columns": [
+            { "data": "product_status", "orderable": false },
             { "data": "product_status", "orderable": false },
             { "data": "product_code", "orderable": false },
             { "data": "product_name", "orderable": false },
@@ -125,4 +127,44 @@ $(document).on('change','#company',function(){
 // 			}
 // 		})
 // 	});
+// var product_id = [];
+// function submited()
+// {
+//     var ckbox = document.getElementsByClassName("chkdata");
+//     for(var i=0;i<ckbox.length;i++){
+//         element = ckbox[i];
+//         if(element.checked){
+//       var prod_id = ckbox[i].value;
+//       if(prod_id!='' && ckbox!='')
+//       {
+//         product_id.push(prod_id);
+//       }
+//     }
+//     }
+//     if(product_id != ""){
+//     $.ajax({
+//           url:"<?php echo base_url();?>Product/editMultipleItems",
+//           type: 'POST',
+//           data:{product_id:product_id},
+//           dataType: 'json',
+//           success:
+//           function(data){
+//             if(data){
+//                 console.log(data);
+//             }
+//           }
+//         });
+//     }
+// }
+jQuery(function ($) {
+    //form submit handler
+    $('#multiple').submit(function (e) {
+        //check atleat 1 checkbox is checked
+        if (!$('.chkdata').is(':checked')) {
+            //prevent the default form submit if it is not checked
+            e.preventDefault();
+            alert('Please Select The Product you want to edit by clicking checkboxes');
+        }
+    })
+})
 </script>

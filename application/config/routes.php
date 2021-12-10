@@ -137,6 +137,8 @@ $route['itemDelete'] = 'Product/itemDelete';
 $route['editProduct/(:num)'] = 'Product/editProduct/$1';
 $route['activeProduct/(:num)/(:num)'] = 'Product/activeProduct/$1/$2';
 $route['deactiveProduct/(:num)/(:num)'] = 'Product/deactiveProduct/$1/$2';
+$route['editMultipleItems'] = 'Product/editMultipleItems';
+$route['UpdateMultipleItems'] = 'Product/UpdateMultipleItems';
 
 
 $route['Openingstock'] = 'Product/Openingstock';
@@ -231,6 +233,7 @@ $route['Production/view/(:num)'] = 'Manufacturing/viewProduction/$1';
 $route['Production/delete']='Manufacturing/deleteProduction';
 $route['Production/edit/(:num)'] = 'Manufacturing/editProduction/$1';
 $route['Production/updateProduction'] ='Manufacturing/updateProduction';
+
 
 $route['Sale'] = 'Sale';
 $route['Sale/add'] = 'Sale/add';

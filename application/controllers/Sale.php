@@ -193,8 +193,8 @@ class Sale extends MY_Controller {
 				//Insert Round Off Difference in ledgerHead
 				
 					$round_off_diff = array(
-						'group_id_fk' => 29,
-						'ledger_head' => 'Round_off@Sale',
+						'group_id_fk' => 38,
+						'ledger_head' => 'Sale',
 						'ledgerhead_desc' => 'Round off Sale',
 						'opening_bal' => $this->input->post('round_off_diff'),
 						'debit_or_credit' => 2,
@@ -212,8 +212,8 @@ class Sale extends MY_Controller {
 			{
 				$differnce = $round_off_variable - $this->input->post('round_off_diff');
 					$round_off_diff = array(
-						'group_id_fk' => 29,
-						'ledger_head' => 'Round_off@Sale',
+						'group_id_fk' => 38,
+						'ledger_head' => 'Sale',
 						'ledgerhead_desc' => 'Round off Sale',
 						'opening_bal' => $differnce,
 						'debit_or_credit' => 1,

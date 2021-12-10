@@ -208,8 +208,8 @@ class Inventory extends MY_Controller {
 				if($this->input->post('round_off_diff') > 0 && $this->input->post('round_off_diff') <= 0.49){
 
 						$ledger_head_data = array(
-							'group_id_fk' => 29,
-							'ledger_head' => 'Round_off@Purchase',
+							'group_id_fk' => 38,
+							'ledger_head' => 'Purchase',
 							'ledgerhead_desc' => 'Round Off Purchase',
 							'opening_bal' => $this->input->post('round_off_diff'),
 							'debit_or_credit' => 2,
@@ -229,8 +229,8 @@ class Inventory extends MY_Controller {
 					
 					$differnce = $round_off_variable - $this->input->post('round_off_diff');
 					$ledger_head_data = array(
-						'group_id_fk' => 29,
-						'ledger_head' => 'Round_off@Purchase',
+						'group_id_fk' => 38,
+						'ledger_head' => 'Purchase',
 						'ledgerhead_desc' => 'Round Off Purchase',
 						'opening_bal' => $differnce,
 						'debit_or_credit' => 1,

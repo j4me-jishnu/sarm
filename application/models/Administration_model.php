@@ -239,10 +239,26 @@ Class Administration_model extends CI_Model
         $query = $this->db->get();
         return $query->row();
     }
+    public function getProductDetails2($p)
+    {
+        $this->db->select('*');
+        $this->db->where_in('product_id',$p);
+        $this->db->from('tbl_product');
+        $query = $this->db->get();
+        return $query->result();
+    }
     public function getPriceDetails($product_id)
     {
         $this->db->select('*');
         $this->db->where('item_id',$product_id);
+        $this->db->from('tbl_pricelist');
+        $query = $this->db->get();
+        return $query->result();
+    }
+    public function getPriceDetails2($p)
+    {
+        $this->db->select('*');
+        $this->db->where_in('item_id',$p);
         $this->db->from('tbl_pricelist');
         $query = $this->db->get();
         return $query->result();

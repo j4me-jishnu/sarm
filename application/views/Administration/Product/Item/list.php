@@ -11,20 +11,25 @@
     </section><br>
 
     <!-- Main content -->
+    <form id="multiple" action="<?php echo base_url();?>editMultipleItems" method="post">
     <section class="content">
       <input type="hidden" id="response" value="<?php echo $this->session->flashdata('response');?>" />
       <div class="box">
         <div class="box-header">
           <div class="row">
-            <div class="col-sm-9">
+            <div class="col-sm-8">
               <h3>Item List</h3>  
             </div>
             <div class="row">
                 <div class="col-md-1">
-                  <a href="<?php echo base_url();?>addItem" class="btn btn-sm common-btn" data-inline="true"><i class="fa fa-plus-square"></i>Add New</a>
+                  <a href="<?php echo base_url();?>addItem" class="btn btn-sm common-btn" data-inline="true"><i class="fa fa-plus-square"></i> Add New</a>
                 </div>
                 <div class="col-md-1">
-                  <a href="<?php echo base_url();?>importItem" class="btn btn-sm common-btn" data-inline="true"><i class="fa fa-plus-square"></i>Import</a>
+                  <a href="<?php echo base_url();?>importItem" class="btn btn-sm common-btn" data-inline="true"><i class="fa fa-plus-square"></i> Import</a>
+                </div> 
+                <div class="col-md-1">
+                  <!-- <a href="<?php echo base_url();?>editMultipleItems" class="btn btn-sm common-btn"  data-inline="true"><i class="fa fa-edit"></i> Edit Multiple</a> -->
+                  <input type="submit" class="btn btn-sm btn-primary" value="Edit Multiple">
                 </div>  
             </div>
           </div>
@@ -53,6 +58,7 @@
                 <thead>
                   <tr>
                     <th>SI.NO</th>
+                    <th>SELECT</th>
                     <th>PRODUCT CODE</th>
                     <th>PRODUCT NAME</th>
                     <th>MAIN CATEGORY</th>
@@ -69,4 +75,5 @@
         </div>
       </div>
     </section>
+    </form>
 </div>

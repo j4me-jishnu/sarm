@@ -78,6 +78,7 @@
                   <div class="col-md-3">
                     <label></label>
                     <select class="form-control ledgerhead" name="ledgerhead[]" id="ledgerhead_1">
+                      <option value="">SELECT</option>
                       <?php
                           foreach ($ledgerhead as $value) 
                           {
@@ -105,6 +106,7 @@
                   <div class="col-md-3">
                     <label></label>
                     <select class="form-control ledgerhead" name="ledgerhead[]" id="ledgerhead_2">
+                    <option value="">SELECT</option>
                       <?php
                           foreach ($ledgerhead as $value) 
                           {

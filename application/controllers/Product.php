@@ -441,6 +441,80 @@ class Product extends MY_Controller {
 		$template['script'] = 'Administration/Product/Item/script';
 		$this->load->view('template', $template);
 	}
+
+
+	public function editMultipleItems()
+	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
+		$p = array();
+		$product_id = $this->input->post('product_idx');	
+		for($i=0;$i<count($product_id);$i++){
+			 array_push($p,$product_id[$i]);
+		}
+		//$p = implode("','",$product_id);	
+		
+		$template['category']=$this->General_model->getPriceCategories();
+		$template['company']=$this->General_model->getCompanies();
+		$template['mainCategory'] = $this->General_model->getMainCategorylist();
+		$template['subCategory'] = $this->General_model->getSubCategorylist();
+		$template['unit'] = $this->General_model->getUnitlist();
+		$template['price_category'] = $this->General_model->getPriceCategories();
+		$template['records'] = $this->Administration_model->getProductDetails2($p);
+		//var_dump($template['records']);die();
+		//$data = $this->db->last_query();
+		$template['prices'] = $this->Administration_model->getPriceDetails2($p);
+		//$data2 = $this->db->last_query();
+		$template['supplier'] = $this->General_model->getSuppliers();
+		$template['body'] = 'Administration/Product/Item/edit';
+		$template['script'] = 'Administration/Product/Item/script';
+		$this->load->view('template', $template);
+	}
+
+	public function UpdateMultipleItems()
+	{
+		
+		$company = $this->input->post('company');
+		$supp_id = $this->input->post('supp_id');
+		$maincategory = $this->input->post('maincategory');
+		$subcategory = $this->input->post('subcategory');
+		$product_code = $this->input->post('product_code');
+		$product_name = $this->input->post('product_name');
+		$product_description = $this->input->post('product_description');
+		$product_unit = $this->input->post('product_unit');
+		$min_stock = $this->input->post('min_stock');
+		$remark = $this->input->post('remark');
+		$product_ides = $this->input->post('product_ides');
+		$sort = array_map(null,$company,$supp_id,$maincategory,$subcategory,$product_code,$product_name,$product_description,$product_unit,$min_stock,$remark,$product_ides);
+		foreach($sort as $sorts)
+		{
+			$item = array(
+				'company_id' => $sorts[0],
+				'supplier_id' => $sorts[1],
+				'maincategory_id' => $sorts[2],
+				'subcategory_id' => $sorts[3],
+				'product_code'	=> $sorts[4],
+				'product_name'	=> $sorts[5],
+				'product_description' => $sorts[6],
+				'product_unit'	=> $sorts[7],
+				'min_stock'	=> $sorts[8],
+				'product_remark' => $sorts[9],
+			);
+			$result2 = $this->General_model->update('tbl_product',$item,'product_id',$sorts[10]);
+		}
+		$response_text = 'Multiple Products Up[dated';
+		if($result2){
+			$this->session->set_flashdata('response', "{&quot;text&quot;:&quot;$response_text&quot;,&quot;layout&quot;:&quot;topRight&quot;,&quot;type&quot;:&quot;success&quot;}");
+		}	
+		else
+		{
+			$this->session->set_flashdata('response', '{&quot;text&quot;:&quot;Something went wrong,please try again later&quot;,&quot;layout&quot;:&quot;bottomRight&quot;,&quot;type&quot;:&quot;error&quot;}');
+		}			
+	}
+
+
 	public function activeProduct($product_id,$company_id)
 	{
 		$fnyr = $this->General_model->fin_year();
