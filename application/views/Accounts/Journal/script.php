@@ -74,7 +74,8 @@
 			$table.column(0).nodes().each(function(node,index,dt){
             $table.cell(node).data(index+1);
             });
-            $('td', row).eq(6).html('<center><a href="<?php echo base_url();?>Journal/edit/'+data['journal_inv']+'"><i class="fa fa-edit iconFontSize-medium" ></i></a>&nbsp;&nbsp;&nbsp;<a onclick="return confirmDelete('+data['journal_id']+')"><i class="fa fa-trash-o iconFontSize-medium" ></i></a></center>');
+            $('td', row).eq(7).html('<center><a href="<?php echo base_url();?>Journal/edit/'+data['journal_inv']+'"><i class="fa fa-edit iconFontSize-medium" ></i></a>&nbsp;&nbsp;&nbsp;<a onclick="return confirmDelete('+data['journal_id']+')"><i class="fa fa-trash-o iconFontSize-medium" ></i></a></center>');
+            $('td', row).eq(5).html('<center><button type="button" id="journalist" class="btn btn-primary journalist" data-toggle="modal" data-target="#myModal" onclick="Journalist(this.value)" value="'+data['journal_inv']+'"><i class="fa fa-print"></i></button></center>');
             
         },
 
@@ -84,6 +85,7 @@
                 { "data": "ledger_heads", "orderable": false },
                 { "data": "journal_inv", "orderable": false },
                 { "data": "narration", "orderable": false },
+                { "data": "journal_status", "orderable": true },
                 { "data": "amount", "orderable": false },
                 { "data": "journal_status", "orderable": false }
         ]
@@ -106,4 +108,60 @@
 	        });
 	    }
 	}
+
+// function voucher2(){
+// let button = document.getElementById('hello2');
+//    var journal_id = '';
+//     journal_id = journal_inv;
+//     $.ajax({
+//             url:"<?php echo base_url();?>JournalVoucher",
+//             type: 'POST',
+//             data:{journal_id:journal_id},
+//             dataType: 'json',
+//             success:
+//             function(data){
+//                 console.log(data);
+//             }
+//         });
+//     }
+function Journalist(id){
+    var list;
+	var journal_inv;
+    journal_inv = id;
+    $.ajax({
+            url:"<?php echo base_url();?>JournalVoucher",
+            type: 'POST',
+            data:{journal_inv:journal_inv},
+            dataType: 'json',
+            cache: false,
+            success:
+            function(data){
+              for(var i=0;i<data.records.length;i++){
+                  console.log(data.records[i]);
+                  $('#company3').text(data.records[0].cmp_name);
+                  $('#date3').text(data.records[0].journal_date);
+                  $('#note3').text(data.records[0].note);
+                  $('#journal3').text(data.records[0].journal_inv);
+                  list += '<tr><td>'+data.records[i].ledger_head+'</td><td>'+data.records[i].debit_amt+'</td><td>'+data.records[i].credit_amt+'</td><td>'+data.records[i].narration+'</td></tr>';
+              }
+              $('#table_voucher').append(list);
+            }
+        });
+    
+    }  
+ function printData()
+{
+   var divToPrint=document.getElementById("table_voucher");
+   newWin= window.open("");
+   newWin.document.write(divToPrint.outerHTML);
+   newWin.print();
+   newWin.close();
+}
+
+$('#printer').on('click',function(){
+printData();
+})
+$('#myModal').on('hidden.bs.modal', function () {
+ location.reload();
+});
 </script>

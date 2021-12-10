@@ -278,14 +278,16 @@
                 <input class="form-control" type="text" name="frieght" id="frieght" value="<?php if(isset($records[0]->frieght)) echo  $records[0]->frieght?>" onkeyup="getNetTotal()" required>
                 <label>Packing Charge</label>
                 <input class="form-control" type="text" name="pack_chrg" id="pack_chrg" value="<?php if(isset($records[0]->packing_charge)) echo  $records[0]->packing_charge?>" onkeyup="getNetTotal()">
-                <label>Net Total</label>
-                <input class="form-control" type="text" style="height:50px; background-color: paleturquoise;" autofocus name="sum" id="sum" value="<?php if(isset($records[0]->net_total)) echo  $records[0]->net_total?>">
+                
               </div>
               <div class="col-md-4">
-               
-                <label>Round Off Amount</label>
+              <label>Net Total</label>
+                <input class="form-control" type="text" style="height:50px; background-color: paleturquoise;" autofocus name="sum" id="sum" value="<?php if(isset($records[0]->net_total)) echo  $records[0]->net_total?>">
+              <label>Round Off Amount</label>
                 <input type="text" name="round_off" id="round_off" class="form-control"  value="<?php if(isset($records[0]->sale_round_off_amt)) echo  $records[0]->sale_round_off_amt?>">
                 <input type="hidden" name="round_off_diff" id="round_off_diff" class="form-control"  value="0">
+              <label>RoundOff Difference</label>
+                <input type="text" name="round_off2" id="round_off2" class="form-control"  value="0">  
               </div>
               <div class="col-md-4">
                

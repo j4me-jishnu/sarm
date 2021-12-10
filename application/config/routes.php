@@ -294,6 +294,7 @@ $route['getLedgerHeadlist'] = 'Accounts/getLedgerHeadlist';
 $route['getJournallist'] = 'Accounts/getJournallist';
 $route['Journal/edit/(:any)'] = 'Accounts/editJournal/$1';
 $route['deleteJournal'] = 'Accounts/deleteJournal';
+$route['JournalVoucher'] = 'Accounts/JournalVoucher';
 
 $route['Types'] = 'Accounts/Types';
 $route['Types/get'] = 'Accounts/getTypes/';

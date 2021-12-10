@@ -34,6 +34,7 @@
                   <th>JOURNAL</th>
                   <th>JOURNAL#</th>
                   <th>NARRATION</th>
+                  <th>VOUCHER</th>
                   <th>AMOUNT</th>                   
                   <th><center>EDIT/DELETE</center></th>
                 </tr>
@@ -46,3 +47,44 @@
       </div>
     </section>
 </div>
+
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Voucher</h4>
+          <button type="button" id="printer" class="btn btn-default">Print</button>
+        </div>
+        <div class="modal-body">
+        <table class="table table-bordered" id="table_voucher">
+              <tr>
+                <td><b>Company</b></td>
+                <td><b>Date</b></td>
+                <td><b>Note</b></td>
+                <td><b>Journal</b></td>
+              </tr>
+              <tr>
+                <td id="company3"></td>
+                <td id="date3"></td>
+                <td id="note3"></td>
+                <td id="journal3"></td>
+              </tr>
+              <tr>
+                <td><b>LedgerHead</b></td>
+                <td><b>Debit</b></td>
+                <td><b>Credit</b></td>
+                <td><b>Narration</b></td>
+              </tr>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>

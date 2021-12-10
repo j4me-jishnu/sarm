@@ -188,7 +188,10 @@
               <label>Round Off Amount</label>
                 <input type="text" name="round_off" id="round_off" class="form-control"  value="0">
                 <input type="hidden" name="round_off_diff" id="round_off_diff" class="form-control"  value="0">
+              <label>Round Off Difference</label> 
+                <input type="text" name="round_off2" id="round_off2" class="form-control"  value="0">      
               </div>
+              
               <!-- <div class="col-md-6"></div> -->
               <div class="col-md-4">
                 <label>Total</label>

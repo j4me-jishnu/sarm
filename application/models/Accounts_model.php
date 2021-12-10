@@ -475,6 +475,16 @@ Class Accounts_model extends CI_Model
         $this->db->where("journal_inv",$unique_id);
         return $query = $this->db->get()->result();
     }
+    public function getJournals2($unique_id)
+    {
+        $this->db->select('*,DATE_FORMAT(journal_date,\'%d/%m/%Y\')as journal_date');
+        $this->db->from('tbl_journal');
+        $this->db->join('tbl_ledgerhead','ledgerhead_id = ledger_head_id');
+        $this->db->join('tbl_companyinfo','tbl_companyinfo.cmp_id = tbl_journal.company_id_fk');
+        $this->db->where("journal_status",1);
+        $this->db->where("journal_inv",$unique_id);
+        return $query = $this->db->get()->result();
+    }
     public function UpdateJournal($journal_inv)
     {
         $this->db->where('journal_inv',$journal_inv);

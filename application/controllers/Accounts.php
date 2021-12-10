@@ -852,6 +852,7 @@ class Accounts extends MY_Controller {
 			$cmpa_id = $this->session->userdata('cmp_id');	
 			$template['company1']=$this->General_model->get_row('tbl_companyinfo','cmp_id',$cmpa_id);	
 			$template['ledgerhead']=$this->Accounts_model->getLedgerheadlist();
+			//var_dump($template['ledgerhead']);die();
 			$template['company']=$this->General_model->getCompanies();
 			$template['body'] = 'Accounts/Journal/add';
 			$template['script'] = 'Accounts/Journal/script';
@@ -872,26 +873,7 @@ class Accounts extends MY_Controller {
 			{
 				$res = $this->Accounts_model->UpdateJournal($journal_inv);
 			}
-			// if (! $unique_id)
-			// {
-			// 	$unique = $this->Accounts_model->getJournalUnique();
-			// 	if (! $unique)
-			// 	{
-			// 		$unique=1;
-			// 	}
-			// 	else
-			// 	{
-			// 		$unique=$unique+1;
-			// 	}
-			// }
-			// else
-			// {
-			// 	$res = $this->Accounts_model->UpdateJournal($unique_id);
-			// 	if($res != 0)
-			// 	{
-			// 		$unique = $unique_id;
-			// 	}
-			// }
+			
 
 			$journal_date = str_replace('/', '-', $this->input->post('journal_date'));
 			$journal_date =  date("Y-m-d",strtotime($journal_date));
@@ -918,6 +900,30 @@ class Accounts extends MY_Controller {
 			}
 			for ($a=0; $a < count($ledgerhead) ; $a++)
 			{
+				// if($debit != '')
+				// {
+				// 	$bal = $debit[$a];
+				// 	$debit_credit = 1;
+				// }
+				// else
+				// {
+				// 	$bal = $credit[$a];
+				// 	$debit_credit = 2;
+				// }
+				// $ledger_name = $this->General_model->get_row('tbl_ledgerhead','group_id_fk',$ledgerhead[$a]);
+				// $ledger_head = array(
+				// 	'group_id_fk' => $ledgerhead[$a],
+				// 	'ledger_head' => $ledger_name,
+				// 	'ledgerhead_desc' => '.',
+				// 	'opening_bal' => $bal,
+				// 	'debit_or_credit' => $debit_credit,
+				// 	'ledgerhead_status' => 1,
+				// 	'company_id_fk' => $this->input->post('company'),
+				// 	'ledger_default' => 0,
+				// 	'created_at' => date("Y-m-d h:i:sa"),
+				// 	'updated_at' => date("Y-m-d h:i:sa"),
+				// );
+				// $this->General_model->add('tbl_ledgerhead',$ledger_head);
 				$this->BalanceUpdate($this->input->post('company'),$ledgerhead[$a],$journal_date);
 				// echo $ledgerhead[$a];die;
 			}
@@ -998,6 +1004,23 @@ class Accounts extends MY_Controller {
         $response['layout'] = 'topRight';
         $data_json = json_encode($response);
         echo $data_json;
+	}
+
+	public function JournalVoucher()
+	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
+		$journal_id = $this->input->post('journal_inv');		
+		//$cmpa_id = $this->session->userdata('cmp_id');	
+		//$template['company1']=$this->General_model->get_row('tbl_companyinfo','cmp_id',$cmpa_id);		
+		//$template['ledgerhead']=$this->Accounts_model->getLedgerheadlist();
+		//$template['company']=$this->General_model->getCompanies();
+		$template['records'] = $this->Accounts_model->getJournals2($journal_id);
+
+		$data = json_encode($template);
+		echo $data;
 	}
 
 

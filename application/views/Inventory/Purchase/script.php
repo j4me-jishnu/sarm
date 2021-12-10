@@ -367,6 +367,8 @@ function roundOffDiff()
     var differnce = sum2 - round_off_amt2;
     if(isNaN(differnce)){ differnce = 0; }
     $('#round_off_diff').val(differnce);
+    var num = differnce.toFixed(2);
+    $('#round_off2').val(num);
 }
 function getNet()
 {

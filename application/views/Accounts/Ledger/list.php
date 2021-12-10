@@ -154,15 +154,44 @@
                 <tr>
                   <td colspan="5"></td>
                 </tr>
+                <?php 
+                  if($debit_total > $credit_total){
+                ?>
                 <tr>
                   <td></td>
                   <td></td>
-                  <td style="text-align:right;"><label>Total</label></td>
+                  <td style="text-align:right;"></td>
                   <td><label><?php echo $debit_total; ?></label></td>
-                  <td><label><?php echo $credit_total; ?></label></td>
+                  <td><label><?php echo $debit_total; ?></label></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td><b><?php echo $debit_total - $credit_total?></b></td>
+                  <td></td>
                 </tr>
                 <?php
               }
+            else {
+            ?>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td style="text-align:right;"></td>
+                  <td><label><?php echo $credit_total; ?></label></td>
+                  <td><label><?php echo $credit_total; ?></label></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td><b><?php echo $credit_total - $debit_total ?></b></td>
+                </tr>
+            <?php 
+                  }
+            }
               ?>
             </tbody>
           </table>
