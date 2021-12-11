@@ -83,6 +83,15 @@ Class Inventory_model extends CI_Model
 		$this->db->where('tbl_purchase.invoice_number',$invoice);
         return $query = $this->db->get()->result();
 	}
+
+	public function getPurchaseReportInvoice2($invoice)
+	{
+		$this->db->select('*');
+		$this->db->from('tbl_purchasepayments');
+		$this->db->where('tbl_purchasepayments.invoice_number',$invoice);
+        return $query = $this->db->get()->result();
+	}
+	
 	public function UpdatePurchase($invc_no)
 	{
 		$this->db->where('invoice_number',$invc_no)->delete('tbl_purchase');

@@ -96,6 +96,15 @@ Class Sale_model extends CI_Model
         $query = $this->db->get();	
         return $query->result();
 	}
+
+	public function getSaleReportInvoice2($invoice)
+	{
+		$this->db->select('*');
+		$this->db->from('tbl_salepayments');
+		$this->db->where('tbl_salepayments.invoice_number',$invoice);
+        $query = $this->db->get();	
+        return $query->result();
+	}
 	public function UpdateSale($invc_no)
 	{
 		$this->db->where('invoice_number',$invc_no)->delete('tbl_sale');

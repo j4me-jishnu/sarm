@@ -32,7 +32,7 @@ $(document).ready(function () {
             $table.column(0).nodes().each(function(node,index,dt){
             $table.cell(node).data(index+1);
             });
-            $('td', row).eq(7).html('<center><a target ="_blank"  href="<?php echo base_url();?>purchase/invoice/'+data['auto_invoice']+'"><i class="fa  fa-file iconFontSize-medium" ></i></a></center>');
+            $('td', row).eq(7).html('<center><a  href="<?php echo base_url();?>PurchaseInvoiceList/'+data['invoice_number']+'"><i class="fa  fa-file iconFontSize-medium" ></i></a></center>');
             if(data['stockstatus']==0){
                 $('td', row).eq(8).html('<center><input type="hidden" class="invno" value="'+data['invoice_number']+'"/><a onclick="return masterStock('+data['invoice_number']+')"><i class="fa fa-check-square-o" ></i></a></center>');
                 $('td', row).eq(9).html('<center><a href="<?php echo base_url();?>Purchase/edit/'+data['invoice_number']+'"><i class="fa fa-edit iconFontSize-medium" ></i></a>&nbsp;&nbsp;&nbsp;<a onclick="return confirmDelete('+data['invoice_number']+')"><i class="fa fa-trash-o iconFontSize-medium" ></i></a>');
@@ -518,4 +518,23 @@ $(".total").each(function () {
 function net_balance1() {
     var cash = $('#cash').val();
 }
+function printData()
+{
+   var divToPrint=document.getElementById("table_purchase");
+   var htmlToPrint = '' +
+        '<style type="text/css">' +
+        'table th, table td {' +
+        'border:1px solid #000;' +
+        '}' +
+        '</style>';
+    htmlToPrint += divToPrint.outerHTML;     
+   newWin= window.open("");
+   newWin.document.write(htmlToPrint);
+   newWin.print();
+   newWin.close(); 
+}
+
+$('#printer').on('click',function(){
+printData();
+})
 </script>

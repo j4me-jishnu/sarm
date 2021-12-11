@@ -344,6 +344,19 @@ class Sale extends MY_Controller {
 			redirect('/Sale/', 'refresh');
 		}
 	}
+	public function SaleInvoiceList($invoice)
+	{
+		$template['company']=$this->General_model->getCompanies();
+		$template['customers'] = $this->General_model->getCustomers();
+		$template['pcategory'] = $this->General_model->getPriceCategories();
+		$template['itemlist'] = $this->General_model->getItemlist();
+		$template['bank'] = $this->Sale_model->GetBank();
+		$template['records'] = $this->Sale_model->getSaleReportInvoice($invoice);
+		$template['records2'] = $this->Sale_model->getSaleReportInvoice2($invoice);
+		$template['body'] = 'Sale/invoice';
+		$template['script'] = 'Sale/script';
+		$this->load->view('template', $template);
+	}
 	public function getCustomerbyCompany()
 	{
 		header('Content-Type: application/x-json; charset=utf-8');

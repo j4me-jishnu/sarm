@@ -142,9 +142,12 @@ function Journalist(id){
                   $('#date3').text(data.records[0].journal_date);
                   $('#note3').text(data.records[0].note);
                   $('#journal3').text(data.records[0].journal_inv);
-                  list += '<tr><td>'+data.records[i].ledger_head+'</td><td>'+data.records[i].debit_amt+'</td><td>'+data.records[i].credit_amt+'</td><td>'+data.records[i].narration+'</td></tr>';
+                  //list += '<tr><td>'+data.records[i].ledger_head+'</td><td>'+data.records[i].debit_amt+'</td><td>'+data.records[i].credit_amt+'</td><td>'+data.records[i].narration+'</td></tr>';
+                  list='<tr><td colspan="4">Recieved with thanks from <b>'+data.records[0].ledger_head+'</b> the sum of Rs.('+data.records[0].debit_amt+')/- being cash/cheque</td></tr>';
+                  list2='<tr><td colspan="4"><hr>Cashier:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Manager:</td></tr>';
               }
               $('#table_voucher').append(list);
+              $('#table_voucher').append(list2);
             }
         });
     
@@ -155,7 +158,7 @@ function Journalist(id){
    newWin= window.open("");
    newWin.document.write(divToPrint.outerHTML);
    newWin.print();
-   newWin.close();
+   newWin.close(); 
 }
 
 $('#printer').on('click',function(){

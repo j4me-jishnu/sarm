@@ -57,15 +57,18 @@
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">Voucher</h4>
-          <button type="button" id="printer" class="btn btn-default">Print</button>
+          <button type="button" id="printer" class="btn btn-primary">Print</button>
         </div>
         <div class="modal-body">
         <table class="table table-bordered" id="table_voucher">
               <tr>
+                <td colspan="4" style="text-align: center;"><b>RECEIPT VOUCHER</b></td>
+              </tr>
+              <tr>
                 <td><b>Company</b></td>
                 <td><b>Date</b></td>
                 <td><b>Note</b></td>
-                <td><b>Journal</b></td>
+                <td><b>Voucher No</b></td>
               </tr>
               <tr>
                 <td id="company3"></td>
@@ -73,12 +76,12 @@
                 <td id="note3"></td>
                 <td id="journal3"></td>
               </tr>
-              <tr>
+              <!-- <tr>
                 <td><b>LedgerHead</b></td>
                 <td><b>Debit</b></td>
                 <td><b>Credit</b></td>
                 <td><b>Narration</b></td>
-              </tr>
+              </tr> -->
           </table>
         </div>
         <div class="modal-footer">

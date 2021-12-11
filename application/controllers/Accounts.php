@@ -900,30 +900,31 @@ class Accounts extends MY_Controller {
 			}
 			for ($a=0; $a < count($ledgerhead) ; $a++)
 			{
-				// if($debit != '')
-				// {
-				// 	$bal = $debit[$a];
-				// 	$debit_credit = 1;
-				// }
-				// else
-				// {
-				// 	$bal = $credit[$a];
-				// 	$debit_credit = 2;
-				// }
-				// $ledger_name = $this->General_model->get_row('tbl_ledgerhead','group_id_fk',$ledgerhead[$a]);
-				// $ledger_head = array(
-				// 	'group_id_fk' => $ledgerhead[$a],
-				// 	'ledger_head' => $ledger_name,
-				// 	'ledgerhead_desc' => '.',
-				// 	'opening_bal' => $bal,
-				// 	'debit_or_credit' => $debit_credit,
-				// 	'ledgerhead_status' => 1,
-				// 	'company_id_fk' => $this->input->post('company'),
-				// 	'ledger_default' => 0,
-				// 	'created_at' => date("Y-m-d h:i:sa"),
-				// 	'updated_at' => date("Y-m-d h:i:sa"),
-				// );
-				// $this->General_model->add('tbl_ledgerhead',$ledger_head);
+				if($debit[$a] != "")
+				{
+					$bal = $debit[$a];
+					$debit_credit = 1;
+				}
+				else
+				{
+					$bal = $credit[$a];
+					$debit_credit = 2;
+				}
+				$ledger_name = $this->General_model->get_row('tbl_ledgerhead','ledgerhead_id',$ledgerhead[$a]);
+
+				$ledger_head = array(
+					'group_id_fk' => $ledger_name->group_id_fk,
+					'ledger_head' => $ledger_name->ledger_head,
+					'ledgerhead_desc' => '.',
+					'opening_bal' => $bal,
+					'debit_or_credit' => $debit_credit,
+					'ledgerhead_status' => 1,
+					'company_id_fk' => $this->input->post('company'),
+					'ledger_default' => 0,
+					'created_at' => date("Y-m-d h:i:sa"),
+					'updated_at' => date("Y-m-d h:i:sa"),
+				);
+				$this->General_model->add('tbl_ledgerhead',$ledger_head);
 				$this->BalanceUpdate($this->input->post('company'),$ledgerhead[$a],$journal_date);
 				// echo $ledgerhead[$a];die;
 			}

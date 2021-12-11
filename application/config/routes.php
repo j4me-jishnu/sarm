@@ -198,6 +198,7 @@ $route['getOvertimeofEmployee'] = 'Hrmodule/getOvertimeofEmployee';
 $route['Purchase'] = 'Inventory/Purchase';
 $route['getPurchase'] = 'Inventory/getPurchase';
 $route['addPurchase'] = 'Inventory/addPurchase';
+$route['PurchaseInvoiceList/(:num)'] = 'Inventory/PurchaseInvoiceList/$1';
 $route['getSuppDetails'] = 'Inventory/getSuppDetails';
 $route['getItemlist'] = 'Inventory/getItemlist';
 $route['getTaxlist'] = 'Inventory/getTaxlist';
@@ -237,6 +238,7 @@ $route['Production/updateProduction'] ='Manufacturing/updateProduction';
 
 $route['Sale'] = 'Sale';
 $route['Sale/add'] = 'Sale/add';
+$route['SaleInvoiceList/(:num)'] = 'Sale/SaleInvoiceList/$1';
 $route['getCustomerbyCompany'] = 'Sale/getCustomerbyCompany';
 $route['getcustDetails'] = 'Sale/getcustDetails';
 $route['checkInvoicenumber'] = 'Sale/checkInvoicenumber';

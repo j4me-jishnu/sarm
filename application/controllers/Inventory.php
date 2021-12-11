@@ -248,7 +248,8 @@ class Inventory extends MY_Controller {
 			{
 				$pur_table_id = $this->input->post('pur_table_id');
 				$total_pay_id = $this->input->post('total_payments_id');
-				if($draft == 2){
+				if($draft == 2
+				){
 					$j=1;
 				for ($i=0; $i < $counter; $i++) 
 				{ 
@@ -357,6 +358,21 @@ class Inventory extends MY_Controller {
 			}
 			redirect('/Purchase/', 'refresh');
 		}	
+	}
+
+	public function PurchaseInvoiceList($invoice)
+	{
+		$template['company']=$this->General_model->getCompanies();
+		$template['supplier'] = $this->General_model->getSuppliers();
+		$template['pcategory'] = $this->General_model->getPriceCategories();
+		$template['itemlist'] = $this->General_model->getItemlist();
+		$template['banklist'] = $this->General_model->getBankListTable();
+		$template['records'] = $this->Inventory_model->getPurchaseReportInvoice($invoice);
+		$template['records2'] = $this->Inventory_model->getPurchaseReportInvoice2($invoice);
+		//var_dump($template['records']);die();
+		$template['body'] = 'Inventory/Purchase/invoice';
+		$template['script'] = 'Inventory/Purchase/script';
+		$this->load->view('template', $template);
 	}
 	public function checkInvoice()
 	{
