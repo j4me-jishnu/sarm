@@ -155,12 +155,14 @@
             <?php 
                  $x = 10;
                  $c = 10;
+                 $y = 1;
+                 @${'opening_bal10'.$y};
                    foreach($addition_data as $group_heads) { 
                      if($group_heads->group_id == 20 || $group_heads->group_id == 21){
             ?>
             <tr>
-                <td colspan="2" id="row-1-<?php echo $x ?>" class="parent-row">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><?php echo $group_heads->group_name ?></b></td>
-                <td></td>
+                <td colspan="2" id="row-1-<?php echo $x ?>" class="parent-row">&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;&nbsp;&nbsp;&nbsp;<b><?php echo $group_heads->group_name ?></b></td>
+                <td><b><?php for ($i=0; $i < count($currentliabilty); $i++) { if($group_heads->group_id == $currentliabilty[$i]->group_id_fk){ @${'opening_bal10'.$y}=@${'opening_bal10'.$y}+$currentliabilty[$i]->opening_bal2; } } echo @${'opening_bal10'.$y} ?></b></td>
             </tr>
             <?php 
                 for ($i=0; $i < count($currentliabilty); $i++) 
@@ -175,6 +177,7 @@
                 } } } 
                 $c++;
                 $x++;
+                $y++;
             }
             ?>
             <tr>
@@ -232,12 +235,14 @@
             <?php 
                  $x = 20;
                  $c = 20;
+                 $y = 1;
+                 @${'opening_bal20'.$y};
                    foreach($addition_data as $group_heads) { 
                      if($group_heads->group_id == 17){
             ?>
             <tr>
-                <td colspan="2" id="row-2-<?php echo $x ?>" class="parent-row">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><?php echo $group_heads->group_name ?></b></td>
-                <td></td>
+                <td colspan="2" id="row-2-<?php echo $x ?>" class="parent-row">&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;&nbsp;&nbsp;&nbsp;<b><?php echo $group_heads->group_name ?></b></td>
+                <td><b><?php for ($i=0; $i < count($fixed); $i++) { if($group_heads->group_id == $fixed[$i]->group_id_fk){ @${'opening_bal20'.$y}=@${'opening_bal20'.$y}+$fixed[$i]->opening_bal2; } } echo @${'opening_bal20'.$y} ?></b></td>
             </tr>
             <?php 
                 for ($i=0; $i < count($fixed); $i++) 
@@ -252,6 +257,7 @@
                 } } } 
                 $c++;
                 $x++;
+                $y++;
             }
             ?>
             <tr>
@@ -261,12 +267,14 @@
             <?php 
                  $x = 30;
                  $c = 30;
+                 $y = 1;
+                 @${'opening_bal30'.$y};
                    foreach($addition_data as $group_heads) { 
                      if($group_heads->group_id == 12 || $group_heads->group_id == 13 || $group_heads->group_id == 14 || $group_heads->group_id == 15 || $group_heads->group_id == 16){
             ?>
             <tr>
-                <td colspan="2" id="row-3-<?php echo $x ?>" class="parent-row">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><?php echo $group_heads->group_name ?></b></td>
-                <td></td>
+                <td colspan="2" id="row-3-<?php echo $x ?>" class="parent-row">&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;&nbsp;&nbsp;&nbsp;<b><?php echo $group_heads->group_name ?></b></td>
+                <td><b><?php for ($i=0; $i < count($current); $i++) { if($group_heads->group_id == $current[$i]->group_id_fk){ @${'opening_bal30'.$y}=@${'opening_bal30'.$y}+$current[$i]->opening_bal2; } } echo @${'opening_bal30'.$y} ?></b></td>
             </tr>
             <?php 
                 for ($i=0; $i < count($current); $i++) 
@@ -281,6 +289,7 @@
                 } } } 
                 $c++;
                 $x++;
+                $y++;
             }
             if(@$profitloss[0]->profit_loss == 1){
             ?>

@@ -9,11 +9,15 @@
 
 .tree-table [data-parent] {
   display: none;
+  
 }
+
 
 .tree-table [data-parent].expanded {
   display: table-row;
 }
+
+
 </style>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -138,15 +142,17 @@
                     <?php
                     $x = 17;
                     $c = 17;
+                    $y=1;
+                    @${'deb_total10'.$y};
                       foreach($addition_data as $group_heads) { 
                         if($group_heads->group_id == 17 ){
                     ?>
                          
                     <tr id="row-1-<?php echo $x ?>" class="parent-row">
-                          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a ></a>&nbsp;&nbsp;&nbsp;&nbsp;<b><?php echo $group_heads->group_name ?></b></td>
+                          <td>&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><?php echo $group_heads->group_name ?></b></td>
                           <td></td>
-                          <td></td>
-                          <td></td>
+                          <td><b><?php for ($i=0; $i < count($fixed); $i++) { if($group_heads->group_id == $fixed[$i]->group_id_fk){ @${'deb_total10'.$y}=@${'deb_total10'.$y}+$fixed[$i]->debit;  } } echo @${'deb_total10'.$y} ?></b></td>
+                          <td><b><?php for ($i=0; $i < count($fixed); $i++) { if($group_heads->group_id == $fixed[$i]->group_id_fk){ @${'cred_total10'.$y}=@${'cred_total10'.$y}+$fixed[$i]->credit;  } } echo @${'cred_total10'.$y} ?></b></td>
                     </tr>
                    <?php for ($i=0; $i < count($fixed); $i++) 
                     { 
@@ -163,6 +169,7 @@
                      } } } 
                     $x++;
                     $c++;
+                    $y++;
                     }
                 }
                 if(! empty($current))
@@ -174,14 +181,17 @@
                  <?php
                   $x = 12;
                   $c = 12;
+                  $y=1;
+                  @${'deb_total20'.$y};
+                  @${'cred_total20'.$y};
                  foreach($addition_data as $group_heads) { 
                    if($group_heads->group_id == 12 || $group_heads->group_id == 13 || $group_heads->group_id == 14 || $group_heads->group_id == 15 || $group_heads->group_id == 12){
                    ?>
                       <tr id="row-2-<?php echo $x ?>" class="parent-row">
-                          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><?php echo $group_heads->group_name ?></b></td>
+                          <td>&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><?php echo $group_heads->group_name ?></b></td>
                           <td></td>
-                          <td></td>
-                          <td></td>
+                          <td><b><?php for ($i=0; $i < count($current); $i++) { if($group_heads->group_id == $current[$i]->group_id_fk){ @${'deb_total20'.$y}=@${'deb_total20'.$y}+$current[$i]->debit;  } } echo @${'deb_total20'.$y} ?></b></td>
+                          <td><b><?php for ($i=0; $i < count($current); $i++) { if($group_heads->group_id == $current[$i]->group_id_fk){ @${'cred_total20'.$y}=@${'cred_total20'.$y}+$current[$i]->credit;  } } echo @${'cred_total20'.$y} ?></b></td>
                       </tr>
                       <?php for($i=0;$i < count($current);$i++){ 
                         if($group_heads->group_id == $current[$i]->group_id_fk){ ?>
@@ -197,6 +207,7 @@
                    }
                    $x++;
                    $c++;
+                   $y++;
                  }
                  
                 
@@ -210,14 +221,17 @@
                   <?php 
                   $x = 19;
                   $c = 19;
+                  $y=1;
+                  @${'deb_total30'.$y};
+                  @${'cred_total30'.$y};
                     foreach($addition_data as $group_heads) { 
                       if($group_heads->group_id == 19 ){
                     ?>
                       <tr id="row-3-<?php echo $x ?>" class="parent-row">
-                          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a ></a>&nbsp;&nbsp;&nbsp;&nbsp;<b><?php echo $group_heads->group_name ?></b></td>
+                          <td>&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><?php echo $group_heads->group_name ?></b></td>
                           <td></td>
-                          <td></td>
-                          <td></td>
+                          <td><b><?php for ($i=0; $i < count($liabilty); $i++) { if($group_heads->group_id == $liabilty[$i]->group_id_fk){ @${'deb_total30'.$y}=@${'deb_total30'.$y}+$liabilty[$i]->debit;  } } echo @${'deb_total30'.$y} ?></b></td>
+                          <td><b><?php for ($i=0; $i < count($liabilty); $i++) { if($group_heads->group_id == $liabilty[$i]->group_id_fk){ @${'cred_total30'.$y}=@${'cred_total30'.$y}+$liabilty[$i]->credit;  } } echo @${'cred_total30'.$y} ?></b></td>
                       </tr>
                       <?php for ($i=0; $i < count($liabilty); $i++) { 
                           if($group_heads->group_id == $liabilty[$i]->group_id_fk){
@@ -233,6 +247,7 @@
                   } } }
                   $x++;
                   $c++;
+                  $y++;
                 }
                 }
                 if(! empty($currentliabilty))
@@ -244,14 +259,17 @@
                   <?php 
                    $x = 20;
                    $c = 20;
+                   $y=1;
+                   @${'deb_total40'.$y};
+                  @${'cred_total40'.$y};
                     foreach($addition_data as $group_heads) { 
                       if($group_heads->group_id == 20 || $group_heads->group_id == 21 ){
                     ?>
                         <tr id="row-4-<?php echo $x ?>" class="parent-row">
-                          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a ></a>&nbsp;&nbsp;&nbsp;&nbsp;<b><?php echo $group_heads->group_name ?></b></td>
+                          <td>&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><?php echo $group_heads->group_name ?></b></td>
                           <td></td>
-                          <td></td>
-                          <td></td>
+                          <td><b><?php for ($i=0; $i < count($currentliabilty); $i++) { if($group_heads->group_id == $currentliabilty[$i]->group_id_fk){ @${'deb_total40'.$y}=@${'deb_total40'.$y}+$currentliabilty[$i]->debit;  } } echo @${'deb_total40'.$y} ?></b></td>
+                          <td><b><?php for ($i=0; $i < count($currentliabilty); $i++) { if($group_heads->group_id == $currentliabilty[$i]->group_id_fk){ @${'cred_total40'.$y}=@${'cred_total40'.$y}+$currentliabilty[$i]->credit;  } } echo @${'cred_total40'.$y} ?></b></td>
                       </tr>
                     <?php for ($i=0; $i < count($currentliabilty); $i++) {
                       if($group_heads->group_id == $currentliabilty[$i]->group_id_fk){
@@ -267,6 +285,7 @@
                   } } } 
                   $x++;
                   $c++;
+                  $y++;
                 }
                 }
                 if(! empty($direct_income))
@@ -278,14 +297,17 @@
                   <?php 
                    $x = 24;
                    $c = 24;
+                   $y=1;
+                   @${'deb_total50'.$y};
+                   @${'cred_total50'.$y};
                      foreach($addition_data as $group_heads) { 
                       if($group_heads->group_id == 24 || $group_heads->group_id == 25 ){
                     ?>
                         <tr id="row-5-<?php echo $x ?>" class="parent-row">
-                          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a ></a>&nbsp;&nbsp;&nbsp;&nbsp;<b><?php echo $group_heads->group_name ?></b></td>
+                          <td>&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><?php echo $group_heads->group_name ?></b></td>
                           <td></td>
-                          <td></td>
-                          <td></td>
+                          <td><b><?php for ($i=0; $i < count($direct_income); $i++) { if($group_heads->group_id == $direct_income[$i]->group_id_fk){ @${'deb_total50'.$y}=@${'deb_total50'.$y}+$direct_income[$i]->debit;  } } echo @${'deb_total50'.$y} ?></b></td>
+                          <td><b><?php for ($i=0; $i < count($direct_income); $i++) { if($group_heads->group_id == $direct_income[$i]->group_id_fk){ @${'cred_total50'.$y}=@${'cred_total50'.$y}+$direct_income[$i]->credit;  } } echo @${'cred_total50'.$y} ?></b></td>
                       </tr>
                     <?php  for ($i=0; $i < count($direct_income); $i++) 
                   { 
@@ -302,6 +324,7 @@
                   } } } 
                   $x++;
                   $c++;
+                  $y++;
                 }
                 }
                 if(! empty($indirect_income))
@@ -313,14 +336,17 @@
                   <?php 
                   $x = 26;
                   $c = 26;
+                  $y=1;
+                  @${'deb_total60'.$y};
+                   @${'cred_total60'.$y};
                      foreach($addition_data as $group_heads) { 
                       if($group_heads->group_id == 26 ){
                     ?>
                       <tr id="row-6-<?php echo $x ?>" class="parent-row">
-                          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a ></a>&nbsp;&nbsp;&nbsp;&nbsp;<b><?php echo $group_heads->group_name ?></b></td>
+                          <td>&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><?php echo $group_heads->group_name ?></b></td>
                           <td></td>
-                          <td></td>
-                          <td></td>
+                          <td><b><?php for ($i=0; $i < count($indirect_income); $i++) { if($group_heads->group_id == $indirect_income[$i]->group_id_fk){ @${'deb_total60'.$y}=@${'deb_total60'.$y}+$indirect_income[$i]->debit;  } } echo @${'deb_total60'.$y} ?></b></td>
+                          <td><b><?php for ($i=0; $i < count($indirect_income); $i++) { if($group_heads->group_id == $indirect_income[$i]->group_id_fk){ @${'cred_total60'.$y}=@${'cred_total60'.$y}+$indirect_income[$i]->credit;  } } echo @${'cred_total60'.$y} ?></b></td>
                       </tr>
                   <?php 
                   for ($i=0; $i < count($indirect_income); $i++) 
@@ -337,6 +363,7 @@
                   } } } 
                   $x++;
                   $c++;
+                  $y++;
                 }
                 }
                 if(! empty($direct_exp))
@@ -348,14 +375,17 @@
                   <?php 
                   $x = 27;
                   $c = 27;
+                  $y=1;
+                  @${'deb_total70'.$y};
+                  @${'cred_total70'.$y};
                      foreach($addition_data as $group_heads) { 
                       if($group_heads->group_id == 27 || $group_heads->group_id == 28 || $group_heads->group_id == 31 || $group_heads->group_id == 34 ){
                     ?>
                       <tr id="row-7-<?php echo $x ?>" class="parent-row">
-                          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a ></a>&nbsp;&nbsp;&nbsp;&nbsp;<b><?php echo $group_heads->group_name ?></b></td>
+                          <td>&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><?php echo $group_heads->group_name ?></b></td>
                           <td></td>
-                          <td></td>
-                          <td></td>
+                          <td><b><?php for ($i=0; $i < count($direct_exp); $i++) { if($group_heads->group_id == $direct_exp[$i]->group_id_fk){ @${'deb_total70'.$y}=@${'deb_total70'.$y}+$direct_exp[$i]->debit;  } } echo @${'deb_total70'.$y}; ?></b></td>
+                          <td><b><?php for ($i=0; $i < count($direct_exp); $i++) { if($group_heads->group_id == $direct_exp[$i]->group_id_fk){ @${'cred_total70'.$y}=@${'cred_total70'.$y}+$direct_exp[$i]->credit;  } } echo @${'cred_total70'.$y} ?></b></td>
                       </tr>
                   <?php 
                   for ($i=0; $i < count($direct_exp); $i++) {
@@ -371,6 +401,7 @@
                   } } } 
                   $x++;
                   $c++;
+                  $y++;
                 }
                 }
                 if(! empty($indirect_exp))
@@ -382,13 +413,16 @@
                   <?php 
                   $x = 29;
                   $c = 29;
+                  $y=1;
+                  @${'deb_total80'.$y};
+                   @${'cred_total80'.$y};
                   foreach($addition_data as $group_heads) { 
                       if($group_heads->group_id == 29 ){ ?>
                       <tr id="row-8-<?php echo $x ?>" class="parent-row">
-                          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a ></a>&nbsp;&nbsp;&nbsp;&nbsp;<b><?php echo $group_heads->group_name ?></b></td>
+                          <td>&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><?php echo $group_heads->group_name ?></b></td>
                           <td></td>
-                          <td></td>
-                          <td></td>
+                          <td><b><?php for ($i=0; $i < count($indirect_exp); $i++) { if($group_heads->group_id == $indirect_exp[$i]->group_id_fk){ @${'deb_total80'.$y}=@${'deb_total80'.$y}+$indirect_exp[$i]->debit;  } } echo @${'deb_total80'.$y} ?></b></td>
+                          <td><b><?php for ($i=0; $i < count($indirect_exp); $i++) { if($group_heads->group_id == $indirect_exp[$i]->group_id_fk){ @${'cred_total80'.$y}=@${'cred_total80'.$y}+$indirect_exp[$i]->credit;  } } echo @${'cred_total80'.$y} ?></b></td>
                       </tr>
                   <?php 
                   for ($i=0; $i < count($indirect_exp); $i++) 
@@ -405,6 +439,7 @@
                   } } } 
                   $x++;
                   $c++;
+                  $y++;
                 }
                 }
                 ?>
@@ -430,7 +465,7 @@
                   <td colspan="4" style="background: #e6ecf5;"><span style="font-family: Arial Narrow;font-size: 14px;"><b>OPENING BALANCE DIFFERNCE <i class="fas fa-accessible-icon    "></i></b></span></td>
                 </tr>
                 <tr>
-                  <td>DIFFRENCE</td>
+                  <td>DIFFERENCE</td>
                   <td></td>
                   <td></td>
                   <td><?php echo $differnce =$cred_total - $deb_total; ?></td>
