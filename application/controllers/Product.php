@@ -463,11 +463,9 @@ class Product extends MY_Controller {
 		$template['unit'] = $this->General_model->getUnitlist();
 		$template['price_category'] = $this->General_model->getPriceCategories();
 		$template['records'] = $this->Administration_model->getProductDetails2($p);
-		//var_dump($template['records']);die();
-		//$data = $this->db->last_query();
 		$template['prices'] = $this->Administration_model->getPriceDetails2($p);
-		//$data2 = $this->db->last_query();
 		$template['supplier'] = $this->General_model->getSuppliers();
+		//var_dump($template['prices']);die();
 		$template['body'] = 'Administration/Product/Item/edit';
 		$template['script'] = 'Administration/Product/Item/script';
 		$this->load->view('template', $template);
@@ -476,42 +474,50 @@ class Product extends MY_Controller {
 	public function UpdateMultipleItems()
 	{
 		
-		$company = $this->input->post('company');
 		$supp_id = $this->input->post('supp_id');
-		$maincategory = $this->input->post('maincategory');
-		$subcategory = $this->input->post('subcategory');
 		$product_code = $this->input->post('product_code');
 		$product_name = $this->input->post('product_name');
-		$product_description = $this->input->post('product_description');
-		$product_unit = $this->input->post('product_unit');
-		$min_stock = $this->input->post('min_stock');
-		$remark = $this->input->post('remark');
 		$product_ides = $this->input->post('product_ides');
-		$sort = array_map(null,$company,$supp_id,$maincategory,$subcategory,$product_code,$product_name,$product_description,$product_unit,$min_stock,$remark,$product_ides);
+		$product_pricing = $this->input->post('product_pricing');
+		$p_category2 = $this->input->post('p_category2');
+		$company_id = $this->input->post('p_company');
+		$item_ide = $this->input->post('pricing_item');
+		$p_idx = $this->input->post('p_idx');
+		$sort = array_map(null,$supp_id,$product_code,$product_name,$product_ides);
 		foreach($sort as $sorts)
 		{
 			$item = array(
-				'company_id' => $sorts[0],
-				'supplier_id' => $sorts[1],
-				'maincategory_id' => $sorts[2],
-				'subcategory_id' => $sorts[3],
-				'product_code'	=> $sorts[4],
-				'product_name'	=> $sorts[5],
-				'product_description' => $sorts[6],
-				'product_unit'	=> $sorts[7],
-				'min_stock'	=> $sorts[8],
-				'product_remark' => $sorts[9],
+				'supplier_id' => $sorts[0],
+				'product_code'	=> $sorts[1],
+				'product_name'	=> $sorts[2],
 			);
-			$result2 = $this->General_model->update('tbl_product',$item,'product_id',$sorts[10]);
+			$result2 = $this->General_model->update('tbl_product',$item,'product_id',$sorts[3]);
+
 		}
-		$response_text = 'Multiple Products Up[dated';
+		foreach($p_idx as $p_ide){
+		$result89 = $this->General_model->delete('tbl_pricelist','price_id',$p_ide); 
+		}
+		$sort2 = array_map(null,$item_ide,$p_category2,$product_pricing,$company_id);
+			foreach($sort2 as $sorts2){
+			$price2 = array(
+				'item_id' => $sorts2[0],
+				'pcategory_id' => $sorts2[1],
+				'item_price' => $sorts2[2],
+				'company_id' => $sorts2[3],
+				'price_status' => 1,
+
+			);
+			$result56 = $this->General_model->add('tbl_pricelist',$price2);
+		}
+		$response_text = 'Multiple Products Updated';
 		if($result2){
 			$this->session->set_flashdata('response', "{&quot;text&quot;:&quot;$response_text&quot;,&quot;layout&quot;:&quot;topRight&quot;,&quot;type&quot;:&quot;success&quot;}");
 		}	
 		else
 		{
 			$this->session->set_flashdata('response', '{&quot;text&quot;:&quot;Something went wrong,please try again later&quot;,&quot;layout&quot;:&quot;bottomRight&quot;,&quot;type&quot;:&quot;error&quot;}');
-		}			
+		}		
+		redirect('/Item/', 'refresh');		
 	}
 
 

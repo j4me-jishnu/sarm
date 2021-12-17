@@ -341,6 +341,7 @@
                   <ul class="dropdown-menu">
                     <li><a type="submit" href="#" onclick="document.getElementById('purchase_form').submit();">Save</a></li>
                     <li><a href="#"  onclick="saveAsdraft();">Save as Draft</a></li>
+                    <li><a href="#"  onclick="saveAndprint();">Save and Print</a></li>
                   </ul>
                 </div><input type="hidden" name="draft" id="draft">
               </div>
@@ -356,6 +357,12 @@
   function saveAsdraft()
   {
     $('#draft').val(2);
+    document.getElementById('purchase_form').submit();
+  }
+
+  function saveAndprint()
+  {
+    $('#draft').val(3);
     document.getElementById('purchase_form').submit();
   }
 

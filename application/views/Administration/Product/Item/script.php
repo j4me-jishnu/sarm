@@ -28,14 +28,14 @@ var response = $("#response").val();
             $table.cell(node).data(index+1);
             });
             $('td', row).eq(1).html('<input type="checkbox" value="'+data['product_id']+'" name="product_idx[]" id="product_checkbox" class="chkdata">');
-            $('td', row).eq(7).html('<center><a href="<?php echo base_url();?>editProduct/'+data['product_id']+'"><i class="fa fa-edit iconFontSize-medium" ></i></a> &nbsp;&nbsp;&nbsp;<a onclick="return confirmDelete('+data['product_id']+')"><i class="fa fa-trash-o iconFontSize-medium" ></i></a></center>');
+            $('td', row).eq(8).html('<center><a href="<?php echo base_url();?>editProduct/'+data['product_id']+'"><i class="fa fa-edit iconFontSize-medium" ></i></a> &nbsp;&nbsp;&nbsp;<a onclick="return confirmDelete('+data['product_id']+')"><i class="fa fa-trash-o iconFontSize-medium" ></i></a></center>');
             if (data['active_status'] == 1) 
             {
-                $('td', row).eq(8).html('<center><a href="<?php echo base_url();?>deactiveProduct/'+data['product_id']+'/'+data['cmp_id']+'"><i style="font-size: 25px;color:#03ab11;" class="glyphicon glyphicon-ok-circle" title="Click to Deactivate"></i></a></center>');
+                $('td', row).eq(9).html('<center><a href="<?php echo base_url();?>deactiveProduct/'+data['product_id']+'/'+data['cmp_id']+'"><i style="font-size: 25px;color:#03ab11;" class="glyphicon glyphicon-ok-circle" title="Click to Deactivate"></i></a></center>');
             }
             else
             {
-                $('td', row).eq(8).html('<center><a href="<?php echo base_url();?>activeProduct/'+data['product_id']+'/'+data['cmp_id']+'"><i style="font-size: 25px;color:#ff0000;" class="glyphicon glyphicon-remove-circle" title="Click to Activate"></i></a></center>');
+                $('td', row).eq(9).html('<center><a href="<?php echo base_url();?>activeProduct/'+data['product_id']+'/'+data['cmp_id']+'"><i style="font-size: 25px;color:#ff0000;" class="glyphicon glyphicon-remove-circle" title="Click to Activate"></i></a></center>');
             }    
         },
 

@@ -175,6 +175,80 @@ class Accountsreports extends MY_Controller
 				$end_date = str_replace('/', '-', $end_date);
 				$end_date =  date("Y-m-d",strtotime($end_date));
 			}
+			$deb_total = 0;
+			$cred_total = 0;
+			$difference = 0;
+			// TRIALBALANCE FOR CALCULATION IN PROFITL&LOSS
+			$fixed2 = $this->Accountsreports_model->getFixedAssetsDetails($cmp,$fyr,$start_date,$end_date);
+			//var_dump($template['fixed']); die;
+
+			//short term assets or current assets
+			$current2 = $this->Accountsreports_model->getCurrentAssetsDetails($cmp,$fyr,$start_date,$end_date);
+			//var_dump($template['current']); die;
+
+			//longterm liability
+			$liabilty2 = $this->Accountsreports_model->getFixedLiabiltyDetails($cmp,$fyr,$start_date,$end_date);
+			//var_dump($template['liabilty']); die;
+
+			//current liability
+			$currentliabilty2 = $this->Accountsreports_model->getCurrentLiabiltyDetails($cmp,$fyr,$start_date,$end_date);
+			//var_dump($template['currentliabilty']); die;
+
+			//all direct income
+			$direct_income2 = $this->Accountsreports_model->getAllDirectincomes($cmp,$fyr,$start_date,$end_date);
+			//var_dump($template['direct_income']); die;
+
+			//all indirect income
+			$indirect_income2 = $this->Accountsreports_model->getAllinDirectincomes($cmp,$fyr,$start_date,$end_date);
+			//var_dump($template['indirect_income']); die;
+
+			//all direct expense
+			$direct_exp2 = $this->Accountsreports_model->getAllDirectexpenses($cmp,$fyr,$start_date,$end_date);
+			//var_dump($template['direct_exp']); die;
+
+			//all indirect expense
+			$indirect_exp2 = $this->Accountsreports_model->getAllinDirectexpenses($cmp,$fyr,$start_date,$end_date);
+			//var_dump($template['indirect_exp']); die;
+			for($i=0;$i<count($fixed2);$i++){
+				$deb_total=$deb_total+$fixed2[$i]->debit;
+				$cred_total=$cred_total+$fixed2[$i]->credit;
+			}
+			for($i=0;$i<count($current2);$i++){
+				$deb_total=$deb_total+$current2[$i]->debit;
+				$cred_total=$cred_total+$current2[$i]->credit;
+			}
+			for($i=0;$i<count($liabilty2);$i++){
+				$deb_total=$deb_total+$liabilty2[$i]->debit;
+				$cred_total=$cred_total+$liabilty2[$i]->credit;
+			}
+			for($i=0;$i<count($currentliabilty2);$i++){
+				$deb_total=$deb_total+$currentliabilty2[$i]->debit;
+				$cred_total=$cred_total+$currentliabilty2[$i]->credit;
+			}
+			for($i=0;$i<count($direct_income2);$i++){
+				$deb_total=$deb_total+$direct_income2[$i]->debit;
+				$cred_total=$cred_total+$direct_income2[$i]->credit;
+			}
+			for($i=0;$i<count($indirect_income2);$i++){
+				$deb_total=$deb_total+$indirect_income2[$i]->debit;
+				$cred_total=$cred_total+$indirect_income2[$i]->credit;
+			}
+			for($i=0;$i<count($direct_exp2);$i++){
+				$deb_total=$deb_total+$direct_exp2[$i]->debit;
+				$cred_total=$cred_total+$direct_exp2[$i]->credit;
+			}
+			for($i=0;$i<count($indirect_exp2);$i++){
+				$deb_total=$deb_total+$indirect_exp2[$i]->debit;
+				$cred_total=$cred_total+$indirect_exp2[$i]->credit;
+			}
+
+			if($deb_total > $cred_total){
+				$difference = $deb_total-$cred_total;
+			}
+			else if($deb_total < $cred_total){
+				$difference = $cred_total-$deb_total;
+			}
+			/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			//purchase
 			// $template['purchase'] = $this->Accountsreports_model->getTotalPurchases($cmp,$fyr);
 			// print_r($template['purchase']);die;
@@ -368,6 +442,81 @@ class Accountsreports extends MY_Controller
 				$end_date = str_replace('/', '-', $end_date);
 				$end_date =  date("Y-m-d",strtotime($end_date));
 			}
+
+			$deb_total = 0;
+			$cred_total = 0;
+			$difference = 0;
+			// TRIALBALANCE FOR CALCULATION IN PROFITL&LOSS
+			$fixed2 = $this->Accountsreports_model->getFixedAssetsDetails($cmp,$fyr,$start_date,$end_date);
+			//var_dump($template['fixed']); die;
+
+			//short term assets or current assets
+			$current2 = $this->Accountsreports_model->getCurrentAssetsDetails($cmp,$fyr,$start_date,$end_date);
+			//var_dump($template['current']); die;
+
+			//longterm liability
+			$liabilty2 = $this->Accountsreports_model->getFixedLiabiltyDetails($cmp,$fyr,$start_date,$end_date);
+			//var_dump($template['liabilty']); die;
+
+			//current liability
+			$currentliabilty2 = $this->Accountsreports_model->getCurrentLiabiltyDetails($cmp,$fyr,$start_date,$end_date);
+			//var_dump($template['currentliabilty']); die;
+
+			//all direct income
+			$direct_income2 = $this->Accountsreports_model->getAllDirectincomes($cmp,$fyr,$start_date,$end_date);
+			//var_dump($template['direct_income']); die;
+
+			//all indirect income
+			$indirect_income2 = $this->Accountsreports_model->getAllinDirectincomes($cmp,$fyr,$start_date,$end_date);
+			//var_dump($template['indirect_income']); die;
+
+			//all direct expense
+			$direct_exp2 = $this->Accountsreports_model->getAllDirectexpenses($cmp,$fyr,$start_date,$end_date);
+			//var_dump($template['direct_exp']); die;
+
+			//all indirect expense
+			$indirect_exp2 = $this->Accountsreports_model->getAllinDirectexpenses($cmp,$fyr,$start_date,$end_date);
+			//var_dump($template['indirect_exp']); die;
+			for($i=0;$i<count($fixed2);$i++){
+				$deb_total=$deb_total+$fixed2[$i]->debit;
+				$cred_total=$cred_total+$fixed2[$i]->credit;
+			}
+			for($i=0;$i<count($current2);$i++){
+				$deb_total=$deb_total+$current2[$i]->debit;
+				$cred_total=$cred_total+$current2[$i]->credit;
+			}
+			for($i=0;$i<count($liabilty2);$i++){
+				$deb_total=$deb_total+$liabilty2[$i]->debit;
+				$cred_total=$cred_total+$liabilty2[$i]->credit;
+			}
+			for($i=0;$i<count($currentliabilty2);$i++){
+				$deb_total=$deb_total+$currentliabilty2[$i]->debit;
+				$cred_total=$cred_total+$currentliabilty2[$i]->credit;
+			}
+			for($i=0;$i<count($direct_income2);$i++){
+				$deb_total=$deb_total+$direct_income2[$i]->debit;
+				$cred_total=$cred_total+$direct_income2[$i]->credit;
+			}
+			for($i=0;$i<count($indirect_income2);$i++){
+				$deb_total=$deb_total+$indirect_income2[$i]->debit;
+				$cred_total=$cred_total+$indirect_income2[$i]->credit;
+			}
+			for($i=0;$i<count($direct_exp2);$i++){
+				$deb_total=$deb_total+$direct_exp2[$i]->debit;
+				$cred_total=$cred_total+$direct_exp2[$i]->credit;
+			}
+			for($i=0;$i<count($indirect_exp2);$i++){
+				$deb_total=$deb_total+$indirect_exp2[$i]->debit;
+				$cred_total=$cred_total+$indirect_exp2[$i]->credit;
+			}
+
+			if($deb_total > $cred_total){
+				$difference = $deb_total-$cred_total;
+			}
+			else if($deb_total < $cred_total){
+				$difference = $cred_total-$deb_total;
+			}
+
 
 			//long term assets or fixed 
 			$template['fixed'] = $this->Accountsreports_model->getFixedAssets($cmp,$fyr,$start_date,$end_date);

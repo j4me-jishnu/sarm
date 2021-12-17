@@ -79,6 +79,7 @@
                     <th>PRODUCT</th>
                     <th>OPENING STOCK</th>
                     <th>AVAILABLE STOCK</th>
+                    <th>DAMAGED STOCK</th>
                     <th>UPDATE STOCK</th>
                     <th><center>STATUS</center></th>
                 </tr>

@@ -81,7 +81,7 @@ class Sale extends MY_Controller {
 			$counter = $this->input->post('counter');
 			$draft = $this->input->post('draft');
 			if ($draft != 1 && $draft != 2) 
-			{
+		{
 				$invc_no = $this->input->post('invoice_number_edit');
 				if (isset($invc_no)) 
 				{
@@ -202,7 +202,7 @@ class Sale extends MY_Controller {
 						'company_id_fk' => $company,
 						'sale_id_fk' => $this->input->post('invoice_number'),
 						'ledger_default' => 0,
-						'created_date' => date('Y-m-d H:i:s'),
+						'created_at' => date('Y-m-d H:i:s'),
 						'updated_at' => date('Y-m-d H:i:s'),
 					);
 				$result45 = $this->General_model->add('tbl_ledgerhead',$round_off_diff); 	 
@@ -221,10 +221,17 @@ class Sale extends MY_Controller {
 						'company_id_fk' => $company,
 						'sale_id_fk' => $this->input->post('invoice_number'),
 						'ledger_default' => 0,
-						'created_date' => date('Y-m-d H:i:s'),
+						'created_at' => date('Y-m-d H:i:s'),
 						'updated_at' => date('Y-m-d H:i:s'),
 					);
 				$result45 = $this->General_model->add('tbl_ledgerhead',$round_off_diff); 	
+			}
+
+			if($draft == 3)
+			{
+				$inv_ide = $this->input->post('invoice_number');
+				redirect(base_url()."SaleInvoiceList/".$inv_ide);
+
 			}
 		}
 			
@@ -346,13 +353,19 @@ class Sale extends MY_Controller {
 	}
 	public function SaleInvoiceList($invoice)
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['company']=$this->General_model->getCompanies();
 		$template['customers'] = $this->General_model->getCustomers();
 		$template['pcategory'] = $this->General_model->getPriceCategories();
 		$template['itemlist'] = $this->General_model->getItemlist();
 		$template['bank'] = $this->Sale_model->GetBank();
+		$template['unit'] = $this->General_model->get_all('tbl_unit');
 		$template['records'] = $this->Sale_model->getSaleReportInvoice($invoice);
 		$template['records2'] = $this->Sale_model->getSaleReportInvoice2($invoice);
+		//var_dump($template['records']);die();
 		$template['body'] = 'Sale/invoice';
 		$template['script'] = 'Sale/script';
 		$this->load->view('template', $template);

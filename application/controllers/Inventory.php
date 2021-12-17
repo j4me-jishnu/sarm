@@ -203,45 +203,52 @@ class Inventory extends MY_Controller {
 				$upData = array('supplier_oldbal' =>$this->input->post('net_bal'));
 				$stk = $this->General_model->update('tbl_supplier',$upData,'supplier_id',$supp_id);
 				$response_text = 'Purchase added successfully';
-				$round_off_variable = round($this->input->post('round_off_diff'));
+				$round_off_variable = $this->input->post('round_off2');
 				//If round of value less than and equal to 49 paise enter to ledger head as roundoff value in credit
-				if($this->input->post('round_off_diff') > 0 && $this->input->post('round_off_diff') <= 0.49){
+				if($this->input->post('round_off2') > 0 && $this->input->post('round_off2') <= 0.49){
 
 						$ledger_head_data = array(
 							'group_id_fk' => 38,
 							'ledger_head' => 'Purchase',
 							'ledgerhead_desc' => 'Round Off Purchase',
-							'opening_bal' => $this->input->post('round_off_diff'),
+							'opening_bal' => $this->input->post('round_off2'),
 							'debit_or_credit' => 2,
 							'ledgerhead_status' =>1,
 							'company_id_fk' => $company,
 							'purchase_fk_id' => $this->input->post('invoice_number'),
 							'ledger_default' => 0,
-							'created_date' => date('Y-m-d H:i:s'),
+							'created_at' => date('Y-m-d H:i:s'),
 							'updated_at' => date('Y-m-d H:i:s'),
 						);
 						$result34 = $this->General_model->add('tbl_ledgerhead',$ledger_head_data);	
 					
 				}
 				//If round of value greater than and equal to 50 paise enter to ledger head as roundoff value in debit
-				else if($this->input->post('round_off_diff') > 0 && $this->input->post('round_off_diff') >=0.50)
+				else if($this->input->post('round_off2') > 0 && $this->input->post('round_off2') >=0.50)
 				{
 					
-					$differnce = $round_off_variable - $this->input->post('round_off_diff');
+					//$differnce = $round_off_variable - $this->input->post('round_off_diff');
 					$ledger_head_data = array(
 						'group_id_fk' => 38,
 						'ledger_head' => 'Purchase',
 						'ledgerhead_desc' => 'Round Off Purchase',
-						'opening_bal' => $differnce,
+						'opening_bal' => $this->input->post('round_off2'),
 						'debit_or_credit' => 1,
 						'ledgerhead_status' =>1,
 						'company_id_fk' => $company,
 						'purchase_fk_id' => $this->input->post('invoice_number'),
 						'ledger_default' => 0,
-						'created_date' => date('Y-m-d H:i:s'),
+						'created_at' => date('Y-m-d H:i:s'),
 						'updated_at' => date('Y-m-d H:i:s'),
 					);
 					$result34 = $this->General_model->add('tbl_ledgerhead',$ledger_head_data);	
+				}
+
+				if($draft == 3)
+				{
+					$inv_ide = $this->input->post('invoice_number');
+					redirect(base_url()."PurchaseInvoiceList/".$inv_ide);
+
 				}
 			}
 			else
@@ -362,14 +369,19 @@ class Inventory extends MY_Controller {
 
 	public function PurchaseInvoiceList($invoice)
 	{
+		if($this->session->userdata('user_type')=='C'){
+			$id = $this->session->userdata('id');
+			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
+			}
 		$template['company']=$this->General_model->getCompanies();
 		$template['supplier'] = $this->General_model->getSuppliers();
 		$template['pcategory'] = $this->General_model->getPriceCategories();
 		$template['itemlist'] = $this->General_model->getItemlist();
 		$template['banklist'] = $this->General_model->getBankListTable();
+		$template['unit'] = $this->General_model->get_all('tbl_unit');
 		$template['records'] = $this->Inventory_model->getPurchaseReportInvoice($invoice);
 		$template['records2'] = $this->Inventory_model->getPurchaseReportInvoice2($invoice);
-		//var_dump($template['records']);die();
+		//var_dump($template['unit']);die();
 		$template['body'] = 'Inventory/Purchase/invoice';
 		$template['script'] = 'Inventory/Purchase/script';
 		$this->load->view('template', $template);
@@ -558,7 +570,8 @@ class Inventory extends MY_Controller {
 			$template['color_change'] = $this->General_model->get_row('tbl_color','company_id_fk',$id);
 		}
 		$template['stocks'] = $this->Inventory_model->UpdateStockList($product_id);
-		$template['total_stock'] = $template['stocks'][0]->opening_stock + $template['stocks'][0]->stock_qty; 
+		//var_dump($template['stocks']);die();
+		$template['total_stock'] = $template['stocks'][0]->opening_stock + $template['stocks'][0]->stock_qty;
 		$template['body'] = 'Inventory/Stock/edit';
 		$template['script'] = 'Inventory/Stock/script';
 		$this->load->view('template', $template);
@@ -579,8 +592,14 @@ class Inventory extends MY_Controller {
 				{
 					$remarks = "";
 				}
+				$avail_stock = $this->input->post('avail_stock');
+				$damaged_stock = $this->input->post('damaged_stock');
+				if($this->input->post('damaged_stock') != ""){
+					$damage = $avail_stock - $damaged_stock;
+				}
 				$data = array(
-					'stock' => $this->input->post('avail_stock'),
+					'stock' => $damage,
+					'damaged_stock' => $damaged_stock,
 					'remark' => $remarks,
 				);
 

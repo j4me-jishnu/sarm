@@ -97,6 +97,7 @@ Class Sale_model extends CI_Model
         return $query->result();
 	}
 
+
 	public function getSaleReportInvoice2($invoice)
 	{
 		$this->db->select('*');

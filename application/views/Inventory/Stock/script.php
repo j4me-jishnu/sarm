@@ -28,18 +28,18 @@
             $table.column(0).nodes().each(function(node,index,dt){
             $table.cell(node).data(index+1);
             });
-            $('td', row).eq(5).html('<center><a href="<?php echo base_url();?>StockUpdateList/'+data['product_id']+'"><i class="fa fa-edit iconFontSize-medium" ></i></a>');
+            $('td', row).eq(6).html('<center><a href="<?php echo base_url();?>StockUpdateList/'+data['product_id']+'"><i class="fa fa-edit iconFontSize-medium" ></i></a>');
 			if(data['stock_sum'] <=0)
 			{
-				$('td', row).eq(6).html('<center><button type="button" class="btn btn-block btn-danger">Out of Stock</button></center>');
+				$('td', row).eq(7).html('<center><button type="button" class="btn btn-block btn-danger">Out of Stock</button></center>');
 			}
 			else if(data['stock_sum'] > 0 && data['stock_sum'] < data['min_stock'])
 			{
-				$('td', row).eq(6).html('<center><button type="button" class="btn btn-block btn-warning">Reached Below</button></center>');
+				$('td', row).eq(7).html('<center><button type="button" class="btn btn-block btn-warning">Reached Below</button></center>');
 			}
 			else
 			{
-				$('td', row).eq(6).html('<center><button type="button" class="btn btn-block btn-success">Available</button></center>');
+				$('td', row).eq(7).html('<center><button type="button" class="btn btn-block btn-success">Available</button></center>');
 			}
 			
         },
@@ -50,6 +50,7 @@
             { "data": "product_name", "orderable": false },
             { "data": "opening_stock", "orderable": false },
             { "data": "stock_sum", "orderable": false },
+            { "data": "damaged_stock", "orderable": false },
             { "data": "stock_status", "orderable": false },
             { "data": "overall_status", "orderable": false }
         ]

@@ -169,10 +169,14 @@ class Administration extends MY_Controller {
 				$data['cust_id'] = $cust_id;
 				//get name of customer from customer table to pass and change data in ledger head
 				$cust_name = $this->General_model->get_data('tbl_customer','cust_id','custname',$cust_id);
+				
 				$result = $this->General_model->update($this->customer,$datas,'cust_id',$cust_id);
 				//in leger head customer name is used to find ledger entry and toupdate that field
 				//data3 is used because data2 array is mostly static and changes made in ledger head would be changes if data2 array put
 				$result2 = $this->General_model->update('tbl_ledgerhead',$data3,'ledger_head',$cust_name[0]->custname);
+				if($isSalary == 1){
+				$result34 = $this->General_model->update('tbl_supplier',$data_is_supplier,'supplier_name',$cust_name[0]->custname);
+				}
 				$data_ledger_balance = array(
 					'company_id_fk' => $company,
 					'balance' => $this->input->post('old_balance'),
@@ -385,6 +389,9 @@ class Administration extends MY_Controller {
 				 $result = $this->General_model->update($this->suppliers,$data,'supplier_id',$supplier_id);
 				 //pass the supplier name and update ledger head
 				 $result2 = $this->General_model->update('tbl_ledgerhead',$data3,'ledger_head',$supplier_name2[0]->supplier_name);
+				 if($is_customer == 1){
+				 	$result34 = $this->General_model->update('tbl_customer',$data_is_customer,'custname',$supplier_name2[0]->supplier_name);
+				 }
 				//  $data_ledger_balance = array(
 				// 	'company_id_fk' => $company,
 				// 	'balance' => $this->input->post('supplier_oldbal'),

@@ -51,7 +51,14 @@
                   <label for="size_name" class="col-sm-4 control-label">Available Stock<span style="color:red">*</span></label>
 
                   <div class="col-sm-5">
-                    <input type="number" data-pms-required="true"  class="form-control" name="avail_stock" id="avail_stock"  value="<?php if(isset($stocks[0]->stock_qty)) echo $stocks[0]->stock_qty; ?>">
+                    <input type="text" data-pms-required="true"  class="form-control" name="avail_stock" id="avail_stock"  value="<?php if(isset($stocks[0]->stock_qty)) echo $stocks[0]->stock_qty; ?>" readonly>
+                  </div>
+              </div>
+              <div class="form-group">
+                  <label for="size_name" class="col-sm-4 control-label">Damaged Stock<span style="color:red">*</span></label>
+
+                  <div class="col-sm-5">
+                    <input type="text" data-pms-required="true"  class="form-control" name="damaged_stock" id="damaged_stock"  value="<?php if(isset($stocks[0]->damaged_stock)) echo $stocks[0]->damaged_stock; ?>">
                   </div>
               </div>
               <div class="form-group">

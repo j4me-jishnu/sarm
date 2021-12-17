@@ -275,14 +275,14 @@ function getNetTotal()
         if ($('#total_'+i+'').val()) 
         {
             var sum = parseFloat(sum) + parseFloat($('#total_'+i+'').val());
-            var round_off = Math.floor(parseFloat(sum) + parseFloat($('#total_'+i+'').val()));
+            var round_off = Math.round(parseFloat(sum) + parseFloat($('#total_'+i+'').val()));
         }
     }
     if (tax_amt) 
     {
         // var tax_amt = parseFloat(sum) * parseFloat(tax_amt) / 100;
         sum = parseFloat(sum) + parseFloat(tax_amt);
-        var round_off = Math.floor(parseFloat(sum) + parseFloat(tax_amt));
+        var round_off = Math.round(parseFloat(sum) + parseFloat(tax_amt));
     }
     if (bill_discount) 
     {
@@ -290,23 +290,23 @@ function getNetTotal()
         {
             var bill_discount=parseFloat(sum)*parseFloat(bill_discount)/100;
             sum = parseFloat(sum) - parseFloat(bill_discount);
-            var round_off = Math.floor(parseFloat(sum) - parseFloat(bill_discount));
+            var round_off = Math.round(parseFloat(sum) - parseFloat(bill_discount));
         }
         else
         {
             sum = parseFloat(sum) - parseFloat(bill_discount);
-            var round_off = Math.floor(parseFloat(sum) - parseFloat(bill_discount));
+            var round_off = Math.round(parseFloat(sum) - parseFloat(bill_discount));
         }    
     }
     if (frieght) 
     {
         sum = parseFloat(sum) + parseFloat(frieght);  
-        var round_off = Math.floor(parseFloat(sum) + parseFloat(frieght));
+        var round_off = Math.round(parseFloat(sum) + parseFloat(frieght));
     }
     if (pack_chrg) 
     {
         sum = parseFloat(sum) + parseFloat(pack_chrg);
-        var round_off = Math.floor(parseFloat(sum) + parseFloat(pack_chrg));
+        var round_off = Math.round(parseFloat(sum) + parseFloat(pack_chrg));
     }
     if(isNaN(sum)){ sum = 0; }
     if(isNaN(round_off)){ round_off = 0; }
@@ -363,14 +363,14 @@ window.onload = function getNetTotal2()
         if ($('#total_'+i+'').val()) 
         {
             var sum = parseFloat(sum) + parseFloat($('#total_'+i+'').val());
-            var round_off = Math.floor(parseFloat(sum) + parseFloat($('#total_'+i+'').val()));
+            var round_off = Math.round(parseFloat(sum) + parseFloat($('#total_'+i+'').val()));
         }
     }
     if (tax_amt) 
     {
         // var tax_amt = parseFloat(sum) * parseFloat(tax_amt) / 100;
         sum = parseFloat(sum) + parseFloat(tax_amt);
-        var round_off = Math.floor(parseFloat(sum) + parseFloat(tax_amt));
+        var round_off = Math.round(parseFloat(sum) + parseFloat(tax_amt));
     }
     if (bill_discount) 
     {
@@ -378,23 +378,23 @@ window.onload = function getNetTotal2()
         {
             var bill_discount=parseFloat(sum)*parseFloat(bill_discount)/100;
             sum = parseFloat(sum) - parseFloat(bill_discount);
-            var round_off = Math.floor(parseFloat(sum) - parseFloat(bill_discount));
+            var round_off = Math.round(parseFloat(sum) - parseFloat(bill_discount));
         }
         else
         {
             sum = parseFloat(sum) - parseFloat(bill_discount);
-            var round_off = Math.floor(parseFloat(sum) - parseFloat(bill_discount));
+            var round_off = Math.round(parseFloat(sum) - parseFloat(bill_discount));
         }    
     }
     if (frieght) 
     {
         sum = parseFloat(sum) + parseFloat(frieght);  
-        var round_off = Math.floor(parseFloat(sum) + parseFloat(frieght));
+        var round_off = Math.round(parseFloat(sum) + parseFloat(frieght));
     }
     if (pack_chrg) 
     {
         sum = parseFloat(sum) + parseFloat(pack_chrg);
-        var round_off = Math.floor(parseFloat(sum) + parseFloat(pack_chrg));
+        var round_off = Math.round(parseFloat(sum) + parseFloat(pack_chrg));
     }
     if(isNaN(sum)){ sum = 0; }
     if(isNaN(round_off)){ round_off = 0; }
@@ -439,7 +439,7 @@ function roundOffDiff(sum,round_off)
 {   
     var sum2 = sum;
     var round_off_amt2 = round_off;
-    var differnce = sum2 - round_off_amt2;
+    var differnce = Math.abs(sum2 - round_off_amt2);
     if(isNaN(differnce)){ differnce = 0; }
     $('#round_off_diff').val(differnce);
     var num = differnce.toFixed(2);

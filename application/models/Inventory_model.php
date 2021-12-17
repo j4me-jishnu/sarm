@@ -84,6 +84,7 @@ Class Inventory_model extends CI_Model
         return $query = $this->db->get()->result();
 	}
 
+
 	public function getPurchaseReportInvoice2($invoice)
 	{
 		$this->db->select('*');

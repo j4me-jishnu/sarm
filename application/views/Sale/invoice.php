@@ -47,7 +47,7 @@
                         <tr style="text-align: center;">
                             <td><?php echo $x; ?></td>
                             <td><?php echo $rows->product_name ?></td>
-                            <td><?php echo $rows->sale_quantity ?></td>
+                            <td><?php echo $rows->sale_quantity ?>&nbsp;<?php foreach($unit as $unites){ if($rows->product_unit == $unites->unit_id){ echo $unites->unit_name; }else{ echo ''; } } ?></td>
                             <td><?php echo $rows->sale_price ?></td>
                             <?php if($rows->discount_type == 1){ ?>
                             <td><?php echo $rows->discount_price ?>%</td>
@@ -61,36 +61,56 @@
                             }
                         ?>
                         
-                        <tr>
-                            <td colspan="5"></td>
-                            <td><b>Total:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $total; ?></td>
+                        <tr style="text-align: center;">
+                            <td colspan="3"></td>
+                            <td colspan="2"><b>Total:</b></td>
+                            <td colspan="1"><b><?php echo $total; ?></b></td>
                         </tr>
                         <?php foreach($records2 as $rock){ ?>
-                        <tr>
-                            <td colspan="5"><b>Tax Amount:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $rock->tax_amount; ?></td>
-                            <td colspan="1"><b>Old Balance:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo round($rock->old_balance,2); ?></b></td>
+                        <tr style="text-align: center;">
+                            <?php if($rock->tax_amount != 0){ ?>
+                            <td colspan="3"><b>Tax Amount:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $rock->tax_amount; ?></td>
+                            <?php }else{ ?>
+                            <td colspan="3"></td>    
+                            <?php } ?>    
+                            <td colspan="2"><b>Old Balance:</b></td>
+                            <td colspan="1"><?php echo round($rock->old_balance,2); ?></td>
                         </tr>
-                        <tr>
-                            <td colspan="5"><b>Fright & Packaging:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $rock->frieght+$rock->packing_charge; ?></td>
-                            <td colspan="1"><b></b></td>
+                        <tr style="text-align: center;">
+                            <?php if($rock->frieght != 0 || $rock->packing_charge != 0){ ?>
+                            <td colspan="3"><b>Fright & Packaging:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $rock->frieght+$rock->packing_charge; ?></td>
+                            <?php }else{ ?>
+                            <td colspan="3"></td>    
+                            <?php } ?>    
+                            <td colspan="2"><b></b></td>
+                            <td colspan="1"></td>
                         </tr>
-                        <tr>
-                            <td colspan="5"><b>Discount:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $rock->bill_discount; ?></td>
-                            <td colspan="1"><b>Net Total:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $rock->net_total; ?></td>
+                        <tr style="text-align: center;">
+                            <?php if($rock->bill_discount != 0){ ?>
+                            <td colspan="3"><b>Discount:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $rock->bill_discount; ?></td>
+                            <?php }else{ ?>
+                            <td colspan="3"></td>    
+                            <?php } ?>    
+                            <td colspan="2"><b>Net Total:</b></td>
+                            <td colspan="1"><?php echo $rock->net_total; ?></td>
                         </tr>
-                        <tr>
-                            <td colspan="5"></td>
+                        <tr style="text-align: center;">
+                            <td colspan="3"></td>
                             <?php if($rock->bank_paid != 0){ ?>
-                            <td colspan="1"><b>Paid:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $rock->bank_paid; ?></td>
+                            <td colspan="2"><b>Paid:</b></td>
+                            <td colspan="1"><?php echo $rock->bank_paid; ?></td>
                             <?php }else if($rock->cash_paid != 0){ ?>
-                            <td colspan="1"><b>Paid:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $rock->cash_paid; ?></td>
+                            <td colspan="2"><b>Paid:</b></td>
+                            <td colspan="1"><?php echo $rock->cash_paid; ?></td>
                             <?php } else { ?>  
-                            <td colspan="1"><b>Paid:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo 0 ?></td>
+                            <td colspan="2"><b>Paid:</b></td>
+                            <td colspan="1"><?php echo 0 ?></td>
                             <?php } ?>          
                         </tr>
-                        <tr>
-                            <td colspan="5"></td>
-                            <td colspan="1"><b>Net Balance:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo round($rock->net_balance,2); ?></td>
+                        <tr style="text-align: center;">
+                            <td colspan="3"></td>
+                            <td colspan="2"><b>Net Balance:</b></td>
+                            <td colspan="1"><?php echo round($rock->net_balance,2); ?></td>
                         </tr>
                         <?php } ?>
                     </tbody>
