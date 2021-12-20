@@ -184,7 +184,13 @@
                 <td colspan="2" style="background: #e6ecf5;"><span style="font-family: Arial Narrow;font-size: 14px;"><b>CAPITAL</b></span></td>
                 <td colspan="2" style="background: #e6ecf5;"><?php if(isset($capital)) echo $capital; ?><br></td>
             </tr>
+            <?php if(@$difference_deb != ""){ ?>
+            <tr>
+              <td colspan="2">C/F OPENING BALANCE DIFFERENCE</td>
+              <td><?php if(isset($difference_deb)) echo $difference_deb ?></td>
+            </tr>
             <?php
+             }
                 if(@$profitloss[0]->profit_loss == 1)
                 {
             ?>
@@ -291,14 +297,22 @@
                 $x++;
                 $y++;
             }
-            if(@$profitloss[0]->profit_loss == 1){
+            if(@$difference_cred != ""){
             ?>
+            <tr>
+              <td colspan="2">C/F OPENING BALANCE DIFFERENCE</td>
+              <td><?php if(isset($difference_cred)) echo $difference_cred; ?></td>
+            </tr>
+            <?php
+            }
+            if(@$profitloss[0]->profit_loss == 2){
+             ?>
              <tr>
                 <td colspan="1">LESS NETLOSS</td>
                 <td><?php echo @$profitloss[0]->amount;@$total=$capital - $profitloss[0]->amount ?></td>
             </tr>
             <?php 
-            }
+             }
             ?>
             <tr>
                 <td colspan="2"></td>

@@ -117,7 +117,7 @@ class Inventory extends MY_Controller {
 			$purchase_quantity = $this->input->post('quantity');
 			$purchase_price = $this->input->post('price');
 			$discount_price = $this->input->post('discount'); 
-		
+			$purchase_return = $this->input->post('return'); 
 			$tax_per = $this->input->post('tax');
 			$total_price = $this->input->post('total');
 			$counter = $this->input->post('counter');
@@ -166,6 +166,7 @@ class Inventory extends MY_Controller {
 					  'purchase_quantity' =>$purchase_quantity[$i],
 					  'purchase_price' =>$purchase_price[$i],
 					  'discount_price' =>$discount_price[$i],
+					  'purchase_return' => $purchase_return[$i],
 					  'discount_type' =>$discount_type,
 					  'total_price' =>$total_price[$i],
 					  'purchase_remarks' =>$remark_text[$i],

@@ -1,3 +1,9 @@
+<style>
+  .wdth-14
+  {
+    width: 14% !important;
+  }
+</style>
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
@@ -156,25 +162,25 @@
             </div> -->
             <br>
             <div class="row">
-              <div class="col-md-2">
+              <div class="col-md-2 wdth-14">
                 <label>Itemcode</label>
               </div>
-              <div class="col-md-2">
+              <div class="col-md-2 wdth-14">
                 <label>Item</label>
               </div>
-              <div class="col-md-2">
+              <div class="col-md-2 wdth-14">
                 <label>Quantity</label>
               </div>
-              <div class="col-md-2">
+              <div class="col-md-2 wdth-14">
                 <label>Price</label>
               </div>
-              <div class="col-md-2">
+              <div class="col-md-2 wdth-14">
                 <label>Discount</label>
               </div>
-              <!-- <div class="col-md-2">
-                <label>Tax</label>
-              </div> -->
-              <div class="col-md-2">
+              <div class="col-md-2 wdth-14">
+                <label>Return</label>
+              </div>
+              <div class="col-md-2 wdth-14">
                 <label>Total</label>
               </div>
             </div>

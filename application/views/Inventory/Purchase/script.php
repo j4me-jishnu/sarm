@@ -195,7 +195,7 @@ function addMore()
                 }
             });
 
-		var htmlVal='<DIV class="product-item box box-success id="list_'+counter+'"><div class="row"><div class="col-md-2"><input type="checkbox" name="item_index[]"/><select name="product_code[]" class="form-control product_code"  id="productcode_'+counter+'" autofocus /></select></div><div class="col-md-2"><br><select name="product_id_fk[]" class="form-control product_id fstdropdown-select"  id="productid_'+counter+'" autofocus /></select></div><div class="col-md-2"><br><input type="text" name="quantity[]" class="form-control" id="quantity_'+counter+'" placeholder="Quantity" onkeyup="getSum('+counter+');"></div><div class="col-md-2"><br><input type="text" name="price[]" class="form-control" id="price_'+counter+'" placeholder="Price" onkeyup="getSum('+counter+');"></div><div class="col-md-2"> <input type="radio" name="disradio_'+counter+'" id="disradio_'+counter+'" onchange="getSum('+counter+');" value="0">price&nbsp;<input type="radio" name="disradio_'+counter+'" onchange="getSum('+counter+');" id="disradio_'+counter+'" value="1" checked>%<input type="text" name="discount[]" id="discount_'+counter+'" class="form-control" placeholder="Discount" onkeyup="getSum('+counter+');"></div><div class="col-md-2"><input type="checkbox" class="form-check-input" id="remark_'+counter+'" name="remark_chk[]" value="1" data-toggle="modal" data-target="#myModal_'+counter+'"><label>remark</label><input type="text" name="total[]" id="total_'+counter+'" class="form-control" placeholder="Total"></div></div></DIV><div class="modal fade" id="myModal_'+counter+'" role="dialog"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal">&times;</button><h4 class="modal-title">Add Remark</h4></div><div class="modal-body"><div class="form-group"><label for="exampleFormControlTextarea1">Remarks</label><textarea class="form-control" name="remarks_text[]" id="exampleFormControlTextarea1" rows="3"></textarea></div></div><div class="modal-footer"><button type="submit" class="btn btn-primary" data-dismiss="modal">Submit</button></div></div></div></div>';
+		var htmlVal='<DIV class="product-item box box-success id="list_'+counter+'"><div class="row"><div class="col-md-2 wdth-14"><input type="checkbox" name="item_index[]"/><select name="product_code[]" class="form-control product_code"  id="productcode_'+counter+'" autofocus /></select></div><div class="col-md-2 wdth-14"><br><select name="product_id_fk[]" class="form-control product_id fstdropdown-select"  id="productid_'+counter+'" autofocus /></select></div><div class="col-md-2 wdth-14"><br><input type="text" name="quantity[]" class="form-control" id="quantity_'+counter+'" placeholder="Quantity" onkeyup="getSum('+counter+');"></div><div class="col-md-2 wdth-14"><br><input type="text" name="price[]" class="form-control" id="price_'+counter+'" placeholder="Price" onkeyup="getSum('+counter+');"></div><div class="col-md-2 wdth-14"> <input type="radio" name="disradio_'+counter+'" id="disradio_'+counter+'" onchange="getSum('+counter+');" value="0">price&nbsp;<input type="radio" name="disradio_'+counter+'" onchange="getSum('+counter+');" id="disradio_'+counter+'" value="1" checked>%<input type="text" name="discount[]" id="discount_'+counter+'" class="form-control" placeholder="Discount" onkeyup="getSum('+counter+');"></div><div class="col-md-2 wdth-14"><br><input type="text" name="return[]" id="return_'+counter+'" class="form-control" onkeyup="getSum('+counter+');" placeholder="Return"></div><div class="col-md-2 wdth-14"><input type="checkbox" class="form-check-input" id="remark_'+counter+'" name="remark_chk[]" value="1" data-toggle="modal" data-target="#myModal_'+counter+'"><label>remark</label><input type="text" name="total[]" id="total_'+counter+'" class="form-control" placeholder="Total"></div></div></DIV><div class="modal fade" id="myModal_'+counter+'" role="dialog"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal">&times;</button><h4 class="modal-title">Add Remark</h4></div><div class="modal-body"><div class="form-group"><label for="exampleFormControlTextarea1">Remarks</label><textarea class="form-control" name="remarks_text[]" id="exampleFormControlTextarea1" rows="3"></textarea></div></div><div class="modal-footer"><button type="submit" class="btn btn-primary" data-dismiss="modal">Submit</button></div></div></div></div>';
 
 		$("#service").append(htmlVal);
 		$('#counter').val(counter);
@@ -211,6 +211,7 @@ function addMore()
         else
         {
             var price=$('#price_'+row_id+'').val();
+            var return2=$('#return_'+row_id+'').val();
             // var tax=$('#tax_'+row_id+'').val();
             var discount=$('#discount_'+row_id+'').val();
             var old_bal=$('#old_bal').val();
@@ -218,6 +219,22 @@ function addMore()
             var bank=$('#bank').val();
             var dis=$('input[type="radio"][name="disradio_'+row_id+'"]:checked').val();
             // console.log(quantity);console.log(price);console.log(tax);console.log(discount);
+            if(return2)
+            {
+                if(return2 != ""){
+                    var quantity7 = parseFloat(quantity) - parseFloat(return2);
+                    var itemtottal = parseFloat(quantity7) * parseFloat(price);
+                    $('#total_'+row_id+'').val(itemtottal);
+                    getNetTotal();
+                }
+                else{
+                    return2 = 0;
+                    var quantity7 = parseFloat(quantity) - parseFloat(return2);
+                    var itemtottal = parseFloat(quantity7) * parseFloat(price);
+                    $('#total_'+row_id+'').val(itemtottal);
+                    getNetTotal();
+                }
+            }
             if ( ! price)
             {
                 $('#total_'+row_id+'').val(0);
@@ -225,9 +242,18 @@ function addMore()
             }
             else if(! discount)
             {
-                var itemtottal = parseFloat(quantity) * parseFloat(price);
-                $('#total_'+row_id+'').val(itemtottal);
-                getNetTotal();
+                if(return2){
+                    // var quantity7 = parseFloat(quantity) - parseFloat(return2);
+                    // var itemtottal = parseFloat(quantity) * parseFloat(quantity7);
+                    $('#total_'+row_id+'').val(itemtottal);
+                    getNetTotal();
+                }
+                else
+                {
+                    var itemtottal = parseFloat(quantity) * parseFloat(price);
+                    $('#total_'+row_id+'').val(itemtottal);
+                    getNetTotal(); 
+                }
             }
             // else if (tax && ! discount)
             // {

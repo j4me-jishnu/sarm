@@ -1,4 +1,9 @@
-
+<style>
+  .wdth-14
+  {
+    width: 14% !important;
+  }
+</style>
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
@@ -136,25 +141,28 @@
             </div> -->
             <br>
             <div class="row">
-              <div class="col-md-2">
+              <div class="col-md-2 wdth-14">
                 <label>Itemcode</label>
               </div>
-              <div class="col-md-2">
+              <div class="col-md-2 wdth-14">
                 <label>Item</label>
               </div>
-              <div class="col-md-2">
+              <div class="col-md-2 wdth-14">
                 <label>Quantity</label>
               </div>
-              <div class="col-md-2">
+              <div class="col-md-2 wdth-14">
                 <label>Price</label>
               </div>
-              <div class="col-md-2">
+              <div class="col-md-2 wdth-14">
                 <label>Discount</label>
+              </div>
+              <div class="col-md-2 wdth-14">
+                <label>Return</label>
               </div>
               <!-- <div class="col-md-2">
                 <label>Tax</label>
               </div> -->
-              <div class="col-md-2">
+              <div class="col-md-2 wdth-14">
                 <label>Total</label>
               </div>
             </div>
@@ -166,7 +174,7 @@
             ?>
             <div class="product-item box box-success" id="list">
               <div class="row">
-                <div class="col-md-2">
+                <div class="col-md-2 wdth-14">
                   <input type="checkbox" name="item_index[]"/>
                   <select name="product_code[]" class="form-control product_code"  id="productcode_<?php echo $i; ?>" autofocus />
                     <?php
@@ -178,7 +186,7 @@
                     ?>
                   </select>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-2 wdth-14">
                   <br>
                   <select name="product_id_fk[]" class="form-control product_id fstdropdown-select"  id="productid_<?php echo $i; ?>" autofocus />
                    <?php
@@ -190,21 +198,25 @@
                     ?> 
                   </select>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-2 wdth-14">
                   <br>
                   <input type="text" name="quantity[]" class="form-control" id="quantity_<?php echo $i; ?>" placeholder="Quantity" value="<?php if(isset($key->sale_quantity)) echo  $key->sale_quantity?>" onkeyup="getSum(<?php echo $i; ?>);">
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-2 wdth-14">
                   <br>
                   <input type="text" name="price[]" class="form-control" id="price_<?php echo $i; ?>" placeholder="Price" value="<?php if(isset($key->sale_price)) echo  $key->sale_price?>" onkeyup="getSum(<?php echo $i; ?>);">
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-2 wdth-14">
                   <input type="radio" name="disradio_<?php echo $i; ?>" id="disradio_<?php echo $i; ?>" onchange="getSum(<?php echo $i; ?>);" value="0" <?php if($key->discount_type == 0){echo 'checked';} ?>>price&nbsp;
                   <input type="radio" name="disradio_<?php echo $i; ?>" onchange="getSum(<?php echo $i; ?>);" id="disradio_<?php echo $i; ?>" value="1" <?php if($key->discount_type == 1){echo 'checked';} ?>>%
 
                   <input type="text" name="discount[]" id="discount_<?php echo $i; ?>" class="form-control" placeholder="Discount" value="<?php if(isset($key->discount_price)) echo  $key->discount_price?>" onkeyup="getSum(<?php echo $i; ?>);">
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-2 wdth-14">
+                  <br>
+                  <input type="text" name="return[]" class="form-control" id="return_<?php echo $i; ?>" placeholder="Return" value="<?php if(isset($key->sale_return)) echo  $key->sale_return?>" onkeyup="getSum(<?php echo $i; ?>);">
+                </div>
+                <div class="col-md-2 wdth-14">
                   <br>
                   <input type="text" name="total[]" id="total_<?php echo $i; ?>" class="form-control" placeholder="Total" value="<?php if(isset($key->total_price)) echo  $key->total_price?>">
                 </div>

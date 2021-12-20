@@ -75,7 +75,7 @@ class Sale extends MY_Controller {
 			$sale_quantity = $this->input->post('quantity');
 			$sale_price = $this->input->post('price');
 			$discount_price = $this->input->post('discount'); 
-		
+			$sale_return = $this->input->post('return'); 
 			$tax_per = $this->input->post('tax');
 			$total_price = $this->input->post('total');
 			$counter = $this->input->post('counter');
@@ -130,6 +130,7 @@ class Sale extends MY_Controller {
 					  'sale_quantity' =>$sale_quantity[$i],
 					  'sale_price' =>$sale_price[$i],
 					  'discount_price' =>$discount_price[$i],
+					  'sale_return' => $sale_return[$i],
 					  'discount_type' =>$discount_type,
 					  'total_price' =>$total_price[$i],
 					  'sale_remark' =>$remark_text[$i],
@@ -141,10 +142,21 @@ class Sale extends MY_Controller {
 					$insert_id = $this->db->insert_id();
 
 					$stok = $this->Inventory_model->get_stk($product_id[$i]);
-		            $nwstk = $stok[0]->stock - $sale_quantity[$i];
-					$updateData = array(
-					'stock' =>$nwstk);			
-					$data = $this->General_model->update('tbl_stock',$updateData,'item_id',$product_id[$i]);
+					if($sale_return != "")
+					{
+						$newstk = $sale_quantity[$i] - $sale_return[$i];
+						$nwstk = $stok[0]->stock - $newstk[$i];
+						$updateData = array('stock' =>$nwstk);			
+						$data = $this->General_model->update('tbl_stock',$updateData,'item_id',$product_id[$i]);
+
+					}
+					else
+					{
+						$nwstk = $stok[0]->stock - $sale_quantity[$i];
+						$updateData = array('stock' =>$nwstk);			
+						$data = $this->General_model->update('tbl_stock',$updateData,'item_id',$product_id[$i]);
+					}
+		           
 				$j++;	
 				}
 				//check if radio button of bank is selected
@@ -226,7 +238,8 @@ class Sale extends MY_Controller {
 					);
 				$result45 = $this->General_model->add('tbl_ledgerhead',$round_off_diff); 	
 			}
-
+			
+			
 			if($draft == 3)
 			{
 				$inv_ide = $this->input->post('invoice_number');

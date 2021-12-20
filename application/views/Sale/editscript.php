@@ -146,6 +146,7 @@ function getSum(row_id)
         else
         {
             var price=$('#price_'+row_id+'').val();
+            var return2=$('#return_'+row_id+'').val();
             // var tax=$('#tax_'+row_id+'').val();
             var discount=$('#discount_'+row_id+'').val();
             var old_bal=$('#old_bal').val();
@@ -153,6 +154,22 @@ function getSum(row_id)
             var bank=$('#bank').val();
             var dis=$('input[type="radio"][name="disradio_'+row_id+'"]:checked').val(); 
             // console.log(quantity);console.log(price);console.log(tax);console.log(discount);
+            if(return2)
+            {
+                if(return2 != ""){
+                    var quantity7 = parseFloat(quantity) - parseFloat(return2);
+                    var itemtottal = parseFloat(quantity7) * parseFloat(price);
+                    $('#total_'+row_id+'').val(itemtottal);
+                    getNetTotal();
+                }
+                else{
+                    return2 = 0;
+                    var quantity7 = parseFloat(quantity) - parseFloat(return2);
+                    var itemtottal = parseFloat(quantity7) * parseFloat(price);
+                    $('#total_'+row_id+'').val(itemtottal);
+                    getNetTotal();
+                }
+            }
             if ( ! price) 
             {
                 $('#total_'+row_id+'').val(0);
@@ -160,9 +177,18 @@ function getSum(row_id)
             }
             else if(! discount)
             {
-                var itemtottal = parseFloat(quantity) * parseFloat(price);
-                $('#total_'+row_id+'').val(itemtottal);
-                getNetTotal();
+                if(return2){
+                    // var quantity7 = parseFloat(quantity) - parseFloat(return2);
+                    // var itemtottal = parseFloat(quantity) * parseFloat(quantity7);
+                    $('#total_'+row_id+'').val(itemtottal);
+                    getNetTotal();
+                }
+                else
+                {
+                    var itemtottal = parseFloat(quantity) * parseFloat(price);
+                    $('#total_'+row_id+'').val(itemtottal);
+                    getNetTotal(); 
+                }
             }
             // else if (tax && ! discount) 
             // {
