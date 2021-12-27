@@ -122,7 +122,7 @@
                 </select>
               </div>
               <div class="col-md-4">
-                  <label for="product_name" class="control-label">Refffernce Bill ID<span style="color:red">*</span></label>
+                  <label for="product_name" class="control-label">Transaction ID<span style="color:red">*</span></label>
                   <input type="text" name="ref_bill_id" class="form-control" id="reffernce bill" value="<?php if(isset($records[0]->reference_bill_id)) echo  $records[0]->reference_bill_id?>" required>
               </div>
             </div>
@@ -325,7 +325,7 @@
               </div>
               <div class="col-md-4">
                 <label>Net Total</label>
-                <input class="form-control" type="text" style="height:50px; background-color: paleturquoise;" autofocus name="sum" id="sum" value="">
+                <input class="form-control" type="text" style="height:70px; background-color: paleturquoise;font-size: large;" autofocus name="sum" id="sum" value="">
                 <label>Round Off Amount</label>
                 <input type="text" name="round_off" id="round_off" class="form-control"  value="">
                 <input type="hidden" name="round_off_diff" id="round_off_diff" class="form-control"  value="0">

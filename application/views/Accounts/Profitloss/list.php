@@ -1,35 +1,19 @@
 <style>
-
-  .tree-table .parent-row:hover {
-
+.tree-table .parent-row:hover {
   cursor: pointer;
-
 }
-
-
 
 .tree-table [data-parent] td:first-child {
-
   padding-left: 10px;
-
 }
-
-
 
 .tree-table [data-parent] {
-
   display: none;
-
 }
-
-
 
 .tree-table [data-parent].expanded {
-
   display: table-row;
-
 }
-
 </style>
 
 <div class="content-wrapper">
@@ -621,6 +605,8 @@
                 $c=1;
 
                 $y=1;
+                $din = count($direct_income);
+                $dex = count($direct_exp);
 
                 @${'deb_total20'.$y};
 
@@ -634,8 +620,8 @@
 
                   <td colspan="2" id="row-3-<?php echo $x ?>" class="parent-row">&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;&nbsp;&nbsp;&nbsp;<b><?php echo $group_heads->group_name ?></b></td>
 
-                  <td><b><?php for ($i=0; $i < count($direct_income); $i++) { if($group_heads->group_id == $direct_income[$i]->group_id_fk){ @${'deb_total20'.$y}=@${'deb_total20'.$y}+$direct_income[$i]->debit;  } } echo @${'deb_total20'.$y} ?></b></td>
-
+                  <td><b><?php for ($i=0; $i < count($direct_income); $i++) { if($group_heads->group_id == @$direct_income[$i]->group_id_fk){ @${'deb_total20'.$y}=@${'deb_total20'.$y}+@$direct_income[$i]->debit;  } } echo @${'deb_total20'.$y} ?></b></td>
+                   
                 </tr>
 
                 <?php 
@@ -644,7 +630,7 @@
 
                   {
 
-                    if($group_heads->group_id == $direct_income[$i]->group_id_fk){
+                    if($group_heads->group_id == @$direct_income[$i]->group_id_fk){
 
                 ?>
 
@@ -684,7 +670,7 @@
 
                 <tr>
 
-                  <td colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;<b><?php echo $closing['ledgerhead'] ?></b></td>
+                  <td colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><?php echo $closing['ledgerhead'] ?></b></td>
 
                   <td><?php echo $closing['amount'];$total_sale3 = $total_sale3 + $closing['amount']; ?></td>
 
@@ -714,7 +700,7 @@
 
                 </tr>
 
-                <?php } else{ ?>
+                <?php } else { ?>
 
                 <tr>
 

@@ -220,7 +220,7 @@ class Sale extends MY_Controller {
 				$result45 = $this->General_model->add('tbl_ledgerhead',$round_off_diff); 	 
 				
 			}
-			else if($this->input->post('round_off_diff') > 0 && $this->input->post('round_off_diff') >= 0.50)
+			else if($this->input->post('round_off_diff') > 0.49 && $this->input->post('round_off_diff') <= 1)
 			{
 				$differnce = $round_off_variable - $this->input->post('round_off_diff');
 					$round_off_diff = array(
@@ -237,6 +237,105 @@ class Sale extends MY_Controller {
 						'updated_at' => date('Y-m-d H:i:s'),
 					);
 				$result45 = $this->General_model->add('tbl_ledgerhead',$round_off_diff); 	
+			}
+			if($this->input->post('frieght') != ""){
+				$freight_data = array(
+					'group_id_fk' => 39,
+					'ledger_head' => 'Freight',
+					'ledgerhead_desc' => 'Freight',
+					'opening_bal' => $this->input->post('frieght'),
+					'debit_or_credit' => 1,
+					'ledgerhead_status' => 1,
+					'company_id_fk' => $company,
+					'sale_id_fk' => $this->input->post('invoice_number'),
+					'ledger_default' => 0,
+					'created_at' => date('Y-m-d H:i:s'),
+					'updated_at' => date('Y-m-d H:i:s'),
+				);
+				$result45 = $this->General_model->add('tbl_ledgerhead',$freight_data); 	
+			}
+			if($this->input->post('bill_discount') != ""){
+				$bill_data = array(
+					'group_id_fk' => 41,
+					'ledger_head' => 'Discount',
+					'ledgerhead_desc' => 'Discount',
+					'opening_bal' => $this->input->post('bill_discount'),
+					'debit_or_credit' => 2,
+					'ledgerhead_status' => 1,
+					'company_id_fk' => $company,
+					'sale_id_fk' => $this->input->post('invoice_number'),
+					'ledger_default' => 0,
+					'created_at' => date('Y-m-d H:i:s'),
+					'updated_at' => date('Y-m-d H:i:s'),
+				);
+				$result45 = $this->General_model->add('tbl_ledgerhead',$bill_data); 
+			}
+			if($this->input->post('pack_chrg') != ""){
+				$packing_data = array(
+					'group_id_fk' => 43,
+					'ledger_head' => 'Package Charge',
+					'ledgerhead_desc' => 'Package Charge',
+					'opening_bal' => $this->input->post('pack_chrg'),
+					'debit_or_credit' => 1,
+					'ledgerhead_status' => 1,
+					'company_id_fk' => $company,
+					'sale_id_fk' => $this->input->post('invoice_number'),
+					'ledger_default' => 0,
+					'created_at' => date('Y-m-d H:i:s'),
+					'updated_at' => date('Y-m-d H:i:s'),
+				);
+				$result45 = $this->General_model->add('tbl_ledgerhead',$packing_data); 
+			}
+
+			if($this->input->post('tax_sum') != ""){
+				$tax_data = array(
+					'group_id_fk' => 40,
+					'ledger_head' => 'Tax Amount',
+					'ledgerhead_desc' => 'Tax Amount',
+					'opening_bal' => $this->input->post('tax_sum'),
+					'debit_or_credit' => 1,
+					'ledgerhead_status' => 1,
+					'company_id_fk' => $company,
+					'sale_id_fk' => $this->input->post('invoice_number'),
+					'ledger_default' => 0,
+					'created_at' => date('Y-m-d H:i:s'),
+					'updated_at' => date('Y-m-d H:i:s'),
+				);
+				$result45 = $this->General_model->add('tbl_ledgerhead',$tax_data); 
+			}
+
+			if($cash_amt != 0){
+				$cash_data = array(
+					'group_id_fk' => 13,
+					'ledger_head' => 'Cash',
+					'ledgerhead_desc' => 'Cash',
+					'opening_bal' => $cash_amt,
+					'debit_or_credit' => 1,
+					'ledgerhead_status' => 1,
+					'company_id_fk' => $company,
+					'sale_id_fk' => $this->input->post('invoice_number'),
+					'ledger_default' => 0,
+					'created_at' => date('Y-m-d H:i:s'),
+					'updated_at' => date('Y-m-d H:i:s'),
+				);
+				$result45 = $this->General_model->add('tbl_ledgerhead',$cash_data); 
+			}
+
+			if($bank_amt != 0){
+				$bank_data = array(
+					'group_id_fk' => 12,
+					'ledger_head' => 'Cash',
+					'ledgerhead_desc' => 'Cash',
+					'opening_bal' => $bank_amt,
+					'debit_or_credit' => 1,
+					'ledgerhead_status' => 1,
+					'company_id_fk' => $company,
+					'sale_id_fk' => $this->input->post('invoice_number'),
+					'ledger_default' => 0,
+					'created_at' => date('Y-m-d H:i:s'),
+					'updated_at' => date('Y-m-d H:i:s'),
+				);
+				$result45 = $this->General_model->add('tbl_ledgerhead',$bank_data); 
 			}
 			
 			

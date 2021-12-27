@@ -237,6 +237,7 @@
                 <input type="radio" name="bill_dis" id="bill_dis" onchange="getNetTotal()" value="0">Price
                 <input type="radio" name="bill_dis" id="bill_dis" onchange="getNetTotal()" value="1" checked>%
                 <input class="form-control" type="text" name="bill_discount" id="bill_discount" value="0" onkeyup="getNetTotal()" required>
+                <input class="form-control" type="hidden" name="total_bill_discount" id="total_bill_discount" value="0" onkeyup="getNetTotal()" required>
                 <label>Frieght</label>
                 <input class="form-control" type="text" name="frieght" id="frieght" value="0" onkeyup="getNetTotal()" required>
                 <label>Packing Charge</label>
@@ -246,7 +247,7 @@
               </div>
               <div class="col-md-4">
               <label>Net Total</label>
-                <input class="form-control" style="height:50px; background-color: paleturquoise;" autofocus type="text" name="sum" id="sum" value="0">    
+                <input class="form-control" style="height:70px; background-color: paleturquoise; font-size: large;" autofocus type="text" name="sum" id="sum" value="0">    
               <label>Round Off Amount</label>
                 <input type="text" name="round_off" id="round_off" class="form-control"  value="0">
                 <input type="hidden" name="round_off_diff" id="round_off_diff" class="form-control"  value="0">

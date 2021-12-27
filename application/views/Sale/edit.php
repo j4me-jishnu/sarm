@@ -294,7 +294,7 @@
               </div>
               <div class="col-md-4">
               <label>Net Total</label>
-                <input class="form-control" type="text" style="height:50px; background-color: paleturquoise;" autofocus name="sum" id="sum" value="<?php if(isset($records[0]->net_total)) echo  $records[0]->net_total?>">
+                <input class="form-control" type="text" style="height:70px; background-color: paleturquoise; font-size: large;" autofocus name="sum" id="sum" value="<?php if(isset($records[0]->net_total)) echo  $records[0]->net_total?>">
               <label>Round Off Amount</label>
                 <input type="text" name="round_off" id="round_off" class="form-control"  value="<?php if(isset($records[0]->sale_round_off_amt)) echo  $records[0]->sale_round_off_amt?>">
                 <input type="hidden" name="round_off_diff" id="round_off_diff" class="form-control"  value="0">

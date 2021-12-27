@@ -117,7 +117,7 @@
                 </select>
               </div>
               <div class="col-md-4">
-                  <label for="product_name" class="control-label">Reference ID<span style="color:red">*</span></label>
+                  <label for="product_name" class="control-label">Transaction ID<span style="color:red">*</span></label>
                   <input type="text" name="ref_bill_id" class="form-control" id="invoice_number" required>
               </div>
             </div>
@@ -192,7 +192,7 @@
               </div>
               <div class="col-md-4">
               <label>Net Total</label>
-                <input class="form-control" type="text" style="height:50px; background-color: paleturquoise;" autofocus name="net_total" id="net_total" value="0" >
+                <input class="form-control" type="text" style="height:70px; background-color: paleturquoise;font-size: large;" autofocus name="net_total" id="net_total" value="0" >
               <label>Round Off Amount</label>
                 <input type="text" name="round_off" id="round_off" class="form-control"  value="0">
                 <input type="hidden" name="round_off_diff" id="round_off_diff" class="form-control"  value="0">
